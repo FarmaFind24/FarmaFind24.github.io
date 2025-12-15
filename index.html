@@ -1,37 +1,135 @@
 <!DOCTYPE html>
 <html lang="it">
-
-<head>
+  <head>
     <title>FarmaFind24</title>
-    <meta charset="utf-8">
-    <meta name="description" content="Pagina dedicata a"> 
-    <meta name="keywords" content="salute">
-    <link rel="stylesheet" href="style.css" media="screen">
-    <link rel="stylesheet" href="mini.css" media="screen and (max-width:800px)">
-    <link rel="stylesheet" href="print.css" media="print">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet"> 
-</head>
-<body>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate"
+    />
+    <meta name="keywords" content="salute" />
+    <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
     <header>
-        <img src="logo.png" alt="logo">
-        <h1>FarmaFind24</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="info.html">Info</a></li>
-            <li><a href="contatti.html">Contatti</a></li>
+      <h1>FarmaFind24</h1>
+      <img src="assets/logo_FarmaFind24.png" alt="logo farmafind24" />
+      <nav class="Top-NavBar">
+        <ul aria-label="menu di navigazione">
+          <li>
+            <span lang="en" id="current-page">Home</span>
+          </li>
+          <li><a href="info.html">Farmacie per Città</a></li>
+          <li><a href="contatti.html">Prenota Servizio</a></li>
+          <li>
+            <a href="about.html"><span lang="en">About us</span></a>
+          </li>
         </ul>
-    </nav>
+      </nav>
+    </header>
+
     <main>
-        <h2>Home</h2>
-        <p>Benvenuto nella nostra pagina dedicata alla droca!</p>
-        <p>Qui troverete tutte le informazioni utili per il farmaco che desiderate!</p>
+      <section class="hero-section">
+        <div id="hero-section-div">
+          <h1>Trova la Farmacia perfetta, in ogni momento</h1>
+          <p>
+            FarmaFind24 ti aiuta a localizzare farmacie aperte, controllare la
+            disponibilità dei medicinali e prenotare servizi sanitari con
+            facilità.
+          </p>
+          <form action="">
+            <input
+              type="search"
+              id="search-input"
+              placeholder="Cerca farmacie o medicinali..."
+            />
+            <button type="submit"><span>Cerca</span></button>
+          </form>
+          <div>
+            <button id="open-farma-button">Farmacie aperte ora</button>
+            <button id="search-drug-button">Cerca medicinali</button>
+          </div>
+        </div>
+        <img
+          id="home-image"
+          src="assets/home-image.png"
+          alt="immagine illustrativa della Home"
+          width="50%"
+        />
+      </section>
+      <section>
+        <h1>Come funziona</h2>
+        <div class="grid">
+          <div>
+            <i class="fa-solid fa-search fa-2xl"></i>
+            <h3>Cerca la farmacia</h3>
+            <p>
+              Inserisci la tua città o il nome del medicinale per trovare le
+              farmacie più vicine a te, aperte o con disponibilità
+            </p>
+          </div>
+          <div>
+            <i class="fa-solid fa-location-dot fa-2xl"></i>
+            <h3>Vedi i dettagli</h3>
+            <p>
+              Accedi a informazioni complete su ogni farmacia: orari, servizi
+              offerti, contatti e percorso sulla mappa.
+            </p>
+          </div>
+          <div>
+            <i class="fa-solid fa-stethoscope fa-2xl"></i>
+            <h3>Prenota servizi</h3>
+            <p>
+              Prenota facilmente servizi sanitari come test audiometrici o
+              vaccinazioni direttamente dalla nostra piattaforma.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h1>Le nostre funzionalità</h2>
+        <div class="grid">
+          <div>
+            <i class="fa-solid fa-clock fa-2xl"></i>
+            <h3>Farmacie aperte ora</h3>
+            <p>
+              Trova immediatamente le farmacie di turno e quelle aperte nella
+              tua zona, il tutto disponibile 24/7.
+            </p>
+          </div>
+          <div>
+            <i class="fa-solid fa-pills fa-2xl"></i>
+            <h3>disponibilità medicinali</h3>
+            <p>
+              Controlla la disponibilità di specifici farmaci in tempo reale
+              prima di recarti in farmacia.
+            </p>
+          </div>
+          <div>
+            <i class="fa-solid fa-user fa-2xl"></i>
+            <h3>Gestione profilo utente</h3>
+            <p>
+              Personalizza la tua esperienza, gestisci le tue prenotazioni e
+              visualizza lo storico delle tue ricerche.
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
     <footer>
-        <p>Copyright &copy; 2025</p>
+      <p>Copyright &copy; 2025</p>
     </footer>
-</body>
+  </body>
 </html>
