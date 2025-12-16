@@ -1,0 +1,341 @@
+/******* COLORI *******/
+:root {
+  --main-bg-color: #ffffff;
+  --second-main-bg-color: #0000000a;
+  --primary-color: #1d781d;
+  --primary-color-button: #005500;
+  --header-border-color: #dee1e6;
+}
+
+/******* SETTINGS GLOBALI *******/
+* {
+  border: 0;
+  margin: 0;
+}
+body {
+  font-family: "Lexend", sans-serif;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem 1rem 1rem;
+  justify-content: center;
+  align-items: center;
+}
+html {
+  scroll-behavior: smooth;
+}
+abbr {
+  cursor: help;
+}
+
+/******* HEADER *******/
+header {
+  height: 4rem;
+  position: sticky;
+  display: flex;
+  background-color: var(--main-bg-color);
+  top: 0;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--header-border-color);
+  padding: 0 1rem;
+}
+header h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+header img {
+  position: static;
+  width: 3rem;
+}
+.text-header {
+  background-image: url("as");
+}
+.Top-NavBar {
+  display: flex;
+  gap: 2em;
+}
+.Top-NavBar a {
+  text-decoration: none;
+  color: black;
+  border-radius: 1em;
+  transition: color 0.2s, background-color 0.3s, padding 0.3s;
+}
+.Top-NavBar a:hover {
+  padding: 0.5em;
+  border: var(--primary-color-button) solid 2px;
+  background-color: var(--primary-color-button);
+  border-radius: 1em;
+  color: var(--main-bg-color);
+}
+.Top-NavBar a:hover a:visited {
+  color: inherit;
+}
+
+.Top-NavBar ul {
+  list-style: none;
+  flex-direction: row;
+  display: flex;
+  gap: 1em;
+  padding-left: 0;
+}
+#current-page {
+  padding: 0.5em;
+  border: var(--primary-color-button) solid 2px;
+  background-color: var(--primary-color-button);
+  border-radius: 1em;
+  color: var(--main-bg-color);
+}
+#current-page:hover {
+  cursor: default;
+}
+
+/******* HOME *******/
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+  background-color: var(--second-main-bg-color);
+  border-radius: 20px;
+}
+.hero-section img {
+  border-radius: 20px;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+#hero-section-div {
+  margin: 1.5em;
+  flex: 1;
+  min-width: 0;
+}
+#hero-section-div h1 {
+  font-size: 2em;
+}
+#hero-section-div p {
+  margin-top: 2em;
+  font-size: 1em;
+}
+#hero-section-div form {
+  margin-top: 4em;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+#hero-section-div input {
+  font-size: 1em;
+  width: 100%;
+  height: 3em;
+  border-radius: 1em;
+  border: black solid 1px;
+  padding-left: 1em;
+  box-sizing: border-box;
+}
+
+#hero-section-div form button {
+  height: 3.6em;
+  color: var(--main-bg-color);
+  border-radius: 1em;
+  box-sizing: border-box;
+  background-color: var(--primary-color-button);
+  cursor: pointer;
+}
+#hero-section-div form button span {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+#hero-section-div div {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+#search-drug-button {
+  border: var(--primary-color) solid 2px;
+  background-color: var(--main-bg-color);
+  font-weight: 600;
+  font-size: 0.9em;
+  color: var(--primary-color-button);
+  border-radius: 1em;
+  height: 3.6em;
+  cursor: pointer;
+}
+#open-farma-button {
+  border: rgba(0, 0, 0, 0.055) solid 1px;
+  font-weight: 600;
+  font-size: 0.9em;
+  color: black;
+  border-radius: 1em;
+  height: 3.6em;
+  cursor: pointer;
+}
+
+section:not(.hero-section) {
+  margin-top: 3rem;
+}
+section h1,
+section h2 {
+  margin-top: 3rem;
+  text-align: center;
+}
+section h2 {
+  font-size: 2em;
+}
+.grid {
+  margin-top: 4rem;
+  gap: 2rem;
+  display: grid;
+  grid-template-columns: auto;
+}
+
+.grid div {
+  display: flex;
+  height: 12em;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1em;
+  border-radius: 1em;
+  /* width: 20rem; */
+  background-color: var(--second-main-bg-color);
+}
+#about-grid div h3,
+#team-grid div h3,
+.grid div h3 {
+  font-weight: 500;
+  font-size: 1.4em;
+  margin: 0.4em 0 1em 0;
+}
+
+i {
+  margin: 1em;
+  color: var(--primary-color);
+}
+
+/******* ABOUT US *******/
+#about-hero {
+  padding: 2rem;
+  gap: 2rem;
+  margin: 5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+#about-hero h1 {
+  font-size: 3em;
+  text-align: center;
+}
+#about-hero p {
+  text-align: center;
+}
+
+#about-hero img {
+  width: 65%;
+  border-radius: 1em;
+}
+#about-section {
+  margin-top: 0rem;
+}
+#about-section h1,
+#about-section h2 {
+  margin-top: 3rem;
+  text-align: center;
+}
+section h2 {
+  font-size: 2em;
+}
+#about-grid,
+#team-grid {
+  margin-top: 4rem;
+  gap: 2rem;
+  display: grid;
+  grid-template-columns: auto;
+}
+#team-grid {
+  grid-template-columns: auto;
+}
+#about-grid div {
+  display: flex;
+  height: 12em;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1em;
+  border-radius: 1em;
+  /* width: 20rem; */
+  background-color: var(--second-main-bg-color);
+}
+#team-section {
+  margin-top: 5rem;
+}
+
+.avatar-container {
+  border-radius: 12px;
+  width: 180px;
+  height: 220px;
+  padding: 1.5rem;
+  text-align: center;
+  border: var(--primary-color-button) solid 1px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease, border-color 0.2s ease, color 0.5s ease;
+  box-shadow: 0px 9px 5px var(--accent);
+}
+.avatar-container span {
+  font-size: 1.3em;
+  color: black;
+  transition: color 0.2s;
+}
+
+.avatar-container:hover {
+  transform: translateY(2px);
+  background-color: var(--primary-color-button);
+  color: var(--main-bg-color);
+  border-color: var(--accent);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.avatar-container:hover span {
+  color: var(--main-bg-color);
+}
+.avatar-container a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.avatar-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+/******* FOOTER *******/
+footer {
+  margin-top: 5rem;
+  padding: 5rem;
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  gap: 2rem;
+  text-align: center;
+  border-top: 2px solid var(--header-border-color);
+}
+footer img {
+  width: 3rem;
+}
