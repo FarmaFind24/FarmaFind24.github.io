@@ -22,15 +22,9 @@ main {
   justify-content: center;
   align-items: center;
 }
-html {
-  scroll-behavior: smooth;
-}
-abbr {
-  cursor: help;
-}
 
 /******* HEADER *******/
-header {
+.main-header {
   height: 4rem;
   position: sticky;
   display: flex;
@@ -41,34 +35,31 @@ header {
   border-bottom: 2px solid var(--header-border-color);
   z-index: 1000;
 }
-header h1 {
-  left: 2em;
+.main-header h1 {
+  left: 4rem;
   margin-left: 0;
   position: absolute;
 }
-header img {
+.main-header img {
   position: absolute;
-  left: 1em;
+  left: 1rem;
   width: 3rem;
 }
-.text-header {
-  background-image: url("as");
-}
-.Top-NavBar {
-  display: flex;
-  gap: 2em;
-}
 .Top-NavBar a {
+  height: 2rem;
   text-decoration: none;
   color: black;
-  border-radius: 1em;
-  transition: color 0.2s, background-color 0.3s, padding 0.3s;
+  border-radius: 1rem;
+  transition:
+    color 0.2s,
+    background-color 0.3s,
+    padding 0.3s;
 }
 .Top-NavBar a:hover {
-  padding: 0.5em;
+  padding: 0.5rem;
   border: var(--primary-color-button) solid 2px;
   background-color: var(--primary-color-button);
-  border-radius: 1em;
+  border-radius: 1rem;
   color: var(--main-bg-color);
 }
 .Top-NavBar a:hover a:visited {
@@ -79,13 +70,13 @@ header img {
   list-style: none;
   flex-direction: row;
   display: flex;
-  gap: 2em;
+  gap: 2rem;
 }
 #current-page {
-  padding: 0.5em;
+  padding: 0.5rem;
   border: var(--primary-color-button) solid 2px;
   background-color: var(--primary-color-button);
-  border-radius: 1em;
+  border-radius: 1rem;
   color: var(--main-bg-color);
 }
 #current-page:hover {
@@ -94,99 +85,95 @@ header img {
 
 /******* HOME *******/
 
-.hero-section {
+.main-hero-section {
   display: flex;
-  width: 80%;
-  gap: 2rem;
-  background-color: var(--second-main-bg-color);
-  border-radius: 20px;
+  justify-content: center;
+  width: 100%;
+  border-radius: 2rem;
+  gap: 4rem;
 }
-.hero-section img {
-  border-radius: 20px;
-  height: auto;
-  object-fit: cover;
+.main-hero-section img {
+  border-radius: 2rem;
+  align-self: center;
+  width: 40%;
 }
 
-#hero-section-div {
-  margin: 3em;
-  flex: 1;
-  min-width: 0;
-}
-#hero-section-div h1 {
-  font-size: 2.5em;
-}
-#hero-section-div p {
-  margin-top: 2em;
-  font-size: 1.2em;
-}
-#hero-section-div form {
-  margin-top: 4em;
-  width: fit-content;
-  align-items: end;
+#left-hero-section-div {
   display: flex;
-  gap: 1em;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+  height: 100%;
 }
-
-#hero-section-div input {
-  font-size: 1em;
-  width: 25em;
-  height: 3em;
-  border-radius: 1em;
+#left-hero-section-div h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+#left-hero-section-div p {
+  margin-top: 2rem;
+  font-size: 1rem;
+  text-align: center;
+}
+#left-hero-section-div form {
+  margin-top: 4rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+#left-hero-section-div form div {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+#left-hero-section-div input {
+  font-size: 1rem;
+  width: 35rem;
+  border-radius: 1rem;
   border: black solid 1px;
-  padding-left: 1em;
+  padding-left: 1rem;
   box-sizing: border-box;
 }
 
-#hero-section-div form button {
-  width: 7em;
-  height: 3.6em;
+.submit-btn {
+  width: 7rem;
+  height: 3rem;
   color: var(--main-bg-color);
-  border-radius: 1em;
+  border-radius: 1rem;
   box-sizing: border-box;
   background-color: var(--primary-color-button);
   cursor: pointer;
-}
-#hero-section-div form button span {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: 600;
 }
-#hero-section-div div {
-  margin-top: 2em;
-  display: flex;
-  gap: 2em;
-}
 
-#search-drug-button {
+.form-outline-btn {
   border: var(--primary-color) solid 2px;
   background-color: var(--main-bg-color);
   font-weight: 600;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   color: var(--primary-color-button);
-  border-radius: 1em;
-  height: 3.6em;
-  cursor: pointer;
-}
-#open-farma-button {
-  border: rgba(0, 0, 0, 0.055) solid 1px;
-  font-weight: 600;
-  font-size: 0.9em;
-  color: black;
-  border-radius: 1em;
-  height: 3.6em;
+  border-radius: 1rem;
   cursor: pointer;
 }
 
-section:not(.hero-section) {
+#open-farm-btn {
+  border: rgba(0, 0, 0, 0.055) solid 1px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: black;
+  border-radius: 1rem;
+  height: 3rem;
+  cursor: pointer;
+}
+#home section:not(.main-hero-section) {
   margin-top: 3rem;
 }
-section h1,
 section h2 {
   margin-top: 3rem;
   text-align: center;
+  font-size: 1.8rem;
 }
-section h2 {
-  font-size: 2em;
-}
+
 .grid {
   margin-top: 4rem;
   gap: 2rem;
@@ -196,30 +183,29 @@ section h2 {
 
 .grid div {
   display: flex;
-  height: 12em;
+  height: 12rem;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 1em;
-  border-radius: 1em;
+  padding: 2rem 1rem 0.5rem;
+  border-radius: 1rem;
   width: 20rem;
   background-color: var(--second-main-bg-color);
 }
-#about-grid div h3,
 #team-grid div h3,
 .grid div h3 {
   font-weight: 500;
-  font-size: 1.4em;
-  margin: 0.4em 0 1em 0;
+  font-size: 1.4rem;
+  margin: 0.4rem 0 1rem 0;
 }
 
 i {
-  margin: 1em;
+  margin: 1rem;
   color: var(--primary-color);
 }
 
 /******* ABOUT US *******/
-#about-hero {
+.about-hero {
   padding: 2rem;
   gap: 2rem;
   margin: 5rem auto;
@@ -228,47 +214,42 @@ i {
   align-items: center;
   width: 50%;
 }
-#about-hero h1 {
-  font-size: 3em;
+.about-hero h1 {
+  font-size: 3rem;
   text-align: center;
 }
-#about-hero p {
+.about-hero p {
   text-align: center;
 }
 
-#about-hero img {
+.about-hero img {
   width: 65%;
-  border-radius: 1em;
+  border-radius: 1rem;
 }
-#about-section {
+.about-section {
   margin-top: 0rem;
 }
-#about-section h1,
-#about-section h2 {
+.about-section h1,
+.about-section h2 {
   margin-top: 3rem;
   text-align: center;
 }
-section h2 {
-  font-size: 2em;
-}
-#about-grid,
+
 #team-grid {
   margin-top: 4rem;
   gap: 2rem;
   display: grid;
-  grid-template-columns: auto auto auto;
-}
-#team-grid {
   grid-template-columns: auto auto auto auto;
 }
+
 #about-grid div {
   display: flex;
-  height: 12em;
+  height: 12rem;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 1em;
-  border-radius: 1em;
+  padding: 1rem;
+  border-radius: 1rem;
   width: 20rem;
   background-color: var(--second-main-bg-color);
 }
@@ -283,12 +264,16 @@ section h2 {
   padding: 1.5rem;
   text-align: center;
   border: var(--primary-color-button) solid 1px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease,
-    background-color 0.2s ease, border-color 0.2s ease, color 0.5s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.5s ease;
   box-shadow: 0px 9px 5px var(--accent);
 }
 .avatar-container span {
-  font-size: 1.3em;
+  font-size: 1.3rem;
   color: black;
   transition: color 0.2s;
 }
@@ -299,7 +284,9 @@ section h2 {
   background-color: var(--primary-color-button);
   color: var(--main-bg-color);
   border-color: var(--accent);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.25),
+    0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .avatar-container:hover span {
   color: var(--main-bg-color);
@@ -317,66 +304,123 @@ section h2 {
   height: 100px;
   border-radius: 50%;
 }
-#contact-section{
-    margin-top: 5rem;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 2rem;
-
-}
-#contact-form{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 60%;
-    width:30%;
-    padding:1em;
-    gap: 2em;
-    border-radius: 1em;
-    background-color: var(--second-main-bg-color)
-}
-#contact-form form{
-    display: flex;
-    flex-direction: column;
-}
-#contact-form div{
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-#title-form{
-    font-size: 1.8em;
-}
-input[type=text], select, textarea {
+.contact-section {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
   width: 100%;
-  padding: 12px; 
-  border: 1px solid #ccc; 
-  border-radius: 1em; 
-  box-sizing: border-box;   
-  margin-top: 6px; 
-  margin-bottom: 16px;  
+  gap: 2rem;
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 60%;
+  width: 30%;
+  padding: 1rem;
+  gap: 2rem;
+  border-radius: 1rem;
+  background-color: var(--second-main-bg-color);
+}
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+.contact-form div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.title-form {
+  font-size: 1.8rem;
+}
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid black;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
   resize: vertical;
-  }
- input[type=submit]{
-     background-color: var(--primary-color-button);
-     color: white;
-     padding: 1em;
-     border-radius: 1em;
-     font-weight: 600;
- } 
-#contact-info{
-    box-sizing: border-box;
-    width:40%;
-    height:60%;
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
-    padding: 2em;
 }
-#contact-info ul{
-    list-style: none;
+input[type="submit"] {
+  background-color: var(--primary-color-button);
+  color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-weight: 600;
 }
+.contact-info {
+  box-sizing: border-box;
+  width: 40%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+.contact-info ul {
+  list-style: none;
+}
+
+/******* FARMXCITY *******/
+#farmxcity-hero-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#farmxcity-hero-section-div {
+  background-color: var(--second-main-bg-color);
+  width: 60%;
+  border-radius: 1rem;
+  margin-top: 2rem;
+}
+#farmxcity-hero-section-div form {
+  align-items: end;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  height: 3rem;
+  padding: 1rem;
+}
+#farmxcity-filter {
+  margin: 0;
+  width: 30%;
+  box-sizing: border-box;
+}
+
+#farmxcity-hero-section-div input {
+  font-size: 1rem;
+  height: 100%;
+  width: 25rem;
+  border-radius: 1rem;
+  border: black solid 1px;
+  padding-left: 1rem;
+  box-sizing: border-box;
+}
+
+#farmxcity-hero-section-div form button {
+  width: 15rem;
+  color: var(--main-bg-color);
+  border-radius: 1rem;
+  box-sizing: border-box;
+  background-color: var(--primary-color-button);
+}
+#farmxcity-hero-section-div form button span {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+#farmxcity-hero-section-div div {
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+}
+
 /******* FOOTER *******/
 footer {
   margin-top: 5rem;

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <title>FarmaFind24</title>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate"
+    />
+    <meta name="keywords" content="salute" />
+    <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
+    <link
+      rel="stylesheet"
+      href="assets/css/mini.css"
+      media="screen and (max-width:950px)"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <header class="main-header">
+      <h1>FarmaFind24</h1>
+      <img src="assets/logo_FarmaFind24.png" alt="logo farmafind24" />
+      <nav class="Top-NavBar">
+        <ul aria-label="menu di navigazione">
+          <li>
+            <span lang="en" id="current-page">Home</span>
+          </li>
+          <li><a href="info.html">Farmacie per Città</a></li>
+          <li><a href="contatti.html">Prenota Servizio</a></li>
+          <li>
+            <a href="about.html"><span lang="en">About us</span></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="farmxcity-hero-section">
+        <h1>Trova la Farmacia perfetta, in ogni momento</h1>
+        <p>
+          FarmaFind24 ti aiuta a localizzare farmacie aperte, controllare la
+          disponibilità dei medicinali e prenotare servizi sanitari con
+          facilità.
+        </p>
+
+        <div id="farmxcity-hero-section-div">
+          <form action="">
+            <input
+              type="search"
+              id="search-input"
+              placeholder="Cerca farmacie o medicinali..."
+            />
+            <select id="farmxcity-filter">
+              <option value="Distanza (crescente)">Distanza (crescente)</option>
+              <option value="Distanza (decrescente)">
+                Distanza (decrescente)
+              </option>
+            </select>
+            <button id="search-drug-button">Cerca medicinali</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Copyright &copy; 2025</p>
+    </footer>
+  </body>
+</html>

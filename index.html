@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
   <head>
-    <title>FarmaFind24</title>
+    <title>Farmacie e Medicine FarmaFind24</title>
     <meta charset="utf-8" />
     <meta
       name="description"
@@ -9,7 +9,11 @@
     />
     <meta name="keywords" content="salute" />
     <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
-    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)" />
+    <link
+      rel="stylesheet"
+      href="assets/css/mini.css"
+      media="screen and (max-width:950px)"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,7 +27,7 @@
   </head>
 
   <body>
-    <header>
+    <header class="main-header">
       <h1>FarmaFind24</h1>
       <img src="assets/logo_FarmaFind24.png" alt="logo farmafind24" />
       <nav class="Top-NavBar">
@@ -31,7 +35,7 @@
           <li>
             <span lang="en" id="current-page">Home</span>
           </li>
-          <li><a href="info.html">Farmacie per Città</a></li>
+          <li><a href="farmxcity.html">Farmacie per Città</a></li>
           <li><a href="contatti.html">Prenota Servizio</a></li>
           <li>
             <a href="about.html"><span lang="en">About us</span></a>
@@ -40,9 +44,9 @@
       </nav>
     </header>
 
-    <main>
-      <section class="hero-section">
-        <div id="hero-section-div">
+    <main id="home">
+      <section class="main-hero-section">
+        <div id="left-hero-section-div">
           <h1>Trova la Farmacia perfetta, in ogni momento</h1>
           <p>
             FarmaFind24 ti aiuta a localizzare farmacie aperte, controllare la
@@ -50,27 +54,26 @@
             facilità.
           </p>
           <form action="">
-            <input
-              type="search"
-              id="search-input"
-              placeholder="Cerca farmacie o medicinali..."
-            />
-            <button type="submit"><span>Cerca</span></button>
+            <div>
+              <input
+                name="Ricerca farmacie e medicinali"
+                type="search"
+                placeholder="Cerca farmacie o medicinali..."
+              />
+              <button type="submit" class="submit-btn">
+                <span>Cerca</span>
+              </button>
+            </div>
+            <div>
+              <button id="open-farm-btn">Farmacie aperte ora</button>
+              <button class="form-outline-btn">Cerca medicinali</button>
+            </div>
           </form>
-          <div>
-            <button id="open-farma-button">Farmacie aperte ora</button>
-            <button id="search-drug-button">Cerca medicinali</button>
-          </div>
         </div>
-        <img
-          id="home-image"
-          src="assets/home-image.png"
-          alt="immagine illustrativa della Home"
-          width="50%"
-        />
+        <img src="assets/home-image.png" alt="" />
       </section>
       <section>
-        <h1>Come funziona</h2>
+        <h2>Come funziona</h2>
         <div class="grid">
           <div>
             <i class="fa-solid fa-search fa-2xl"></i>
@@ -99,7 +102,7 @@
         </div>
       </section>
       <section>
-        <h1>Le nostre funzionalità</h2>
+        <h2>Le nostre funzionalità</h2>
         <div class="grid">
           <div>
             <i class="fa-solid fa-clock fa-2xl"></i>
