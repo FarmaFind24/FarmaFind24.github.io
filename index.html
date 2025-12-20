@@ -29,16 +29,19 @@
   <body>
     <header class="main-header">
       <h1>FarmaFind24</h1>
-      <img src="assets/logo_FarmaFind24.png" alt="logo farmafind24" />
+      <img src="assets/logo_FarmaFind24.png" alt="" />
       <nav class="Top-NavBar">
         <ul aria-label="menu di navigazione">
           <li>
-            <span lang="en" id="current-page">Home</span>
+            <a aria-current="page" href="#home" id="current-page" tabindex="-1"
+              ><span class="sr-only">Pagina Corrente:</span
+              ><span lang="en">Home</span></a
+            >
           </li>
           <li><a href="farmxcity.html">Farmacie per Città</a></li>
           <li><a href="contatti.html">Prenota Servizio</a></li>
           <li>
-            <a href="about.html"><span lang="en">About us</span></a>
+            <a href="about.html"><span lang="en">About</span></a>
           </li>
         </ul>
       </nav>
@@ -66,7 +69,7 @@
             </div>
             <div>
               <button id="open-farm-btn">Farmacie aperte ora</button>
-              <button class="form-outline-btn">Cerca medicinali</button>
+              <button class="outline-btn">Cerca medicinali</button>
             </div>
           </form>
         </div>
