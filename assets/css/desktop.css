@@ -146,7 +146,7 @@ main {
   font-weight: 600;
 }
 
-.form-outline-btn {
+.outline-btn {
   border: var(--primary-color) solid 2px;
   background-color: var(--main-bg-color);
   font-weight: 600;
@@ -372,10 +372,10 @@ input[type="submit"] {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2rem;
 }
 
 #farmxcity-hero-section-div {
-  background-color: var(--second-main-bg-color);
   width: 60%;
   border-radius: 1rem;
   margin-top: 2rem;
@@ -384,20 +384,20 @@ input[type="submit"] {
   align-items: end;
   display: flex;
   flex-direction: row;
+  align-items: flex-end;
   gap: 1rem;
-  height: 3rem;
-  padding: 1rem;
 }
-#farmxcity-filter {
+.farmxcity-filter {
   margin: 0;
-  width: 30%;
+  width: 25%;
+  height: 3rem;
   box-sizing: border-box;
 }
 
 #farmxcity-hero-section-div input {
   font-size: 1rem;
-  height: 100%;
-  width: 25rem;
+  height: 3rem;
+  width: 100%;
   border-radius: 1rem;
   border: black solid 1px;
   padding-left: 1rem;
@@ -406,21 +406,68 @@ input[type="submit"] {
 
 #farmxcity-hero-section-div form button {
   width: 15rem;
+  height: 3rem;
   color: var(--main-bg-color);
   border-radius: 1rem;
   box-sizing: border-box;
   background-color: var(--primary-color-button);
-}
-#farmxcity-hero-section-div form button span {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-#farmxcity-hero-section-div div {
-  margin-top: 2rem;
-  display: flex;
-  gap: 2rem;
+  font-size: 1rem;
 }
 
+.search-div {
+  width: 100%;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.grid-farm-card {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  margin-top: 10rem;
+  gap: 2rem;
+}
+.farm-card {
+  border: 2px solid var(--second-main-bg-color);
+  width: 20rem;
+  height: auto;
+  border-radius: 1rem;
+}
+
+.farm-card h3 {
+  font-size: 1.5rem;
+}
+.farm-card div {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.farm-card img {
+  object-fit: contain;
+  width: 100%;
+  border-radius: 1rem 1rem 0 0;
+}
+.farm-card button {
+  background-color: white;
+  border: 1px solid var(--primary-color-button);
+  border-radius: 1rem;
+  width: 7rem;
+  font-size: 0.9rem;
+  height: 3rem;
+  margin-left: 12rem;
+  margin-bottom: 1rem;
+  transition:
+    background-color 0.2s,
+    color 0.5s;
+  cursor: pointer;
+}
+.farm-card button:hover {
+  background-color: var(--primary-color-button);
+  color: white;
+}
+.farm-orario {
+  text-align: right;
+}
 /******* FOOTER *******/
 footer {
   margin-top: 5rem;
