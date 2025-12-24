@@ -68,16 +68,20 @@ main {
   display: flex;
   gap: 2em;
 }
+<<<<<<< HEAD
 #current-page {
   padding: 0.5em;
+=======
+.Top-NavBar .current-page {
+  pointer-events: none;
+  padding: 0.5rem;
+>>>>>>> 4e16233 (modificate robe)
   border: var(--primary-color-button) solid 2px;
   background-color: var(--primary-color-button);
   border-radius: 1em;
   color: var(--main-bg-color);
 }
-#current-page:hover {
-  cursor: default;
-}
+
 .sr-only {
   position: absolute;
   left: -10000px;
