@@ -32,12 +32,18 @@
       <nav class="Top-NavBar">
         <ul aria-label="menu di navigazione">
           <li>
-            <a lang="en-us" href="index.html">Home</a>
+            <a lang="en" href="index.html">Home</a>
           </li>
-          <li><span id="current-page">Farmacie per Città</span></li>
+          <li><a href="search-farm.html">Farmacie</a></li>
+           <li>
+            <a aria-current="page" href="#" class="current-page" tabindex="-1"
+              ><span class="sr-only">Pagina Corrente:</span
+              >Medicine</a
+            >
+          </li>
           <li><a href="contatti.html">Prenota Servizio</a></li>
           <li>
-            <a href="about.html"><span lang="en-us">Aboutus</span></a>
+            <a href="about.html"><span lang="en">About</span></a>
           </li>
         </ul>
       </nav>
@@ -52,11 +58,11 @@
         <div id="farmxcity-hero-section-div">
           <form action="">
             <div class="search-div">
-              <label for="search-input">Cerca Farmacia</label>
+              <label for="search-input">Cerca Medicinale</label>
               <input
                 type="search"
                 id="search-input"
-                placeholder="Cerca farmaco..."
+                placeholder="Cerca medicinale"
               />
             </div>
             
