@@ -5,124 +5,122 @@
     <meta charset="utf-8" />
     <meta
       name="description"
-      content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate"
-    />
+      content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate" />
     <meta name="keywords" content="salute" />
     <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
-    <link
-      rel="stylesheet"
-      href="assets/css/mini.css"
-      media="screen and (max-width:950px)"
-    />
+    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   </head>
 
   <body>
     <header class="main-header">
       <h1>FarmaFind24</h1>
+      <img src="assets/logo_FarmaFind24.png" alt="logo farmafind24" />
       <nav class="Top-NavBar">
         <ul aria-label="menu di navigazione">
           <li>
-            <a lang="en" href="index.html">Home</a>
+            <a lang="en-GB" href="index.html">Home</a>
           </li>
           <li><a href="search-farm.html">Farmacie</a></li>
-           <li>
-            <a aria-current="page" href="#" class="current-page" tabindex="-1"
-              ><span class="sr-only">Pagina Corrente:</span
-              >Medicine</a
-            >
+          <li>
+            <a href="#" aria-current="page" tabindex="-1" class="current-page">
+              <span class="sr-only">Pagina Corrente</span>
+              Medicinali
+            </a>
           </li>
+
           <li><a href="contatti.html">Prenota Servizio</a></li>
           <li>
-            <a href="about.html"><span lang="en">About</span></a>
+            <a href="about.html"><span lang="en-GB">About</span></a>
           </li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <section id="farmxcity-hero-section">
-        <h1>Ricerca Farmaco</h1>
-        <p>
-          Ricerca il farmaco che ti serve e ti verranno presentate le farmacie che lo hanno in catalogo.
-        </p>
-        <div id="farmxcity-hero-section-div">
-          <form action="">
-            <div class="search-div">
-              <label for="search-input">Cerca Medicinale</label>
-              <input
-                type="search"
-                id="search-input"
-                placeholder="Cerca medicinale"
-              />
-            </div>
-            
-            
-            <button id="search-drug-button" type="submit">
-              Cerca farmaco
-            </button>
-          </form>
+      <section class="search-page-hero-section">
+        <div class="search-page-hero-content">
+          <h1>Cerca il Medicinale adatto a te</h1>
+          <p>Cerca tra i migliori medicinali in circolazione e vedi in quali farmacie c'è disponibilità.</p>
+          <div class="search-page-hero-form-container">
+            <form>
+              <div class="form-search-container">
+                <label for="farm-name" class="sr-only">Cerca una farmacia</label>
+                <input type="search" id="farm-name" placeholder="Cerca farmacia..." required />
+                <button type="submit">Cerca</button>
+              </div>
+            </form>
+          </div>
         </div>
-        </section>
-        <div class="grid-farm-card">
-            <div class="farm-card">
-                <img
-                src="./assets/benagol.jpg"
-                alt=""
-                />
-                <div>
-                    <h3>Benagol</h3>
-                    <p>Benagol è un farmaco da banco usato soprattutto per mal di gola e infiammazioni della bocca.</p>
-                </div>
-                <button type="button"><a href="info-med.html">Vedi Dettagli</a></button>
-            </div>
+      </section>
+      <section class="farm-list-section">
+        <div class="grid-4c">
+          <div class="med-card">
+            <img src="assets/benagol.jpg" alt="" />
+            <div class="med-card-content">
+              <h3>Benagol</h3>
+              <p>
+                Benagol è un farmaco da banco (senza obbligo di prescrizione) utilizzato principalmente disinfettante
+                del cavo orale. È indicato per il sollievo rapido dai primi sintomi del mal di gola, bruciore e
+                irritazioni della bocca...
+              </p>
 
-            <div class="farm-card">
-                <img
-                src="./assets/benagol.jpg"
-                alt=""
-                />
-                <div>
-                    <h3>Benagol</h3>
-                    <p>Benagol è un farmaco da banco usato soprattutto per mal di gola e infiammazioni della bocca.</p>
-                </div>
-                <button type="button"><a href="info-med.html">Vedi Dettagli</a></button>
+              <div class="row-btn">
+                <button type="button">Dettagli</button>
+              </div>
             </div>
+          </div>
 
-            <div class="farm-card">
-                <img
-                src="./assets/benagol.jpg"
-                alt=""
-                />
-                <div>
-                    <h3>Benagol</h3>
-                    <p>Benagol è un farmaco da banco usato soprattutto per mal di gola e infiammazioni della bocca.</p>
-                </div>
-                <button type="button"><a href="info-med.html">Vedi Dettagli</a></button>
+          <div class="med-card">
+            <img src="assets/benagol.jpg" alt="" />
+            <div class="med-card-content">
+              <h3>Benagol</h3>
+              <p>
+                Benagol è un farmaco da banco (senza obbligo di prescrizione) utilizzato principalmente disinfettante
+                del cavo orale. È indicato per il sollievo rapido dai primi sintomi del mal di gola, bruciore e
+                irritazioni della bocca...
+              </p>
+              <div class="row-btn">
+                <button type="button">Dettagli</button>
+              </div>
             </div>
+          </div>
+          <div class="med-card">
+            <img src="assets/benagol.jpg" alt="" />
+            <div class="med-card-content">
+              <h3>Benagol</h3>
+              <p>
+                Benagol è un farmaco da banco (senza obbligo di prescrizione) utilizzato principalmente disinfettante
+                del cavo orale. È indicato per il sollievo rapido dai primi sintomi del mal di gola, bruciore e
+                irritazioni della bocca...
+              </p>
 
-            <div class="farm-card">
-                <img
-                src="./assets/benagol.jpg"
-                alt=""
-                />
-                <div>
-                    <h3>Benagol</h3>
-                    <p>Benagol è un farmaco da banco usato soprattutto per mal di gola e infiammazioni della bocca.</p>
-                </div>
-                <button type="button"><a href="info-med.html">Vedi Dettagli</a></button>
+              <div class="row-btn">
+                <button type="button">Dettagli</button>
+              </div>
             </div>
-            
+          </div>
+
+          <div class="med-card">
+            <img src="assets/benagol.jpg" alt="" />
+            <div class="med-card-content">
+              <h3>Benagol</h3>
+              <p>
+                Benagol è un farmaco da banco (senza obbligo di prescrizione) utilizzato principalmente disinfettante
+                del cavo orale. È indicato per il sollievo rapido dai primi sintomi del mal di gola, bruciore e
+                irritazioni della bocca...
+              </p>
+
+              <div class="row-btn">
+                <button type="button">Dettagli</button>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
     </main>
     <footer>
       <p>Copyright &copy; 2025</p>

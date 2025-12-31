@@ -5,25 +5,16 @@
     <meta charset="utf-8" />
     <meta
       name="description"
-      content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate"
-    />
+      content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate" />
     <meta name="keywords" content="salute" />
-    <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
     <link
       rel="stylesheet"
-      href="assets/css/mini.css"
-      media="screen and (max-width:950px)"
-    />
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0" />
+    <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
+    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
   </head>
 
   <body>
@@ -33,13 +24,13 @@
       <nav class="Top-NavBar">
         <ul aria-label="menu di navigazione">
           <li>
-            <a aria-current="page" href="#" class="current-page" tabindex="-1"
-              ><span class="sr-only">Pagina Corrente:</span
-              ><span lang="en-GB">Home</span></a
-            >
+            <a aria-current="page" href="#" class="current-page" tabindex="-1">
+              <span class="sr-only">Pagina Corrente:</span>
+              <span lang="en-GB">Home</span>
+            </a>
           </li>
           <li><a href="search-farm.html">Farmacie</a></li>
-          <li><a href="search-med.html">Medicine</a></li>
+          <li><a href="search-med.html">Medicinali</a></li>
           <li><a href="contatti.html">Prenota Servizio</a></li>
           <li>
             <a href="about.html"><span lang="en-GB">About</span></a>
@@ -48,73 +39,151 @@
       </nav>
     </header>
 
-    <main id="home">
-      <section class="main-hero-section">
-        <div id="left-hero-section-div">
-          <h1>Trova la Farmacia perfetta, in ogni momento</h1>
+    <main>
+      <section>
+        <div class="home-hero-content">
+          <h1>Trova la Farmacia perfetta in ogni momento</h1>
           <p>
-            FarmaFind24 ti aiuta a localizzare farmacie aperte, controllare la
-            disponibilità dei medicinali e prenotare servizi sanitari con
-            facilità.
+            FarmaFind24 ti aiuta a localizzare farmacie aperte, controllare la disponibilità dei medicinali e prenotare
+            servizi sanitari con facilità.
           </p>
-        </div>
-        <img src="assets/home-image.png" alt="" />
-      </section>
-      <section>
-        <h2>Come funziona</h2>
-        <div class="grid">
-          <div>
-            <i class="fa-solid fa-search fa-2xl"></i>
-            <h3>Cerca la farmacia</h3>
-            <p>
-              Inserisci la tua città o il nome del medicinale per trovare le
-              farmacie più vicine a te, aperte o con disponibilità
-            </p>
-          </div>
-          <div>
-            <i class="fa-solid fa-location-dot fa-2xl"></i>
-            <h3>Vedi i dettagli</h3>
-            <p>
-              Accedi a informazioni complete su ogni farmacia: orari, servizi
-              offerti, contatti e percorso sulla mappa.
-            </p>
-          </div>
-          <div>
-            <i class="fa-solid fa-stethoscope fa-2xl"></i>
-            <h3>Prenota servizi</h3>
-            <p>
-              Prenota facilmente servizi sanitari come test audiometrici o
-              vaccinazioni direttamente dalla nostra piattaforma.
-            </p>
+          <div class="home-hero-form-container">
+            <form>
+              <fieldset>
+                <legend>Filtra per:</legend>
+                <div class="filter-container">
+                  <div class="radio-item">
+                    <input type="radio" name="type-name" value="Farmacia" checked id="type1" />
+                    <label for="type1">Farmacia</label>
+                  </div>
+                  <div class="radio-item">
+                    <input type="radio" name="type-name" value="Medicinale" id="type2" />
+                    <label for="type2">Medicinale</label>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="hero-form-search-container">
+                <label for="obj-name" class="sr-only">Cerca una farmacia o un medicinale</label>
+                <input
+                  type="search"
+                  value=""
+                  placeholder="Cerca una farmacia o un medicinale..."
+                  id="obj-name"
+                  required />
+                <button type="submit" class="hero-form-btn">Cerca</button>
+              </div>
+            </form>
           </div>
         </div>
       </section>
       <section>
-        <h2>Le nostre funzionalità</h2>
-        <div class="grid">
-          <div>
-            <i class="fa-solid fa-clock fa-2xl"></i>
-            <h3>Farmacie aperte ora</h3>
-            <p>
-              Trova immediatamente le farmacie di turno e quelle aperte nella
-              tua zona, il tutto disponibile 24/7.
-            </p>
+        <div class="service-section-content">
+          <h2>I Nostri Servizi</h2>
+          <p>Tutto ciò di cui hai bisogno per la tua salute, in unico portale affidabile e veloce.</p>
+          <div class="grid">
+            <div class="service-card">
+              <div class="icon-container">
+                <span class="material-symbols-outlined" notranslate aria-hidden="true">calendar_month</span>
+              </div>
+              <h3>Cerca la farmacia</h3>
+              <p>
+                Inserisci la tua città o il nome del medicinale per trovare le farmacie più vicine a te, aperte o con
+                disponibilità
+              </p>
+            </div>
+            <div class="service-card">
+              <div class="icon-container">
+                <span class="material-symbols-outlined" notranslate aria-hidden="true">medication</span>
+              </div>
+              <h3>Vedi i dettagli</h3>
+              <p>
+                Accedi a informazioni complete su ogni farmacia: orari, servizi offerti, contatti e percorso sulla
+                mappa.
+              </p>
+            </div>
+            <div class="service-card">
+              <div class="icon-container">
+                <span class="material-symbols-outlined" aria-hidden="true">bedtime</span>
+              </div>
+              <h3>Prenota servizi</h3>
+              <p>
+                Prenota facilmente servizi sanitari come test audiometrici o vaccinazioni direttamente dalla nostra
+                piattaforma.
+              </p>
+            </div>
           </div>
-          <div>
-            <i class="fa-solid fa-pills fa-2xl"></i>
-            <h3>disponibilità medicinali</h3>
-            <p>
-              Controlla la disponibilità di specifici farmaci in tempo reale
-              prima di recarti in farmacia.
-            </p>
-          </div>
-          <div>
-            <i class="fa-solid fa-user fa-2xl"></i>
-            <h3>Gestione profilo utente</h3>
-            <p>
-              Personalizza la tua esperienza, gestisci le tue prenotazioni e
-              visualizza lo storico delle tue ricerche.
-            </p>
+        </div>
+      </section>
+      <section>
+        <div class="farm-content">
+          <h2>Farmacie nei Dintorni</h2>
+          <p>Le tue farmacie di turno a portata di mano</p>
+          <div class="grid-4c">
+            <div class="farm-card-mini">
+              <div class="farm-img-container">
+                <img
+                  src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
+                  alt="" />
+                <span class="farm-stato-open">Aperta</span>
+              </div>
+              <div class="farm-card-content">
+                <h3>Farmacia Alvigini</h3>
+                <p>Via Roma 12, Milano</p>
+                <div class="row-btn">
+                  <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
+                  <button type="button">Dettagli</button>
+                </div>
+              </div>
+            </div>
+            <div class="farm-card-mini">
+              <div class="farm-img-container">
+                <img
+                  src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
+                  alt="" />
+                <span class="farm-stato-closed">Chiusa</span>
+              </div>
+              <div class="farm-card-content">
+                <h3>Farmacia Alvigini</h3>
+                <p>Via Roma 12, Milano</p>
+                <div class="row-btn">
+                  <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
+                  <button type="button">Dettagli</button>
+                </div>
+              </div>
+            </div>
+            <div class="farm-card-mini">
+              <div class="farm-img-container">
+                <img
+                  src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
+                  alt="" />
+                <span class="farm-stato-open">Aperta</span>
+              </div>
+              <div class="farm-card-content">
+                <h3>Farmacia Alvigini</h3>
+                <p>Via Roma 12, Milano</p>
+                <div class="row-btn">
+                  <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
+                  <button type="button">Dettagli</button>
+                </div>
+              </div>
+            </div>
+            <div class="farm-card-mini">
+              <div class="farm-img-container">
+                <img
+                  src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
+                  alt="" />
+                <span class="farm-stato-open">Aperta</span>
+              </div>
+
+              <div class="farm-card-content">
+                <h3>Farmacia Alvigini</h3>
+                <p>Via Roma 12, Milano</p>
+                <div class="row-btn">
+                  <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
+                  <button type="button">Dettagli</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
