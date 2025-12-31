@@ -71,6 +71,17 @@ section {
 .row-btn:has(> *:only-child) {
   justify-content: flex-end;
 }
+/* colore testo placeholder con contrasto sufficiente*/ 
+::placeholder {
+  color: #5E5E5E;
+  opacity: 1;
+}
+a:link {
+  color: var(--primary-color-button);
+}
+a:visited {
+  color: #870058;
+}
 /**********************/
 /*       HEADER       */
 /**********************/
@@ -133,6 +144,21 @@ section {
   border-radius: 1rem;
   color: var(--main-bg-color);
 }
+/*BREADCRUMB*/
+#breadcrumb {
+    display: block;
+    width: 100%;
+    padding: 0.8em 1em;
+    font-size: 1em;
+    text-align: left;
+    background-color: #F0F4F0;
+    /*border-bottom: 5px solid var(--primary-color-button);*/
+}
+#breadcrumb a {
+    color: var(--primary-color-button);
+    text-decoration: underline;
+}
+
 
 /**********************/
 /*        HOME        */
@@ -558,16 +584,18 @@ button:not(.outlined-btn):hover {
   font-size: 1.8rem;
 }
 input[type="text"],
+input[type="email"],
 select,
 textarea {
   width: 100%;
-  padding: 12px;
-  border: 1px solid black;
-  border-radius: 1rem;
+  padding: 0.75em;        
+  border: 0.063em solid black; 
+  border-radius: 1em;     
   box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
+  margin-top: 0.4em;      
+  margin-bottom: 1em;    
   resize: vertical;
+  font-family: inherit; 
 }
 input[type="submit"] {
   cursor: pointer;
@@ -724,4 +752,327 @@ footer img {
   flex-wrap: wrap; /* le card vanno a capo se superano la larghezza */
   gap: 2rem; /* spazio tra le card */
   margin-top: 2rem;
+}
+
+/* NUOVE AGGIUNTE (DA SISTEMARE)*/
+
+/******* PAGINA PRENOTAZIONE VISITA *******/
+
+/* Nascondere pallino di default */
+.service-box input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/*passaggio scelta visita*/
+
+.service-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    padding: 0;
+    border: 0.125em solid var(--header-border-color);
+    border-radius: 0.8em;
+    background-color: var(--main-bg-color);
+
+    overflow: hidden;
+    
+    
+    cursor: pointer;
+    /*transition: all 0.2s ease-in-out;*/
+    position: relative; 
+}
+
+
+.service-box:hover {
+    border-color: var(--primary-color-button);
+    background-color: #f0f0f0;
+}
+
+
+.service-box:has(input:checked) {
+    border-color: var(--primary-color-button);
+    border-width: 0.188em; 
+    background-color: #eafaea; 
+    box-shadow: 0 0.3em 0.6em rgba(0, 0, 0, 0.05);
+}
+
+.service-box:has(input:checked) strong {
+    color: var(--primary-color-button);
+}
+
+/* Quando l'utente arriva sul box con la tastiera */
+.service-box:has(input:focus-visible) {
+    outline: 0.2em solid var(--primary-color);
+    outline-offset: 0.2em;
+}
+
+.service-box label {
+    cursor: pointer; 
+    display: block;
+    width: 100%;
+    padding: 1.5em
+}
+
+.service-box strong {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 0.3em;
+}
+
+/*
+.service-box span {
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+    line-height: 1.2;
+}*/
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+    gap: 1em;
+    width: 100%;
+}
+
+/* passaggio farmacie */
+
+.farm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.card-clickable-label {
+  cursor: pointer;
+}
+
+.farm-name {
+    font-weight: 700;
+}
+
+.farm-address {
+    font-weight: 400;
+    color: #666;
+}
+
+/*passaggio data e ora */
+.date-picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-bottom: 2em; /* Spazio sotto il calendario */
+    width: 100%;
+}
+
+.label-title {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.8em;
+    text-align: center;
+}
+
+#date-pick {
+    width: 100%;
+    max-width: 12em; 
+    padding: 0.8em 1.2em;
+    font-size: 1.1em; 
+    font-family: inherit;
+    /*border: 0.125em solid var(--header-border-color); 
+    border-radius: 0.5em;
+    background-color: #f8f9fa;*/
+    cursor: pointer;
+    text-align: center;
+    color: #666;
+    box-sizing: border-box;
+}
+
+#date-pick:focus {
+    outline: none;
+    border-color: var(--primary-color-button);
+    background-color: #fff;
+}
+
+/* griglia Orari*/
+
+.time-picker-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
+    gap: 0.8em;
+    margin-top: 1em;
+}
+
+.time-slot label {
+    display: block;
+    padding: 0.8em 0.5em;
+    background-color: var(--main-bg-color);
+    border: 0.063em solid #ddd;
+    border-radius: 0.4em;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.time-slot input[type="radio"]:checked + label {
+    background-color: var(--primary-color-button);
+    color: white;
+}
+
+.time-slot label:hover {
+    border-color: var(--primary-color-button);
+    background-color: #f0f0f0;
+}
+
+/* tasti orari non disponibili */
+
+.time-slot input[disabled] + label {
+    background-color: #f0f0f0;
+    color: #a0a0a0;            
+    border-color: #e0e0e0;   
+    cursor: not-allowed;      
+    text-decoration: line-through; 
+}
+
+/****************************************************************************************************************************************/
+/* messaggio "Nessun orario disponibile"
+.no-availability-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    padding: 1.5em;
+    margin-top: 1em;
+    
+    background-color: #fff5f5;
+    border: 0.125em dashed #feb2b2; 
+    border-radius: 0.6em;
+    
+    min-height: 8em;
+}
+
+.no-availability-message p {
+    font-weight: 600;
+    color: #c53030; 
+    margin-bottom: 0.3em;
+    font-size: 1.1em;
+}
+
+.no-availability-message span {
+    color: #718096; 
+    font-size: 0.9em;
+}*/
+
+/*********************************************************************************************************************************************/
+
+/*PULSANTI*/
+
+.btn-secondary {
+    border-radius: 0.4em;
+    font: inherit;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--primary-color-button);
+    border: 1.8px solid var(--primary-color-button);
+
+    min-width: 10em;  
+    max-width: 18em;  
+    padding: 0.8em 1.2em; 
+    
+    line-height: 1.2;
+    
+    /*transition: all 0.2s ease;*/
+}
+
+.btn-primary {
+    padding: 0.8em 2em;
+    background-color: var(--primary-color-button);
+    color: white;
+    border: none;
+    border-radius: 0.4em;
+    font: inherit;
+    font-size: 1em;
+    cursor: pointer;
+    /*transition: background-color 0.2s;*/
+
+    min-width: 10em;  
+    max-width: 18em; 
+    padding: 0.8em 1.2em; 
+    
+    line-height: 1.2;
+}
+
+.step-actions {
+    display: flex;
+    justify-content: flex-end; /* bottoni a dx e sx */
+    gap: 2em;
+  
+    align-items: center;
+    margin-top: 0.3em;         /* Spazio sopra il bottone */
+    padding: 1.5em;
+}
+
+#regForm {
+    width: 95%;
+    max-width: 60em;
+    margin: 2em auto;
+    padding: 2.5em;
+    border: 0.4em solid var(--primary-color-button);
+    border-radius: 0.8em;
+    background-color: var(--main-bg-color);
+
+    box-sizing: border-box;
+    display: block;
+}
+
+/* schede non attive */
+.tab {
+    display: none;
+}
+
+
+.step {
+  height: 1em;
+  width: 1em;
+  margin: 0 5px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step-indicator-container {
+    text-align: center;
+    margin-bottom: 2em;      
+    justify-content: center;
+    gap: 10px;
+}
+
+.step.active {
+  opacity: 1;
+  background-color: #4CAF50;
+}
+
+.step.finish {
+  background-color: #4CAF50;
 }
