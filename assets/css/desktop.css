@@ -77,7 +77,7 @@ section {
   opacity: 1;
 }
 a:link {
-  color: var(--primary-color-button);
+  color: var(--primary-color);
 }
 a:visited {
   color: #870058;
@@ -152,10 +152,10 @@ a:visited {
     font-size: 1em;
     text-align: left;
     background-color: #F0F4F0;
-    /*border-bottom: 5px solid var(--primary-color-button);*/
+    /*border-bottom: 5px solid var(--primary-color);*/
 }
 #breadcrumb a {
-    color: var(--primary-color-button);
+    color: var(--primary-color);
     text-decoration: underline;
 }
 
@@ -356,36 +356,57 @@ a:visited {
 }
 
 button {
-  border-radius: 0.5rem;
-  width: 6.5rem;
-  font-size: 0.9rem;
-  height: 2.5rem;
-  margin-top: 1rem;
+  min-width: 10em;  
+  max-width: 18em; 
+  height: 3em;
+  padding: 0.8em 1.2em;
+  margin-top: 1em;
+  border-radius: 0.5em;
+  font-family: inherit;
+  font-size: 0.9em;
+  line-height: 1.2;
+  
   transition:
     background-color 0.2s,
     color 0.5s,
     border 0.2s;
+
+  border-radius: 0.5em;
   cursor: pointer;
+
+  border: 1.8px solid transparent;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
-button:not(.outlined-btn) {
+/*button:not(.outlined-btn) {
   color: white;
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color-hover);
-}
-.outlined-btn {
+}*/
+button.outlined-btn {
   background-color: var(--second-bg-color);
   border: 1px solid black;
   color: black;
 }
-
-button:not(.outlined-btn):hover {
+/*button:not(.outlined-btn):hover {
   background-color: var(--primary-color-hover);
   color: white;
   border: 1px solid var(--primary-color-hover);
-}
+}*/
 .outlined-btn:hover {
   background-color: black;
   color: white;
+}
+button.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+button.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 /**********************/
@@ -791,20 +812,20 @@ footer img {
 
 
 .service-box:hover {
-    border-color: var(--primary-color-button);
+    border-color: var(--primary-color);
     background-color: #f0f0f0;
 }
 
 
 .service-box:has(input:checked) {
-    border-color: var(--primary-color-button);
+    border-color: var(--primary-color);
     border-width: 0.188em; 
     background-color: #eafaea; 
     box-shadow: 0 0.3em 0.6em rgba(0, 0, 0, 0.05);
 }
 
 .service-box:has(input:checked) strong {
-    color: var(--primary-color-button);
+    color: var(--primary-color);
 }
 
 /* Quando l'utente arriva sul box con la tastiera */
@@ -897,7 +918,7 @@ footer img {
 
 #date-pick:focus {
     outline: none;
-    border-color: var(--primary-color-button);
+    border-color: var(--primary-color);
     background-color: #fff;
 }
 
@@ -931,12 +952,12 @@ footer img {
 }
 
 .time-slot input[type="radio"]:checked + label {
-    background-color: var(--primary-color-button);
+    background-color: var(--primary-color);
     color: white;
 }
 
 .time-slot label:hover {
-    border-color: var(--primary-color-button);
+    border-color: var(--primary-color);
     background-color: #f0f0f0;
 }
 
@@ -982,46 +1003,6 @@ footer img {
 }*/
 
 /*********************************************************************************************************************************************/
-
-/*PULSANTI*/
-
-.btn-secondary {
-    border-radius: 0.4em;
-    font: inherit;
-    font-size: 1em;
-    font-weight: 500;
-    cursor: pointer;
-    background-color: transparent;
-    color: var(--primary-color-button);
-    border: 1.8px solid var(--primary-color-button);
-
-    min-width: 10em;  
-    max-width: 18em;  
-    padding: 0.8em 1.2em; 
-    
-    line-height: 1.2;
-    
-    /*transition: all 0.2s ease;*/
-}
-
-.btn-primary {
-    padding: 0.8em 2em;
-    background-color: var(--primary-color-button);
-    color: white;
-    border: none;
-    border-radius: 0.4em;
-    font: inherit;
-    font-size: 1em;
-    cursor: pointer;
-    /*transition: background-color 0.2s;*/
-
-    min-width: 10em;  
-    max-width: 18em; 
-    padding: 0.8em 1.2em; 
-    
-    line-height: 1.2;
-}
-
 .step-actions {
     display: flex;
     justify-content: flex-end; /* bottoni a dx e sx */
@@ -1037,7 +1018,7 @@ footer img {
     max-width: 60em;
     margin: 2em auto;
     padding: 2.5em;
-    border: 0.4em solid var(--primary-color-button);
+    border: 0.4em solid var(--primary-color);
     border-radius: 0.8em;
     background-color: var(--main-bg-color);
 
