@@ -34,11 +34,7 @@ section {
 .material-symbols-outlined {
   font-size: 27px;
   color: var(--primary-color);
-  font-variation-settings:
-    "FILL" 0,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 .grid {
   align-items: start;
@@ -71,9 +67,9 @@ section {
 .row-btn:has(> *:only-child) {
   justify-content: flex-end;
 }
-/* colore testo placeholder con contrasto sufficiente*/ 
+
 ::placeholder {
-  color: #5E5E5E;
+  color: #5e5e5e;
   opacity: 1;
 }
 a:link {
@@ -106,7 +102,7 @@ a:visited {
   left: 1rem;
   width: 3rem;
 }
-
+/* NAVBAR */
 .Top-NavBar a {
   height: 2rem;
   text-decoration: none;
@@ -114,10 +110,7 @@ a:visited {
   color: black;
   border-radius: 1rem;
   border: 2px solid transparent;
-  transition:
-    border 0.2s,
-    color 0.2s,
-    background-color 0.3s;
+  transition: border 0.2s, color 0.2s, background-color 0.3s;
 }
 .Top-NavBar a:hover {
   border: var(--primary-color) solid 2px;
@@ -144,21 +137,20 @@ a:visited {
   border-radius: 1rem;
   color: var(--main-bg-color);
 }
-/*BREADCRUMB*/
+
+/* BREADCRUMB */
 #breadcrumb {
-    display: block;
-    width: 100%;
-    padding: 0.8em 1em;
-    font-size: 1em;
-    text-align: left;
-    background-color: #F0F4F0;
-    /*border-bottom: 5px solid var(--primary-color);*/
+  display: block;
+  width: 100%;
+  padding: 0.8em 1em;
+  font-size: 1em;
+  text-align: left;
+  background-color: var(--second-bg-color);
 }
 #breadcrumb a {
-    color: var(--primary-color);
-    text-decoration: underline;
+  color: var(--primary-color);
+  text-decoration: underline;
 }
-
 
 /**********************/
 /*        HOME        */
@@ -208,8 +200,7 @@ a:visited {
   margin-right: 1rem;
   float: left;
 }
-.home-hero-form-container input[type="radio"] {
-}
+
 .hero-form-search-container {
   display: flex;
   flex-direction: row;
@@ -248,6 +239,7 @@ a:visited {
 }
 .hero-form-btn:hover {
   background-color: var(--primary-color-hover);
+  color: white;
 }
 .team-section-content,
 .about-section-content,
@@ -356,57 +348,33 @@ a:visited {
 }
 
 button {
-  min-width: 10em;  
-  max-width: 18em; 
-  height: 3em;
-  padding: 0.8em 1.2em;
-  margin-top: 1em;
-  border-radius: 0.5em;
-  font-family: inherit;
-  font-size: 0.9em;
-  line-height: 1.2;
-  
-  transition:
-    background-color 0.2s,
-    color 0.5s,
-    border 0.2s;
-
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
+  width: 6.5rem;
+  font-size: 0.9rem;
+  height: 2.5rem;
+  margin-top: 1rem;
+  transition: background-color 0.2s, color 0.5s, border 0.2s;
   cursor: pointer;
-
-  border: 1.8px solid transparent;
-
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
 }
-/*button:not(.outlined-btn) {
-  color: white;
-  background-color: var(--primary-color);
-  border: 1px solid var(--primary-color-hover);
-}*/
+
 button.outlined-btn {
   background-color: var(--second-bg-color);
   border: 1px solid black;
   color: black;
 }
-/*button:not(.outlined-btn):hover {
+button.outlined-btn:hover {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+}
+
+button.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+button.btn-primary:hover {
   background-color: var(--primary-color-hover);
   color: white;
-  border: 1px solid var(--primary-color-hover);
-}*/
-.outlined-btn:hover {
-  background-color: black;
-  color: white;
-}
-button.btn-secondary {
-    background-color: transparent;
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-button.btn-primary {
-    background-color: var(--primary-color);
-    color: white;
 }
 
 /**********************/
@@ -468,10 +436,6 @@ button.btn-primary {
 /**********************/
 /*  SEARCH-FARM-PAGE  */
 /**********************/
-.farm-list-section {
-  height: 620px;
-  background-color: var(--main-bg-color);
-}
 .med-card h3,
 .farm-card h3 {
   font-size: 1.5rem;
@@ -534,11 +498,7 @@ button.btn-primary {
   padding: 1.5rem;
   text-align: center;
   border: var(--primary-color) solid 1px;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease,
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease,
     color 0.5s ease;
   box-shadow: 0px 9px 5px var(--accent);
 }
@@ -554,9 +514,7 @@ button.btn-primary {
   background-color: var(--primary-color);
   color: var(--main-bg-color);
   border-color: var(--accent);
-  box-shadow:
-    0 10px 20px rgba(0, 0, 0, 0.25),
-    0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .avatar-container:hover span {
   color: var(--main-bg-color);
@@ -609,14 +567,14 @@ input[type="email"],
 select,
 textarea {
   width: 100%;
-  padding: 0.75em;        
-  border: 0.063em solid black; 
-  border-radius: 1em;     
+  padding: 0.75em;
+  border: 0.063em solid black;
+  border-radius: 1em;
   box-sizing: border-box;
-  margin-top: 0.4em;      
-  margin-bottom: 1em;    
+  margin-top: 0.4em;
+  margin-bottom: 1em;
   resize: vertical;
-  font-family: inherit; 
+  font-family: inherit;
 }
 input[type="submit"] {
   cursor: pointer;
@@ -791,60 +749,57 @@ footer img {
 /*passaggio scelta visita*/
 
 .service-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    
-    padding: 0;
-    border: 0.125em solid var(--header-border-color);
-    border-radius: 0.8em;
-    background-color: var(--main-bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 
-    overflow: hidden;
-    
-    
-    cursor: pointer;
-    /*transition: all 0.2s ease-in-out;*/
-    position: relative; 
+  padding: 0;
+  border: 0.125em solid var(--header-border-color);
+  border-radius: 0.8em;
+  background-color: var(--main-bg-color);
+
+  overflow: hidden;
+
+  cursor: pointer;
+  /*transition: all 0.2s ease-in-out;*/
+  position: relative;
 }
-
 
 .service-box:hover {
-    border-color: var(--primary-color);
-    background-color: #f0f0f0;
+  border-color: var(--primary-color);
+  background-color: #f0f0f0;
 }
 
-
 .service-box:has(input:checked) {
-    border-color: var(--primary-color);
-    border-width: 0.188em; 
-    background-color: #eafaea; 
-    box-shadow: 0 0.3em 0.6em rgba(0, 0, 0, 0.05);
+  border-color: var(--primary-color);
+  border-width: 0.188em;
+  background-color: #eafaea;
+  box-shadow: 0 0.3em 0.6em rgba(0, 0, 0, 0.05);
 }
 
 .service-box:has(input:checked) strong {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 /* Quando l'utente arriva sul box con la tastiera*/
 .service-box:has(input:focus-visible) {
-    outline: 0.2em solid var(--primary-color);
-    outline-offset: 0.2em;
+  outline: 0.2em solid var(--primary-color);
+  outline-offset: 0.2em;
 }
 
 .service-box label {
-    cursor: pointer; 
-    display: block;
-    width: 100%;
-    padding: 1.5em
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 1.5em;
 }
 
 .service-box strong {
-    display: block;
-    font-size: 1.1em;
-    margin-bottom: 0.3em;
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 0.3em;
 }
 
 /*
@@ -856,17 +811,17 @@ footer img {
 }*/
 
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
-    gap: 1em;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+  gap: 1em;
+  width: 100%;
 }
 
 /* passaggio farmacie */
 
 .farm-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   margin-top: 1.5rem;
   width: 100%;
@@ -877,49 +832,49 @@ footer img {
 }
 
 .farm-name {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .farm-address {
-    font-weight: 400;
-    color: #666;
+  font-weight: 400;
+  color: #666;
 }
 
 /*passaggio data e ora */
 .date-picker-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    margin-bottom: 2em; 
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em; /* Spazio sotto il calendario */
+  width: 100%;
 }
 
 .label-title {
-    display: block;
-    font-weight: 700;
-    margin-bottom: 0.8em;
-    text-align: center;
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.8em;
+  text-align: center;
 }
 
 #date-pick {
-    width: 100%;
-    max-width: 12em; 
-    padding: 0.8em 1.2em;
-    font-size: 1.1em; 
-    font-family: inherit;
-    /*border: 0.125em solid var(--header-border-color); 
+  width: 100%;
+  max-width: 12em;
+  padding: 0.8em 1.2em;
+  font-size: 1.1em;
+  font-family: inherit;
+  /*border: 0.125em solid var(--header-border-color); 
     border-radius: 0.5em;
     background-color: #f8f9fa;*/
-    cursor: pointer;
-    text-align: center;
-    color: #666;
-    box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  color: #666;
+  box-sizing: border-box;
 }
 
 #date-pick:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    background-color: #fff;
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: #fff;
 }
 
 /* griglia Orari*/
@@ -933,42 +888,42 @@ footer img {
 }
 
 .time-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
-    gap: 0.8em;
-    margin-top: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
+  gap: 0.8em;
+  margin-top: 1em;
 }
 
 .time-slot label {
-    display: block;
-    padding: 0.8em 0.5em;
-    background-color: var(--main-bg-color);
-    border: 0.063em solid #ddd;
-    border-radius: 0.4em;
-    text-align: center;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.2s;
+  display: block;
+  padding: 0.8em 0.5em;
+  background-color: var(--main-bg-color);
+  border: 0.063em solid #ddd;
+  border-radius: 0.4em;
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
 }
 
 .time-slot input[type="radio"]:checked + label {
-    background-color: var(--primary-color);
-    color: white;
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .time-slot label:hover {
-    border-color: var(--primary-color);
-    background-color: #f0f0f0;
+  border-color: var(--primary-color);
+  background-color: #f0f0f0;
 }
 
 /* tasti orari non disponibili */
 
 .time-slot input[disabled] + label {
-    background-color: #f0f0f0;
-    color: #a0a0a0;            
-    border-color: #e0e0e0;   
-    cursor: not-allowed;      
-    text-decoration: line-through; 
+  background-color: #f0f0f0;
+  color: #a0a0a0;
+  border-color: #e0e0e0;
+  cursor: not-allowed;
+  text-decoration: line-through;
 }
 
 /****************************************************************************************************************************************/
@@ -1003,33 +958,33 @@ footer img {
 
 /*********************************************************************************************************************************************/
 .step-actions {
-    display: flex;
-    flex-direction: row-reverse; /* ordine invertito per screen reader */
-    justify-content: flex-start;
-    gap: 2em;
-  
-    align-items: center;
-    margin-top: 0.3em;         /* Spazio sopra il bottone */
-    padding: 1.5em;
+  display: flex;
+  justify-content: flex-end; /* bottoni a dx e sx */
+  gap: 2em;
+
+  align-items: center;
+  margin-top: 0.3em; /* Spazio sopra il bottone */
+  padding: 1.5em;
 }
 
 #regForm {
-    width: 95%;
-    max-width: 60em;
-    margin: 2em auto;
-    padding: 2.5em;
-    border: 0.4em solid var(--primary-color);
-    border-radius: 0.8em;
-    background-color: var(--main-bg-color);
+  width: 95%;
+  max-width: 60em;
+  margin: 2em auto;
+  padding: 2.5em;
+  border: 0.4em solid var(--primary-color);
+  border-radius: 0.8em;
+  background-color: var(--main-bg-color);
 
-    box-sizing: border-box;
-    display: block;
+  box-sizing: border-box;
+  display: block;
 }
 
 /* nascondere passaggi del form non attivi (prova anche disabilitando js) */
 .tab {
-    display: none;
+  display: none;
 }
+
 /*
 .tab {
     display: block; 
@@ -1045,31 +1000,35 @@ footer img {
   height: 1em;
   width: 1em;
   margin: 0 5px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   border-radius: 50%;
   display: inline-block;
   opacity: 0.5;
 }
 
 .step-indicator-container {
-    text-align: center;
-    margin-bottom: 1em;      
-    justify-content: center;
-    gap: 10px;
+  text-align: center;
+  margin-bottom: 2em;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  margin-bottom: 1em;
+  justify-content: center;
+  gap: 10px;
 }
 
 .step.active {
   opacity: 1;
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 
 .step.finish {
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 
-.instruction{
-  color:#5E5E5E;
-  font-style: italic; 
+.instruction {
+  color: #5e5e5e;
+  font-style: italic;
   text-align: center;
   margin-bottom: 1em;
 }
@@ -1078,24 +1037,23 @@ footer img {
 
 /* Quando l'input è invalido colora il bordo*/
 input.invalid {
-    border-color: #d93025;
-    background-color: #fff4f4;
+  border-color: #d93025;
+  background-color: #fff4f4;
 }
 .error-msg {
-    display: none; 
-    color: #d93025;
-    font-size: 0.85rem;
-    font-weight: bold;
-    margin-top: 5px;
+  display: none;
+  color: #d93025;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-top: 5px;
 }
 
 input.invalid + .error-msg {
-    display: block;
+  display: block;
 }
 
-
 #general-error-msg {
-    display: none; 
-    color: #d93025;
-    text-align: right;
+  display: none;
+  color: #d93025;
+  text-align: right;
 }
