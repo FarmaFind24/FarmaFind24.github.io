@@ -2,211 +2,193 @@
 
 <!doctype html>
 <html lang="it">
-  <head>
-    <title>FarmaFind24</title>
-    <meta charset="utf-8" />
-    <meta
-      name="description"
-      content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate" />
-    <meta name="keywords" content="salute" />
-    <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  </head>
 
-  <body>
-    <header class="main-header">
-      <h1>FarmaFind24</h1>
-      <nav class="Top-NavBar">
-        <ul aria-label="menu di navigazione">
-          <li>
-            <a href="index.html"><span lang="en-GB">Home</span></a>
-          </li>
-          <li><a href="search-farm.html">Farmacie</a></li>
-          <li><a href="search-med.html">Medicinali</a></li>
-          <li><a href="book-app.html">Prenota Visita</a></li>
-          <li>
-            <a aria-current="page" href="#" class="current-page" tabindex="-1">
-              <span class="sr-only">Pagina Corrente:</span>
-              <span lang="en-GB">About</span>
+<head>
+  <title>FarmaFind24</title>
+  <meta charset="utf-8" />
+  <meta name="description"
+    content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate" />
+  <meta name="keywords" content="salute" />
+  <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+  <header class="main-header">
+    <h1 class="hide">FarmaFind24</h1>
+    <nav class="Top-NavBar">
+      <ul aria-label="menu di navigazione">
+        <li>
+          <a href="index.html"><span lang="en-GB">Home</span></a>
+        </li>
+        <li><a href="search-farm.html">Farmacie</a></li>
+        <li><a href="search-med.html">Medicinali</a></li>
+        <li><a href="book-app.html">Prenota Visita</a></li>
+        <li>
+          <a aria-current="page" href="#" class="current-page" tabindex="-1">
+            <span class="sr-only">Pagina Corrente:</span>
+            <span lang="en-GB">About</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <nav id="breadcrumb" aria-label="Percorso di navigazione">
+    <p> Ti trovi in:
+      <a href="index.html"> <span lang="en">Home</span></a> >> <span lang="en-GB">About</span>
+    </p>
+  </nav>
+
+  <main>
+    <section>
+      <div class="about-hero">
+        <h1>Scopri FarmaFind24: La Tua Salute a Portata di Mano</h1>
+        <p>
+          FarmaFind24 nasce dalla visione di rendere l'accesso ai servizi farmaceutici semplice, veloce ed efficiente
+          per tutti. La nostra piattaforma ti connette in tempo reale con le farmacie più vicine, permettendoti di
+          trovare i farmaci di cui hai bisogno e di prenotare consulti e prestazioni sanitarie con pochi clic.
+        </p>
+        <img src="assets/about-hero.webp" alt="" />
+      </div>
+    </section>
+    <section class="about-first-section">
+      <div class="about-section-content">
+        <h2>Le nostre funzionalità</h2>
+        <div class="grid">
+          <div class="feature-card">
+            <div class="icon-container">
+              <span class="material-symbols-outlined" notranslate aria-hidden="true">accessibility_new</span>
+            </div>
+            <h3>Accessibilità</h3>
+            <p>
+              Crediamo che tutti debbano avere facile accesso ai servizi farmaceutici e alle informazioni sanitarie
+              essenziali, in ogni momento e ovunque si trovino.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="icon-container">
+              <span class="material-symbols-outlined" notranslate aria-hidden="true">speed</span>
+            </div>
+            <h3>Efficienza</h3>
+            <p>
+              Siamo impegnati a semplificare la ricerca di farmacie e farmaci, ottimizzando il tuo tempo e riducendo
+              lo stress legato alla cura della tua salute.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="icon-container">
+              <span class="material-symbols-outlined" notranslate aria-hidden="true">verified_user</span>
+            </div>
+            <h3>Affidabilità</h3>
+            <p>
+              Forniamo informazioni accurate e aggiornate per garantirti tranquillità e sicurezza nelle tue scelte
+              sanitarie.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="team-section-content">
+        <h2>Conosci il nostro team</h2>
+        <div class="grid-4c">
+          <div class="avatar-container">
+            <a href="https://github.com/Scafu" target="_blank">
+              <img class="avatar-img" src="https://github.com/Scafu.png" alt="" />
+              <span>
+                Alessandro
+                <br />
+                Mazzariol
+              </span>
             </a>
+          </div>
+          <div class="avatar-container">
+            <a href="https://github.com/matteorocco27" target="_blank">
+              <img class="avatar-img" src="https://github.com/matteorocco27.png" alt="" />
+              <span>
+                Matteo
+                <br />
+                Rocco
+              </span>
+            </a>
+          </div>
+          <div class="avatar-container">
+            <a href="https://github.com/Albero04" target="_blank">
+              <img class="avatar-img" src="https://github.com/Albero04.png" alt="" />
+              <span>
+                Alberto
+                <br />
+                Pignat
+              </span>
+            </a>
+          </div>
+          <div class="avatar-container">
+            <a href="https://github.com/saragifi" target="_blank">
+              <img class="avatar-img" src="https://github.com/saragifi.png" alt="" />
+              <span>
+                Sara
+                <br />
+                Fichera
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="contact-section">
+      <div class="contact-info">
+        <h2>Mettiti in Contatto</h2>
+        <p>
+          Hai domande, suggerimenti o hai bisogno di supporto? Il nostro team è qui per aiutarti, compila il modulo o
+          contattaci direttamente.
+        </p>
+        <ul role="list" aria-label="Informazioni di contatto">
+          <li>
+            <i class="fa-solid fa-location-dot fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Dove ci trovi:</span>
+            Via Trieste 63 - Torre Archimede, 35100 Padova, Italia
+          </li>
+          <li>
+            <i class="fa-solid fa-phone fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Il nostro numero:</span>
+            +39 321 6767679
+          </li>
+          <li>
+            <i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">La nostra email:</span>
+            farmafind24@gmail.com
           </li>
         </ul>
-      </nav>
-    </header>
+      </div>
 
-    <nav id="breadcrumb" aria-label="Percorso di navigazione">
-        <p> Ti trovi in: 
-            <a href="index.html"> <span lang="en">Home</span></a> >> <span lang="en-GB">About</span></p>
-    </nav>
+      <div class="contact-form">
+        <div>
+          <span class="title-form">Inviaci un Messaggio</span>
+          <p>Compila il modulo sottostante e ti risponderemo il prima possibile.</p>
+        </div>
+        <form>
+          <label for="fnc">Nome Completo</label>
+          <input type="text" id="fnc" name="Name-completo" value="" required aria-label="Nome Completo"
+            placeholder="Il tuo Nome e Cognome..." />
+          <label for="email">Email (e.g email@esempio.com)</label>
+          <input type="text" name="Email" id="email" value="" autocomplete="email" aria-label="Email" required
+            placeholder="La tua email (e.g email@esempio.com)..." />
+          <label for="object">Oggetto</label>
+          <input type="text" name="Oggetto richiesta" value="" required id="object" aria-label="Oggetto della richiesta"
+            placeholder="Oggetto della richiesta..." />
+          <label for="message">Messaggio</label>
+          <textarea id="message" placeholder="Scrivi qui il tuo messaggio..." style="height: 100px"></textarea>
+          <input type="submit" value="Invia messaggio" aria-label="Invia Messaggio" />
+        </form>
+      </div>
+    </section>
+  </main>
+</body>
 
-    <main>
-      <section>
-        <div class="about-hero">
-          <h1>Scopri FarmaFind24: La Tua Salute a Portata di Mano</h1>
-          <p>
-            FarmaFind24 nasce dalla visione di rendere l'accesso ai servizi farmaceutici semplice, veloce ed efficiente
-            per tutti. La nostra piattaforma ti connette in tempo reale con le farmacie più vicine, permettendoti di
-            trovare i farmaci di cui hai bisogno e di prenotare consulti e prestazioni sanitarie con pochi clic.
-          </p>
-          <img src="assets/about-hero.png" alt="" />
-        </div>
-      </section>
-      <section class="about-first-section">
-        <div class="about-section-content">
-          <h2>Le nostre funzionalità</h2>
-          <div class="grid">
-            <div class="feature-card">
-              <div class="icon-container">
-                <span class="material-symbols-outlined" notranslate aria-hidden="true">accessibility_new</span>
-              </div>
-              <h3>Accessibilità</h3>
-              <p>
-                Crediamo che tutti debbano avere facile accesso ai servizi farmaceutici e alle informazioni sanitarie
-                essenziali, in ogni momento e ovunque si trovino.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="icon-container">
-                <span class="material-symbols-outlined" notranslate aria-hidden="true">speed</span>
-              </div>
-              <h3>Efficienza</h3>
-              <p>
-                Siamo impegnati a semplificare la ricerca di farmacie e farmaci, ottimizzando il tuo tempo e riducendo
-                lo stress legato alla cura della tua salute.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="icon-container">
-                <span class="material-symbols-outlined" notranslate aria-hidden="true">verified_user</span>
-              </div>
-              <h3>Affidabilità</h3>
-              <p>
-                Forniamo informazioni accurate e aggiornate per garantirti tranquillità e sicurezza nelle tue scelte
-                sanitarie.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div class="team-section-content">
-          <h2>Conosci il nostro team</h2>
-          <div class="grid-4c">
-            <div class="avatar-container">
-              <a href="https://github.com/Scafu" target="_blank">
-                <img class="avatar-img" src="https://github.com/Scafu.png" alt="" />
-                <span>
-                  Alessandro
-                  <br />
-                  Mazzariol
-                </span>
-              </a>
-            </div>
-            <div class="avatar-container">
-              <a href="https://github.com/matteorocco27" target="_blank">
-                <img class="avatar-img" src="https://github.com/matteorocco27.png" alt="" />
-                <span>
-                  Matteo
-                  <br />
-                  Rocco
-                </span>
-              </a>
-            </div>
-            <div class="avatar-container">
-              <a href="https://github.com/Albero04" target="_blank">
-                <img class="avatar-img" src="https://github.com/Albero04.png" alt="" />
-                <span>
-                  Alberto
-                  <br />
-                  Pignat
-                </span>
-              </a>
-            </div>
-            <div class="avatar-container">
-              <a href="https://github.com/saragifi" target="_blank">
-                <img class="avatar-img" src="https://github.com/saragifi.png" alt="" />
-                <span>
-                  Sara
-                  <br />
-                  Fichera
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="contact-section">
-        <div class="contact-info">
-          <h2>Mettiti in Contatto</h2>
-          <p>
-            Hai domande, suggerimenti o hai bisogno di supporto? Il nostro team è qui per aiutarti, compila il modulo o
-            contattaci direttamente.
-          </p>
-          <ul role="list" aria-label="Informazioni di contatto">
-            <li>
-              <i class="fa-solid fa-location-dot fa-lg" aria-hidden="true"></i>
-              <span class="sr-only">Dove ci trovi:</span>
-              Via Trieste 63 - Torre Archimede, 35100 Padova, Italia
-            </li>
-            <li>
-              <i class="fa-solid fa-phone fa-lg" aria-hidden="true"></i>
-              <span class="sr-only">Il nostro numero:</span>
-              +39 321 6767679
-            </li>
-            <li>
-              <i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
-              <span class="sr-only">La nostra email:</span>
-              farmafind24@gmail.com
-            </li>
-          </ul>
-        </div>
-
-        <div class="contact-form">
-          <div>
-            <span class="title-form">Inviaci un Messaggio</span>
-            <p>Compila il modulo sottostante e ti risponderemo il prima possibile.</p>
-          </div>
-          <form>
-            <label for="fnc">Nome Completo</label>
-            <input
-              type="text"
-              id="fnc"
-              name="Name-completo"
-              value=""
-              required
-              aria-label="Nome Completo"
-              placeholder="Il tuo Nome e Cognome..." />
-            <label for="email">Email (e.g email@esempio.com)</label>
-            <input
-              type="text"
-              name="Email"
-              id="email"
-              value=""
-              autocomplete="email"
-              aria-label="Email"
-              required
-              placeholder="La tua email (e.g email@esempio.com)..." />
-            <label for="object">Oggetto</label>
-            <input
-              type="text"
-              name="Oggetto richiesta"
-              value=""
-              required
-              id="object"
-              aria-label="Oggetto della richiesta"
-              placeholder="Oggetto della richiesta..." />
-            <label for="message">Messaggio</label>
-            <textarea id="message" placeholder="Scrivi qui il tuo messaggio..." style="height: 100px"></textarea>
-            <input type="submit" value="Invia messaggio" aria-label="Invia Messaggio" />
-          </form>
-        </div>
-      </section>
-    </main>
-  </body>
 </html>

@@ -22,7 +22,8 @@ body {
   font-family: "Lexend", sans-serif;
 }
 main {
-  padding-bottom: 10rem;
+  box-sizing: border-box;
+  padding: 1rem 1rem 10rem 1rem;
   background-color: var(--second-bg-color);
 }
 section {
@@ -31,24 +32,46 @@ section {
   justify-content: center;
   padding-top: 3rem;
 }
+
+button {
+  border-radius: 0.5rem;
+  width: 6.5rem;
+  font-size: 0.9rem;
+  height: 2.5rem;
+  margin-top: 1rem;
+  transition: background-color 0.2s, color 0.5s, border 0.2s;
+  cursor: pointer;
+  font-family: inherit;
+}
+::placeholder {
+  color: #5e5e5e;
+  opacity: 1;
+}
+a:link {
+  color: var(--primary-color);
+}
+a:visited {
+  color: #870058;
+}
 .material-symbols-outlined {
   font-size: 27px;
   color: var(--primary-color);
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 .grid {
-  align-items: start;
-  gap: 1.5rem;
+  gap: 1rem;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(auto-fit, 24rem);
   padding: 2rem 0rem 0rem 0rem;
+  justify-content: center;
 }
 .grid-4c {
-  align-items: start;
-  gap: 1.125rem;
-  padding: 2rem 0rem 0rem 0rem;
+  gap: 1rem;
+  margin-top: 2rem;
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(auto-fit, 18.165rem);
+  width: 100%;
+  justify-content: center;
 }
 
 .sr-only {
@@ -68,16 +91,6 @@ section {
   justify-content: flex-end;
 }
 
-::placeholder {
-  color: #5e5e5e;
-  opacity: 1;
-}
-a:link {
-  color: var(--primary-color);
-}
-a:visited {
-  color: #870058;
-}
 /**********************/
 /*       HEADER       */
 /**********************/
@@ -88,20 +101,12 @@ a:visited {
   background-color: var(--main-bg-color);
   top: 0;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border-bottom: 2px solid var(--header-border-color);
   z-index: 1000;
+  padding-right: 1rem;
 }
-.main-header h1 {
-  left: 4rem;
-  margin-left: 0;
-  position: absolute;
-}
-.main-header img {
-  position: absolute;
-  left: 1rem;
-  width: 3rem;
-}
+
 /* NAVBAR */
 .Top-NavBar a {
   height: 2rem;
@@ -152,16 +157,26 @@ a:visited {
   text-decoration: underline;
 }
 
+h1.hide {
+  background-image: url("/assets/h1.webp");
+  margin-left: 1rem;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 /**********************/
 /*        HOME        */
 /**********************/
 
 .home-hero-content {
   background-color: var(--primary-color);
-  padding: 3rem;
   border-radius: 1.5rem;
+  padding: 1rem 3rem;
   max-width: 1260px;
-  min-height: 480px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,10 +185,10 @@ a:visited {
   gap: 1rem;
 }
 .home-hero-content > h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 800;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 .home-hero-content > p {
   color: white;
@@ -184,9 +199,9 @@ a:visited {
   width: 100%;
   border-radius: 1.5rem;
   max-width: 700px;
-  margin-top: 3.5rem;
+  margin-top: 1.5rem;
   background-color: var(--main-bg-color);
-  padding: 1.5rem 1.75rem;
+  padding: 1.5rem 1.5rem;
 }
 
 .home-hero-form-container fieldset {
@@ -246,6 +261,7 @@ a:visited {
 .service-section-content,
 .farm-content {
   max-width: 1220px;
+  width: 100%;
   min-height: 400px;
   display: flex;
   flex-direction: column;
@@ -256,7 +272,7 @@ a:visited {
 .about-section-content h2,
 .service-section-content h2,
 .farm-content h2 {
-  margin-top: 3rem;
+  margin-top: 0;
   text-align: left;
   font-size: 2rem;
 }
@@ -295,7 +311,8 @@ a:visited {
 .med-card,
 .farm-card,
 .farm-card-mini {
-  width: 17.75rem;
+  max-width: 17.75rem;
+  width: 100%;
   background-color: var(--main-bg-color);
   min-height: 150px;
   height: auto;
@@ -347,16 +364,6 @@ a:visited {
   height: 2.5rem;
 }
 
-button {
-  border-radius: 0.5rem;
-  width: 6.5rem;
-  font-size: 0.9rem;
-  height: 2.5rem;
-  margin-top: 1rem;
-  transition: background-color 0.2s, color 0.5s, border 0.2s;
-  cursor: pointer;
-}
-
 button.outlined-btn {
   background-color: var(--second-bg-color);
   border: 1px solid black;
@@ -371,6 +378,7 @@ button.outlined-btn:hover {
 button.btn-primary {
   background-color: var(--primary-color);
   color: white;
+  font-family: inherit;
 }
 button.btn-primary:hover {
   background-color: var(--primary-color-hover);
@@ -469,7 +477,6 @@ button.btn-primary:hover {
 .about-hero {
   padding: 2rem;
   gap: 2rem;
-  margin: 5rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -583,6 +590,11 @@ input[type="submit"] {
   padding: 1rem;
   border-radius: 1rem;
   font-weight: 600;
+  transition: background-color 0.2s;
+  font-family: inherit;
+}
+input[type="submit"]:hover {
+  background-color: var(--primary-color-hover);
 }
 .contact-info {
   box-sizing: border-box;
