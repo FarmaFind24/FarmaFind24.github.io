@@ -1,264 +1,270 @@
 <!doctype html>
 <html lang="it">
-  <head>
+
+<head>
     <title>Farmacie e Medicine FarmaFind24</title>
     <meta charset="utf-8">
-    <meta
-      name="description"
-      content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate"
-    >
+    <meta name="description"
+        content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate">
     <meta name="keywords" content="salute">
-    <link rel="stylesheet" href="assets/css/desktop.css" media="screen" >
-    <link
-      rel="stylesheet"
-      href="assets/css/mini.css"
-      media="screen and (max-width:950px)"
-    >
-    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
+    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
-      rel="stylesheet"
-    >
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  </head>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
 
-  <body>
+<body>
     <header class="main-header">
         <img src="assets/logo_FarmaFind24.png" alt="" />
-      <h1>FarmaFind24</h1>
-      <nav class="Top-NavBar">
-          <ul aria-label="menu di navigazione">
-          <li>
-            <a lang="en" href="index.html">Home</a>
-          </li>
-          <li><a href="search-farm.html">Farmacie</a></li>
-          <li> <a href="search-med.html"> Medicine</a></li>
+        <h1>FarmaFind24</h1>
+        <nav class="Top-NavBar">
+            <ul aria-label="menu di navigazione">
+                <li>
+                    <a lang="en" href="index.html">Home</a>
+                </li>
+                <li><a href="search-farm.html">Farmacie</a></li>
+                <li> <a href="search-med.html"> Medicine</a></li>
 
-          <li>
-            <a aria-current="page" href="book-app.html" class="current-page" tabindex="-1">
-              <span class="sr-only">Pagina Corrente:</span>Prenota visita
-            </a>
-          </li>
-          <li>
-            <a href="about.html"><span lang="en">About</span></a>
-          </li>
-        </ul>
-      </nav>
+                <li>
+                    <a aria-current="page" href="book-app.html" class="current-page" tabindex="-1">
+                        <span class="sr-only">Pagina Corrente:</span>Prenota visita
+                    </a>
+                </li>
+                <li>
+                    <a href="about.html"><span lang="en">About</span></a>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <nav id="breadcrumb" aria-label="Percorso di navigazione">
-        <p> Ti trovi in: 
-            <a href="index.html"> <span lang="en">Home</span></a> >> Prenota visita</p>
+        <p> Ti trovi in:
+            <a href="index.html"> <span lang="en">Home</span></a> >> Prenota visita
+        </p>
     </nav>
 
     <main id="main-content">
         <h1>Prenota una visita</h1>
-        <p> Scegli il servizio che ti interessa, seleziona la farmacia, la data e l'orario e inserisci i tuoi dettagli per confermare l'appuntamento.</p>
+        <p> Scegli il servizio che ti interessa, seleziona la farmacia, la data e l'orario e inserisci i tuoi dettagli
+            per confermare l'appuntamento.</p>
 
-  <!-- REGISTRATION FORM: MULTI STEP FORM-->
-  <form id="regForm" action=" " method="POST">
-    
-    <div class="step-indicator-container">
-        <span class="step"></span>
-        <span class="step"></span>
-        <span class="step"></span>
-        <span class="step"></span>
-    </div>
+        <!-- REGISTRATION FORM: MULTI STEP FORM-->
+        <form id="regForm" action=" " method="POST">
 
-    <p class="instruction">Tutti i campi contrassegnati con <span class="required" aria-hidden="true">*</span> sono obbligatori.</p>
-    <div class="tab">
-    <h2 class="tab-title"><span class="sr-only">Passaggio 1 di 4</span>1. Scegli Prestazione e Comune</h2>
-        <fieldset class="fieldset-services">
-            <legend>Seleziona il servizio desiderato: <span class="required" aria-hidden="true">*</span></legend>
-        
-            <div class="services-grid">
-                <div class="service-box">
-                <input type="radio" name="service" id="visita1" value="ecg" required  >
-                <label for="visita1"> <strong>Elettrocardiogramma</strong>Controllo del ritmo cardiaco</label>
-                </div>
-
-                <div class="service-box">
-                <input type="radio" name="service" id="visita2" value="pressione" required>
-                <label for="visita2"><strong>Misurazione della pressione</strong>Monitoraggio pressione arteriosa</label>
-                </div>
-
-                <div class="service-box">
-                <input type="radio" name="service" id="visita3" value="vaccino" required>
-                <label for="visita3"><strong>Vaccino</strong>Antinfluenzale o richiami</label>
-                </div>
-
-                <div class="service-box">
-                <input type="radio" name="service" id="visita4" value="sangue" required>
-                <label for="visita4"><strong>Analisi del sangue</strong></label>
-                </div>
-
-                <div class="service-box">
-                <input type="radio" name="service" id="visita5" value="udito" required>
-                <label for="visita5"><strong>Test dell'udito</strong></label>
-                </div>
-
-                <div class="service-box">
-                <input type="radio"  name="service" id="visita6" value="spirometria" required>
-                <label for="visita6"><strong>Spirometria</strong></label>
-                </div>   
+            <div class="step-indicator-container">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
             </div>
-        </fieldset>
-            
-            <fieldset class="fieldset-city">
-                <label for="city">Seleziona Comune: <span class="required" aria-hidden="true">*</span></label> 
-                    <select id="city" name="city" required  >
+
+            <p class="instruction">Tutti i campi contrassegnati con <span class="required" aria-hidden="true">*</span>
+                sono obbligatori.</p>
+            <div class="tab">
+                <h2 class="tab-title"><span class="sr-only">Passaggio 1 di 4:</span>1. Scegli Prestazione e Comune</h2>
+                <fieldset class="fieldset-services">
+                    <legend>Seleziona il servizio desiderato: <span class="required" aria-hidden="true">*</span>
+                    </legend>
+
+                    <div class="services-grid">
+                        <div class="service-box">
+                            <input type="radio" name="service" id="visita1" value="ecg" required>
+                            <label for="visita1"> <strong>Elettrocardiogramma</strong>Controllo del ritmo
+                                cardiaco</label>
+                        </div>
+
+                        <div class="service-box">
+                            <input type="radio" name="service" id="visita2" value="pressione" required>
+                            <label for="visita2"><strong>Misurazione della pressione</strong>Monitoraggio pressione
+                                arteriosa</label>
+                        </div>
+
+                        <div class="service-box">
+                            <input type="radio" name="service" id="visita3" value="vaccino" required>
+                            <label for="visita3"><strong>Vaccino</strong>Antinfluenzale o richiami</label>
+                        </div>
+
+                        <div class="service-box">
+                            <input type="radio" name="service" id="visita4" value="sangue" required>
+                            <label for="visita4"><strong>Analisi del sangue</strong></label>
+                        </div>
+
+                        <div class="service-box">
+                            <input type="radio" name="service" id="visita5" value="udito" required>
+                            <label for="visita5"><strong>Test dell'udito</strong></label>
+                        </div>
+
+                        <div class="service-box">
+                            <input type="radio" name="service" id="visita6" value="spirometria" required>
+                            <label for="visita6"><strong>Spirometria</strong></label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="fieldset-city">
+                    <legend for="city">Seleziona Comune: <span class="required" aria-hidden="true">*</span></legend>
+                    <select id="city" name="city" required>
                         <option value="">Seleziona un comune...</option>
                         <option value="padova">Padova</option>
                         <option value="abano">Abano</option>
                         <option value="albignasego">Albignasego</option>
                         <option value="limena">Limena</option>
                     </select>
-        </fieldset>
-    </div>        
+                </fieldset>
+            </div>
             <!--scelta farmacia-->
-    <div class="tab">
-        <h2 class="tab-title"><span class="sr-only">Passaggio 2 di 4</span>2. Seleziona la Farmacia</h2>
-            <fieldset>
-                <legend>Scegli una farmacia tra quelle disponibili: <span class="required" aria-hidden="true">*</span></legend>
-                <div class="farm-grid">   
+            <div class="tab">
+                <h2 class="tab-title"><span class="sr-only">Passaggio 2 di 4:</span>2. Seleziona la Farmacia</h2>
+                <fieldset>
+                    <legend>Scegli una farmacia tra quelle disponibili: <span class="required"
+                            aria-hidden="true">*</span></legend>
+                    <div class="farm-grid">
 
-                    <div class="farm-box">
-                    <input type="radio" id="farm-1" name="pharmacy-selection" value="centrale" required  >
-                    <label for="farm-1" class="card-clickable-label">
-                        <span>
-                        <span class="farm-name">Farmacia Centrale</span> 
-                        <span class="farm-address">- Via Francesco Petrarca, 14r, Padova</span>
-                        </span>
-                    </label>
+                        <div class="farm-box">
+                            <input type="radio" id="farm-1" name="pharmacy-selection" value="centrale" required>
+                            <label for="farm-1" class="card-clickable-label">
+                                <span>
+                                    <span class="farm-name">Farmacia Centrale</span>
+                                    <span class="farm-address">- Via Francesco Petrarca, 14r, Padova</span>
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="farm-box">
+                            <input type="radio" id="farm-2" name="pharmacy-selection" value="celly" required>
+                            <label for="farm-2" class="card-clickable-label">
+                                <span>
+                                    <span class="farm-name">Farmacia Celly</span>
+                                    <span class="farm-address">- Via Vercelli, 6, Padova</span>
+                                </span> <!-- TODO: ma si possono omettere???-->
+                            </label>
+                        </div>
+
+                        <div class="farm-box">
+                            <input type="radio" id="farm-3" name="pharmacy-selection" value="giotto" required>
+                            <label for="farm-3" class="card-clickable-label">
+                                <span>
+                                    <span class="farm-name">Farmacia Giotto</span>
+                                    <span class="farm-address">- Via Giotto, 14r, Padova</span>
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="farm-box">
+                            <input type="radio" id="farm-4" name="pharmacy-selection" value="giotto" required>
+                            <label for="farm-4" class="card-clickable-label">
+                                <span>
+                                    <span class="farm-name">Farmacia Centrale</span>
+                                    <span class="farm-address">- Via Francesco Petrarca, 14r, Padova</span>
+                                </span>
+                            </label>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="tab">
+                <h2 class="tab-title" id="data-ora"><span class="sr-only">Passaggio 3 di 4:</span>
+                    3. Seleziona Data e
+                    Orario</h2>
+                <fieldset aria-labelledby="data-ora">
+                    <legend class="sr-only">Seleziona Data e Orario</legend>
+                    <div class="date-picker-container">
+                        <label for="date-pick" class="label-title">Scegli il giorno: <span class="required"
+                                aria-hidden="true">*</span></label>
+                        <input type="date" id="date-pick" name="date-pick" required>
                     </div>
 
-                    <div class="farm-box">
-                    <input type="radio" id="farm-2" name="pharmacy-selection" value="celly" required>
-                    <label for="farm-2" class="card-clickable-label">
-                        <span>
-                        <span class="farm-name">Farmacia Celly</span> 
-                        <span class="farm-address">- Via Vercelli, 6, Padova</span>
-                        </span>  <!-- TODO: ma si possono omettere???-->
-                    </label>
-                    </div>
+                    <div class="time-picker-container">
+                        <span id="time-selection-label" class="label-title">Scegli l'orario: <span class="required"
+                                aria-hidden="true">*</span></span>
 
-                    <div class="farm-box">
-                    <input type="radio" id="farm-3" name="pharmacy-selection" value="giotto" required>
-                    <label for="farm-3" class="card-clickable-label">
-                        <span>
-                        <span class="farm-name">Farmacia Giotto</span> 
-                        <span class="farm-address">- Via Giotto, 14r, Padova</span>
-                        </span>
-                    </label>
-                    </div>
-
-                    <div class="farm-box">
-                    <input type="radio" id="farm-4" name="pharmacy-selection" value="giotto" required>
-                    <label for="farm-4" class="card-clickable-label">
-                        <span>
-                        <span class="farm-name">Farmacia Centrale</span> 
-                        <span class="farm-address">- Via Francesco Petrarca, 14r, Padova</span>
-                        </span>
-                    </label>
-                    </div>                           
-
-                </div>
-            </fieldset>
-    </div>
-
-    <div class="tab">
-        <h2 class="tab-title"><span class="sr-only">Passaggio 3 di 4</span>3. Seleziona Data e Orario</h2>
-            <fieldset>
-                <div class="date-picker-container">
-                    <label for="date-pick" class="label-title">Scegli il giorno: <span class="required" aria-hidden="true">*</span></label>
-                    <input type="date" id="date-pick" name="date-pick" required>
-                </div>
-
-                    <div class="time-picker-container" >
-                        <span id="time-selection-label" class="label-title">Scegli l'orario: <span class="required" aria-hidden="true">*</span></span>
-
-                            <div class="time-grid" role="radiogroup" aria-labelledby="time-selection-label">
-                                <div class="time-slot">
-                                    <input type="radio" id="t1" name="time-pick" value="09:00" required  >
-                                    <label for="t1">09:00</label>
-                                </div>
-
-                                <div class="time-slot">
-                                    <input type="radio" id="t2" name="time-pick" value="10:00" required>
-                                    <label for="t2">10:00</label>
-                                </div>
-
-                                <div class="time-slot">
-                                    <input type="radio" id="t3" name="time-pick" value="11:00" required>
-                                    <label for="t3">11:00</label>
-                                </div>
-
-                                <div class="time-slot">
-                                    <input type="radio" id="t4" name="time-pick" value="12:00" required>
-                                    <label for="t4">12:00</label>
-                                </div>
-
-                                <div class="time-slot occupied">
-                                    <input type="radio" id="t5" name="time-pick" value="13:00" required disabled>
-                                    <label for="t5">13:00</label>
-                                </div>
-
-                                <div class="time-slot">
-                                    <input type="radio" id="t6" name="time-pick" value="14:00" required>
-                                    <label for="t6">14:00</label>
-                                </div>
-
-                                <div class="time-slot">
-                                    <input type="radio" id="t7" name="time-pick" value="15:00" required disabled>
-                                    <label for="t7">15:00</label>
-                                </div>
+                        <div class="time-grid" role="radiogroup" aria-labelledby="time-selection-label">
+                            <div class="time-slot">
+                                <input type="radio" id="t1" name="time-pick" value="09:00" required>
+                                <label for="t1">09:00</label>
                             </div>
+
+                            <div class="time-slot">
+                                <input type="radio" id="t2" name="time-pick" value="10:00" required>
+                                <label for="t2">10:00</label>
+                            </div>
+
+                            <div class="time-slot">
+                                <input type="radio" id="t3" name="time-pick" value="11:00" required>
+                                <label for="t3">11:00</label>
+                            </div>
+
+                            <div class="time-slot">
+                                <input type="radio" id="t4" name="time-pick" value="12:00" required>
+                                <label for="t4">12:00</label>
+                            </div>
+
+                            <div class="time-slot occupied">
+                                <input type="radio" id="t5" name="time-pick" value="13:00" required disabled>
+                                <label for="t5">13:00</label>
+                            </div>
+
+                            <div class="time-slot">
+                                <input type="radio" id="t6" name="time-pick" value="14:00" required>
+                                <label for="t6">14:00</label>
+                            </div>
+
+                            <div class="time-slot">
+                                <input type="radio" id="t7" name="time-pick" value="15:00" required disabled>
+                                <label for="t7">15:00</label>
+                            </div>
+                        </div>
                     </div>
-            </fieldset>
-    </div>
+                </fieldset>
+            </div>
 
-    <div class="tab">
-    
-        <h2 class="tab-title"> <span class="sr-only">Passaggio 4 di 4</span> 4. Inserisci i Tuoi Dati Personali</h2>
-            <fieldset>
+            <div class="tab">
 
-                <div class="input-wrapper"> 
-                <label for="fname">Nome: <span class="required" aria-hidden="true">*</span></label>
-                <input type="text" id="fname" name="fname" placeholder="Es: Giacomo" required >
-                </div>
+                <h2 class="tab-title"> <span class="sr-only">Passaggio 4 di 4:</span> 4. Inserisci i Tuoi Dati Personali
+                </h2>
+                <fieldset>
 
-                <div class="input-wrapper"> 
-                <label for="fsurname">Cognome: <span class="required" aria-hidden="true">*</span></label>
-                <input type="text" id="fsurname" name="fsurname" placeholder="Es: Leopardi" required >
-                </div>
+                    <div class="input-wrapper">
+                        <label for="fname">Nome: <span class="required" aria-hidden="true">*</span></label>
+                        <input type="text" id="fname" name="fname" placeholder="Es: Giacomo" required>
+                    </div>
 
-                <div class="input-wrapper"> 
-                <label for="femail">Email: <span class="required" aria-hidden="true">*</span></label>
-                <input type="email" id="femail" name="femail" placeholder="Es: giacomoleopardi@mail.com" required>
-                </div>
-            </fieldset>
-        </div>
+                    <div class="input-wrapper">
+                        <label for="fsurname">Cognome: <span class="required" aria-hidden="true">*</span></label>
+                        <input type="text" id="fsurname" name="fsurname" placeholder="Es: Leopardi" required>
+                    </div>
 
-        <div id="general-error-msg" class="error-message" role="alert" tabindex="-1"> Compila tutti i campi obbligatori prima di proseguire!</div>
+                    <div class="input-wrapper">
+                        <label for="femail">Email: <span class="required" aria-hidden="true">*</span></label>
+                        <input type="email" id="femail" name="femail" autocomplete="email"
+                            placeholder="Es: giacomoleopardi@mail.com" required>
+                    </div>
+                </fieldset>
+            </div>
 
-        <div class="step-actions">
-        <button type="button" id="nextBtn" class="btn-primary" onclick="nextPrev(1)">Prosegui</button>
-        <button type="button" id="prevBtn" class="btn-secondary" onclick="nextPrev(-1)">Indietro</button>
-        </div>
+            <div id="general-error-msg" class="error-message" role="alert" tabindex="-1"> Compila tutti i campi
+                obbligatori prima di proseguire!</div>
 
-    </form>
+            <div class="step-actions">
+                <button type="button" id="nextBtn" class="btn-primary" onclick="nextPrev(1)">Prosegui</button>
+                <button type="button" id="prevBtn" class="outlined-btn" onclick="nextPrev(-1)">Indietro</button>
+            </div>
 
-</main>
+        </form>
+
+    </main>
 
     <footer>
-      <p>Copyright &copy; 2025</p>
+        <p>Copyright &copy; 2025</p>
     </footer>
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/book-form-validation.js"></script>
 
 </body>
+
 </html>
