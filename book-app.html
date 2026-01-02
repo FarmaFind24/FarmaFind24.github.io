@@ -60,22 +60,23 @@
 
   <!-- REGISTRATION FORM: MULTI STEP FORM-->
   <form id="regForm" action=" " method="POST">
-
+    
     <div class="step-indicator-container">
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
     </div>
-    
+
+    <p class="instruction">Tutti i campi contrassegnati con <span class="required" aria-hidden="true">*</span> sono obbligatori.</p>
     <div class="tab">
     <h2 class="tab-title"><span class="sr-only">Passaggio 1 di 4</span>1. Scegli Prestazione e Comune</h2>
         <fieldset class="fieldset-services">
-            <legend>Seleziona il servizio desiderato:</legend>
-            
+            <legend>Seleziona il servizio desiderato: <span class="required" aria-hidden="true">*</span></legend>
+        
             <div class="services-grid">
                 <div class="service-box">
-                <input type="radio" name="service" id="visita1" value="ecg" required>
+                <input type="radio" name="service" id="visita1" value="ecg" required  >
                 <label for="visita1"> <strong>Elettrocardiogramma</strong>Controllo del ritmo cardiaco</label>
                 </div>
 
@@ -107,24 +108,25 @@
         </fieldset>
             
             <fieldset class="fieldset-city">
-                <label for="city">Seleziona Comune: </label> 
-                    <select id="city" name="city" required>
+                <label for="city">Seleziona Comune: <span class="required" aria-hidden="true">*</span></label> 
+                    <select id="city" name="city" required  >
                         <option value="">Seleziona un comune...</option>
                         <option value="padova">Padova</option>
                         <option value="abano">Abano</option>
                         <option value="albignasego">Albignasego</option>
                         <option value="limena">Limena</option>
                     </select>
-            </fieldset>
+        </fieldset>
     </div>        
             <!--scelta farmacia-->
     <div class="tab">
-        <h2 class="tab-title"><span class="sr-only">Passaggio 2 di 4</span>2. Scegli la Farmacia</h2>
+        <h2 class="tab-title"><span class="sr-only">Passaggio 2 di 4</span>2. Seleziona la Farmacia</h2>
             <fieldset>
+                <legend>Scegli una farmacia tra quelle disponibili: <span class="required" aria-hidden="true">*</span></legend>
                 <div class="farm-grid">   
 
                     <div class="farm-box">
-                    <input type="radio" id="farm-1" name="pharmacy-selection" value="centrale" required>
+                    <input type="radio" id="farm-1" name="pharmacy-selection" value="centrale" required  >
                     <label for="farm-1" class="card-clickable-label">
                         <span>
                         <span class="farm-name">Farmacia Centrale</span> 
@@ -168,19 +170,19 @@
     </div>
 
     <div class="tab">
-        <h2 class="tab-title"><span class="sr-only">Passaggio 3 di 4</span>3. Selezione Data e Orario</h2>
+        <h2 class="tab-title"><span class="sr-only">Passaggio 3 di 4</span>3. Seleziona Data e Orario</h2>
             <fieldset>
                 <div class="date-picker-container">
-                    <label for="date-pick" class="label-title">Seleziona il giorno:</label>
+                    <label for="date-pick" class="label-title">Scegli il giorno: <span class="required" aria-hidden="true">*</span></label>
                     <input type="date" id="date-pick" name="date-pick" required>
                 </div>
 
                     <div class="time-picker-container" >
-                        <span id="time-selection-label" class="label-title">Seleziona l'orario:</span>
+                        <span id="time-selection-label" class="label-title">Scegli l'orario: <span class="required" aria-hidden="true">*</span></span>
 
                             <div class="time-grid" role="radiogroup" aria-labelledby="time-selection-label">
                                 <div class="time-slot">
-                                    <input type="radio" id="t1" name="time-pick" value="09:00" required>
+                                    <input type="radio" id="t1" name="time-pick" value="09:00" required  >
                                     <label for="t1">09:00</label>
                                 </div>
 
@@ -222,15 +224,29 @@
     
         <h2 class="tab-title"> <span class="sr-only">Passaggio 4 di 4</span> 4. Inserisci i Tuoi Dati Personali</h2>
             <fieldset>
-                <p><label for="fname">Nome:</label><input type="text" id="fname" name="fname" placeholder="Es: Giacomo" required></p>
-                <p><label for="fsurname">Cognome:</label><input type="text" id="fsurname" name="fsurname" placeholder="Es: Leopardi" required></p>
-                <p><label for="femail">Email:</label><input type="email" id="femail" name="femail" placeholder="Es: giacomoleopardi@mail.com" required></p>
+
+                <div class="input-wrapper"> 
+                <label for="fname">Nome: <span class="required" aria-hidden="true">*</span></label>
+                <input type="text" id="fname" name="fname" placeholder="Es: Giacomo" required >
+                </div>
+
+                <div class="input-wrapper"> 
+                <label for="fsurname">Cognome: <span class="required" aria-hidden="true">*</span></label>
+                <input type="text" id="fsurname" name="fsurname" placeholder="Es: Leopardi" required >
+                </div>
+
+                <div class="input-wrapper"> 
+                <label for="femail">Email: <span class="required" aria-hidden="true">*</span></label>
+                <input type="email" id="femail" name="femail" placeholder="Es: giacomoleopardi@mail.com" required>
+                </div>
             </fieldset>
         </div>
 
+        <div id="general-error-msg" class="error-message" role="alert" tabindex="-1"> Compila tutti i campi obbligatori prima di proseguire!</div>
+
         <div class="step-actions">
-        <button type="button" id="prevBtn" class="btn-secondary" onclick="nextPrev(-1)">Indietro</button>
         <button type="button" id="nextBtn" class="btn-primary" onclick="nextPrev(1)">Prosegui</button>
+        <button type="button" id="prevBtn" class="btn-secondary" onclick="nextPrev(-1)">Indietro</button>
         </div>
 
     </form>
@@ -241,7 +257,8 @@
       <p>Copyright &copy; 2025</p>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/book-form-validation.js"></script>
 
 </body>
 </html>

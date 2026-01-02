@@ -828,7 +828,7 @@ footer img {
     color: var(--primary-color);
 }
 
-/* Quando l'utente arriva sul box con la tastiera */
+/* Quando l'utente arriva sul box con la tastiera*/
 .service-box:has(input:focus-visible) {
     outline: 0.2em solid var(--primary-color);
     outline-offset: 0.2em;
@@ -890,7 +890,7 @@ footer img {
     display: flex;
     flex-direction: column;
     align-items: center; 
-    margin-bottom: 2em; /* Spazio sotto il calendario */
+    margin-bottom: 2em; 
     width: 100%;
 }
 
@@ -989,7 +989,6 @@ footer img {
     
     min-height: 8em;
 }
-
 .no-availability-message p {
     font-weight: 600;
     color: #c53030; 
@@ -1005,7 +1004,8 @@ footer img {
 /*********************************************************************************************************************************************/
 .step-actions {
     display: flex;
-    justify-content: flex-end; /* bottoni a dx e sx */
+    flex-direction: row-reverse; /* ordine invertito per screen reader */
+    justify-content: flex-start;
     gap: 2em;
   
     align-items: center;
@@ -1026,12 +1026,21 @@ footer img {
     display: block;
 }
 
-/* schede non attive */
+/* nascondere passaggi del form non attivi (prova anche disabilitando js) */
 .tab {
     display: none;
 }
+/*
+.tab {
+    display: block; 
+}
+.js-active .tab {
+    display: none;
+}
 
-
+.js-active .tab.show {
+    display: block;
+}*/
 .step {
   height: 1em;
   width: 1em;
@@ -1044,7 +1053,7 @@ footer img {
 
 .step-indicator-container {
     text-align: center;
-    margin-bottom: 2em;      
+    margin-bottom: 1em;      
     justify-content: center;
     gap: 10px;
 }
@@ -1056,4 +1065,37 @@ footer img {
 
 .step.finish {
   background-color: #4CAF50;
+}
+
+.instruction{
+  color:#5E5E5E;
+  font-style: italic; 
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+/*VALIDAZIONE INPUT FORM*/
+
+/* Quando l'input è invalido colora il bordo*/
+input.invalid {
+    border-color: #d93025;
+    background-color: #fff4f4;
+}
+.error-msg {
+    display: none; 
+    color: #d93025;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+input.invalid + .error-msg {
+    display: block;
+}
+
+
+#general-error-msg {
+    display: none; 
+    color: #d93025;
+    text-align: right;
 }
