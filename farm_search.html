@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <title>FarmaFind24</title>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate" />
+    <meta name="keywords" content="salute" />
+    <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
+    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+
+  <body>
+    <header class="main-header">
+      <h1>FarmaFind24</h1>
+      <img src="assets/logo_FarmaFind24.png" alt="logo farmafind24" />
+      <nav class="Top-NavBar">
+        <ul aria-label="menu di navigazione">
+          <li>
+            <a lang="en-GB" href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="#" aria-current="page" tabindex="-1" class="current-page">
+              <span class="sr-only">Pagina Corrente</span>
+              Farmacie
+            </a>
+          </li>
+          <li><a href="search-med.html">Medicinali</a></li>
+          <li><a href="book-app.html">Prenota Visita</a></li>
+          <li>
+            <a href="about.html"><span lang="en-GB">About</span></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <nav id="breadcrumb" aria-label="Percorso di navigazione">
+        <p> Ti trovi in: <a href="index.html"> <span lang="en">Home</span></a> >> Farmacie</p>
+    </nav>
+
+    <main>
+      <section class="search-page-hero-section">
+        <div class="search-page-hero-content">
+          <h1>Trova la Farmacia perfetta vicino a te, in ogni momento</h1>
+          <p>Cerca farmacie nella tua città, visualizza orari, servizi e molto altro.</p>
+          <div class="search-page-hero-form-container">
+            <form action="farm_search.php" method="get">
+              <div class="form-search-container">
+                <label for="farm-name" class="sr-only">Cerca una farmacia</label>
+                <input type="search" id="farm-name" name="q" value="[valore_ricerca]" placeholder="Cerca farmacia..." required />
+                <button type="submit">Cerca</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      
+
+      <section class="farm-list-section">
+
+
+        <div class="grid-4c">
+          
+          [listaFarmacie]
+
+          <div class="farm-card">
+            <img
+              src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
+              alt="" />
+            <div class="farm-card-content">
+              <h3>Farmacia Centrale</h3>
+              <p>Via Francesco Petrarca, 14r, 16121 Genova GE</p>
+              <span class="farm-orario">08:30 - 20:00</span>
+              <span>Servizi</span>
+              <ul>
+                <li>Misurazione Pressione</li>
+                <li>Screening Prevenzione</li>
+                <li>Test Rapidi Covid</li>
+              </ul>
+              <div class="row-btn">
+                <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
+                <button type="button">Dettagli</button>
+              </div>
+            </div>
+          </div>
+          <div class="farm-card">
+            <img
+              src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
+              alt="" />
+            <div class="farm-card-content">
+              <h3>Farmacia Centrale</h3>
+              <p>Via Francesco Petrarca, 14r, 16121 Genova GE</p>
+              <span class="farm-orario">08:30 - 20:00</span>
+              <span>Servizi</span>
+              <ul aria-label="Servizi disponibili">
+                <li>Misurazione Pressione</li>
+                <li>Screening Prevenzione</li>
+                <li>Test Rapidi Covid</li>
+              </ul>
+              <div class="row-btn">
+                <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
+                <button type="button">Dettagli</button>
+              </div>
+            </div>
+          </div>
+          <div class="farm-card">
+            <img
+              src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
+              alt="" />
+            <div class="farm-card-content">
+              <h3>Farmacia Centrale</h3>
+              <p>Via Francesco Petrarca, 14r, 16121 Genova GE</p>
+              <span class="farm-orario">08:30 - 20:00</span>
+              <span>Servizi</span>
+              <ul>
+                <li>Misurazione Pressione</li>
+                <li>Screening Prevenzione</li>
+                <li>Test Rapidi Covid</li>
+              </ul>
+              <div class="row-btn">
+                <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
+                <button type="button">Dettagli</button>
+              </div>
+            </div>
+          </div>
+          <div class="farm-card">
+            <img
+              src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
+              alt="" />
+            <div class="farm-card-content">
+              <h3>Farmacia Centrale</h3>
+              <p>Via Francesco Petrarca, 14r, 16121 Genova GE</p>
+              <span class="farm-orario">08:30 - 20:00</span>
+              <span>Servizi</span>
+              <ul>
+                <li>Misurazione Pressione</li>
+                <li>Screening Prevenzione</li>
+                <li>Test Rapidi Covid</li>
+              </ul>
+              <div class="row-btn">
+                <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
+                <button type="button">Dettagli</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Copyright &copy; 2025</p>
+    </footer>
+  </body>
+</html>
