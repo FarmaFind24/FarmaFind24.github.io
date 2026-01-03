@@ -23,7 +23,7 @@ body {
 }
 main {
   box-sizing: border-box;
-  padding: 1rem 1rem 10rem 1rem;
+  padding: 1em 1em 6em 1em;
   background-color: var(--second-bg-color);
 }
 section {
@@ -59,10 +59,10 @@ a:visited {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 .grid {
-  gap: 1rem;
+  gap: 1em;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 24rem);
-  padding: 2rem 0rem 0rem 0rem;
+  grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+  padding: 2em 0em 0em 0em;
   justify-content: center;
 }
 .grid-4c {
@@ -104,6 +104,73 @@ h3 {
 .title-card {
     font-size: 1.5em;
     text-align: left;
+}
+p {
+  font-family: inherit;
+  line-height: 1.5; 
+  margin-bottom: 1em; 
+}
+#main-content > p {
+  padding: 0 1em; 
+  max-width: 800px;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 0.5em
+}
+h1 + p {
+  text-align: center;
+  max-width: 800px;       
+  margin: 0 auto 1em auto;
+  font-size: 1.2em;
+  color: rgba(0, 0, 0, 0.7); 
+  padding: 0 1em;        
+}
+.form-search-container {
+  display: flex;
+  gap: 0.5rem;             
+  width: 100%;             
+  max-width: 700px;       
+  margin: 2rem auto;       
+  padding: 0 1rem;         
+  box-sizing: border-box;
+  align-items: center;
+}
+.form-search-container input[type="search"] {
+  flex-grow: 1;            
+  height: 3rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: 1px solid black; 
+  padding-left: 1rem;
+  box-sizing: border-box; 
+}
+.form-search-container button {
+  width: 10rem;            
+  height: 3rem;
+  background-color: var(--primary-color);
+  color: var(--main-bg-color);
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 0;
+}
+.form-search-container button:hover {
+  background-color: var(--primary-color-hover);
+}
+.hero-image {
+  display: block;        
+  margin: 2em auto;     
+  
+  width: 65%;
+  border-radius: 1rem;
 }
 /**********************/
 /*       HEADER       */
@@ -198,15 +265,10 @@ h1.hide {
   gap: 1rem;
 }
 .home-hero-content > h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
   color: white;
-  margin-bottom: 0.5rem;
 }
 .home-hero-content > p {
   color: white;
-  max-width: 800px;
-  font-size: 1.2rem;
 }
 .home-hero-form-container {
   width: 100%;
@@ -228,12 +290,6 @@ h1.hide {
   margin-right: 1rem;
   float: left;
 }
-
-.hero-form-search-container {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
-}
 .filter-container {
   display: flex;
   flex-direction: row;
@@ -242,32 +298,6 @@ h1.hide {
 .home-hero-form-container .radio-item {
   display: flex;
   gap: 0.5rem;
-}
-.hero-form-search-container input[type="search"] {
-  width: 100%;
-  background-color: var(--second-bg-color);
-  border-radius: 0.5rem;
-  height: 3rem;
-  font-size: 1rem;
-  font-weight: 700;
-  border: 1px solid black;
-  padding: 1rem;
-}
-
-.hero-form-btn {
-  height: 3rem;
-  padding: 0 2rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  transition: background-color 0.5s;
-  margin: 0;
-  width: auto;
-}
-.hero-form-btn:hover {
-  background-color: var(--primary-color-hover);
-  color: white;
 }
 .team-section-content,
 .about-section-content,
@@ -404,62 +434,6 @@ button.btn-primary:hover {
   background-color: var(--primary-color-hover);
 }
 /**********************/
-/*     SEARCH-PAGE    */
-/**********************/
-.search-page-hero-section {
-  padding-bottom: 5rem;
-}
-.search-page-hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  max-width: 1260px;
-  min-height: 200px;
-}
-.search-page-hero-content h1 {
-  font-size: 2.5rem;
-}
-.search-page-hero-content p {
-  font-size: 1.25rem;
-  color: rgba(0, 0, 0, 0.7);
-}
-.search-page-hero-form-container {
-  width: 100%;
-  border-radius: 1.5rem;
-  max-width: 700px;
-  padding-top: 3rem;
-}
-.search-page-hero-form-container .form-search-container {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
-}
-.search-page-hero-form-container input[type="search"] {
-  font-size: 1rem;
-  height: 3rem;
-  width: 100%;
-  border-radius: 1rem;
-  border: black solid 1px;
-  padding-left: 1rem;
-  box-sizing: border-box;
-}
-.search-page-hero-form-container button {
-  width: 10rem;
-  height: 3rem;
-  font-weight: bold;
-  color: var(--main-bg-color);
-  border-radius: 1rem;
-  box-sizing: border-box;
-  background-color: var(--primary-color);
-  font-size: 1rem;
-  margin: 0;
-  transition: background-color 0.2s;
-}
-.search-page-hero-form-container button:hover {
-  background-color: var(--primary-color-hover);
-}
-/**********************/
 /*  SEARCH-FARM-PAGE  */
 /**********************/
 .med-card-content,
@@ -477,37 +451,12 @@ button.btn-primary:hover {
   height: 150px;
   border-radius: 1rem 1rem 0 0;
 }
-
 .farm-orario {
   text-align: right;
 }
 /**********************/
-/*   SEARCH-MED-PAGE  */
-/**********************/
-
-/**********************/
 /*       ABOUT        */
 /**********************/
-.about-hero {
-  padding: 2rem;
-  gap: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
-}
-.about-hero h1 {
-  font-size: 3rem;
-  text-align: center;
-}
-.about-hero p {
-  text-align: center;
-}
-
-.about-hero img {
-  width: 65%;
-  border-radius: 1rem;
-}
 .about-first-section {
   padding: 0;
 }
@@ -744,23 +693,20 @@ footer img {
 }
 
 #FarmacieDisponibili {
-  max-width: 1200px; /* oppure la larghezza che vuoi */
-  margin: 0 auto; /* centra il contenitore */
+  max-width: 1200px; 
+  margin: 0 auto; 
   padding: 20px;
-  box-sizing: border-box; /* include padding e border nella larghezza */
-  overflow: hidden; /* evita che i figli escano dai bordi */
+  box-sizing: border-box; 
+  overflow: hidden; 
 }
 
 .grid-med-card {
-  display: flex; /* o grid se vuoi layout a griglia */
+  display: flex; 
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  flex-wrap: wrap; /* le card vanno a capo se superano la larghezza */
-  gap: 2rem; /* spazio tra le card */
-  margin-top: 2rem;
+  flex-wrap: wrap; 
+  gap: 2em; 
+  margin-top: 2em;
 }
-
-/* NUOVE AGGIUNTE (DA SISTEMARE)*/
-
 /******* PAGINA PRENOTAZIONE VISITA *******/
 
 /* Nascondere pallino di default */
@@ -771,8 +717,6 @@ footer img {
   height: 0;
   width: 0;
 }
-
-/*passaggio scelta visita*/
 
 .service-box {
   display: flex;
@@ -789,7 +733,6 @@ footer img {
   overflow: hidden;
 
   cursor: pointer;
-  /*transition: all 0.2s ease-in-out;*/
   position: relative;
 }
 
@@ -808,8 +751,6 @@ footer img {
 .service-box:has(input:checked) strong {
   color: var(--primary-color);
 }
-
-/* Quando l'utente arriva sul box con la tastiera*/
 .service-box:has(input:focus-visible) {
   outline: 0.2em solid var(--primary-color);
   outline-offset: 0.2em;
@@ -843,8 +784,6 @@ footer img {
   width: 100%;
 }
 
-/* passaggio farmacie */
-
 .farm-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -866,12 +805,11 @@ footer img {
   color: #666;
 }
 
-/*passaggio data e ora */
 .date-picker-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2em; /* Spazio sotto il calendario */
+  margin-bottom: 2em; 
   width: 100%;
 }
 
@@ -904,7 +842,6 @@ footer img {
 }
 
 /* griglia Orari*/
-
 .time-picker-container input {
   position: absolute;
   opacity: 0;
@@ -912,14 +849,12 @@ footer img {
   height: 0;
   width: 0;
 }
-
 .time-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
   gap: 0.8em;
   margin-top: 1em;
 }
-
 .time-slot label {
   display: block;
   padding: 0.8em 0.5em;
@@ -931,7 +866,6 @@ footer img {
   font-size: 0.9em;
   transition: background-color 0.2s;
 }
-
 .time-slot input[type="radio"]:checked + label {
   background-color: var(--primary-color);
   color: white;
@@ -941,9 +875,6 @@ footer img {
   border-color: var(--primary-color);
   background-color: #f0f0f0;
 }
-
-/* tasti orari non disponibili */
-
 .time-slot input[disabled] + label {
   background-color: #f0f0f0;
   color: #a0a0a0;
@@ -951,38 +882,6 @@ footer img {
   cursor: not-allowed;
   text-decoration: line-through;
 }
-
-/****************************************************************************************************************************************/
-/* messaggio "Nessun orario disponibile"
-.no-availability-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    
-    padding: 1.5em;
-    margin-top: 1em;
-    
-    background-color: #fff5f5;
-    border: 0.125em dashed #feb2b2; 
-    border-radius: 0.6em;
-    
-    min-height: 8em;
-}
-.no-availability-message p {
-    font-weight: 600;
-    color: #c53030; 
-    margin-bottom: 0.3em;
-    font-size: 1.1em;
-}
-
-.no-availability-message span {
-    color: #718096; 
-    font-size: 0.9em;
-}*/
-
-/*********************************************************************************************************************************************/
 .step-actions {
   display: flex;
   flex-direction: row-reverse;
@@ -1059,9 +958,7 @@ footer img {
   text-align: center;
   margin-bottom: 1em;
 }
-
 /*VALIDAZIONE INPUT FORM*/
-
 input.invalid {
   border-color: #d93025;
   background-color: #fff4f4;
