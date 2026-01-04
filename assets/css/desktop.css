@@ -932,6 +932,14 @@ footer img {
   margin-top: 1em;
 }
 
+/* Pulsante per la ricerca manuale (visibile di default) */
+#findPharmaciesBtn {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 1.5rem auto;
+}
+
 /* con js attivo*/
 .js-active .tab {
     display: none;
@@ -947,6 +955,13 @@ footer img {
 }
 .js-active #submitBtnNoJs {
   display: none;
+}
+.js-active #submitBtnNoJs {
+  display: none;
+}
+/* Nascondi il pulsante di ricerca manuale se JS è attivo */
+.js-active #findPharmaciesBtn {
+    display: none;
 }
 .js-active #nextBtn, 
 .js-active #prevBtn {

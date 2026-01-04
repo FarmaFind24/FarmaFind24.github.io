@@ -27,7 +27,7 @@
                 <li> <a href="search-med.html"> Medicine</a></li>
 
                 <li>
-                    <a aria-current="page" href="book-app.html" class="current-page" tabindex="-1">
+                    <a aria-current="page" href="book-app.php" class="current-page" tabindex="-1">
                         <span class="sr-only">Pagina Corrente:</span>Prenota Visita
                     </a>
                 </li>
@@ -50,8 +50,8 @@
             In fondo alla pagina troverai delle semplici regole per prepararti al meglio.
         </p>
 
-        <!-- REGISTRATION FORM: MULTI STEP FORM-->
-        <form id="regForm" action=" " method="POST">
+        <!-- Il form ora punta a se stesso per il ricaricamento, il pulsante finale avrà un formaction diverso -->
+        <form id="regForm" action="book-app.php" method="POST">
 
             <div class="step-indicator-container">
                 <span class="step"></span>
@@ -63,112 +63,47 @@
             <p class="instruction"><span class="required" aria-hidden="true">Tutti i campi contrassegnati con * sono
                     obbligatori.</span></p>
             <div class="tab">
-                <h2 class="tab-title"><span class="sr-only">Passaggio 1 di 4:</span>1. Scegli Prestazione e Comune</h2>
+                <h2 class="tab-title"><span class="sr-only">Passaggio 1 di 4:</span>1. Scegli Prestazione</h2>
                 <fieldset class="fieldset-services">
                     <legend>Seleziona il servizio desiderato: <span class="required" aria-hidden="true">*</span>
                     </legend>
 
                     <div class="services-grid">
-                        <div class="service-box">
-                            <input type="radio" name="service" id="visita1" value="ecg" required>
-                            <label for="visita1"> <strong>Elettrocardiogramma</strong>Controllo del ritmo
-                                cardiaco</label>
-                        </div>
-
-                        <div class="service-box">
-                            <input type="radio" name="service" id="visita2" value="pressione" required>
-                            <label for="visita2"><strong>Misurazione della pressione</strong>Monitoraggio pressione
-                                arteriosa</label>
-                        </div>
-
-                        <div class="service-box">
-                            <input type="radio" name="service" id="visita3" value="vaccino" required>
-                            <label for="visita3"><strong>Vaccino</strong>Antinfluenzale o richiami</label>
-                        </div>
-
-                        <div class="service-box">
-                            <input type="radio" name="service" id="visita4" value="sangue" required>
-                            <label for="visita4"><strong>Analisi del sangue</strong>Colesterolo, glicemia e trigliceridi</label>
-                        </div>
-
-                        <div class="service-box">
-                            <input type="radio" name="service" id="visita5" value="udito" required>
-                            <label for="visita5"><strong>Test dell'udito</strong>Controllo audiometrico preliminare</label>
-                        </div>
-
-                        <div class="service-box">
-                            <input type="radio" name="service" id="visita6" value="spirometria" required>
-                            <label for="visita6"><strong>Spirometria</strong>Valutazione della funzionalità respiratoria</label>
-                        </div>
+                        [servizi_grid]
                     </div>
-                </fieldset>
-
-                <fieldset class="fieldset-city">
-                    <legend for="city">Seleziona il comune: <span class="required" aria-hidden="true">*</span></legend>
-                    <select id="city" name="city" required>
-                        <option value="padova">Padova</option>
-                        <option value="abano">Abano</option>
-                        <option value="albignasego">Albignasego</option>
-                        <option value="limena">Limena</option>
-                    </select>
                 </fieldset>
             </div>
             
             <div class="tab">
                 <h2 class="tab-title"><span class="sr-only">Passaggio 2 di 4:</span>2. Seleziona la Farmacia</h2>
+
+                <fieldset class="fieldset-city">
+                    <legend for="city">Seleziona il comune: <span class="required" aria-hidden="true">*</span></legend>
+                    <select id="city" name="city" required>
+                        [citta_options]
+                    </select>
+                </fieldset>
+
+                <!-- Pulsante per la ricerca manuale (visibile solo senza JS) -->
+                <button type="submit" id="findPharmaciesBtn" name="find_pharmacies_btn" class="btn-primary">Trova Farmacie</button>
+
                 <fieldset>
                     <legend>Scegli una farmacia tra quelle disponibili: <span class="required"
                             aria-hidden="true">*</span></legend>
+                    
+                    <!-- Contenitore per messaggi dinamici (popolato da PHP o JS) -->
+                    <div id="farm-message-container">[farmacie_message]</div>
+
+                    <!-- La griglia delle farmacie verrà popolata da PHP (no-JS) o da AJAX (con JS) -->
                     <div class="farm-grid">
-
-                        <div class="farm-box">
-                            <input type="radio" id="farm-1" name="pharmacy-selection" value="centrale" required>
-                            <label for="farm-1" class="card-clickable-label">
-                                <span>
-                                    <span class="farm-name">Farmacia Centrale</span>
-                                    <span class="farm-address">- Via Francesco Petrarca, 14r, Padova</span>
-                                </span>
-                            </label>
-                        </div>
-
-                        <div class="farm-box">
-                            <input type="radio" id="farm-2" name="pharmacy-selection" value="celly" required>
-                            <label for="farm-2" class="card-clickable-label">
-                                <span>
-                                    <span class="farm-name">Farmacia Celly</span>
-                                    <span class="farm-address">- Via Vercelli, 6, Padova</span>
-                                </span> 
-                            </label>
-                        </div>
-
-                        <div class="farm-box">
-                            <input type="radio" id="farm-3" name="pharmacy-selection" value="giotto" required>
-                            <label for="farm-3" class="card-clickable-label">
-                                <span>
-                                    <span class="farm-name">Farmacia Giotto</span>
-                                    <span class="farm-address">- Via Giotto, 14r, Padova</span>
-                                </span>
-                            </label>
-                        </div>
-
-                        <div class="farm-box">
-                            <input type="radio" id="farm-4" name="pharmacy-selection" value="giotto" required>
-                            <label for="farm-4" class="card-clickable-label">
-                                <span>
-                                    <span class="farm-name">Farmacia Centrale</span>
-                                    <span class="farm-address">- Via Francesco Petrarca, 14r, Padova</span>
-                                </span>
-                            </label>
-                        </div>
-
+                        [farmacie_grid]
                     </div>
+
                 </fieldset>
             </div>
 
             <div class="tab">
-                <h2 class="tab-title" id="data-ora"><span class="sr-only">Passaggio 3 di 4:</span>
-                    3. Seleziona Data e
-                    Orario</h2>
+                <h2 class="tab-title" id="data-ora"><span class="sr-only">Passaggio 3 di 4:</span> 3. Seleziona Data e Orario</h2>
                 <fieldset aria-labelledby="data-ora">
                     <legend class="sr-only">Seleziona Data e Orario</legend>
                     <div class="date-picker-container">
@@ -252,7 +187,8 @@
                 <button type="button" id="nextBtn" class="btn-primary" onclick="nextPrev(1)">Prosegui</button>
                 <button type="button" id="prevBtn" class="outlined-btn" onclick="nextPrev(-1)">Indietro</button>
 
-                <button type="submit" id="submitBtnNoJs" class="btn-primary">Conferma Prenotazione</button>
+                <!-- Il pulsante finale per utenti senza JS ora ha un `formaction` per inviare i dati allo script corretto -->
+                <button type="submit" id="submitBtnNoJs" class="btn-primary" formaction="process-booking.php">Conferma Prenotazione</button>
             </div>
 
         </form>
@@ -301,6 +237,8 @@
     <script src="assets/js/scroll-top.js"></script>
     <script src="assets/js/book-form.js"></script>
     <script src="assets/js/book-form-validation.js"></script>
+    <!-- Script per la logica AJAX -->
+    <script src="assets/js/book-app-ajax.js"></script>
 
 </body>
 
