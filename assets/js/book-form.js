@@ -1,3 +1,4 @@
+document.body.classList.add('js-active');
 // tab di indice 0
 var currentTab = 0; 
 showTab(currentTab); 
@@ -87,7 +88,7 @@ function validateForm() {
         else if (input.id === "femail") {
             if (!validateEmail()) {
                 isValid = false;
-                msg += "<p>Email: Formato valido nome@mail.com </p>";
+                msg += "<p>Email: nome@mail.com </p>";
                 input.classList.add("invalid");
             } else { input.classList.remove("invalid"); }
         }

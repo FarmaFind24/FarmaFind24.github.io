@@ -62,7 +62,7 @@ a:visited {
   gap: 1em;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
-  padding: 2em 0em 0em 0em;
+  padding: 1em 0em 0em 0em;
   justify-content: center;
 }
 .grid-4c {
@@ -108,7 +108,7 @@ h3 {
 p {
   font-family: inherit;
   line-height: 1.5; 
-  margin-bottom: 1em; 
+  margin-bottom: 0.5em; 
 }
 #main-content > p {
   padding: 0 1em; 
@@ -127,7 +127,6 @@ h1 + p {
   max-width: 800px;       
   margin: 0 auto 1em auto;
   font-size: 1.2em;
-  color: rgba(0, 0, 0, 0.7); 
   padding: 0 1em;        
 }
 .form-search-container {
@@ -323,18 +322,24 @@ h1.hide {
 .farm-content > p,
 .service-section-content > p {
   margin-top: 1rem;
-  color: rgba(0, 0, 0, 0.8);
 }
 .feature-card,
 .service-card {
   display: flex;
-  height: 12rem;
+  height: 12em;
   flex-direction: column;
-  padding: 1rem 2rem;
-  border-radius: 1rem;
-  width: 20rem;
+  padding: 1em 2em;
+  border-radius: 1em;
+  width: 20em;
   background-color: var(--main-bg-color);
-  border: 1px solid var(--border-color);
+  border: 0.4em solid var(--primary-color);
+  justify-content: center; 
+  align-items: center;     
+  text-align: center;
+}
+
+.service-card ul {
+  text-align: left;
 }
 
 .icon-container {
@@ -907,21 +912,46 @@ footer img {
 }
 
 /* nascondere passaggi del form non attivi (prova anche disabilitando js) */
-.tab {
+/*.tab {
   display: none;
-}
+}*/
 
-/*
+/*senza js*/
 .tab {
     display: block; 
 }
+.step-indicator-container {
+  display: none;
+}
+#nextBtn, #prevBtn {
+  display: none;
+}
+#submitBtnNoJs {
+  display: inline-block;
+  width: 100%;
+  margin-top: 1em;
+}
+
+/* con js attivo*/
 .js-active .tab {
     display: none;
 }
-
+.js-active .step-indicator-container {
+  display: flex; /* O block, come avevi prima */
+}
 .js-active .tab.show {
     display: block;
-}*/
+}
+.js-active #submitBtnNoJs {
+    display: none;
+}
+.js-active #submitBtnNoJs {
+  display: none;
+}
+.js-active #nextBtn, 
+.js-active #prevBtn {
+  display: inline-block;
+}
 .step {
   height: 1em;
   width: 1em;

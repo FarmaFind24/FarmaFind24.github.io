@@ -28,7 +28,7 @@
 
                 <li>
                     <a aria-current="page" href="book-app.html" class="current-page" tabindex="-1">
-                        <span class="sr-only">Pagina Corrente:</span>Prenota visita
+                        <span class="sr-only">Pagina Corrente:</span>Prenota Visita
                     </a>
                 </li>
                 <li>
@@ -46,8 +46,9 @@
 
     <main id="main-content">
         <h1>Prenota una visita</h1>
-        <p> Scegli il servizio che ti interessa, seleziona la farmacia, la data e l'orario e inserisci i tuoi dettagli
-            per confermare l'appuntamento.</p>
+        <p> Prenota in pochi passaggi le tue prestazioni sanitarie. Seleziona il servizio desiderato, scegli la farmacia, la data e l'ora e fissa l'appuntamento. <br>
+            In fondo alla pagina troverai delle semplici regole per prepararti al meglio.
+        </p>
 
         <!-- REGISTRATION FORM: MULTI STEP FORM-->
         <form id="regForm" action=" " method="POST">
@@ -87,25 +88,24 @@
 
                         <div class="service-box">
                             <input type="radio" name="service" id="visita4" value="sangue" required>
-                            <label for="visita4"><strong>Analisi del sangue</strong></label>
+                            <label for="visita4"><strong>Analisi del sangue</strong>Colesterolo, glicemia e trigliceridi</label>
                         </div>
 
                         <div class="service-box">
                             <input type="radio" name="service" id="visita5" value="udito" required>
-                            <label for="visita5"><strong>Test dell'udito</strong></label>
+                            <label for="visita5"><strong>Test dell'udito</strong>Controllo audiometrico preliminare</label>
                         </div>
 
                         <div class="service-box">
                             <input type="radio" name="service" id="visita6" value="spirometria" required>
-                            <label for="visita6"><strong>Spirometria</strong></label>
+                            <label for="visita6"><strong>Spirometria</strong>Valutazione della funzionalità respiratoria</label>
                         </div>
                     </div>
                 </fieldset>
 
                 <fieldset class="fieldset-city">
-                    <legend for="city">Seleziona Comune: <span class="required" aria-hidden="true">*</span></legend>
+                    <legend for="city">Seleziona il comune: <span class="required" aria-hidden="true">*</span></legend>
                     <select id="city" name="city" required>
-                        <option value="">Seleziona un comune...</option>
                         <option value="padova">Padova</option>
                         <option value="abano">Abano</option>
                         <option value="albignasego">Albignasego</option>
@@ -251,37 +251,41 @@
             <div class="step-actions">
                 <button type="button" id="nextBtn" class="btn-primary" onclick="nextPrev(1)">Prosegui</button>
                 <button type="button" id="prevBtn" class="outlined-btn" onclick="nextPrev(-1)">Indietro</button>
+
+                <button type="submit" id="submitBtnNoJs" class="btn-primary">Conferma Prenotazione</button>
             </div>
 
         </form>
 
         <section>
       <div class="service-section-content">
-        <h3 class="title-main">Consigli utili per prepararsi alla visita</h3>
-        <p>Per assicurarti che la visita si svolga correttamente, tieni a mente quanto segue:</p>
+        <h3 class="title-main">Come prepararsi alla visita</h3>
+        <p>Per assicurarti che la visita si svolga correttamente, segui queste semplici regole:</p>
         <div class="grid">
             <div class="service-card">
-                <h3 class="title-card">Documentazione</h3>
-                <p>
-                    Porta la Tessera Sanitaria, un documento d'identità valido e la conferma della prenotazione.
-                </p>
+                <h3 class="title-card">Cosa portare</h3>
+                <ul>
+                    <li>Tessera Sanitaria</li>
+                    <li>Documento d'identità</li>
+                    <li>Conferma della prenotazione</li>
+                </ul>
             </div>
             <div class="service-card">
                 <h3 class="title-card">Puntualità</h3>
                 <p>
-                Ti consigliamo di presentarti circa 5 minuti prima per l'accettazione.
+                Ti consigliamo di presentarti con 10 minuti di anticipo per l'accettazione.
                 </p>
             </div>
             <div class="service-card">
                 <h3 class="title-card">Cancellazione</h3>
                 <p>
-                Se non puoi venire, ti chiediamo di annullare la prenotazione nella tua AREA PERSONALE.
+                Se non puoi presentarti, annulla l'appuntamento tramite la tua AREA PERSONALE per liberare il posto.
                 </p>
             </div>
 
         </div>
         <p>Hai dubbi specifici o esigenze particolari? <br>
-        Contatta direttamente la farmacia. Nella pagina <a href="search-farm.html"> Ricerca Farmacie</a> troverai i contatti, gli orari e gli altri servizi offerti.
+        Contatta direttamente la farmacia. Nella pagina <a href="search-farm.html"> Ricerca Farmacie</a> troverai tutti i contatti e gli altri servizi offerti.
         </p>
       </div>
 
@@ -295,7 +299,7 @@
     </footer>
 
     <script src="assets/js/scroll-top.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/book-form.js"></script>
     <script src="assets/js/book-form-validation.js"></script>
 
 </body>
