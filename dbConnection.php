@@ -139,6 +139,19 @@ class DBAccess {
         return [];
     }
 
+    // Funzione per ottenere la lista dei SERVIZI disponibili per la farmacia
+    public function getServiziFarmacia($idFarm) {
+        $query = "SELECT servizi.id, servizi.nome_servizio, servizi.descrizione, servizi.durata_media_minuti 
+                FROM servizi 
+                INNER JOIN farmacia_servizi ON servizi.id = farmacia_servizi.servizio_id 
+                WHERE farmacia_servizi.farmacia_id = ? 
+                ORDER BY nome_servizio ASC";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $idFarm);
+        mysqli_stmt_execute($stmt);
+        return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
+    }
+
     // 7. Funzione per ottenere la lista di tutte le CITTÀ uniche
     public function getListaCitta() {
         $query = "SELECT DISTINCT citta FROM farmacie ORDER BY citta ASC";

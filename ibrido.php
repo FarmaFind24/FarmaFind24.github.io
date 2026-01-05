@@ -40,7 +40,7 @@
               ><span class="sr-only">Pagina Corrente</span>Farmacie</a
             >
           </li>
-          <li><a href="search-med.html">Medicine</a></li>
+          <li><a href="med_search.php">Medicine</a></li>
           <li><a href="contatti.html">Prenota Servizio</a></li>
           <li>
             <a href="about.html"><span lang="en-GB">About</span></a>

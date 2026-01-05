@@ -46,7 +46,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 // ... resto del codice ...
                 
                 $htmlRisultati .= '<div class="med-card-content">';
-                $htmlRisultati .= '<h3>' . htmlspecialchars($row['nome_commerciale']) . '</h3>';
+                $htmlRisultati .= '<h3 class="title-card">' . htmlspecialchars($row['nome_commerciale']) . '</h3>';
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['descrizione']) . '</p>';
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['forma_farmaceutica']) . '</p>';
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['dosaggio']) . '</p>';

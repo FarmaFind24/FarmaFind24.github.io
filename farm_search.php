@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once "dbConnection.php";
 use DB\DBAccess;
 
@@ -15,40 +19,56 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
     $connessioneOk = $db->openDBConnection();
 
     if ($connessioneOk) {
-        $risultati = $db->cercaFarmacie($testoCercato);
-        $db->closeConnection();
-        
-        if ($risultati && count($risultati) > 0) {
+        try {
+            $risultati = $db->cercaFarmacie($testoCercato);
             
-            foreach ($risultati as $row) {
+            if ($risultati && count($risultati) > 0) {
                 
-                if (!empty($row['immagine'])) {
-                    $srcImmagine = "assets/" . htmlspecialchars($row['immagine']);
-                } else {
-                    $srcImmagine = "assets/immagine_farmacia.jpg"; 
+                foreach ($risultati as $row) {
+                    
+                    if (!empty($row['immagine'])) {
+                        $srcImmagine = "assets/" . htmlspecialchars($row['immagine']);
+                    } else {
+                        $srcImmagine = "assets/immagine_farmacia.jpg"; 
+                    }
+                    
+                    $htmlRisultati .= '<div class="farm-card">';
+                    $htmlRisultati .= '<img src="' . $srcImmagine . '" alt="Foto ' . htmlspecialchars($row['nome']) . '">';
+                    $htmlRisultati .= '<div class="farm-card-content">';
+                    $htmlRisultati .= '<h3 class="title-card">' . htmlspecialchars($row['nome']) . '</h3>';
+                    $htmlRisultati .= '<p>' . htmlspecialchars($row['indirizzo']) . ', ' . htmlspecialchars($row['citta']) . '</p>';
+                    $htmlRisultati .= '<span class="farm-orario">Tel: ' . htmlspecialchars($row['telefono']) . '</span>';
+
+                    $idFarm = $row['id'];
+                    $servizi = $db->getServiziFarmacia($idFarm);
+                    if ($servizi && count($servizi) > 0) {
+                        $htmlRisultati .= '<span>Servizi</span><ul aria-label="Servizi disponibili">';
+                        foreach ($servizi as $servizio) {
+                            $htmlRisultati .= '<li>' . htmlspecialchars($servizio['nome_servizio']) . '</li>';
+                        }
+                        $htmlRisultati .= '</ul>';
+                    }
+                    $htmlRisultati .= '<div class="row-btn">
+                                        <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
+                                        <button type="button" class="btn-primary">Dettagli</button>
+                                        </div>';
+                    $htmlRisultati .= '</div></div>';
                 }
-                
-                $htmlRisultati .= '<div class="farm-card">';
-                $htmlRisultati .= '<img src="' . $srcImmagine . '" alt="Foto ' . htmlspecialchars($row['nome']) . '">';
-                
-                $htmlRisultati .= '<div class="farm-card-content">';
-                $htmlRisultati .= '<h3>' . htmlspecialchars($row['nome']) . '</h3>';
-                $htmlRisultati .= '<p>' . htmlspecialchars($row['indirizzo']) . ', ' . htmlspecialchars($row['citta']) . '</p>';
-                $htmlRisultati .= '<span class="farm-orario">Tel: ' . htmlspecialchars($row['telefono']) . '</span>';
-                $htmlRisultati .= '</div></div>';
+            } else {
+                $htmlRisultati = '<p class="no-results">Nessun risultato trovato per "<strong>' . htmlspecialchars($testoCercato) . '</strong>".</p>';
             }
-            
-        } else {
-            $htmlRisultati = '<p class="no-results">Nessun risultato trovato per "<strong>' . htmlspecialchars($testoCercato) . '</strong>".</p>';
+        } catch (\mysqli_sql_exception $e) {
+            // Per il debug, puoi registrare l'errore: error_log($e->getMessage());
+            $htmlRisultati = '<p class="error">Si è verificato un errore durante la ricerca. Riprova più tardi.</p>';
+        } finally {
+            $db->closeConnection();
         }
-        
     } else {
         $htmlRisultati = '<p class="error">Errore di connessione al database.</p>';
     }
 } 
 
 $paginaHTML = str_replace('[listaFarmacie]', $htmlRisultati, $paginaHTML);
-
 $paginaHTML = str_replace('[valore_ricerca]', htmlspecialchars($testoCercato), $paginaHTML);
 
 echo $paginaHTML;
