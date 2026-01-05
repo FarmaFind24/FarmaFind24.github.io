@@ -135,24 +135,19 @@ function validateForm() {
   return isValid;
 }
 function showSuccessMessage() {
-    // 1. Nascondi l'ultima tab visibile
     var x = document.getElementsByClassName("tab");
     if(x[currentTab]) x[currentTab].style.display = "none"; 
 
-    // 2. Nascondi pulsanti, pallini e istruzioni
     document.querySelector(".step-actions").style.display = "none";
     document.querySelector(".step-indicator-container").style.display = "none";
     
     var instruction = document.querySelector(".instruction");
     if(instruction) instruction.style.display = "none";
 
-    // 3. Mostra il box di successo
     var successDiv = document.getElementById("success-step");
     if(successDiv) {
         successDiv.style.display = "block";
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-        console.error("Errore: Elemento 'success-step' non trovato nell'HTML");
+        //window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 

@@ -909,7 +909,13 @@ footer img {
 
   box-sizing: border-box;
   display: block;
+
+  min-height: 40em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
 
 /* nascondere passaggi del form non attivi (prova anche disabilitando js) */
 /*.tab {
@@ -1002,6 +1008,27 @@ footer img {
   font-style: italic;
   text-align: center;
   margin-bottom: 1em;
+}
+
+/* --- SCHERMATA DI SUCCESSO --- */
+#success-step {
+    display: none;
+}
+
+.success-container {
+    text-align: center;
+    padding: 4em 2em;
+}
+
+.success-container h2 {
+    color: var(--primary-color);
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.success-container p {
+    color: #5e5e5e;
+    margin-bottom: 2em;
 }
 /*VALIDAZIONE INPUT FORM*/
 input.invalid {
