@@ -237,8 +237,9 @@ h1 + p {
 }
 
 h1.hide {
-  background-image: url("/assets/h1.webp");
+  background-image: url("../h1.webp");
   margin-left: 1rem;
+  margin-top: 1rem;
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
