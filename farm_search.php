@@ -55,7 +55,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                     $htmlRisultati .= '</div></div>';
                 }
             } else {
-                $htmlRisultati = '<p class="no-results">Nessun risultato trovato per "<strong>' . htmlspecialchars($testoCercato) . '</strong>".</p>';
+                $htmlRisultati = '<p class="no-results">Nessuna farmacia o città trovata per "<strong>' . htmlspecialchars($testoCercato) . '</strong>".</p>';
             }
         } catch (\mysqli_sql_exception $e) {
             // Per il debug, puoi registrare l'errore: error_log($e->getMessage());

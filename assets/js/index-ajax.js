@@ -1,24 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const servicesContainer = document.querySelector('.services-grid');
     const citySelect = document.getElementById('city');
-    const pharmacyGrid = document.querySelector('.farm-grid');
-    const pharmacyMessageContainer = document.getElementById('farm-message-container');
+    const pharmacyGrid = document.querySelector('.grid-dintorni');
+    const pharmacyMessageContainer = document.getElementById('index-message-container');
 
     function fetchPharmacies() {
-        const selectedService = document.querySelector('input[name="service"]:checked');
         const selectedCity = citySelect.value;
 
         // Pulisce la lista precedente e il messaggio
         pharmacyGrid.innerHTML = '';
         pharmacyMessageContainer.innerHTML = '';
 
-        if (selectedService && selectedCity) {
+        if (selectedCity) {
             // Mostra un loader/messaggio di caricamento
             pharmacyGrid.innerHTML = '<p>Caricamento farmacie...</p>';
 
-            const serviceId = selectedService.value;
-            
-            fetch(`get_dintorni.php?service_id=${serviceId}&city=${selectedCity}`)
+            fetch(`get_dintorni.php?city=${selectedCity}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -26,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     return response.json();
                 })
                 .then(data => {
-                    pharmacyMessageContainer.innerHTML = data.message;
-                    pharmacyGrid.innerHTML = data.html || '<p>Nessuna farmacia corrisponde ai criteri di ricerca.</p>';
+                    pharmacyMessageContainer.innerHTML = data.message || '';
+                    pharmacyGrid.innerHTML = data.html || '<p>Nessuna farmacia trovata.</p>';
                 })
                 .catch(error => {
                     console.error('Errore nel fetch delle farmacie:', error);
@@ -38,13 +34,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (citySelect) {
         citySelect.addEventListener('change', fetchPharmacies);
-    }
-
-    if (servicesContainer) {
-        servicesContainer.addEventListener('change', function(event) {
-            if (event.target.name === 'service') {
-                fetchPharmacies();
-            }
-        });
     }
 });

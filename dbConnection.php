@@ -211,6 +211,40 @@ class DBAccess {
         mysqli_stmt_execute($stmt);
         return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getFarmacieDintorni($cittaRiferimento, $limit = 4) {
+        // Step 1: Ottiene le coordinate medie (lat, lon) per la città selezionata, usandole come centro per la ricerca
+        $coordQuery = "SELECT AVG(latitudine) as lat, AVG(longitudine) as lon FROM farmacie WHERE citta = ?";
+        $coordStmt = mysqli_prepare($this->connection, $coordQuery);
+        mysqli_stmt_bind_param($coordStmt, "s", $cittaRiferimento);
+        mysqli_stmt_execute($coordStmt);
+        $coordResult = mysqli_stmt_get_result($coordStmt);
+        $coords = mysqli_fetch_assoc($coordResult);
+
+        // Se non è possibile trovare le coordinate per la città (es. nessuna farmacia presente), non si può calcolare la distanza.
+        if (!$coords || is_null($coords['lat']) || is_null($coords['lon'])) {
+            return [];
+        }
+
+        $lat = $coords['lat'];
+        $lon = $coords['lon'];
+        $distanzaMassima = 20; // Distanza massima in KM. Puoi modificare questo valore.
+
+        // Step 2: Trova le farmacie vicine usando la formula di Haversine per calcolare la distanza in km.
+        // 6371 è il raggio della Terra in km.
+        $query = "SELECT f.id, f.nome, f.indirizzo, f.citta, f.telefono, f.immagine,
+                    ( 6371 * acos( cos( radians(?) ) * cos( radians( f.latitudine ) ) * cos( radians( f.longitudine ) - radians(?) ) + sin( radians(?) ) * sin( radians( f.latitudine ) ) ) ) AS distanza
+                  FROM farmacie f 
+                  HAVING distanza < ?
+                  ORDER BY distanza ASC 
+                  LIMIT ?";
+                  
+        $stmt = mysqli_prepare($this->connection, $query);
+        // I parametri sono: lat, lon, lat, idServizio, cittaEsclusa, distanzaMassima, limit
+        mysqli_stmt_bind_param($stmt, "dddii", $lat, $lon, $lat, $distanzaMassima, $limit);
+        mysqli_stmt_execute($stmt);
+        return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
 ?>

@@ -74,6 +74,15 @@ a:visited {
   justify-content: center;
 }
 
+.grid-dintorni {
+  gap: 1rem;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 18.165rem);
+  width: 100%;
+  justify-content: center;
+}
+
 .sr-only {
   position: absolute;
   left: -10000px;
@@ -324,6 +333,37 @@ h1.hide {
 .service-section-content > p {
   margin-top: 1rem;
 }
+
+.feature-card,
+.dintorni-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.dintorni-form label {
+    font-size: 1.1em;
+}
+
+.dintorni-form-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.dintorni-form-controls > select {
+    width: auto;
+    min-width: 250px;
+    margin: 0;
+}
+
+.dintorni-form-controls > button {
+    margin-top: 0;
+}
+
 .feature-card,
 .service-card {
   display: flex;
@@ -970,6 +1010,10 @@ footer img {
 .js-active #findPharmaciesBtn {
     display: none;
 }
+.js-active #findDintorniBtn {
+    display: none;
+}
+
 .js-active #nextBtn, 
 .js-active #prevBtn {
   display: inline-block;
