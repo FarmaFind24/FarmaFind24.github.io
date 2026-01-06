@@ -99,6 +99,19 @@ a:visited {
 .row-btn:has(> *:only-child) {
   justify-content: flex-end;
 }
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+  color: black;
+}
+h2 {
+  font-size: 2em;      
+  margin-top: 0;        
+  line-height: 1.2;     
+  margin-bottom: 1rem;  
+  text-align:center;
+}
 h3 {
     font-family: inherit; 
     margin: 0.1em 0 0.2em 0;
@@ -118,13 +131,6 @@ p {
   font-family: inherit;
   line-height: 1.5; 
   margin-bottom: 0.5em; 
-}
-#main-content > p {
-  padding: 0 1em; 
-  max-width: 800px;
-
-  margin-left: auto;
-  margin-right: auto;
 }
 h1 {
   text-align: center;
@@ -309,26 +315,19 @@ h1.hide {
   gap: 0.5rem;
 }
 .team-section-content,
-.about-section-content,
 .service-section-content,
 .farm-content {
-  max-width: 1220px;
+  max-width: 80em;
   width: 100%;
-  min-height: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: left;
+  margin: 0 auto;
 }
 .team-section-content h2,
-.about-section-content h2,
 .service-section-content h2,
 .farm-content h2 {
-  margin-top: 0;
   text-align: left;
-  font-size: 2rem;
 }
-.about-section-content > p,
 .farm-content > p,
 .service-section-content > p {
   margin-top: 1rem;
@@ -503,10 +502,56 @@ button.btn-primary:hover {
 /**********************/
 /*       ABOUT        */
 /**********************/
-.about-first-section {
-  padding: 0;
+.container-zig-zag {
+  padding: 0em 1em;
+  width: 80%;
+  margin: 0 auto;
 }
-
+.row {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+.col-testo {
+  flex: 1;
+  width: 60%;
+}
+.col-img {
+  width: 40%
+}
+.col-img img {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+.row.inverti-ordine {
+  flex-direction: row-reverse; 
+}
+.col-testo h2 {
+  color: var(--primary-color);
+}
+.col-testo p {
+  margin: 1.5em 0em;
+}
+.intro-community p {
+  max-width: 70em;
+  line-height: 1.8;
+  text-align:center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.col-testo ul {
+  padding-left: 1.5em;       
+  margin-top: 0;  
+          
+}
+.col-testo li {
+  line-height: 1.8;                
+  margin-bottom: 1em;   
+}
+.col-testo li::marker {
+  color: var(--primary-color); 
+}
 .avatar-container {
   border-radius: 12px;
   width: 180px;
@@ -548,36 +593,6 @@ button.btn-primary:hover {
   height: 100px;
   border-radius: 50%;
 }
-.contact-section {
-  margin-top: 5rem;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 2rem;
-}
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 60%;
-  width: 30%;
-  padding: 1rem;
-  gap: 2rem;
-  border-radius: 1rem;
-  background-color: var(--second-bg-color);
-}
-.contact-form form {
-  display: flex;
-  flex-direction: column;
-}
-.contact-form div {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.title-form {
-  font-size: 1.8rem;
-}
 input[type="text"],
 input[type="email"],
 select,
@@ -613,6 +628,7 @@ input[type="submit"]:hover {
   flex-direction: column;
   gap: 2rem;
   padding: 2rem;
+  margin: 0 auto;
 }
 .contact-info ul {
   padding: 0;
@@ -686,13 +702,10 @@ footer img {
   border-radius: 6px;
   width: 50%;
 }
-
-/* Titoli delle sezioni */
 #InfoGeneraliGridInfoFarm h2,
 #OrariDiApertura h2,
 #SeriviziOfferti h2 {
   grid-column: 1 / -1;
-  margin: 0 0 1rem;
 }
 
 /* Info Generali */
