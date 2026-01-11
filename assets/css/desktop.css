@@ -202,7 +202,9 @@ h1 + p {
   padding-right: 1rem;
 }
 
-/* NAVBAR */
+/**********************/
+/*       NAVBAR       */
+/**********************/
 .Top-NavBar a {
   height: 2rem;
   text-decoration: none;
@@ -261,7 +263,10 @@ h1.hide {
   background-repeat: no-repeat;
   background-size: contain;
 }
-
+/*Per Hamburger*/
+.menu-toggle {
+  display: none;
+}
 /**********************/
 /*        HOME        */
 /**********************/
