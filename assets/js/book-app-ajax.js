@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const serviceId = selectedService.value;
             
-            fetch(`get_dintorni.php?service_id=${serviceId}&city=${selectedCity}`)
+            fetch(`get_pharmacies.php?service_id=${serviceId}&city=${selectedCity}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

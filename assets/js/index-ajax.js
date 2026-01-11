@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
     const citySelect = document.getElementById('city');
-    const pharmacyGrid = document.querySelector('.grid-dintorni');
     const pharmacyMessageContainer = document.getElementById('index-message-container');
 
     function fetchPharmacies() {
+        const pharmacyGrid = document.querySelector('.grid-4c');
         const selectedCity = citySelect.value;
-
+        if (!pharmacyGrid) {
+            console.error("Errore: Elemento .grid-4c non trovato!");
+            return;
+        }
         // Pulisce la lista precedente e il messaggio
         pharmacyGrid.innerHTML = '';
         pharmacyMessageContainer.innerHTML = '';

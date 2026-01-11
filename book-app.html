@@ -40,13 +40,14 @@
 
     <nav id="breadcrumb" aria-label="Percorso di navigazione">
         <p> Ti trovi in:
-            <a href="index.php"> <span lang="en">Home</span></a> >> Prenota visita
+            Prenota visita
         </p>
     </nav>
 
     <main id="main-content">
         <h1>Prenota una visita</h1>
-        <p> Prenota in pochi passaggi le tue prestazioni sanitarie. Seleziona il servizio desiderato, scegli la farmacia, la data e l'ora e fissa l'appuntamento. <br>
+        <p> Prenota in pochi passaggi le tue prestazioni sanitarie. Seleziona il servizio desiderato, scegli la
+            farmacia, la data e l'ora e fissa l'appuntamento. <br>
             In fondo alla pagina troverai delle semplici regole per prepararti al meglio.
         </p>
 
@@ -73,7 +74,7 @@
                     </div>
                 </fieldset>
             </div>
-            
+
             <div class="tab">
                 <h2 class="tab-title"><span class="sr-only">Passaggio 2 di 4:</span>2. Seleziona la Farmacia</h2>
 
@@ -85,12 +86,13 @@
                 </fieldset>
 
                 <!-- Pulsante per la ricerca manuale (visibile solo senza JS) -->
-                <button type="submit" id="findPharmaciesBtn" name="find_pharmacies_btn" class="btn-primary" formnovalidate>Trova Farmacie</button>
+                <button type="submit" id="findPharmaciesBtn" name="find_pharmacies_btn" class="btn-primary"
+                    formnovalidate>Trova Farmacie</button>
 
                 <fieldset>
                     <legend>Scegli una farmacia tra quelle disponibili: <span class="required"
                             aria-hidden="true">*</span></legend>
-                    
+
                     <!-- Contenitore per messaggi dinamici (popolato da PHP o JS) -->
                     <div id="farm-message-container">[farmacie_message]</div>
 
@@ -103,7 +105,8 @@
             </div>
 
             <div class="tab">
-                <h2 class="tab-title" id="data-ora"><span class="sr-only">Passaggio 3 di 4:</span> 3. Seleziona Data e Orario</h2>
+                <h2 class="tab-title" id="data-ora"><span class="sr-only">Passaggio 3 di 4:</span> 3. Seleziona Data e
+                    Orario</h2>
                 <fieldset aria-labelledby="data-ora">
                     <legend class="sr-only">Seleziona Data e Orario</legend>
                     <div class="date-picker-container">
@@ -188,7 +191,8 @@
                 <button type="button" id="prevBtn" class="outlined-btn" onclick="nextPrev(-1)">Indietro</button>
 
                 <!-- Il pulsante finale per utenti senza JS ora ha un `formaction` per inviare i dati allo script corretto -->
-                <button type="submit" id="submitBtnNoJs" class="btn-primary" formaction="process-booking.php">Conferma Prenotazione</button>
+                <button type="submit" id="submitBtnNoJs" class="btn-primary" formaction="process-booking.php">Conferma
+                    Prenotazione</button>
             </div>
 
             <div id="success-step" class="success-container">
@@ -198,50 +202,56 @@
                     Stampa qui la prenotazione. <br>
                     <a href="index.php" class="btn-primary" style="text-decoration: none;">Torna alla Home</a>
                 </p>
-                    
+
             </div>
 
         </form>
 
         <section>
-      <div class="service-section-content">
-        <h3 class="title-main">Come prepararsi alla visita</h3>
-        <p>Per assicurarti che la visita si svolga correttamente, segui queste semplici regole:</p>
-        <div class="grid">
-            <div class="service-card">
-                <h3 class="title-card">Cosa portare</h3>
-                <ul>
-                    <li>Tessera Sanitaria</li>
-                    <li>Documento d'identità</li>
-                    <li>Conferma della prenotazione</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <h3 class="title-card">Puntualità</h3>
-                <p>
-                Ti consigliamo di presentarti con 10 minuti di anticipo per l'accettazione.
-                </p>
-            </div>
-            <div class="service-card">
-                <h3 class="title-card">Cancellazione</h3>
-                <p>
-                Se non puoi presentarti, annulla l'appuntamento tramite la tua AREA PERSONALE per liberare il posto.
+            <div class="service-section-content">
+                <h3 class="title-main">Come prepararsi alla visita</h3>
+                <p>Per assicurarti che la visita si svolga correttamente, segui queste semplici regole:</p>
+                <div class="grid">
+                    <div class="service-card">
+                        <h3 class="title-card">Cosa portare</h3>
+                        <ul>
+                            <li>Tessera Sanitaria</li>
+                            <li>Documento d'identità</li>
+                            <li>Conferma della prenotazione</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <h3 class="title-card">Puntualità</h3>
+                        <p>
+                            Ti consigliamo di presentarti con 10 minuti di anticipo per l'accettazione.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <h3 class="title-card">Cancellazione</h3>
+                        <p>
+                            Se non puoi presentarti, annulla l'appuntamento tramite la tua AREA PERSONALE per liberare
+                            il posto.
+                        </p>
+                    </div>
+
+                </div>
+                <p>Hai dubbi specifici o esigenze particolari? <br>
+                    Contatta direttamente la farmacia. Nella pagina <a href="farm_search.php"> Ricerca Farmacie</a>
+                    troverai tutti i contatti e gli altri servizi offerti.
                 </p>
             </div>
 
-        </div>
-        <p>Hai dubbi specifici o esigenze particolari? <br>
-        Contatta direttamente la farmacia. Nella pagina <a href="farm_search.php"> Ricerca Farmacie</a> troverai tutti i contatti e gli altri servizi offerti.
-        </p>
-      </div>
-
-    </section>
+        </section>
 
         <button onclick="topFunction()" id="scroll-btn" title="Go to top">Torna su</button>
     </main>
 
     <footer>
-        <p>Copyright &copy; 2025</p>
+        <p> Le immagini presenti su questo sito sono state generate
+            tramite
+            strumenti di intelligenza
+            artificiale. Eventuali somiglianze tra i nomi dei prodotti e marchi reali sono puramenti casuali.<br>
+            Copyright &copy; 2026 | Tutti i diritti riservati. </p>
     </footer>
 
     <script src="assets/js/scroll-top.js"></script>
