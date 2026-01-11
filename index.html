@@ -41,53 +41,54 @@
   <nav id="breadcrumb" aria-label="Percorso di navigazione">
     <p>
       Ti trovi in:
-      <a href="index.php"><span lang="en">Home</span></a>
+      <span lang="en">Home</span>
     </p>
   </nav>
 
   <main>
-    <section id="home-hero-section">
+    <section class="home-hero-section">
       <div class="home-hero-content">
         <h1>Farmacie e servizi sanitari nella provincia di Padova</h1>
         <p>
-          Cerca farmacie di turno aperte, verifica la disponibilità dei medicinali e prenota prestazioni sanitarie nella provincia di Padova con FarmaFind24.
+          Cerca farmacie di turno aperte, verifica la disponibilità dei medicinali e prenota prestazioni sanitarie nella
+          provincia di Padova con FarmaFind24.
         </p>
-          <form class="home-hero-form-container">
-            <fieldset>
-              <legend>Filtra per:</legend>
-              <div class="filter-container">
-                <div class="radio-item">
-                  <input type="radio" name="type-name" value="Farmacia" checked id="type1">
-                  <label for="type1">Farmacia</label>
-                </div>
-                <div class="radio-item">
-                  <input type="radio" name="type-name" value="Medicinale" id="type2">
-                  <label for="type2">Medicinale</label>
-                </div>
+        <form class="home-hero-form-container" id="mainSearchForm">
+          <fieldset>
+            <legend>Filtra per:</legend>
+            <div class="filter-container">
+              <div class="radio-item">
+                <input type="radio" name="type" value="farmacia" checked id="type1">
+                <label for="type1">Farmacia</label>
               </div>
-            </fieldset>
-            <div class="form-search-container">
-              <label for="obj-name" class="sr-only">Cerca una farmacia o un medicinale</label>
-              <input type="search" value="" placeholder="Cerca una farmacia o un medicinale..." id="obj-name" required>
-              <button type="submit">Cerca</button>
+              <div class="radio-item">
+                <input type="radio" name="type" value="medicinale" id="type2">
+                <label for="type2">Medicinale</label>
+              </div>
             </div>
-          </form>
+          </fieldset>
+          <div class="form-search-container">
+            <label for="obj-name" class="sr-only">Cerca una farmacia o un medicinale</label>
+            <input type="search" name="q" placeholder="Cerca una farmacia o un medicinale..." id="obj-name" required>
+            <button type="submit">Cerca</button>
+          </div>
+        </form>
       </div>
     </section>
     <section>
       <div class="farm-content">
         <h2>Farmacie nei Dintorni</h2>
         <form method="POST" action="index.php" class="dintorni-form">
-            <label for="city">Le farmacie più vicine a te: seleziona un comune</label>
-            <div class="dintorni-form-controls">
-                <select id="city" name="city" required>
-                    [citta_options]
-                </select>
-                <button type="submit" id="findDintorniBtn" class="btn-primary">Cerca Farmacie</button>
-            </div>
+          <label for="city">Le farmacie più vicine a te: seleziona un comune</label>
+          <div class="dintorni-form-controls">
+            <select id="city" name="city" required>
+              [citta_options]
+            </select>
+            <button type="submit" id="findDintorniBtn" class="btn-primary">Cerca Farmacie</button>
+          </div>
         </form>
         <div id="index-message-container">[index_message]</div>
-        <div class="grid-dintorni">
+        <div class="grid-4c">
           [farmacieDintorni]
         </div>
       </div>
@@ -128,7 +129,7 @@
         </div>
       </div>
     </section>
-    <button onclick="topFunction()" id="scroll-btn" title="Go to top">Torna su</button>
+    <button onclick="topFunction()" id="scroll-btn">Torna su</button>
   </main>
   <footer>
     <p>Copyright &copy; 2025</p>
@@ -136,6 +137,7 @@
 
   <script src="assets/js/scroll-top.js"></script>
   <script src="assets/js/index-ajax.js"></script>
+  <script src="assets/js/home-redirect.js"></script>
 </body>
 
 </html>
