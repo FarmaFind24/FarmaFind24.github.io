@@ -235,7 +235,9 @@ h1.hide {
   padding-right: 1rem;
 }
 
-/* NAVBAR */
+/**********************/
+/*       NAVBAR       */
+/**********************/
 .Top-NavBar a {
   height: 2rem;
   text-decoration: none;
@@ -289,6 +291,23 @@ h1.hide {
 .home-hero-section {
   padding-top: 0.2rem;
 }
+h1.hide {
+  background-image: url("../h1.webp");
+  margin-left: 1rem;
+  margin-top: 1rem;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+/*Per Hamburger*/
+.menu-toggle {
+  display: none;
+}
+/**********************/
+/*        HOME        */
+/**********************/
 
 .home-hero-content {
   background-color: var(--primary-color);
