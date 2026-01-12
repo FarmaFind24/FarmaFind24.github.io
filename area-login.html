@@ -1,0 +1,94 @@
+<!-- ABOUT.HTML -->
+
+<!doctype html>
+<html lang="it">
+
+<head>
+    <title>About - FarmaFind24</title>
+    <meta charset="utf-8" />
+    <meta name="description"
+        content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate" />
+    <meta name="keywords" content="salute" />
+    <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
+    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <header>
+        <h1 class="hide">Farma<span lang="en-GB">Find</span>24</h1>
+        <nav class="Top-NavBar">
+            <ul aria-label="menu di navigazione">
+                <li>
+                    <a href="index.php"><span lang="en-GB">Home</span></a>
+                </li>
+                <li><a href="farm-search.php">Farmacie</a></li>
+                <li><a href="med-search.php">Medicinali</a></li>
+                <li><a href="book-app.php">Prenota Visita</a></li>
+                <li>
+                    <a href="about.html"><span lang="en-GB">About</span></a>
+                </li>
+                <li>
+                    <a aria-current="page" href="#" class="current-page" tabindex="-1">
+                        <span class="sr-only">Pagina Corrente:</span>
+                        <span lang="en-GB">Area Personale</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav id="breadcrumb" aria-label="Percorso di navigazione">
+        <p> Ti trovi in: Area Personale
+        </p>
+    </nav>
+
+    <main>
+        <div class="login-container">
+            <div>
+                <h1>Benvenuto</h1>
+                <p>Accedi al portale di FarmaFind24</p>
+            </div>
+            <div class="user-login">
+                <form action="">
+                    <fieldset>
+                        <legend class="sr-only">Accedi</legend>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Username" name="username" autocomplete="username"
+                            required>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Password" autocomplete="current-password"
+                            name="password" required>
+                        <div class="login-form-row">
+                            <div>
+                                <input type="checkbox" value="Ricordami" id="ricordami">
+                                <label for="ricordami">Ricordami
+                            </div>
+                            </label>
+                            <a href="#">Password dimenticata?</a>
+                        </div>
+
+                        <button type="submit">Accedi<i class="fa-solid fa-arrow-right-to-bracket"
+                                aria-hidden="true"></i></button>
+                    </fieldset>
+                </form>
+                <div>
+                    <p>Sei un nuovo utente?</p><a href="area-register.html">Crea un account</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p> Le immagini presenti su questo sito sono state generate
+            tramite
+            strumenti di intelligenza
+            artificiale. Eventuali somiglianze tra i nomi dei prodotti e marchi reali sono puramenti casuali.<br>
+            Copyright &copy; 2026 | Tutti i diritti riservati. </p>
+    </footer>
+    <script src="assets/js/scroll-top.js"></script>
+</body>
+
+</html>

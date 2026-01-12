@@ -1,0 +1,256 @@
+<!-- ABOUT.HTML -->
+
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>Area Personale - FarmaFind24</title>
+    <meta charset="utf-8" />
+    <meta name="description"
+        content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate" />
+    <meta name="keywords" content="salute" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0" />
+    <link rel="stylesheet" href="../assets/css/desktop.css" media="screen" />
+    <link rel="stylesheet" href="../assets/css/mini.css" media="screen and (max-width:950px)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <header>
+        <h1 class="hide">Farma<span lang="en-GB">Find</span>24</h1>
+        <nav class="Top-NavBar">
+            <ul aria-label="menu di navigazione">
+                <li>
+                    <a href="index.php"><span lang="en">Home</span></a>
+                </li>
+                <li><a href="farm-search.php">Farmacie</a></li>
+                <li><a href="med-search.php">Medicinali</a></li>
+                <li><a href="book-app.php">Prenota Visita</a></li>
+                <li>
+                    <a href="about.html"><span lang="en">About</span></a>
+                </li>
+                <li>
+                    <a aria-current="page" href="#" class="current-page">
+                        Area Personale
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-wrapper">
+        <nav class="sidenav">
+            <ul aria-label="barra di navigazione dell'area personale">
+                <li>
+                    <a href="#dashboard" aria-label="dashboard">
+                        <span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+                </li>
+                <li>
+                    <a href="#profilo" aria-label="profilo"><span class="material-symbols-outlined"
+                            aria-hidden="true">person</span>Profilo</a>
+                </li>
+                <li>
+                    <a href="#prenotazioni" aria-label="prenotazioni"><span class="material-symbols-outlined"
+                            aria-hidden="true">event</span>Prenotazioni</a>
+                </li>
+                <li class="logout">
+                    <a href="#" lang="en" aria-label="logout"><span class="material-symbols-outlined"
+                            aria-hidden="true">logout</span>Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main-area-personale">
+            <section id="dashboard" class="content-section">
+                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
+                    <p>
+                        Ti trovi in: Area Personale >> <span lang="en">Dashboard</span>
+                    </p>
+                </nav>
+                <div class="main-area-personale-title-row">
+                    <h1>Ciao Utente</h1>
+                    <p>Bentornato nella tua dashboard</p>
+                </div>
+
+                <div class="activity-row">
+                    <div class="activity-card">
+                        <div class="activity-title">
+                            <h3>Prossimo Appuntamento</h3>
+                            <span class="material-symbols-outlined" aria-hidden="true">event</span>
+                        </div>
+                        <div class="activity-date">
+                            <span>Ott 24, 10:30</span>
+                            <p>Tra due giorni</p>
+                        </div>
+                    </div>
+                    <div class="activity-card"></div>
+                </div>
+                <div class="appuntamenti-section">
+                    <div class="appuntamenti-section title-row">
+                        <h2 aria-hidden="true">Appuntamenti in arrivo</h2>
+                        <a href="#prenotazioni">Visualizza Tutti</a>
+                    </div>
+
+
+                    <ol aria-label="lista appuntamenti" class="appuntamenti-column">
+                        <li class="appuntamento-card">
+                            <div class="appuntamento-card-date">
+                                <span>OTT <br />
+                                    24</span>
+                            </div>
+                            <div class="appuntamento-card-details">
+                                <div>
+                                    <h3>Vaccinazione - Influenza - 10:30 AM</h3>
+                                    <p>Farmacia Centrale Milano, Via Dante 12</p>
+                                </div>
+
+                                <button type="button" class="btn-primary no-margin">Disdici</button>
+                            </div>
+                        </li>
+                        <li class="appuntamento-card">
+                            <div class="appuntamento-card-date">
+                                <span>OTT <br />
+                                    24</span>
+                            </div>
+                            <div class="appuntamento-card-details">
+                                <div>
+                                    <h3>Vaccinazione - Influenza - 10:30 AM</h3>
+                                    <p>Farmacia Centrale Milano, Via Dante 12</p>
+                                </div>
+
+                                <button type="button" class="btn-primary no-margin">Disdici</button>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+            <section id="profilo" class="content-section">
+                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
+                    <p>Ti trovi in: Area Personale >> Profilo</p>
+                </nav>
+                <div class="main-area-personale-title-row">
+                    <div>
+                        <h1>Profilo</h1>
+                        <button type="button" class="btn-primary" id="edit-profile-btn">Modifica Profilo</button>
+                    </div>
+                    <p>Gestisci le tue informazioni personali</p>
+                </div>
+                <div class="profile-summary">
+                    <h3>Mario Rossi</h3>
+                    <div>
+                        <span class="username">@mario_rossi</span> <span>Membro da Marzo 2023</span>
+                    </div>
+                </div>
+                <div class="dettagli-personali">
+                    <h3>Dettagli Personali</h3>
+                    <form action="">
+                        <fieldset>
+                            <legend aria-hidden="true" class="content-hidden">Dettagli personali</legend>
+                            <div class="details-grid">
+                                <div>
+                                    <label for="name">Nome</label>
+                                    <input type="text" id="name" value="Gerry" readonly>
+                                </div>
+                                <div>
+                                    <label for="surname">Cognome</label>
+                                    <input type="text" id="surname" value="Scotti" readonly>
+                                </div>
+                                <div>
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" value="Gerry_scottone" readonly>
+                                </div>
+                                <div>
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" value="GerryScotti@ciambellina.com" readonly
+                                        autocomplete="email">
+                                </div>
+
+                            </div>
+                            <div class="row-btn"><button type="submit" class="btn-primary" id="save-profile-btn"
+                                    hidden>Applica</button>
+                                <button type="submit" class="outlined-btn" id="cancel-edit-btn" hidden>Annulla</button>
+                            </div>
+                        </fieldset>
+                    </form>
+
+                </div>
+                <a href="conferma_eliminazione.html" class="delete-account"> <span class="material-symbols-outlined"
+                        aria-hidden="true">delete</span>Elimina Account</a>
+            </section>
+            <section id="delete-confirm" class="content-section">
+                <div>
+                    <div class="icon-container-warning"><span class="material-symbols-outlined icon-warning icon-fill"
+                            aria-hidden="true">warning</span></div>
+                    <h2>Elimina Account</h2>
+                    <p>Sei sicuro di voler elimare il tuo Account dai nostri sistemi? Questa azione è irreversibile e
+                        comporterà l'eliminazione permanente dei tuoi dati.</p>
+                    <form action="process-deletion.php" method="POST">
+                        <div class="confirm-check">
+                            <input type="checkbox" id="confirm" name="confirm_deletion" required>
+                            <label for="confirm">Capisco che questa azione non è reversibile</label>
+                        </div>
+
+                        <div class="row-btn">
+                            <a href="about.html#profilo" class="outlined-btn">Annulla</a>
+                            <button type="submit" class="btn-primary no-margin">Conferma Eliminazione
+                                Definitiva</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <section id="prenotazioni" class="content-section">
+                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
+                    <p>
+                        Ti trovi in: Area Personale >> <span lang="en">Prenotazioni</span>
+                    </p>
+                </nav>
+                <div class="main-area-personale-title-row">
+                    <h1>Prenotazioni</h1>
+                    <p>Gestisci i tuoi appuntamenti</p>
+                </div>
+
+
+                <div class="appuntamenti-section">
+                    <span class="sr-only">Lista Appuntamenti</span>
+                    <div class="appuntamenti-column">
+                        <div class="appuntamento-card">
+                            <div class="appuntamento-card-date">
+                                <span class="sr-only"> 24 ottobre</span>
+                                <span aria-hidden="true">OTT <br />
+                                    25</span>
+                            </div>
+                            <div class="appuntamento-card-details">
+                                <div>
+                                    <h3>Vaccinazione - Influenza - 10:30 AM</h3>
+                                    <p>Farmacia Centrale Milano, Via Dante 12</p>
+                                </div>
+
+                                <button type="button" class="btn-primary no-margin"
+                                    aria-label="Disdici appuntamento">Disdici</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>
+            Le immagini presenti su questo sito sono state generate tramite
+            strumenti di intelligenza artificiale. Eventuali somiglianze tra i nomi
+            dei prodotti e marchi reali sono puramenti casuali.<br />
+            Copyright &copy; 2026 | Tutti i diritti riservati.
+        </p>
+    </footer>
+    <script src="assets/js/scroll-top.js"></script>
+    <script src="assets/js/area-personale-nav.js"></script>
+    <script src="assets/js/profile-forms.js"></script>
+</body>
+
+</html>
