@@ -119,11 +119,6 @@ p {
   line-height: 1.5; 
   margin-bottom: 0.5em; 
 }
-h1 {
-  text-align: center;
-  font-size: 2.5em;
-  margin-bottom: 0.5em
-}
 h1 + p {
   text-align: center;
   max-width: 800px;       
@@ -683,10 +678,6 @@ button.btn-primary:hover {
 .contact-info ul li {
   margin-top: 1rem;
 }
-
-
-
-
 /**********************/
 /*     INFO-FARM      */
 /**********************/

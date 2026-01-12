@@ -1,0 +1,206 @@
+*{
+background: none;  
+    color: #000;
+    box-shadow: none;  
+    text-shadow: none;  
+    border-color: #000;  
+}
+
+html{
+    font-size: 12pt; 
+    font-family: "Times New Roman", serif;
+    line-height: 1.4em;
+    margin: auto;
+}
+
+.Top-NavBar,  
+.form-search-container, 
+button, 
+#scroll-btn,
+iframe,
+.hero-image,
+.avatar-img,
+.icon-container, 
+.material-symbols-outlined {
+    display: none !important;   
+}
+
+h1{
+    display: block;  
+    font-size: 24pt;  
+    text-align: center;
+    margin: 0 0 10px 0;  
+    /*text-indent: 0;   /* l'h1.hide che nascondeva il testo */
+    background: none;  
+    width: auto;  
+    height: auto;  
+    overflow: visible;  
+    white-space: normal;  
+}
+
+h1.hide {
+    display: block;  
+    background-image: url("/assets/logo2.png");
+    filter: grayscale(100%);
+    text-indent: -9999px; 
+    overflow: hidden;
+    color: transparent;
+    background-size: 10rem auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 3em;
+    width: 100%;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+.main-header {
+    position: static; 
+    display: block;
+    background: none;
+    height: auto; 
+    border-bottom: 2px solid #000;
+    padding-top: 5px;
+    padding-bottom: px; 
+    text-align: center;
+    margin-bottom: 5px; 
+}
+/*********************************************************Index*****************************************************************************/
+#mainSearchForm,
+.home-hero-form-container {
+    display: none; 
+}
+.dintorni-form {
+    display: none; 
+}
+.home-hero-content {
+    background-color: transparent; 
+    color: #000; 
+    border: none; 
+    box-shadow: none; 
+    min-height: auto;  
+    padding: 0; 
+    margin-bottom: 2em; 
+}
+.home-hero-content h1,
+.home-hero-content p {
+    color: #000; 
+    text-shadow: none;
+}
+.service-card {
+    width: 100%; 
+    margin-bottom: 1em; 
+    box-shadow: none; 
+    page-break-inside: avoid; 
+    height: auto;  
+}
+.grid {
+    display: block; 
+}
+
+/***************************************************Prenota visita***************************************************************************/
+.step-indicator-container, 
+.instruction,              
+.tab,                    
+.step-actions,           
+#general-error-msg,        
+.fieldset-city,            
+.fieldset-services {
+    display: none;
+}
+#main-content > p {
+    display: none;
+}
+#success-step {
+
+    border: 2px solid #000 ; 
+    padding: 2em ; 
+    margin: 2em 0 ; 
+    width: 100% ; 
+    box-sizing: border-box ; 
+    text-align: center ; 
+    background: transparent ; 
+    color: #000; 
+}
+
+#success-step h2 {
+    font-size: 18pt; 
+    border-bottom: 1px solid #000; 
+    padding-bottom: 0.5em; 
+    margin-bottom: 1em; 
+}
+
+#success-step p {
+    font-size: 12pt; 
+    margin: 0; 
+}
+
+#success-step a {
+    display: none; 
+}
+
+/*********************************************************About***************************************************************************/
+.grid-4c {
+    display: block;  
+    grid-template-columns: none;  
+    width: 100%;
+    margin: 0;
+    gap: 0;
+}
+.avatar-container {
+    width: 100%;
+    height: auto;
+    border: none;
+    box-shadow: none;
+    background: transparent;  
+    padding: 0.2em 0;
+    margin: 0;  
+    display: block;
+    text-align: left;
+    page-break-inside: avoid;
+}
+.avatar-container a {
+    text-decoration: none;  
+    color: #000;  
+    align-items: center;  
+}
+.avatar-container span br {
+    display: none;
+}
+.avatar-container:hover {
+    transform: none;  
+    box-shadow: none;  
+    background: transparent;  
+    border: none;  
+}
+.sponsor-card {
+    border: none ;          
+    background: transparent ;  
+    width: auto ;           
+    height: auto ;          
+    padding: 0 ;  
+    margin-right: 20px ;   
+    display: inline-block ;   
+    box-shadow: none ;  
+}
+.sponsor-img {
+    height: 30px;
+    width: auto;
+    object-fit: contain ;  
+    filter: grayscale(100%) contrast(150%) ;   
+}
+.uni-logo{
+    height: 30px;
+    width: auto;
+    object-fit: contain ;  
+    filter: grayscale(100%) contrast(150%) ;   
+}
+
+
+footer{
+    text-align: center;
+    font-size: 10pt;
+    font-style: italic;
+    margin-top: 1em;
+    border-top: 2px solid #000;
+    
+}
