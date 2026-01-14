@@ -63,7 +63,7 @@ section {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding-top: 3rem;
+  padding-top: 2.5em;
 }
 
 button {
@@ -1693,4 +1693,85 @@ input.invalid + .error-msg {
   justify-content: center; /* centra verticalmente */
   text-align: center;
   min-height: 60vh; /* mantiene il contenuto centrato nella pagina */
+}
+
+
+/* --- PAGINA CONSIGLI --- */
+.banner-tips {
+    margin-top: 1.5em;   /* Questo è quello che cercavi! Aumenta se vuoi più aria */
+    background-color: #ecf5a5; /* Un azzurrino clinico/pulito (o usa il tuo colore) */
+    border-radius: 8px;       /* Angoli arrotondati (niente spigoli vivi ai lati schermo) */
+    max-width: 60em;         /* Non si allarga all'infinito */
+    margin-left: auto;         /* Centra il blocco orizzontalmente */
+    margin-right: auto;        /* Centra il blocco orizzontalmente */
+    padding: 1em 2em;        /* Spazio interno */
+    
+    /* 3. LAYOUT (Allinea testo e bottone) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;                 /* Distanza tra testo e link */
+    
+    /* Ombra leggera per farlo "galleggiare" */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.banner-btn {
+    margin-left: 1em;
+    align-self: center;
+    padding: 0.5em;
+}
+.banner-text p {
+    margin: 0;       
+    line-height: 1.2;
+}
+.faq-container {
+    display: block; 
+    max-width: 50em;   
+    margin: 0 auto;     
+    padding: 0.5em 1.5em;
+}
+
+.faq-container h2 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: var(--primary-color); 
+}
+
+.faq-item {
+    display: block; 
+    width: 100%;
+    border: 3px solid var(--primary-color);
+    border-radius: 8px;
+    margin-bottom: 1.5em;
+}
+summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2em 1.5em;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    background-color: var(--main-bg-color);
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+summary:hover {
+    background-color: #eee;
+}
+
+summary::after {
+    content: '+'; 
+    color: var(--primary-color);
+}
+
+details[open] summary::after {
+    content: '-';
+}
+
+.faq-content {
+    padding: 1.5rem;
+    line-height: 1.6;
+    background-color: var(--main-bg-color);
 }
