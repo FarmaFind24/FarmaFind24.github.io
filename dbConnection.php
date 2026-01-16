@@ -251,7 +251,7 @@ class DBAccess {
     public function isFarmaciaAperta($idFarmacia) {
         // 1. Dati attuali
         $giornoOggi = date('w'); // 0 (Dom) - 6 (Sab)
-        $oraAdesso = '14:00:00';
+        $oraAdesso = date('H:i:s');
     
         // 2. Query
         // Cerca se esiste ALMENO UNA fascia oraria che comprende l'ora attuale

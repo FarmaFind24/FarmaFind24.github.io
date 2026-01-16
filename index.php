@@ -55,7 +55,7 @@ if ($connessioneOk) {
                     if ($isAperta) {
                         $htmlFarmacieDintorni .=        '<span class="farm-stato-open">Aperta</span>';
                     } else {
-                        $htmlFarmacieDintorni .=        '<span class="farm-stato-close">Chiusa</span>';
+                        $htmlFarmacieDintorni .=        '<span class="farm-stato-closed">Chiusa</span>';
                     }
                     $htmlFarmacieDintorni .=    '</div>';
                     $htmlFarmacieDintorni .=    '<div class="farm-card-content">';
