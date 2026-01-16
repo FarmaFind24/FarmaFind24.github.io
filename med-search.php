@@ -4,7 +4,7 @@ require_once "dbConnection.php";
 use DB\DBAccess;
 
 // 1. Carica il template HTML puro come una stringa di testo
-$paginaHTML = file_get_contents("med_search.html");
+$paginaHTML = file_get_contents("med-search.html");
 
 // 2. Inizializza variabili
 $testoCercato = "";
@@ -54,7 +54,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['codice_minsan']) . '</p>';
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['obbligo_ricetta']) . '</p>';
                 $htmlRisultati .= '<div class="row-btn">
-                <button type="button">Dettagli</button>
+                <a href="#" class="btn-like primary">Dettagli</a>
                 </div>';
                 $htmlRisultati .= '</div></div>';
             }

@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 require_once "dbConnection.php";
 use DB\DBAccess;
 
-$paginaHTML = file_get_contents("farm_search.html");
+$paginaHTML = file_get_contents("farm-search.html");
 
 $testoCercato = "";
 $htmlRisultati = ""; 
@@ -49,8 +49,8 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                         $htmlRisultati .= '</ul>';
                     }
                     $htmlRisultati .= '<div class="row-btn">
-                                        <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
-                                        <button type="button" class="btn-primary">Dettagli</button>
+                                        <a href="mailto:farmafind24@gmail.com" class="btn-like outlined" aria-label="Contatta via Email">Email</a>
+                                        <a href="#" class="btn-like primary">Dettagli</a>
                                         </div>';
                     $htmlRisultati .= '</div></div>';
                 }
