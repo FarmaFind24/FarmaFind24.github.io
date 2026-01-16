@@ -42,6 +42,7 @@ header {
   padding-right: 1rem;
   flex-shrink: 0;
   overflow: visible;
+  z-index: var(--z-index-header);
 }
 
 main {
@@ -72,7 +73,10 @@ button {
   font-size: 0.9rem;
   height: 2.5rem;
   margin-top: 1rem;
-  transition: background-color 0.2s, color 0.5s, border 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.5s,
+    border 0.2s;
   cursor: pointer;
   font-family: inherit;
 }
@@ -86,10 +90,49 @@ a:link {
 a:visited {
   color: #870058;
 }
+a.outlined,
+button.outlined-btn {
+  transition: all 0.3s;
+  background-color: var(--second-bg-color);
+  border: 1px solid black;
+  color: black;
+}
+a.outlined:hover,
+button.outlined-btn:hover {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+}
+a.primary,
+button.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  font-family: inherit;
+}
+a.primary:hover,
+button.btn-primary:hover {
+  background-color: var(--primary-color-hover);
+  color: white;
+}
+a.btn-like {
+  border-radius: 0.5rem;
+  height: 2.5rem;
+  text-decoration: none;
+  width: 6.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
 .material-symbols-outlined {
   font-size: 27px;
   color: var(--primary-color);
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 .icon-fill {
   font-variation-settings: "FILL" 1;
@@ -123,6 +166,7 @@ a:visited {
 }
 .row-btn {
   margin-top: auto;
+  padding-top: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -204,13 +248,12 @@ h1.hide {
   display: block;
 }
 .small {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 .medium {
   font-size: 1.5rem;
 }
 .title-card {
-  padding: 0 0.75rem;
   font-size: 1.5em;
   text-align: left;
 }
@@ -252,7 +295,7 @@ h1.hide {
 }
 
 .col-img {
-  background-image: url("/assets/about-hero.webp");
+  background-image: url("../about-hero.webp");
   width: 30%;
   aspect-ratio: 16/9;
   background-size: cover;
@@ -509,32 +552,7 @@ nav.breadcrumb-area-personale {
   width: 7rem;
   height: 2.5rem;
 }
-a.outlined-btn,
-button.outlined-btn {
-  transition: all 0.3s;
-  background-color: var(--second-bg-color);
-  border: 1px solid black;
-  color: black;
-}
-a.outlined-btn:hover,
-button.outlined-btn:hover {
-  background-color: black;
-  border: 1px solid black;
-  color: white;
-}
-a.outlined-btn {
-  text-align: center;
-  height: 2rem;
-}
-button.btn-primary {
-  background-color: var(--primary-color);
-  color: white;
-  font-family: inherit;
-}
-button.btn-primary:hover {
-  background-color: var(--primary-color-hover);
-  color: white;
-}
+
 #scroll-btn {
   display: none;
   position: fixed;
@@ -635,8 +653,12 @@ button.btn-primary:hover {
   padding: 1.5rem;
   text-align: center;
   border: var(--primary-color) solid 1px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease,
-    background-color 0.2s ease, border-color 0.2s ease, color 0.5s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.5s ease;
   box-shadow: 0px 9px 5px var(--accent);
 }
 .avatar-img {
@@ -669,7 +691,9 @@ button.btn-primary:hover {
   background-color: var(--primary-color);
   color: var(--main-bg-color);
   border-color: var(--accent);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.25),
+    0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .avatar-container:hover span {
   color: var(--main-bg-color);
@@ -693,16 +717,16 @@ button.btn-primary:hover {
   background-position: center;
 }
 .sponsor_1 {
-  background-image: url("/assets/joogle-icon.webp");
+  background-image: url("../joogle-icon.webp");
 }
 .sponsor_2 {
-  background-image: url("/assets/mirkosoft-icon.webp");
+  background-image: url("../mirkosoft-icon.webp");
 }
 .sponsor_3 {
-  background-image: url("/assets/closedAI-logo.webp");
+  background-image: url("../closedAI-logo.webp");
 }
 .sponsor_4 {
-  background-image: url("/assets/universita-logo.webp");
+  background-image: url("../universita-logo.webp");
   height: 70%;
 }
 
@@ -804,27 +828,26 @@ button.btn-primary:hover {
 /**********************/
 /*   AREA-PERSONALE   */
 /**********************/
-.page-wrapper {
-  height: calc(100vh - 9rem);
-  background-color: var(--second-bg-color);
-  display: flex;
-  overflow: hidden;
-}
 
 .main-area-personale {
   display: flex;
+  margin-left: 15rem;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 2rem;
+  padding: 0 2rem 1rem;
   overflow-y: auto;
 }
 
 .sidenav {
+  height: 100%;
   width: 15rem;
+  position: fixed;
+  top: 4rem;
   background-color: var(--main-bg-color);
   z-index: var(--z-index-sidenav);
   overflow-x: hidden;
   padding: 0.5rem;
+  border-right: 1px solid black;
 }
 .sidenav a {
   padding: 0.5rem;
@@ -1100,15 +1123,7 @@ a.delete-account {
 .btn-primary.no-margin {
   margin: 0;
 }
-a.outlined-btn {
-  border-radius: 0.5rem;
-  height: 2.5rem;
-  text-decoration: none;
-  width: 6.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 #delete-confirm .row-btn {
   display: flex;
   flex-direction: row;
@@ -1607,7 +1622,7 @@ a.outlined-btn {
 
 /* Se JS è attivo, aggiungiamo una classe al body o usiamo JS per nascondere questo bottone */
 .js-enabled .no-js-visible {
-    display: none;
+  display: none;
 }
 
 .step {
@@ -1791,23 +1806,21 @@ input.invalid + .error-msg {
 }
 
 .booking-actions button {
-    width: 10rem;
-    height: 3rem;
-    background-color: var(--main-bg-color);
-    color: var(--primary-color);
-    font-size: 1rem;
-    border-radius: 1rem;
-    border: 2px solid var(--primary-color);
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin: 0;
+  width: 10rem;
+  height: 3rem;
+  background-color: var(--main-bg-color);
+  color: var(--primary-color);
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: 2px solid var(--primary-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 0;
 }
-  
+
 .booking-actions button:hover {
   background-color: var(--primary-color-hover);
 }
-  
-
 
 /******* PAGINE ERRORI *******/
 
@@ -1820,83 +1833,82 @@ input.invalid + .error-msg {
   min-height: 60vh; /* mantiene il contenuto centrato nella pagina */
 }
 
-
 /* --- PAGINA CONSIGLI --- */
 .banner-tips {
-    margin-top: 1.5em;   /* Questo è quello che cercavi! Aumenta se vuoi più aria */
-    background-color: #ecf5a5; /* Un azzurrino clinico/pulito (o usa il tuo colore) */
-    border-radius: 8px;       /* Angoli arrotondati (niente spigoli vivi ai lati schermo) */
-    max-width: 60em;         /* Non si allarga all'infinito */
-    margin-left: auto;         /* Centra il blocco orizzontalmente */
-    margin-right: auto;        /* Centra il blocco orizzontalmente */
-    padding: 1em 2em;        /* Spazio interno */
-    
-    /* 3. LAYOUT (Allinea testo e bottone) */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;                 /* Distanza tra testo e link */
-    
-    /* Ombra leggera per farlo "galleggiare" */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  margin-top: 1.5em; /* Questo è quello che cercavi! Aumenta se vuoi più aria */
+  background-color: #ecf5a5; /* Un azzurrino clinico/pulito (o usa il tuo colore) */
+  border-radius: 8px; /* Angoli arrotondati (niente spigoli vivi ai lati schermo) */
+  max-width: 60em; /* Non si allarga all'infinito */
+  margin-left: auto; /* Centra il blocco orizzontalmente */
+  margin-right: auto; /* Centra il blocco orizzontalmente */
+  padding: 1em 2em; /* Spazio interno */
+
+  /* 3. LAYOUT (Allinea testo e bottone) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem; /* Distanza tra testo e link */
+
+  /* Ombra leggera per farlo "galleggiare" */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 .banner-btn {
-    margin-left: 1em;
-    align-self: center;
-    padding: 0.5em;
+  margin-left: 1em;
+  align-self: center;
+  padding: 0.5em;
 }
 .banner-text p {
-    margin: 0;       
-    line-height: 1.2;
+  margin: 0;
+  line-height: 1.2;
 }
 .faq-container {
-    display: block; 
-    max-width: 50em;   
-    margin: 0 auto;     
-    padding: 0.5em 1.5em;
+  display: block;
+  max-width: 50em;
+  margin: 0 auto;
+  padding: 0.5em 1.5em;
 }
 
 .faq-container h2 {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    color: var(--primary-color); 
+  margin-top: 1em;
+  margin-bottom: 1em;
+  color: var(--primary-color);
 }
 
 .faq-item {
-    display: block; 
-    width: 100%;
-    border: 3px solid var(--primary-color);
-    border-radius: 8px;
-    margin-bottom: 1.5em;
+  display: block;
+  width: 100%;
+  border: 3px solid var(--primary-color);
+  border-radius: 8px;
+  margin-bottom: 1.5em;
 }
 summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2em 1.5em;
-    font-weight: 700;
-    cursor: pointer;
-    list-style: none;
-    background-color: var(--main-bg-color);
-    border-radius: 8px;
-    transition: background-color 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2em 1.5em;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  background-color: var(--main-bg-color);
+  border-radius: 8px;
+  transition: background-color 0.2s;
 }
 
 summary:hover {
-    background-color: #eee;
+  background-color: #eee;
 }
 
 summary::after {
-    content: '+'; 
-    color: var(--primary-color);
+  content: "+";
+  color: var(--primary-color);
 }
 
 details[open] summary::after {
-    content: '-';
+  content: "-";
 }
 
 .faq-content {
-    padding: 1.5rem;
-    line-height: 1.6;
-    background-color: var(--main-bg-color);
+  padding: 1.5rem;
+  line-height: 1.6;
+  background-color: var(--main-bg-color);
 }
