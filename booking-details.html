@@ -1,0 +1,166 @@
+<!-- ABOUT.HTML -->
+
+<!doctype html>
+<html lang="it">
+
+<head>
+  <title>About - Farma Find 24</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Pagina home ">
+  <meta name="keywords" content="salute">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
+  <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
+  <link rel="stylesheet" href="assets/css/print.css" media="print">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <script src="./assets/js/menu.js" defer></script>
+  <script>document.documentElement.classList.add('js-active');</script>
+</head>
+
+<body>
+  <header>
+    <h1 class="hide">Farma<span lang="en">Find</span>24</h1>
+    <nav class="Top-NavBar">
+      <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false">
+        ☰
+      </button>
+      <ul aria-label="menu di navigazione">
+        <li>
+          <a href="index.php"><span lang="en">Home</span></a>
+        </li>
+        <li><a href="farm-search.php">Farmacie</a></li>
+        <li><a href="med-search.php">Medicinali</a></li>
+        <li><a href="book-app.php">Prenota Visita</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="area-login.html">Area Personale</a></li>
+      </ul>
+    </nav>
+  </header>
+  <nav id="breadcrumb" aria-label="Percorso di navigazione">
+    <p> Ti trovi in: Conferma Prenotazione</p>
+  </nav>
+  <main>
+    <div class="title-main small">
+      <h1>Dettagli della Prenotazione</h1>
+      <p>Di seguito sono riportati i dettagli della tua prenotazione. Puoi stampare questa pagina per i tuoi
+        riferimenti.</p>
+    </div>
+
+    <div class="booking-summary-wrapper">
+      
+      <div class="booking-header">
+        <h2>
+          <span class="material-symbols-outlined icon-fill icon-white" aria-hidden="true">check_circle</span>
+          Prenotazione #[numero_prenotazione]
+        </h2>
+        <p>Stato: <strong>Confermata</strong></p>
+      </div>
+
+      <table class="summary-table" role="presentation">
+        <tr>
+          <th scope="row">Servizio Prenotato</th>
+          <td>
+            <strong>[servizio]</strong>
+            <br>
+            <span>Durata stimata: [durata_servizio] min</span>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Data e Ora</th>
+          <td>
+            <div>
+              <span class="material-symbols-outlined">calendar_month</span>
+              <strong>[data]</strong>
+            </div>
+            <div>
+              <span class="material-symbols-outlined">schedule</span>
+              <strong>[orario]</strong>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <div class="split-section">
+        
+        <div class="split-col">
+          <h3 class="section-title">
+            <span class="material-symbols-outlined" aria-hidden="true">store</span>
+            Dettagli Farmacia
+          </h3>
+          <table class="summary-table">
+            <tr>
+              <td colspan="2">
+                <strong>[nome_farmacia]</strong><br>
+                [indirizzo_farmacia], [citta_farmacia]<br>
+                <br>
+                <a href="tel:[telefono_farmacia]">
+                  Tel: [telefono_farmacia]
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <em>Note: Presentarsi 10 minuti prima dell'appuntamento con la tessera sanitaria.</em>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="split-col">
+          <h3 class="section-title">
+            <span class="material-symbols-outlined" aria-hidden="true">person</span>
+            Dati Paziente
+          </h3>
+          <table class="summary-table">
+            <tr>
+              <th scope="row">Nome</th>
+              <td>[nome_paziente]</td>
+            </tr>
+            <tr>
+              <th scope="row">Cognome</th>
+              <td>[cognome_paziente]</td>
+            </tr>
+            <tr>
+              <th scope="row">Email</th>
+              <td>[email_paziente]</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="booking-footer">
+        <p>FarmaFind24 - Il tuo portale per la salute.</p>
+        <p>In caso di impossibilità a presentarsi, si prega di disdire tramite Area Personale almeno 24 ore prima.</p>
+      </div>
+
+    </div>
+
+    <div class="booking-actions">
+      <button onclick="window.print()" class="outlined-btn">
+        <span class="material-symbols-outlined">print</span>
+        Stampa
+      </button>
+
+      <button type="button"><a href="index.php" class="btn-primary">Torna alla Home</a></button>
+      
+    </div>
+
+
+    <button onclick="topFunction()" id="scroll-btn" title="Go to top">Torna su</button>
+  </main>
+  <footer>
+    <p> Le immagini presenti su questo sito sono state generate
+      tramite
+      strumenti di intelligenza
+      artificiale. Eventuali somiglianze tra i nomi dei prodotti e marchi reali sono puramenti casuali.<br>
+      Copyright &copy; 2026 | Tutti i diritti riservati. </p>
+  </footer>
+  <script src="assets/js/scroll-top.js"></script>
+</body>
+
+</html>

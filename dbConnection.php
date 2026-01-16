@@ -245,6 +245,57 @@ class DBAccess {
         mysqli_stmt_execute($stmt);
         return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
     }
+
+    // Inserire in dbConnection.php dentro la classe DBAccess
+    
+    public function isFarmaciaAperta($idFarmacia) {
+        // 1. Dati attuali
+        $giornoOggi = date('w'); // 0 (Dom) - 6 (Sab)
+        $oraAdesso = '14:00:00';
+    
+        // 2. Query
+        // Cerca se esiste ALMENO UNA fascia oraria che comprende l'ora attuale
+        $query = "SELECT COUNT(*) as total 
+                  FROM orari_farmacie 
+                  WHERE farmacia_id = ? 
+                  AND giorno_settimana = ? 
+                  AND ? BETWEEN ora_apertura AND ora_chiusura";
+    
+        $stmt = mysqli_prepare($this->connection, $query);
+        
+        // Bind dei parametri: i (intero), i (intero), s (stringa)
+        mysqli_stmt_bind_param($stmt, "iis", $idFarmacia, $giornoOggi, $oraAdesso);
+        
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+    
+        // 3. Ritorna TRUE se trova almeno 1 riga, altrimenti FALSE
+        return $row['total'] > 0;
+    }
+
+    // In dbConnection.php
+
+    // Inserire in DBAccess dentro dbConnection.php
+    
+    public function getOrariFarmacia($idFarmacia, $giornoSettimana) {
+        // $giornoSettimana va da 0 (Domenica) a 6 (Sabato)
+        $query = "SELECT ora_apertura, ora_chiusura 
+                  FROM orari_farmacie 
+                  WHERE farmacia_id = ? AND giorno_settimana = ? 
+                  ORDER BY ora_apertura ASC";
+        
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ii", $idFarmacia, $giornoSettimana);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        $orari = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $orari[] = $row;
+        }
+        return $orari;
+    }
 }
 
 ?>

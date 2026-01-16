@@ -1604,6 +1604,12 @@ a.outlined-btn {
 .js-active #prevBtn {
   display: inline-block;
 }
+
+/* Se JS è attivo, aggiungiamo una classe al body o usiamo JS per nascondere questo bottone */
+.js-enabled .no-js-visible {
+    display: none;
+}
+
 .step {
   height: 1em;
   width: 1em;
@@ -1683,6 +1689,125 @@ input.invalid + .error-msg {
   color: #d93025;
   text-align: right;
 }
+
+/*************************/
+/* CONFERMA PRENOTAZIONE */
+/*************************/
+
+/* --- STILE PAGINA RIEPILOGO PRENOTAZIONE --- */
+
+.booking-summary-wrapper {
+  max-width: 50em; /* Circa un foglio A4 */
+  margin: 0 auto;
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Per i bordi arrotondati */
+}
+
+/* Header della ricevuta */
+.booking-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1.5em;
+  text-align: center;
+}
+
+.booking-header h2 {
+  color: white; /* Sovrascrive il colore nero di default */
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Stile delle Tabelle Dati */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0;
+}
+
+.summary-table th,
+.summary-table td {
+  padding: 1em;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+}
+
+.summary-table th {
+  background-color: var(--second-bg-color);
+  width: 35%; /* Larghezza fissa per le etichette */
+  color: #333;
+  font-weight: 600;
+}
+
+/* Sezione per dividere Farmacia e Utente */
+.split-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.split-col {
+  flex: 1;
+  min-width: 300px;
+  border-right: 1px solid var(--border-color);
+}
+.split-col:last-child {
+  border-right: none;
+}
+
+.section-title {
+  background-color: #eafaea; /* Colore tenue basato sul primary */
+  color: var(--primary-color);
+  padding: 0.8em 1em;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Footer della ricevuta */
+.booking-footer {
+  padding: 1.5em;
+  background-color: var(--second-bg-color);
+  text-align: center;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Azioni (bottoni) fuori dal foglio stampabile */
+.booking-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.booking-actions button {
+    width: 10rem;
+    height: 3rem;
+    background-color: var(--main-bg-color);
+    color: var(--primary-color);
+    font-size: 1rem;
+    border-radius: 1rem;
+    border: 2px solid var(--primary-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin: 0;
+}
+  
+.booking-actions button:hover {
+  background-color: var(--primary-color-hover);
+}
+  
+
 
 /******* PAGINE ERRORI *******/
 
