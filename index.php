@@ -46,20 +46,27 @@ if ($connessioneOk) {
                         $srcImmagine = "assets/immagine_farmacia.jpg"; 
                     }
 
-                    $htmlFarmacieDintorni .= '<div class="farm-card-mini">
-                                                <div class="farm-img-container">
-                                                    <img src="' . $srcImmagine . '" alt="Foto ' . htmlspecialchars($farmacia['nome']) . '">
-                                                    <span class="farm-stato-open">Aperta</span>
-                                                </div>
-                                                <div class="farm-card-content">
-                                                    <h3 class="title-card">' . htmlspecialchars($farmacia['nome']) . '</h3>
-                                                    <p>' . htmlspecialchars($farmacia['indirizzo']) . ', ' . htmlspecialchars($farmacia['citta']) . '</p>
-                                                    <div class="row-btn">
-                                                        <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
-                                                        <button type="button" class="btn-primary">Dettagli</button>
-                                                    </div>
-                                                </div>
-                                              </div>';
+                    $htmlFarmacieDintorni .= '<div class="farm-card-mini">';
+                    $htmlFarmacieDintorni .=    '<div class="farm-img-container">';
+                    $htmlFarmacieDintorni .=        '<img src="' . $srcImmagine . '" alt="Foto ' . htmlspecialchars($farmacia['nome']) . '">';
+
+                    $idFarmacia = $farmacia['id'];
+                    $isAperta = $db->isFarmaciaAperta($idFarmacia);
+                    if ($isAperta) {
+                        $htmlFarmacieDintorni .=        '<span class="farm-stato-open">Aperta</span>';
+                    } else {
+                        $htmlFarmacieDintorni .=        '<span class="farm-stato-closed">Chiusa</span>';
+                    }
+                    $htmlFarmacieDintorni .=    '</div>';
+                    $htmlFarmacieDintorni .=    '<div class="farm-card-content">';
+                    $htmlFarmacieDintorni .=        '<h3 class="title-card">' . htmlspecialchars($farmacia['nome']) . '</h3>';
+                    $htmlFarmacieDintorni .=        '<p>' . htmlspecialchars($farmacia['indirizzo']) . ', ' . htmlspecialchars($farmacia['citta']) . '</p>';
+                    $htmlFarmacieDintorni .=       '<div class="row-btn">';
+                    $htmlFarmacieDintorni .=            '<button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>';
+                    $htmlFarmacieDintorni .=            '<button type="button" class="btn-primary">Dettagli</button>';
+                    $htmlFarmacieDintorni .=        '</div>';
+                    $htmlFarmacieDintorni .=    '</div>';
+                    $htmlFarmacieDintorni .= '</div>';
                 }
             } else {
                 $indexMessage = '<p class="no-results">Nessuna farmacia trovata nei dintorni di ' . htmlspecialchars($selectedCity) . '.</p>';

@@ -120,7 +120,9 @@
                     <div class="date-picker-container">
                         <label for="date-pick" class="label-title">Scegli il giorno: <span class="required"
                                 aria-hidden="true">*</span></label>
-                        <input type="date" id="date-pick" name="date-pick" required>
+                        <input type="date" id="date-pick" name="date-pick" min="[min_date]" value="[valore_data]" required>
+
+                        <button type="submit" id="check-time-btn" class="btn-primary" formnovalidate>Verifica Orari</button>
                     </div>
 
                     <div class="time-picker-container">
@@ -128,40 +130,7 @@
                                 aria-hidden="true">*</span></span>
 
                         <div class="time-grid" role="radiogroup" aria-labelledby="time-selection-label">
-                            <div class="time-slot">
-                                <input type="radio" id="t1" name="time-pick" value="09:00" required>
-                                <label for="t1">09:00</label>
-                            </div>
-
-                            <div class="time-slot">
-                                <input type="radio" id="t2" name="time-pick" value="10:00" required>
-                                <label for="t2">10:00</label>
-                            </div>
-
-                            <div class="time-slot">
-                                <input type="radio" id="t3" name="time-pick" value="11:00" required>
-                                <label for="t3">11:00</label>
-                            </div>
-
-                            <div class="time-slot">
-                                <input type="radio" id="t4" name="time-pick" value="12:00" required>
-                                <label for="t4">12:00</label>
-                            </div>
-
-                            <div class="time-slot occupied">
-                                <input type="radio" id="t5" name="time-pick" value="13:00" required disabled>
-                                <label for="t5">13:00</label>
-                            </div>
-
-                            <div class="time-slot">
-                                <input type="radio" id="t6" name="time-pick" value="14:00" required>
-                                <label for="t6">14:00</label>
-                            </div>
-
-                            <div class="time-slot">
-                                <input type="radio" id="t7" name="time-pick" value="15:00" required disabled>
-                                <label for="t7">15:00</label>
-                            </div>
+                            [time-slots]
                         </div>
                     </div>
                 </fieldset>
@@ -207,7 +176,7 @@
                 <h2>Prenotazione Confermata!</h2>
                 <p>
                     Grazie, la tua richiesta è stata inoltrata correttamente. <br>
-                    Stampa qui la prenotazione. <br>
+                    <a href="booking-details.html" class="btn-primary" style="text-decoration: none;">Clicca qui</a> per visualizzare o stampare i dettagli della prenotazione. <br>
                     <a href="index.php" class="btn-primary" style="text-decoration: none;">Torna alla Home</a>
                 </p>
 
