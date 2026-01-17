@@ -50,7 +50,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                     }
                     $htmlRisultati .= '<div class="row-btn">
                                         <a href="mailto:farmafind24@gmail.com" class="btn-like outlined" aria-label="Contatta via Email">Email</a>
-                                        <a href="#" class="btn-like primary">Dettagli</a>
+                                        <a href="info-farm.php?id=' . $idFarm . '" class="btn-like primary">Dettagli</a>
                                         </div>';
                     $htmlRisultati .= '</div></div>';
                 }

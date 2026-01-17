@@ -297,5 +297,18 @@ class DBAccess {
         return $orari;
     }
 }
+// Aggiungi SOLO questo metodo dentro la classe DBAccess in dbConnection.php
 
+public function getFarmaciaById($idFarmacia) {
+    $query = "SELECT * FROM farmacie WHERE id = ?";
+    $stmt = mysqli_prepare($this->connection, $query);
+    mysqli_stmt_bind_param($stmt, "i", $idFarmacia);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    if ($row = mysqli_fetch_assoc($result)) {
+        return $row;
+    }
+    return null;
+}
 ?>
