@@ -62,8 +62,8 @@ if ($connessioneOk) {
                     $htmlFarmacieDintorni .=        '<h3 class="title-card">' . htmlspecialchars($farmacia['nome']) . '</h3>';
                     $htmlFarmacieDintorni .=        '<p>' . htmlspecialchars($farmacia['indirizzo']) . ', ' . htmlspecialchars($farmacia['citta']) . '</p>';
                     $htmlFarmacieDintorni .=       '<div class="row-btn">';
-                    $htmlFarmacieDintorni .=            '<button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>';
-                    $htmlFarmacieDintorni .=            '<button type="button" class="btn-primary">Dettagli</button>';
+                    $htmlFarmacieDintorni .=            '<a href="mailto:farmafind24@gmail.com" class="btn-like outlined" aria-label="Contatta via Email">Email</a>';
+                    $htmlFarmacieDintorni .=            '<a href="info-farm.php?id=' . $idFarmacia . '" class="btn-primary">Dettagli</a>';
                     $htmlFarmacieDintorni .=        '</div>';
                     $htmlFarmacieDintorni .=    '</div>';
                     $htmlFarmacieDintorni .= '</div>';

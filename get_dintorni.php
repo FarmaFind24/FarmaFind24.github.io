@@ -41,8 +41,8 @@ if ($connessioneOk) {
                                         <h3 class="title-card">' . htmlspecialchars($farmacia['nome']) . '</h3>
                                         <p>' . htmlspecialchars($farmacia['indirizzo']) . ', ' . htmlspecialchars($farmacia['citta']) . '</p>
                                         <div class="row-btn">
-                                            <button type="button" class="outlined-btn" aria-label="Contatta via Email">Email</button>
-                                            <button type="button" class="btn-primary">Dettagli</button>
+                                            <a href="mailto:farmafind24@gmail.com" class="btn-like outlined" aria-label="Contatta via Email">Email</a>
+                                            <a href="info-farm.php?id=' . $farmacia['id'] . '" class="btn-like primary">Dettagli</a>
                                         </div>
                                     </div>
                                   </div>';
