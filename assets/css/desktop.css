@@ -584,7 +584,8 @@ nav.breadcrumb-area-personale {
   object-fit: cover;
   object-position: top;
   width: 100%;
-  height: 150px;
+  height: auto;
+  aspect-ratio: 2 / 1;
   border-radius: 1rem 1rem 0 0;
 }
 .farm-orario {
@@ -1174,8 +1175,11 @@ a.delete-account {
 
 .FarmImageWrapper img {
   width: 100%;
-  height: 400px;
+  height: auto;
+  max-width: 1200px;
+  max-height: 400px;
   object-fit: cover;
+  aspect-ratio: 2 / 1;
   object-position: center;
   display: block;
 }
@@ -1280,10 +1284,12 @@ a.delete-account {
 
 .MedImageWrapper img {
   width: 100%;
-  max-width: 500px;
-  max-height: 315px;
   height: auto;
-  object-fit: contain;
+  max-width: 900px;
+  max-height: 450px;
+  object-fit: cover;
+  object-position: bottom; /* Da vedere perchè cosi si aspetta medicinale in basso e quindi in caso taglia dall'alto*/
+  aspect-ratio: 2 / 1;
   background-color: #ffffff;
   padding: 2rem;
   border-radius: 12px;
