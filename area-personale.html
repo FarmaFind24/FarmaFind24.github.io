@@ -11,8 +11,8 @@
     <meta name="keywords" content="salute" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0" />
-    <link rel="stylesheet" href="../assets/css/desktop.css" media="screen" />
-    <link rel="stylesheet" href="../assets/css/mini.css" media="screen and (max-width:950px)" />
+    <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
+    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
@@ -58,7 +58,7 @@
                             aria-hidden="true">event</span>Prenotazioni</a>
                 </li>
                 <li class="logout">
-                    <a href="#" lang="en" aria-label="logout"><span class="material-symbols-outlined"
+                    <a href="logout.php" lang="en" aria-label="logout"><span class="material-symbols-outlined"
                             aria-hidden="true">logout</span>Logout</a>
                 </li>
             </ul>
@@ -72,7 +72,7 @@
                     </p>
                 </nav>
                 <div class="main-area-personale-title-row">
-                    <h1>Ciao Utente</h1>
+                    <h1>Ciao [nome_utente]</h1>
                     <p>Bentornato nella tua dashboard</p>
                 </div>
 
@@ -97,38 +97,11 @@
 
 
                     <ol aria-label="lista appuntamenti" class="appuntamenti-column">
-                        <li class="appuntamento-card">
-                            <div class="appuntamento-card-date">
-                                <span>OTT <br />
-                                    24</span>
-                            </div>
-                            <div class="appuntamento-card-details">
-                                <div>
-                                    <h3>Vaccinazione - Influenza - 10:30 AM</h3>
-                                    <p>Farmacia Centrale Milano, Via Dante 12</p>
-                                </div>
-
-                                <button type="button" class="btn-primary no-margin">Disdici</button>
-                            </div>
-                        </li>
-                        <li class="appuntamento-card">
-                            <div class="appuntamento-card-date">
-                                <span>OTT <br />
-                                    24</span>
-                            </div>
-                            <div class="appuntamento-card-details">
-                                <div>
-                                    <h3>Vaccinazione - Influenza - 10:30 AM</h3>
-                                    <p>Farmacia Centrale Milano, Via Dante 12</p>
-                                </div>
-
-                                <button type="button" class="btn-primary no-margin">Disdici</button>
-                            </div>
-                        </li>
+                        [lista_prenotazioni]
                     </ol>
                 </div>
             </section>
-            <section id="profilo" class="content-section">
+            <section id="profilo" class="content-section content-hidden">
                 <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
                     <p>Ti trovi in: Area Personale >> Profilo</p>
                 </nav>
@@ -140,39 +113,39 @@
                     <p>Gestisci le tue informazioni personali</p>
                 </div>
                 <div class="profile-summary">
-                    <h3>Mario Rossi</h3>
+                    <h3>[nome_utente] [cognome_utente]</h3>
                     <div>
-                        <span class="username">@mario_rossi</span> <span>Membro da Marzo 2023</span>
+                        <span class="username">@[username]</span> <span>Membro dal [data_registrazione]</span>
                     </div>
                 </div>
                 <div class="dettagli-personali">
                     <h3>Dettagli Personali</h3>
-                    <form action="">
+                    <form action="process-update-profile.php" method="POST">
                         <fieldset>
                             <legend aria-hidden="true" class="content-hidden">Dettagli personali</legend>
                             <div class="details-grid">
                                 <div>
                                     <label for="name">Nome</label>
-                                    <input type="text" id="name" value="Gerry" readonly>
+                                    <input type="text" id="name" name="name" value="[nome]" readonly>
                                 </div>
                                 <div>
                                     <label for="surname">Cognome</label>
-                                    <input type="text" id="surname" value="Scotti" readonly>
+                                    <input type="text" id="surname" name="surname" value="[cognome]" readonly>
                                 </div>
                                 <div>
                                     <label for="username">Username</label>
-                                    <input type="text" id="username" value="Gerry_scottone" readonly>
+                                    <input type="text" id="username" name="username" value="[username]" readonly disabled>
                                 </div>
                                 <div>
                                     <label for="email">Email</label>
-                                    <input type="email" id="email" value="GerryScotti@ciambellina.com" readonly
+                                    <input type="email" id="email" name="email" value="[email]" readonly
                                         autocomplete="email">
                                 </div>
 
                             </div>
                             <div class="row-btn"><button type="submit" class="btn-primary" id="save-profile-btn"
                                     hidden>Applica</button>
-                                <button type="submit" class="outlined-btn" id="cancel-edit-btn" hidden>Annulla</button>
+                                <button type="button" class="outlined-btn" id="cancel-edit-btn" hidden>Annulla</button>
                             </div>
                         </fieldset>
                     </form>
@@ -181,7 +154,7 @@
                 <a href="conferma_eliminazione.html" class="delete-account"> <span class="material-symbols-outlined"
                         aria-hidden="true">delete</span>Elimina Account</a>
             </section>
-            <section id="delete-confirm" class="content-section">
+            <section id="delete-confirm" class="content-section content-hidden">
                 <div>
                     <div class="icon-container-warning"><span class="material-symbols-outlined icon-warning icon-fill"
                             aria-hidden="true">warning</span></div>
@@ -202,7 +175,7 @@
                     </form>
                 </div>
             </section>
-            <section id="prenotazioni" class="content-section">
+            <section id="prenotazioni" class="content-section content-hidden">
                 <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
                     <p>
                         Ti trovi in: Area Personale >> <span lang="en">Prenotazioni</span>
@@ -217,22 +190,7 @@
                 <div class="appuntamenti-section">
                     <span class="sr-only">Lista Appuntamenti</span>
                     <div class="appuntamenti-column">
-                        <div class="appuntamento-card">
-                            <div class="appuntamento-card-date">
-                                <span class="sr-only"> 24 ottobre</span>
-                                <span aria-hidden="true">OTT <br />
-                                    25</span>
-                            </div>
-                            <div class="appuntamento-card-details">
-                                <div>
-                                    <h3>Vaccinazione - Influenza - 10:30 AM</h3>
-                                    <p>Farmacia Centrale Milano, Via Dante 12</p>
-                                </div>
-
-                                <button type="button" class="btn-primary no-margin"
-                                    aria-label="Disdici appuntamento">Disdici</button>
-                            </div>
-                        </div>
+                        [lista_prenotazioni_completa]
                     </div>
                 </div>
             </section>
@@ -251,6 +209,7 @@
     <script src="assets/js/scroll-top.js"></script>
     <script src="assets/js/area-personale-nav.js"></script>
     <script src="assets/js/profile-forms.js"></script>
+    <script src="assets/js/feedback-messages.js"></script>
 </body>
 
 </html>

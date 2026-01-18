@@ -1,9 +1,11 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once "dbConnection.php";
+require_once "session-helper.php";
 use DB\DBAccess;
 
 $paginaHTML = file_get_contents("farm_search.html");
@@ -70,6 +72,10 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
 
 $paginaHTML = str_replace('[listaFarmacie]', $htmlRisultati, $paginaHTML);
 $paginaHTML = str_replace('[valore_ricerca]', htmlspecialchars($testoCercato), $paginaHTML);
+
+// Gestione Area Personale nella navbar
+$paginaHTML = str_replace('[area_personale_href]', getAreaPersonaleHref(), $paginaHTML);
+$paginaHTML = str_replace('[area_personale_text]', getAreaPersonaleText(), $paginaHTML);
 
 echo $paginaHTML;
 ?>
