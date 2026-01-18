@@ -1,9 +1,20 @@
 document.body.classList.add('js-active');
-// tab di indice 0
-var currentTab = 0; 
-showTab(currentTab); 
+
+// Verifica se il form è visibile prima di inizializzare
+var regForm = document.getElementById("regForm");
+
+if (regForm && !regForm.classList.contains('content-hidden')) {
+    // tab di indice 0
+    var currentTab = 0; 
+    showTab(currentTab);
+} else {
+    // Form nascosto (utente non autenticato), non fare nulla
+    var currentTab = null;
+}
 
 function showTab(n) {
+  if (currentTab === null) return; // Non eseguire se il form è nascosto
+  
   document.getElementById("general-error-msg").style.display = "none";
   var x = document.getElementsByClassName("tab");
   
@@ -29,6 +40,8 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
+  if (currentTab === null) return; // Non eseguire se il form è nascosto
+  
   var x = document.getElementsByClassName("tab");
 
   // 1. Validazione: Se provi ad andare avanti (n=1) e il form NON è valido, fermati.

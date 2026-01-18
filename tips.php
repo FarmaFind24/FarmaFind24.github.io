@@ -1,0 +1,129 @@
+<?php
+session_start();
+require_once "session-helper.php";
+?>
+<!doctype html>
+<html lang="it">
+
+<head>
+  <title>Consigli di salute - Farma Find 24</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Pagina home ">
+  <meta name="keywords" content="salute">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
+  <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
+  <link rel="stylesheet" href="assets/css/print.css" media="print">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <script src="./assets/js/menu.js" defer></script>
+  <script>document.documentElement.classList.add('js-active');</script>  
+</head>
+
+<body>
+      <header>
+    <h1 class="hide">Farma<span lang="en">Find</span>24</h1>
+    <nav class="Top-NavBar">
+      <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false">
+        ☰
+      </button>
+      <ul aria-label="menu di navigazione">
+        <li>
+          <a href="index.php"><span lang="en">Home</span></a>
+        </li>
+        <li><a href="farm-search.php">Farmacie</a></li>
+        <li><a href="med-search.php">Medicinali</a></li>
+        <li><a href="book-app.php">Prenota Visita</a></li>
+        <li><a href="about.php"><span lang="en">About</span></a></li>
+        <li><a href="<?php echo getAreaPersonaleHref(); ?>"><?php echo getAreaPersonaleText(); ?></a></li>
+      </ul>
+    </nav>
+  </header>
+  <nav id="breadcrumb" aria-label="Percorso di navigazione">
+    <p> Ti trovi in: <a href="index.php"> <span lang="en">Home</span></a> >> I consigli del farmacista</p>
+  </nav>
+
+    <main id="main-content">
+        <div class="title-main small">
+            <h1>I consigli del farmacista</h1>
+            <p> Istruzioni per l'uso della sanità e piccoli manuali di sopravvivenza quotidiana.</p>
+        </div>
+
+    <section class="faq-container">
+        
+        <h2>Pillole di Stagione</h2>
+
+
+        <details class="faq-item">
+            <summary>Sopravvivere all'inverno: quali sono le regole d'oro?</summary>
+            <div class="faq-content">
+                <p>
+                    Più che il freddo in sé, il vero nemico sono gli sbalzi di temperatura tra ambienti esterni e interni riscaldati. 
+                    Il primo consiglio è vestirsi "a cipolla" (a strati) per adeguare il corpo ed evitare di sudare.
+                </p>
+                <p>
+                    Inoltre, ricorda che la prevenzione passa dalle mani: lavarle spesso è ancora la barriera numero uno contro i virus. 
+                    Infine, ascolta il tuo corpo: in inverno è normale sentirsi più stanchi, non sottovalutare l'importanza di un buon sonno ristoratore.
+                </p>
+            </div>
+        </details>
+        
+        <details class="faq-item">
+            <summary>Pelle secca e freddo: come proteggersi?</summary>
+            <div class="faq-content">
+                <p>
+                    Durante l'inverno, il freddo esterno e l'aria secca dei riscaldamenti mettono a dura prova la nostra pelle, causando screpolature e arrossamenti, specialmente su mani e labbra.
+                </p>
+                <p>Il consiglio è mantenere la pelle idratata applicando creme idratanti prima di uscire e usando detergenti delicati. Non dimenticare che il sole invernale può essere forte: se vai in montagna, usa sempre una protezione solare sul viso.</p>
+            </div>
+        </details>
+
+
+        <h2>Guide Pratiche</h2>
+
+        <details class="faq-item">
+            <summary>Come prenotare una visita dal sito?</summary>
+            <div class="faq-content">
+                <p>Vai nella sezione <a href="book-app.php">Prenota Visita</a>, scegli la prestazione, la farmacia e l'orario. 
+                Riceverai una conferma immediata da salvare o stampare.</p>
+            </div>
+        </details>
+
+        <details class="faq-item">
+            <summary>Ci sono differenze tra farmaco originale e generico?</summary>
+            <div class="faq-content">
+                <p>Sì, il farmaco equivalente è considerato uguale all'originale per efficacia, sicurezza e qualità, perché <strong>contiene lo stesso principio attivo</strong>, la stessa dose, 
+                    la stessa forma farmaceutica e ha la stessa via di somministrazione, ma ha un costo inferiore perché è commercializzato dopo la scadenza del brevetto del farmaco di marca. 
+                    Le differenze principali riguardano il nome e, talvolta, gli eccipienti (come coloranti o conservanti), che però non alterano l'efficacia terapeutica.  </p>
+            </div>
+        </details>
+
+        <details class="faq-item">
+            <summary>Come funziona il Fascicolo Sanitario Elettronico in Veneto?</summary>
+            <div class="faq-content">
+            <p>
+            Attraverso il portale o l'app <strong>Sanità km zero Fascicolo</strong> puoi avere tutta la tua storia clinica a portata di mano.  <br> 
+            Puoi scaricare le <strong>ricette farmaceutiche</strong> sul cellulare e mostrarle direttamente a noi in farmacia, senza passare dal medico di base.
+            Inoltre, puoi consultare referti ed esami del sangue in tempo reale.
+        </p>
+        </details>
+
+
+    </section>
+
+    <button onclick="topFunction()" id="scroll-btn" title="Go to top">Torna su</button>
+</main>
+
+  <footer>
+    <p> Le immagini presenti su questo sito sono state generate
+      tramite
+      strumenti di intelligenza
+      artificiale. Eventuali somiglianze tra i nomi dei prodotti e marchi reali sono puramenti casuali.<br>
+      Copyright &copy; 2026 | Tutti i diritti riservati. </p>
+  </footer>
+  <script src="assets/js/scroll-top.js"></script>
+
+</body>

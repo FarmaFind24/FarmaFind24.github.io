@@ -1,0 +1,82 @@
+<?php
+session_start();
+require_once "dbConnection.php";
+require_once "session-helper.php";
+use DB\DBAccess;
+
+// 1. CONTROLLO SICUREZZA: Se non è loggato, via al login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: area-login.html");
+    exit;
+}
+
+// 2. CARICAMENTO TEMPLATE HTML
+$paginaHTML = file_get_contents("area-personale.html");
+
+// 3. RECUPERO DATI DAL DATABASE (Prenotazioni)
+$db = new DBAccess();
+$connessioneOk = $db->openDBConnection();
+$htmlPrenotazioni = "";
+
+if ($connessioneOk) {
+    $prenotazioni = $db->getPrenotazioniUtente($_SESSION['user_id']);
+    
+    if ($prenotazioni && count($prenotazioni) > 0) {
+        // Generiamo l'HTML per ogni prenotazione
+        foreach ($prenotazioni as $p) {
+            // NUOVA LOGICA DI FORMATTAZIONE DATE
+            // $p['data_appuntamento'] è tipo "2026-10-24"
+            // $p['ora_appuntamento'] è tipo "10:30:00"
+            
+            $timestamp = strtotime($p['data_appuntamento']);
+            $mese = date("M", $timestamp); // Es: OTT
+            $giorno = date("d", $timestamp);
+            
+            // Per l'ora tagliamo i secondi (es. da 10:30:00 a 10:30)
+            $ora = date("H:i", strtotime($p['ora_appuntamento']));
+            
+            $htmlPrenotazioni .= '
+            <li class="appuntamento-card">
+                <div class="appuntamento-card-date">
+                    <span>' . strtoupper($mese) . '<br />' . $giorno . '</span>
+                </div>
+                <div class="appuntamento-card-details">
+                    <div>
+                        <h3>' . htmlspecialchars($p['nome_servizio']) . ' - ' . $ora . '</h3>
+                        <p>' . htmlspecialchars($p['nome_farmacia']) . ', ' . htmlspecialchars($p['indirizzo']) . '</p>
+                    </div>
+                    <button type="button" class="btn-primary no-margin">Disdici</button>
+                </div>
+            </li>';
+        }
+    } else {
+        $htmlPrenotazioni = '<li class="appuntamento-card"><p style="padding:1rem;">Nessuna prenotazione futura.</p></li>';
+    }
+    
+    $db->closeConnection();
+} else {
+    $htmlPrenotazioni = '<p class="error">Errore connessione database.</p>';
+}
+
+// 4. SOSTITUZIONE PLACEHOLDER (Dati Utente dalla Sessione)
+// Questi dati li abbiamo salvati in $_SESSION durante il login (vedi process-login.php che abbiamo fatto prima)
+
+$paginaHTML = str_replace('[nome_utente]', htmlspecialchars($_SESSION['nome']), $paginaHTML);
+$paginaHTML = str_replace('[nome]', htmlspecialchars($_SESSION['nome']), $paginaHTML);
+$paginaHTML = str_replace('[cognome]', htmlspecialchars($_SESSION['cognome']), $paginaHTML);
+$paginaHTML = str_replace('[cognome_utente]', htmlspecialchars($_SESSION['cognome']), $paginaHTML);
+$paginaHTML = str_replace('[username]', htmlspecialchars($_SESSION['username']), $paginaHTML);
+$paginaHTML = str_replace('[email]', htmlspecialchars($_SESSION['email']), $paginaHTML);
+
+// Formattazione data registrazione (se presente in sessione, altrimenti metti una data fissa o vuota)
+$dataReg = isset($_SESSION['data_registrazione']) ? date("d/m/Y", strtotime($_SESSION['data_registrazione'])) : "N/D";
+$paginaHTML = str_replace('[data_registrazione]', $dataReg, $paginaHTML);
+
+// 5. SOSTITUZIONE PLACEHOLDER (Liste generate)
+$paginaHTML = str_replace('[lista_prenotazioni]', $htmlPrenotazioni, $paginaHTML);
+// Se vuoi usare la stessa lista anche nella sezione "Prenotazioni" in basso:
+$paginaHTML = str_replace('[lista_prenotazioni_completa]', $htmlPrenotazioni, $paginaHTML);
+
+// 6. STAMPA FINALE
+echo $paginaHTML;
+?>

@@ -38,7 +38,7 @@
                 <li>
                     <a href="about.html"><span lang="en">About</span></a>
                 </li>
-                <li><a href="area-login.html">Area Personale</a></li>
+                <li><a href="[area_personale_href]">[area_personale_text]</a></li>
             </ul>
         </nav>
     </header>
@@ -58,9 +58,19 @@
             </p>
         </div>
 
+        <!-- Messaggio per utenti non autenticati -->
+        <div class="auth-required-message [auth_message_class]">
+            <h2>Accesso Richiesto</h2>
+            <p>Per prenotare un appuntamento è necessario effettuare l'accesso al tuo account.</p>
+            <a href="area-login.html" class="btn-primary">Accedi ora</a>
+            <p>Non hai un account? <a href="area-register.html">Registrati qui</a></p>
+        </div>
+
+        <!-- Messaggi di errore per utenti autenticati -->
+        [error_message]
 
         <!-- Il form ora punta a se stesso per il ricaricamento, il pulsante finale avrà un formaction diverso -->
-        <form id="regForm" action="book-app.php" method="POST">
+        <form id="regForm" action="book-app.php" method="POST" class="[form_class]">
 
             <div class="step-indicator-container">
                 <span class="step"></span>

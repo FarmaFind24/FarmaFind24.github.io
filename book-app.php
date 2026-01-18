@@ -1,6 +1,39 @@
 <?php
+session_start();
 require_once "dbConnection.php";
+require_once "session-helper.php";
 use DB\DBAccess;
+
+// Controllo autenticazione
+$isLoggedIn = isLoggedIn();
+
+// Gestione messaggi di errore da URL
+$errorMessage = '';
+if (isset($_GET['error'])) {
+    switch ($_GET['error']) {
+        case 'missing_fields':
+            $errorMessage = 'Compila tutti i campi obbligatori prima di confermare.';
+            break;
+        case 'invalid_date':
+            $errorMessage = 'La data selezionata non è valida.';
+            break;
+        case 'invalid_time':
+            $errorMessage = 'L\'orario selezionato non è valido.';
+            break;
+        case 'past_date':
+            $errorMessage = 'Non è possibile prenotare per una data passata.';
+            break;
+        case 'db_connection':
+            $errorMessage = 'Errore di connessione al database. Riprova più tardi.';
+            break;
+        case 'slot_unavailable':
+            $errorMessage = 'Lo slot selezionato non è più disponibile. Scegli un altro orario.';
+            break;
+        case 'booking_failed':
+            $errorMessage = 'Si è verificato un errore durante la prenotazione. Riprova.';
+            break;
+    }
+}
 
 // Carica il template HTML
 $paginaHTML = file_get_contents("book-app.html");
@@ -20,6 +53,16 @@ $htmlFarmacie = '<p>Seleziona un servizio e un comune, poi clicca su "Trova Farm
 $htmlFarmacieMessage = '';
 // NUOVO: Variabile per gli slot orari
 $htmlTimeSlots = '<p>Seleziona una farmacia e una data per visualizzare gli orari disponibili.</p>';
+
+// Variabili per messaggi di autenticazione
+$authMessageClass = $isLoggedIn ? 'content-hidden' : '';
+$formClass = $isLoggedIn ? '' : 'content-hidden';
+
+// Variabile per messaggi di errore
+$errorMessageHtml = '';
+if ($errorMessage && $isLoggedIn) {
+    $errorMessageHtml = '<div class="notification notification-error booking-error-message">' . htmlspecialchars($errorMessage) . '</div>';
+}
 
 $db = new DBAccess();
 $connessioneOk = $db->openDBConnection();
@@ -163,6 +206,15 @@ $paginaHTML = str_replace('[servizi_grid]', $htmlServizi, $paginaHTML);
 $paginaHTML = str_replace('[citta_options]', $htmlCitta, $paginaHTML);
 $paginaHTML = str_replace('[farmacie_message]', $htmlFarmacieMessage, $paginaHTML);
 $paginaHTML = str_replace('[farmacie_grid]', $htmlFarmacie, $paginaHTML);
+
+// Placeholder per autenticazione
+$paginaHTML = str_replace('[auth_message_class]', $authMessageClass, $paginaHTML);
+$paginaHTML = str_replace('[form_class]', $formClass, $paginaHTML);
+$paginaHTML = str_replace('[error_message]', $errorMessageHtml, $paginaHTML);
+
+// Gestione Area Personale nella navbar
+$paginaHTML = str_replace('[area_personale_href]', getAreaPersonaleHref(), $paginaHTML);
+$paginaHTML = str_replace('[area_personale_text]', getAreaPersonaleText(), $paginaHTML);
 
 // Stampa la pagina finale
 echo $paginaHTML;

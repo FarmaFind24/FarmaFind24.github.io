@@ -1,6 +1,8 @@
 <?php
+session_start();
 // FILE: farm_search.php
 require_once "dbConnection.php";
+require_once "session-helper.php";
 use DB\DBAccess;
 
 // 1. Carica il template HTML puro come una stringa di testo
@@ -76,6 +78,10 @@ $paginaHTML = str_replace('[listaFarmaci]', $htmlRisultati, $paginaHTML);
 // Sostituisci [valore_ricerca] nel campo input per mostrare cosa l'utente ha cercato
 // Se non ha cercato nulla, lo sostituiamo con stringa vuota
 $paginaHTML = str_replace('[valore_ricerca]', htmlspecialchars($testoCercato), $paginaHTML);
+
+// Gestione Area Personale nella navbar
+$paginaHTML = str_replace('[area_personale_href]', getAreaPersonaleHref(), $paginaHTML);
+$paginaHTML = str_replace('[area_personale_text]', getAreaPersonaleText(), $paginaHTML);
 
 // 6. Stampa la pagina finale
 echo $paginaHTML;
