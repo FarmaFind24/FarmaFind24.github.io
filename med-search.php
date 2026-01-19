@@ -1,6 +1,6 @@
 <?php
 session_start();
-// FILE: farm_search.php
+// FILE: farm-search.php
 require_once "dbConnection.php";
 require_once "session-helper.php";
 use DB\DBAccess;

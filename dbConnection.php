@@ -241,7 +241,7 @@ class DBAccess {
                   FROM orari_farmacie 
                   WHERE farmacia_id = ? 
                   AND giorno_settimana = ? 
-                  AND TIME(?) BETWEEN TIME(ora_apertura) AND TIME(ora_chiusura)";
+                  AND ? BETWEEN ora_apertura AND ora_chiusura";
     
         $stmt = mysqli_prepare($this->connection, $query);
         
@@ -417,16 +417,16 @@ class DBAccess {
     }
 
     // 7. Verifica disponibilità di uno slot orario
-    public function verificaDisponibilitaSlot($idFarmacia, $data, $ora) {
-        // Verifica se esiste già una prenotazione per quella farmacia, data e ora
+    public function verificaDisponibilitaSlot($idFarmaciaServizio, $data, $ora) {
+        // Verifica se esiste già una prenotazione per quella combinazione farmacia-servizio, data e ora
         $query = "SELECT COUNT(*) as conteggio 
                   FROM prenotazioni 
-                  WHERE farmacia_id = ? 
-                  AND data_prenotazione = ? 
-                  AND ora_prenotazione = ?";
+                  WHERE farmacia_servizio_id = ? 
+                  AND data_appuntamento = ? 
+                  AND ora_appuntamento = ?";
         
         $stmt = mysqli_prepare($this->connection, $query);
-        mysqli_stmt_bind_param($stmt, "iss", $idFarmacia, $data, $ora);
+        mysqli_stmt_bind_param($stmt, "iss", $idFarmaciaServizio, $data, $ora);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         
@@ -438,12 +438,12 @@ class DBAccess {
     }
 
     // 8. Crea una nuova prenotazione
-    public function creaPrenotazione($idUtente, $idFarmacia, $idServizio, $data, $ora) {
-        $query = "INSERT INTO prenotazioni (utente_id, farmacia_id, servizio_id, data_prenotazione, ora_prenotazione, stato) 
-                  VALUES (?, ?, ?, ?, ?, 'confermata')";
+    public function creaPrenotazione($idUtente, $idFarmaciaServizio, $data, $ora, $nome, $cognome, $codiceFiscale) {
+        $query = "INSERT INTO prenotazioni (utente_id, farmacia_servizio_id, data_appuntamento, ora_appuntamento, nome, cognome, codice_fiscale) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = mysqli_prepare($this->connection, $query);
-        mysqli_stmt_bind_param($stmt, "iiiss", $idUtente, $idFarmacia, $idServizio, $data, $ora);
+        mysqli_stmt_bind_param($stmt, "iisssss", $idUtente, $idFarmaciaServizio, $data, $ora, $nome, $cognome, $codiceFiscale);
         
         try {
             mysqli_stmt_execute($stmt);
@@ -452,6 +452,58 @@ class DBAccess {
         } catch (\mysqli_sql_exception $e) {
             return false;
         }
+    }
+
+    // 9. Ottieni farmacia_servizio_id dato idFarmacia e idServizio
+    public function getFarmaciaServizioId($idFarmacia, $idServizio) {
+        $query = "SELECT id FROM farmacia_servizi 
+                  WHERE farmacia_id = ? AND servizio_id = ?";
+        
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ii", $idFarmacia, $idServizio);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row['id'];
+        }
+        return null;
+    }
+
+    // 10. Ottieni dettagli completi di una prenotazione per il riepilogo
+    public function getDettagliPrenotazione($idPrenotazione, $idUtente = null) {
+        $query = "SELECT p.id, p.data_appuntamento, p.ora_appuntamento, p.nome, p.cognome,
+                         s.nome_servizio as servizio_nome, s.durata_media_minuti as servizio_durata,
+                         f.nome as farmacia_nome, f.indirizzo as farmacia_indirizzo, 
+                         f.citta as farmacia_citta, f.telefono as farmacia_telefono,
+                         u.email as utente_email
+                  FROM prenotazioni p
+                  JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id
+                  JOIN servizi s ON fs.servizio_id = s.id
+                  JOIN farmacie f ON fs.farmacia_id = f.id
+                  JOIN utenti u ON p.utente_id = u.id
+                  WHERE p.id = ?";
+        
+        // Se viene fornito l'ID utente, verifica che la prenotazione appartenga a quell'utente
+        if ($idUtente !== null) {
+            $query .= " AND p.utente_id = ?";
+        }
+        
+        $stmt = mysqli_prepare($this->connection, $query);
+        
+        if ($idUtente !== null) {
+            mysqli_stmt_bind_param($stmt, "ii", $idPrenotazione, $idUtente);
+        } else {
+            mysqli_stmt_bind_param($stmt, "i", $idPrenotazione);
+        }
+        
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row;
+        }
+        return null;
     }
 
 // Aggiungi SOLO questo metodo dentro la classe DBAccess in dbConnection.php

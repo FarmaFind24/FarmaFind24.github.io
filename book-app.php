@@ -32,6 +32,15 @@ if (isset($_GET['error'])) {
         case 'booking_failed':
             $errorMessage = 'Si è verificato un errore durante la prenotazione. Riprova.';
             break;
+        case 'invalid_name':
+            $errorMessage = 'Nome o cognome non valido. Inserisci solo lettere.';
+            break;
+        case 'invalid_fiscal_code':
+            $errorMessage = 'Codice fiscale non valido. Deve essere di 16 caratteri.';
+            break;
+        case 'service_not_available':
+            $errorMessage = 'Il servizio selezionato non è disponibile per questa farmacia.';
+            break;
     }
 }
 

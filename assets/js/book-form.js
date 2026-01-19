@@ -49,7 +49,7 @@ function nextPrev(n) {
 
   // 2. Controllo Finale: Se siamo all'ultima tab e premiamo avanti
   if (currentTab >= x.length - 1 && n == 1) {
-    showSuccessMessage(); 
+    submitBookingForm(); 
     return false; 
   }
 
@@ -98,10 +98,10 @@ function validateForm() {
                 input.classList.add("invalid");
             } else { input.classList.remove("invalid"); }
         }
-        else if (input.id === "femail") {
-            if (!validateEmail()) {
+        else if (input.id === "fcode") {
+            if (!validateCodiceFiscale()) {
                 isValid = false;
-                msg += "<p>Email: nome@mail.com </p>";
+                msg += "<p>Codice fiscale: Inserisci un codice fiscale valido (16 caratteri).</p>";
                 input.classList.add("invalid");
             } else { input.classList.remove("invalid"); }
         }
@@ -147,6 +147,18 @@ function validateForm() {
 
   return isValid;
 }
+
+// Invia il form a process-booking.php
+function submitBookingForm() {
+    var form = document.getElementById("regForm");
+    if (form) {
+        // Cambia l'action del form per puntare a process-booking.php
+        form.action = "process-booking.php";
+        // Sottometti il form
+        form.submit();
+    }
+}
+
 function showSuccessMessage() {
     var x = document.getElementsByClassName("tab");
     if(x[currentTab]) x[currentTab].style.display = "none"; 

@@ -1770,6 +1770,48 @@ input.invalid + .error-msg {
   font-weight: 600;
 }
 
+/* Intestazioni sezioni tabella */
+.summary-table .section-header {
+  background-color: #eafaea;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.1em;
+  padding: 1em;
+  text-align: left;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.summary-table .section-header .material-symbols-outlined {
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+/* Note finali tabella */
+.summary-table .table-note {
+  background-color: #fffbea;
+  border-left: 3px solid #ffa726;
+  padding: 1em;
+  font-style: italic;
+  color: #666;
+  border-bottom: none;
+}
+
+/* Spaziatura dopo sezioni */
+.summary-table .section-header + tr th,
+.summary-table .section-header + tr td {
+  padding-top: 1em;
+}
+
+/* Nascondi caption visivamente ma mantienila per screen reader */
+.summary-table caption.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* Sezione per dividere Farmacia e Utente */
 .split-section {
   display: flex;

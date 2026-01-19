@@ -2,9 +2,9 @@
 // FILE: test_senza_modifiche.php
 
 // 1. IMPOSTAZIONI DEL TEST (Modifica qui per viaggiare nel tempo)
-$idFarmacia = 3;      // ID Farmacia Guizza (quella con orario spezzato)
+$idFarmacia = 42;      // ID Farmacia Guizza (quella con orario spezzato)
 $giornoSimulato = 1;  // 1 = Lunedì
-$oraSimulata = '14:00:00'; // Proviamo l'ora del pranzo (dovrebbe essere CHIUSO)
+$oraSimulata = '15:31:00'; // Proviamo l'ora del pranzo (dovrebbe essere CHIUSO)
 
 // 2. CONNESSIONE MANUALE AL DB (Solo per questo test)
 // Usa le stesse credenziali del tuo file originale

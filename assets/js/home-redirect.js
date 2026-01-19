@@ -13,13 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
             let destination = "";
 
             if (filter === "farmacia") {
-                destination = "farm_search.php";
+                destination = "farm-search.php";
             } else {
-                destination = "med_search.php";
+                destination = "med-search.php";
             }
 
             // Costruiamo l'URL con il parametro q
-            // Esempio: farm_search.php?q=nomefarmacia
+            // Esempio: farm-search.php?q=nomefarmacia
             window.location.href = destination + "?q=" + encodeURIComponent(query);
         });
     }
