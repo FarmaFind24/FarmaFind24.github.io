@@ -44,15 +44,15 @@
     <nav class="sidenav">
         <ul aria-label="barra di navigazione dell'area personale">
             <li>
-                <a href="#dashboard" aria-label="dashboard">
+                <a href="#dashboard" aria-current="page">
                     <span class="material-symbols-outlined">dashboard</span>Dashboard</a>
             </li>
             <li>
-                <a href="#profilo" aria-label="profilo"><span class="material-symbols-outlined"
-                        aria-hidden="true">person</span>Profilo</a>
+                <a href="#profilo" aria-current="page" <span class="material-symbols-outlined"
+                    aria-hidden="true">person</span>Profilo</a>
             </li>
             <li>
-                <a href="#prenotazioni" aria-label="prenotazioni"><span class="material-symbols-outlined"
+                <a href="#prenotazioni" aria-current="page"><span class="material-symbols-outlined"
                         aria-hidden="true">event</span>Prenotazioni</a>
             </li>
             <li>
@@ -62,17 +62,17 @@
         </ul>
     </nav>
 
-        <main class="main-area-personale">
-            <section id="dashboard" class="content-section">
-                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
-                    <p>
-                        Ti trovi in: Area Personale >> <span lang="en">Dashboard</span>
-                    </p>
-                </nav>
-                <div class="main-area-personale-title-row">
-                    <h1>Ciao [nome_utente]</h1>
-                    <p>Bentornato nella tua dashboard</p>
-                </div>
+    <main class="main-area-personale">
+        <section id="dashboard" class="content-section">
+            <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
+                <p>
+                    Ti trovi in: Area Personale >> <span lang="en">Dashboard</span>
+                </p>
+            </nav>
+            <div class="main-area-personale-title-row">
+                <h1>Ciao [nome_utente]</h1>
+                <p>Bentornato nella tua dashboard</p>
+            </div>
 
             <div class="activity-row">
                 <div class="activity-card">
@@ -94,106 +94,107 @@
                 </div>
 
 
-                    <ol aria-label="lista appuntamenti" class="appuntamenti-column">
-                        [lista_prenotazioni]
-                    </ol>
-                </div>
-            </section>
-            <section id="profilo" class="content-section content-hidden">
-                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
-                    <p>Ti trovi in: Area Personale >> Profilo</p>
-                </nav>
-                <div class="main-area-personale-title-row">
-                    <div>
-                        <h1>Profilo</h1>
-                        <button type="button" class="btn-primary" id="edit-profile-btn">Modifica Profilo</button>
-                    </div>
-                    <p>Gestisci le tue informazioni personali</p>
-                </div>
-                <div class="profile-summary">
-                    <h3>[nome_utente] [cognome_utente]</h3>
-                    <div>
-                        <span class="username">@[username]</span> <span>Membro dal [data_registrazione]</span>
-                    </div>
-                </div>
-                <div class="dettagli-personali">
-                    <h3>Dettagli Personali</h3>
-                    <form action="process-update-profile.php" method="POST">
-                        <fieldset>
-                            <legend aria-hidden="true" class="content-hidden">Dettagli personali</legend>
-                            <div class="details-grid">
-                                <div>
-                                    <label for="name">Nome</label>
-                                    <input type="text" id="name" name="name" value="[nome]" readonly>
-                                </div>
-                                <div>
-                                    <label for="surname">Cognome</label>
-                                    <input type="text" id="surname" name="surname" value="[cognome]" readonly>
-                                </div>
-                                <div>
-                                    <label for="username">Username</label>
-                                    <input type="text" id="username" name="username" value="[username]" readonly disabled>
-                                </div>
-                                <div>
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" value="[email]" readonly
-                                        autocomplete="email">
-                                </div>
-
-                            </div>
-                            <div class="row-btn"><button type="submit" class="btn-primary" id="save-profile-btn"
-                                    hidden>Applica</button>
-                                <button type="button" class="outlined-btn" id="cancel-edit-btn" hidden>Annulla</button>
-                            </div>
-                        </fieldset>
-                    </form>
-
-                </div>
-                <a href="conferma_eliminazione.html" class="delete-account"> <span class="material-symbols-outlined"
-                        aria-hidden="true">delete</span>Elimina Account</a>
-            </section>
-            <section id="delete-confirm" class="content-section content-hidden">
+                <ol aria-label="lista appuntamenti" class="appuntamenti-column">
+                    [lista_prenotazioni]
+                </ol>
+            </div>
+        </section>
+        <section id="profilo" class="content-section content-hidden">
+            <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
+                <p>Ti trovi in: Area Personale >> Profilo</p>
+            </nav>
+            <div class="main-area-personale-title-row">
                 <div>
-                    <div class="icon-container-warning"><span class="material-symbols-outlined icon-warning icon-fill"
-                            aria-hidden="true">warning</span></div>
-                    <h2>Elimina Account</h2>
-                    <p>Sei sicuro di voler elimare il tuo Account dai nostri sistemi? Questa azione è irreversibile e
-                        comporterà l'eliminazione permanente dei tuoi dati.</p>
-                    <form action="process-deletion.php" method="POST">
-                        <div class="confirm-check">
-                            <input type="checkbox" id="confirm" name="confirm_deletion" required>
-                            <label for="confirm">Capisco che questa azione non è reversibile</label>
-                        </div>
-
-                        <div class="row-btn">
-                            <a href="about.html#profilo" class="outlined-btn">Annulla</a>
-                            <button type="submit" class="btn-primary no-margin">Conferma Eliminazione
-                                Definitiva</button>
-                        </div>
-                    </form>
+                    <h1>Profilo</h1>
+                    <button type="button" class="btn-primary" id="edit-profile-btn">Modifica Profilo</button>
                 </div>
-            </section>
-            <section id="prenotazioni" class="content-section content-hidden">
-                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
-                    <p>
-                        Ti trovi in: Area Personale >> <span lang="en">Prenotazioni</span>
-                    </p>
-                </nav>
-                <div class="main-area-personale-title-row">
-                    <h1>Prenotazioni</h1>
-                    <p>Gestisci i tuoi appuntamenti</p>
+                <p>Gestisci le tue informazioni personali</p>
+            </div>
+            <div class="profile-summary">
+                <h3>[nome_utente] [cognome_utente]</h3>
+                <div>
+                    <span class="username">@[username]</span> <span>Membro dal [data_registrazione]</span>
                 </div>
+            </div>
+            <div class="dettagli-personali">
+                <h3>Dettagli Personali</h3>
+                <form action="process-update-profile.php" method="POST">
+                    <fieldset>
+                        <legend aria-hidden="true" class="content-hidden">Dettagli personali</legend>
+                        <div class="details-grid">
+                            <div>
+                                <label for="name">Nome</label>
+                                <input type="text" id="name" name="name" value="[nome]" readonly autocomplete="off">
+                            </div>
+                            <div>
+                                <label for="surname">Cognome</label>
+                                <input type="text" id="surname" name="surname" value="[cognome]" readonly
+                                    autocomplete="off">
+                            </div>
+                            <div>
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username" value="[username]" readonly
+                                    autocomplete="off">
+                            </div>
+                            <div>
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" value="[email]" readonly autocomplete="off">
+                            </div>
 
+                        </div>
+                        <div class="row-btn"><button type="submit" class="btn-primary" id="save-profile-btn"
+                                hidden>Applica</button>
+                            <button type="button" class="outlined-btn" id="cancel-edit-btn" hidden>Annulla</button>
+                        </div>
+                    </fieldset>
+                </form>
 
-                <div class="appuntamenti-section">
-                    <span class="sr-only">Lista Appuntamenti</span>
-                    <div class="appuntamenti-column">
-                        [lista_prenotazioni_completa]
+            </div>
+            <a href="conferma_eliminazione.html" class="delete-account"> <span class="material-symbols-outlined"
+                    aria-hidden="true">delete</span>Elimina Account</a>
+        </section>
+        <section id="delete-confirm" class="content-section content-hidden">
+            <div>
+                <div class="icon-container-warning"><span class="material-symbols-outlined icon-warning icon-fill"
+                        aria-hidden="true">warning</span></div>
+                <h2>Elimina Account</h2>
+                <p>Sei sicuro di voler elimare il tuo Account dai nostri sistemi? Questa azione è irreversibile e
+                    comporterà l'eliminazione permanente dei tuoi dati.</p>
+                <form action="process-deletion.php" method="POST">
+                    <div class="confirm-check">
+                        <input type="checkbox" id="confirm" name="confirm_deletion" required>
+                        <label for="confirm">Capisco che questa azione non è reversibile</label>
                     </div>
-                </div>
-            </section>
 
-        </main>
+                    <div class="row-btn">
+                        <a href="about.html#profilo" class="outlined-btn">Annulla</a>
+                        <button type="submit" class="btn-primary no-margin">Conferma Eliminazione
+                            Definitiva</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section id="prenotazioni" class="content-section content-hidden">
+            <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
+                <p>
+                    Ti trovi in: Area Personale >> <span lang="en">Prenotazioni</span>
+                </p>
+            </nav>
+            <div class="main-area-personale-title-row">
+                <h1>Prenotazioni</h1>
+                <p>Gestisci i tuoi appuntamenti</p>
+            </div>
+
+
+            <div class="appuntamenti-section">
+                <span class="sr-only">Lista Appuntamenti</span>
+                <div class="appuntamenti-column">
+                    [lista_prenotazioni_completa]
+                </div>
+            </div>
+        </section>
+
+    </main>
     </div>
 
     <footer>
