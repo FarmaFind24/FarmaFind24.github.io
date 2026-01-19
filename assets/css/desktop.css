@@ -829,6 +829,11 @@ nav.breadcrumb-area-personale {
 /**********************/
 /*   AREA-PERSONALE   */
 /**********************/
+.page-wrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
 
 .main-area-personale {
   display: flex;
@@ -981,7 +986,6 @@ li.logout {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 .row-details {
   display: flex;
@@ -1722,8 +1726,8 @@ input.invalid + .error-msg {
 /* --- STILE PAGINA RIEPILOGO PRENOTAZIONE --- */
 
 .booking-summary-wrapper {
-  max-width: 50em; /* Circa un foglio A4 */
-  margin: 0 auto;
+  max-width: 50em;
+  margin: 3rem auto 0;
   background-color: var(--main-bg-color);
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -1760,7 +1764,12 @@ input.invalid + .error-msg {
   padding: 1em;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
-  vertical-align: top;
+}
+.summary-table td > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .summary-table th {
@@ -1857,21 +1866,51 @@ input.invalid + .error-msg {
   margin-bottom: 3rem;
 }
 
+.back-home-anchor,
 .booking-actions button {
   width: 10rem;
   height: 3rem;
-  background-color: var(--main-bg-color);
-  color: var(--primary-color);
   font-size: 1rem;
   border-radius: 1rem;
   border: 2px solid var(--primary-color);
   cursor: pointer;
   transition: background-color 0.2s;
   margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  text-decoration: none;
+}
+.booking-actions button {
+  background-color: var(--primary-color);
+  color: white;
+}
+.back-home-anchor {
+  transition: all 0.3s;
+  background-color: var(--second-bg-color);
+  border: 1px solid black;
+  color: black;
+}
+.back-home-anchor:visited {
+  color: inherit;
+}
+.back-home-anchor:hover {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
 }
 
 .booking-actions button:hover {
+  border: 2px solid var(--primary-color);
   background-color: var(--primary-color-hover);
+}
+.booking-actions button span {
+  color: white;
+}
+.booking-actions button:hover span {
+  color: white;
 }
 
 /******* PAGINE ERRORI *******/
@@ -1965,143 +2004,142 @@ details[open] summary::after {
   background-color: var(--main-bg-color);
 }
 
-
 /**********************/
 /* NOTIFICATION SYSTEM */
 /**********************/
 .notification {
-    position: fixed;
-    top: 5rem;
-    right: 2rem;
-    min-width: 300px;
-    max-width: 500px;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 9999;
-    animation: slideInRight 0.3s ease-out;
-    transition: opacity 0.3s ease-out;
+  position: fixed;
+  top: 5rem;
+  right: 2rem;
+  min-width: 300px;
+  max-width: 500px;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  animation: slideInRight 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 
 @keyframes slideInRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .notification-success {
-    background-color: #d4edda;
-    border-left: 4px solid #28a745;
-    color: #155724;
+  background-color: #d4edda;
+  border-left: 4px solid #28a745;
+  color: #155724;
 }
 
 .notification-error {
-    background-color: #f8d7da;
-    border-left: 4px solid #dc3545;
-    color: #721c24;
+  background-color: #f8d7da;
+  border-left: 4px solid #dc3545;
+  color: #721c24;
 }
 
 .notification .material-symbols-outlined {
-    font-size: 28px;
-    flex-shrink: 0;
+  font-size: 28px;
+  flex-shrink: 0;
 }
 
 .notification-success .material-symbols-outlined {
-    color: #28a745;
+  color: #28a745;
 }
 
 .notification-error .material-symbols-outlined {
-    color: #dc3545;
+  color: #dc3545;
 }
 
 .notification span:not(.material-symbols-outlined) {
-    flex: 1;
-    font-weight: 500;
+  flex: 1;
+  font-weight: 500;
 }
 
 .notification-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: inherit;
-    opacity: 0.7;
-    padding: 0;
-    width: auto;
-    height: auto;
-    margin: 0;
-    line-height: 1;
-    transition: opacity 0.2s;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.7;
+  padding: 0;
+  width: auto;
+  height: auto;
+  margin: 0;
+  line-height: 1;
+  transition: opacity 0.2s;
 }
 
 .notification-close:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 /* Authentication required message */
 .auth-required-message {
-    margin: 4em auto;
-    max-width: 700px;
-    text-align: center;
-    padding: 3em 2em;
-    background-color: var(--main-bg-color);
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 4em auto;
+  max-width: 700px;
+  text-align: center;
+  padding: 3em 2em;
+  background-color: var(--main-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .auth-required-message h2 {
-    color: var(--primary-color);
-    font-size: 2em;
-    margin-bottom: 0.5em;
+  color: var(--primary-color);
+  font-size: 2em;
+  margin-bottom: 0.5em;
 }
 
 .auth-required-message p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: #333;
-    margin-bottom: 1.5em;
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1.5em;
 }
 
 .auth-required-message p:last-of-type {
-    font-size: 1em;
-    margin-top: 2em;
-    margin-bottom: 0;
+  font-size: 1em;
+  margin-top: 2em;
+  margin-bottom: 0;
 }
 
 .auth-required-message a:not(.btn-primary) {
-    color: var(--primary-color);
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: 2px solid var(--primary-color);
-    transition: border-color 0.2s;
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid var(--primary-color);
+  transition: border-color 0.2s;
 }
 
 .auth-required-message a:not(.btn-primary):hover {
-    border-color: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
 }
 
 .auth-required-message .btn-primary {
-    text-decoration: none;
-    display: inline-block;
-    padding: 0.8em 2em;
-    font-size: 1.1em;
-    margin: 0.5em 0;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.8em 2em;
+  font-size: 1.1em;
+  margin: 0.5em 0;
 }
 
 /* Utility classes for visibility */
 .content-hidden {
-    display: none !important;
+  display: none !important;
 }
 
 /* Error message styling for booking page */
 .booking-error-message {
-    margin: 1em 0;
+  margin: 1em 0;
 }

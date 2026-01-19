@@ -21,41 +21,54 @@ $htmlPrenotazioni = "";
 if ($connessioneOk) {
     $prenotazioni = $db->getPrenotazioniUtente($_SESSION['user_id']);
     
+    // Array per la visualizzazione grafica (Abbreviati)
+    $mesi_it = [
+        "Jan" => "GEN", "Feb" => "FEB", "Mar" => "MAR", "Apr" => "APR",
+        "May" => "MAG", "Jun" => "GIU", "Jul" => "LUG", "Aug" => "AGO",
+        "Sep" => "SET", "Oct" => "OTT", "Nov" => "NOV", "Dec" => "DIC"
+    ];
+
+    // Array per NVDA (Nomi completi in minuscolo per evitare lo spelling)
+    $mesi_estesi = [
+        "Jan" => "gennaio", "Feb" => "febbraio", "Mar" => "marzo", "Apr" => "aprile",
+        "May" => "maggio", "Jun" => "giugno", "Jul" => "luglio", "Aug" => "agosto",
+        "Sep" => "settembre", "Oct" => "ottobre", "Nov" => "novembre", "Dec" => "dicembre"
+    ];
+
     if ($prenotazioni && count($prenotazioni) > 0) {
-        // Generiamo l'HTML per ogni prenotazione
         foreach ($prenotazioni as $p) {
-            // NUOVA LOGICA DI FORMATTAZIONE DATE
-            // $p['data_appuntamento'] è tipo "2026-10-24"
-            // $p['ora_appuntamento'] è tipo "10:30:00"
-            
             $timestamp = strtotime($p['data_appuntamento']);
-            $mese = date("M", $timestamp); // Es: OTT
+            $mese_en = date("M", $timestamp);
+            
+            $mese_visuale = $mesi_it[$mese_en]; 
+            $mese_parlato = $mesi_estesi[$mese_en]; 
             $giorno = date("d", $timestamp);
-            
-            // Per l'ora tagliamo i secondi (es. da 10:30:00 a 10:30)
             $ora = date("H:i", strtotime($p['ora_appuntamento']));
-            
+
             $htmlPrenotazioni .= '
             <li class="appuntamento-card">
-                <div class="appuntamento-card-date">
-                    <span>' . strtoupper($mese) . '<br />' . $giorno . '</span>
+                <span class="sr-only">Appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' il ' . $giorno . ' ' . $mese_parlato . ' alle ore ' . $ora . '.</span>
+
+                <div class="appuntamento-card-date" aria-hidden="true">
+                    <span>' . $mese_visuale . '<br />' . $giorno . '</span>
                 </div>
+                
                 <div class="appuntamento-card-details">
                     <div>
-                        <h3>' . htmlspecialchars($p['nome_servizio']) . ' - ' . $ora . '</h3>
-                        <p>' . htmlspecialchars($p['nome_farmacia']) . ', ' . htmlspecialchars($p['indirizzo']) . '</p>
+                        <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
+                        <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
                     </div>
-                    <button type="button" class="btn-primary no-margin">Disdici</button>
+                    <button type="button" class="btn-primary no-margin" 
+                            aria-label="Disdici appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '">
+                        Disdici
+                    </button>
                 </div>
             </li>';
         }
     } else {
         $htmlPrenotazioni = '<li class="appuntamento-card"><p style="padding:1rem;">Nessuna prenotazione futura.</p></li>';
     }
-    
     $db->closeConnection();
-} else {
-    $htmlPrenotazioni = '<p class="error">Errore connessione database.</p>';
 }
 
 // 4. SOSTITUZIONE PLACEHOLDER (Dati Utente dalla Sessione)
