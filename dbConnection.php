@@ -29,24 +29,6 @@ class DBAccess {
 	}
 
 
-	// 1. Funzione per il LOGIN (User e Admin)
-    public function eseguiLogin($username, $password) {
-        // Usiamo i ? per evitare che qualcuno entri con trucchi SQL
-        $query = "SELECT * FROM utenti WHERE username = ? AND password = ?";
-        
-        $stmt = mysqli_prepare($this->connection, $query);
-        mysqli_stmt_bind_param($stmt, "ss", $username, $password); // "ss" significa due stringhe
-        mysqli_stmt_execute($stmt);
-        
-        $result = mysqli_stmt_get_result($stmt);
-        
-        if ($row = mysqli_fetch_assoc($result)) {
-            return $row; // Ritorna i dati dell'utente (id, ruolo, ecc.)
-        } else {
-            return false; // Login fallito
-        }
-    }
-
     // 2. Funzione per CERCARE FARMACI (quella che mostra compresse/sciroppo separati)
     public function cercaFarmaci($testoRicerca) {
         $query = "SELECT * FROM farmaci 
@@ -253,25 +235,37 @@ class DBAccess {
         $giornoOggi = date('w'); // 0 (Dom) - 6 (Sab)
         $oraAdesso = date('H:i:s');
     
-        // 2. Query
-        // Cerca se esiste ALMENO UNA fascia oraria che comprende l'ora attuale
+        // 2. Query - Verifica se esiste almeno una fascia oraria attiva
+        // La farmacia è aperta se l'ora corrente cade in almeno una fascia oraria del giorno corrente
         $query = "SELECT COUNT(*) as total 
                   FROM orari_farmacie 
                   WHERE farmacia_id = ? 
                   AND giorno_settimana = ? 
-                  AND ? BETWEEN ora_apertura AND ora_chiusura";
+                  AND TIME(?) BETWEEN TIME(ora_apertura) AND TIME(ora_chiusura)";
     
         $stmt = mysqli_prepare($this->connection, $query);
+        
+        if (!$stmt) {
+            // In caso di errore nella preparazione, considera chiusa
+            return false;
+        }
         
         // Bind dei parametri: i (intero), i (intero), s (stringa)
         mysqli_stmt_bind_param($stmt, "iis", $idFarmacia, $giornoOggi, $oraAdesso);
         
-        mysqli_stmt_execute($stmt);
+        $executed = mysqli_stmt_execute($stmt);
+        
+        if (!$executed) {
+            // In caso di errore nell'esecuzione, considera chiusa
+            return false;
+        }
+        
         $result = mysqli_stmt_get_result($stmt);
         $row = mysqli_fetch_assoc($result);
     
         // 3. Ritorna TRUE se trova almeno 1 riga, altrimenti FALSE
-        return $row['total'] > 0;
+        // Se non ci sono orari per questo giorno, la farmacia è considerata chiusa
+        return $row && $row['total'] > 0;
     }
 
     // In dbConnection.php
@@ -296,7 +290,222 @@ class DBAccess {
         }
         return $orari;
     }
-}
+
+
+    // --- AUTENTICAZIONE ---
+
+    // 1. Registrazione nuovo utente
+    public function registraUtente($nome, $cognome, $username, $email, $password) {
+        // Crittografia della password
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $ruolo = 'user'; // Di default tutti sono user
+
+        $query = "INSERT INTO utenti (nome, cognome, username, email, password, ruolo) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ssssss", $nome, $cognome, $username, $email, $passwordHash, $ruolo);
+        
+        try {
+            return mysqli_stmt_execute($stmt);
+        } catch (\Exception $e) {
+            // Probabile errore di duplicato username/email
+            return false;
+        }
+    }
+
+    // 2. Login Utente
+    public function eseguiLogin($username, $password) {
+        $query = "SELECT * FROM utenti WHERE username = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            // Verifica la password hashata
+            if (password_verify($password, $row['password'])) {
+                return $row; // Ritorna tutti i dati dell'utente
+            }
+        }
+        return null; // Login fallito
+    }
+
+    // In dbConnection.php -> class DBAccess
+
+    public function getPrenotazioniUtente($idUtente) {
+        // MODIFICA: Selezioniamo data_appuntamento e ora_appuntamento separatamente
+        $query = "SELECT p.data_appuntamento, p.ora_appuntamento, 
+                         f.nome AS nome_farmacia, f.indirizzo, s.nome_servizio 
+                  FROM prenotazioni p
+                  JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id
+                  JOIN farmacie f ON fs.farmacia_id = f.id
+                  JOIN servizi s ON fs.servizio_id = s.id
+                  WHERE p.utente_id = ?
+                  ORDER BY p.data_appuntamento ASC, p.ora_appuntamento ASC";
+                  
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $idUtente);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        $prenotazioni = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $prenotazioni[] = $row;
+        }
+        return $prenotazioni;
+    }
+
+    // 3. Aggiornamento profilo utente
+    public function aggiornaProfiloUtente($idUtente, $nome, $cognome, $email) {
+        $query = "UPDATE utenti SET nome = ?, cognome = ?, email = ? WHERE id = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "sssi", $nome, $cognome, $email, $idUtente);
+        
+        try {
+            return mysqli_stmt_execute($stmt);
+        } catch (\Exception $e) {
+            // Errore (es. email duplicata)
+            return false;
+        }
+    }
+
+    // 4. Eliminazione account utente
+    public function eliminaUtente($idUtente) {
+        // Prima eliminiamo le prenotazioni dell'utente (per integrità referenziale)
+        $query1 = "DELETE FROM prenotazioni WHERE utente_id = ?";
+        $stmt1 = mysqli_prepare($this->connection, $query1);
+        mysqli_stmt_bind_param($stmt1, "i", $idUtente);
+        mysqli_stmt_execute($stmt1);
+        
+        // Poi eliminiamo l'utente
+        $query2 = "DELETE FROM utenti WHERE id = ?";
+        $stmt2 = mysqli_prepare($this->connection, $query2);
+        mysqli_stmt_bind_param($stmt2, "i", $idUtente);
+        
+        try {
+            return mysqli_stmt_execute($stmt2);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    // 5. Cambio password
+    public function cambiaPassword($idUtente, $nuovaPassword) {
+        $passwordHash = password_hash($nuovaPassword, PASSWORD_DEFAULT);
+        $query = "UPDATE utenti SET password = ? WHERE id = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "si", $passwordHash, $idUtente);
+        
+        try {
+            return mysqli_stmt_execute($stmt);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    // 6. Verifica password corrente (utile per cambio password)
+    public function verificaPasswordUtente($idUtente, $password) {
+        $query = "SELECT password FROM utenti WHERE id = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $idUtente);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            return password_verify($password, $row['password']);
+        }
+        return false;
+    }
+
+    // 7. Verifica disponibilità di uno slot orario
+    public function verificaDisponibilitaSlot($idFarmaciaServizio, $data, $ora) {
+        // Verifica se esiste già una prenotazione per quella combinazione farmacia-servizio, data e ora
+        $query = "SELECT COUNT(*) as conteggio 
+                  FROM prenotazioni 
+                  WHERE farmacia_servizio_id = ? 
+                  AND data_appuntamento = ? 
+                  AND ora_appuntamento = ?";
+        
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "iss", $idFarmaciaServizio, $data, $ora);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            // Se il conteggio è 0, lo slot è disponibile
+            return $row['conteggio'] == 0;
+        }
+        return false;
+    }
+
+    // 8. Crea una nuova prenotazione
+    public function creaPrenotazione($idUtente, $idFarmaciaServizio, $data, $ora, $nome, $cognome, $codiceFiscale) {
+        $query = "INSERT INTO prenotazioni (utente_id, farmacia_servizio_id, data_appuntamento, ora_appuntamento, nome, cognome, codice_fiscale) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "iisssss", $idUtente, $idFarmaciaServizio, $data, $ora, $nome, $cognome, $codiceFiscale);
+        
+        try {
+            mysqli_stmt_execute($stmt);
+            // Restituisce l'ID della prenotazione appena creata
+            return mysqli_insert_id($this->connection);
+        } catch (\mysqli_sql_exception $e) {
+            return false;
+        }
+    }
+
+    // 9. Ottieni farmacia_servizio_id dato idFarmacia e idServizio
+    public function getFarmaciaServizioId($idFarmacia, $idServizio) {
+        $query = "SELECT id FROM farmacia_servizi 
+                  WHERE farmacia_id = ? AND servizio_id = ?";
+        
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ii", $idFarmacia, $idServizio);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row['id'];
+        }
+        return null;
+    }
+
+    // 10. Ottieni dettagli completi di una prenotazione per il riepilogo
+    public function getDettagliPrenotazione($idPrenotazione, $idUtente = null) {
+        $query = "SELECT p.id, p.data_appuntamento, p.ora_appuntamento, p.nome, p.cognome,
+                         s.nome_servizio as servizio_nome, s.durata_media_minuti as servizio_durata,
+                         f.nome as farmacia_nome, f.indirizzo as farmacia_indirizzo, 
+                         f.citta as farmacia_citta, f.telefono as farmacia_telefono,
+                         u.email as utente_email
+                  FROM prenotazioni p
+                  JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id
+                  JOIN servizi s ON fs.servizio_id = s.id
+                  JOIN farmacie f ON fs.farmacia_id = f.id
+                  JOIN utenti u ON p.utente_id = u.id
+                  WHERE p.id = ?";
+        
+        // Se viene fornito l'ID utente, verifica che la prenotazione appartenga a quell'utente
+        if ($idUtente !== null) {
+            $query .= " AND p.utente_id = ?";
+        }
+        
+        $stmt = mysqli_prepare($this->connection, $query);
+        
+        if ($idUtente !== null) {
+            mysqli_stmt_bind_param($stmt, "ii", $idPrenotazione, $idUtente);
+        } else {
+            mysqli_stmt_bind_param($stmt, "i", $idPrenotazione);
+        }
+        
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row;
+        }
+        return null;
+    }
+
 // Aggiungi SOLO questo metodo dentro la classe DBAccess in dbConnection.php
 
 public function getFarmaciaById($idFarmacia) {
@@ -310,5 +519,6 @@ public function getFarmaciaById($idFarmacia) {
         return $row;
     }
     return null;
+}
 }
 ?>

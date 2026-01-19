@@ -1,5 +1,3 @@
-<!-- ABOUT.HTML -->
-
 <!DOCTYPE html>
 <html lang="it">
 
@@ -32,7 +30,7 @@
                 <li><a href="med-search.php">Medicinali</a></li>
                 <li><a href="book-app.php">Prenota Visita</a></li>
                 <li>
-                    <a href="about.html"><span lang="en">About</span></a>
+                    <a href="about.php"><span lang="en">About</span></a>
                 </li>
                 <li>
                     <a aria-current="page" href="#" class="current-page">
@@ -58,23 +56,23 @@
                         aria-hidden="true">event</span>Prenotazioni</a>
             </li>
             <li class="logout">
-                <a href="#" lang="en" aria-label="logout"><span class="material-symbols-outlined"
+                <a href="logout.php" lang="en" aria-label="logout"><span class="material-symbols-outlined"
                         aria-hidden="true">logout</span>Logout</a>
             </li>
         </ul>
     </nav>
 
-    <main class="main-area-personale">
-        <section id="dashboard" class="content-section">
-            <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
-                <p>
-                    Ti trovi in: Area Personale >> <span lang="en">Dashboard</span>
-                </p>
-            </nav>
-            <div class="main-area-personale-title-row">
-                <h1>Ciao Utente</h1>
-                <p>Bentornato nella tua dashboard</p>
-            </div>
+        <main class="main-area-personale">
+            <section id="dashboard" class="content-section">
+                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
+                    <p>
+                        Ti trovi in: Area Personale >> <span lang="en">Dashboard</span>
+                    </p>
+                </nav>
+                <div class="main-area-personale-title-row">
+                    <h1>Ciao [nome_utente]</h1>
+                    <p>Bentornato nella tua dashboard</p>
+                </div>
 
             <div class="activity-row">
                 <div class="activity-card">
@@ -96,149 +94,107 @@
                 </div>
 
 
-                <ol aria-label="lista appuntamenti" class="appuntamenti-column">
-                    <li class="appuntamento-card">
-                        <div class="appuntamento-card-date">
-                            <span>OTT <br />
-                                24</span>
-                        </div>
-                        <div class="appuntamento-card-details">
-                            <div>
-                                <h3>Vaccinazione - Influenza - 10:30 AM</h3>
-                                <p>Farmacia Centrale Milano, Via Dante 12</p>
-                            </div>
+                    <ol aria-label="lista appuntamenti" class="appuntamenti-column">
+                        [lista_prenotazioni]
+                    </ol>
+                </div>
+            </section>
+            <section id="profilo" class="content-section content-hidden">
+                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
+                    <p>Ti trovi in: Area Personale >> Profilo</p>
+                </nav>
+                <div class="main-area-personale-title-row">
+                    <div>
+                        <h1>Profilo</h1>
+                        <button type="button" class="btn-primary" id="edit-profile-btn">Modifica Profilo</button>
+                    </div>
+                    <p>Gestisci le tue informazioni personali</p>
+                </div>
+                <div class="profile-summary">
+                    <h3>[nome_utente] [cognome_utente]</h3>
+                    <div>
+                        <span class="username">@[username]</span> <span>Membro dal [data_registrazione]</span>
+                    </div>
+                </div>
+                <div class="dettagli-personali">
+                    <h3>Dettagli Personali</h3>
+                    <form action="process-update-profile.php" method="POST">
+                        <fieldset>
+                            <legend aria-hidden="true" class="content-hidden">Dettagli personali</legend>
+                            <div class="details-grid">
+                                <div>
+                                    <label for="name">Nome</label>
+                                    <input type="text" id="name" name="name" value="[nome]" readonly>
+                                </div>
+                                <div>
+                                    <label for="surname">Cognome</label>
+                                    <input type="text" id="surname" name="surname" value="[cognome]" readonly>
+                                </div>
+                                <div>
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" name="username" value="[username]" readonly disabled>
+                                </div>
+                                <div>
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" value="[email]" readonly
+                                        autocomplete="email">
+                                </div>
 
-                            <button type="button" class="btn-primary no-margin">Disdici</button>
-                        </div>
-                    </li>
-                    <li class="appuntamento-card">
-                        <div class="appuntamento-card-date">
-                            <span>OTT <br />
-                                24</span>
-                        </div>
-                        <div class="appuntamento-card-details">
-                            <div>
-                                <h3>Vaccinazione - Influenza - 10:30 AM</h3>
-                                <p>Farmacia Centrale Milano, Via Dante 12</p>
                             </div>
+                            <div class="row-btn"><button type="submit" class="btn-primary" id="save-profile-btn"
+                                    hidden>Applica</button>
+                                <button type="button" class="outlined-btn" id="cancel-edit-btn" hidden>Annulla</button>
+                            </div>
+                        </fieldset>
+                    </form>
 
-                            <button type="button" class="btn-primary no-margin">Disdici</button>
-                        </div>
-                    </li>
-                </ol>
-            </div>
-        </section>
-        <section id="profilo" class="content-section">
-            <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
-                <p>Ti trovi in: Area Personale >> Profilo</p>
-            </nav>
-            <div class="main-area-personale-title-row">
+                </div>
+                <a href="conferma_eliminazione.html" class="delete-account"> <span class="material-symbols-outlined"
+                        aria-hidden="true">delete</span>Elimina Account</a>
+            </section>
+            <section id="delete-confirm" class="content-section content-hidden">
                 <div>
-                    <h1>Profilo</h1>
-                    <button type="button" class="btn-primary" id="edit-profile-btn">Modifica Profilo</button>
+                    <div class="icon-container-warning"><span class="material-symbols-outlined icon-warning icon-fill"
+                            aria-hidden="true">warning</span></div>
+                    <h2>Elimina Account</h2>
+                    <p>Sei sicuro di voler elimare il tuo Account dai nostri sistemi? Questa azione è irreversibile e
+                        comporterà l'eliminazione permanente dei tuoi dati.</p>
+                    <form action="process-deletion.php" method="POST">
+                        <div class="confirm-check">
+                            <input type="checkbox" id="confirm" name="confirm_deletion" required>
+                            <label for="confirm">Capisco che questa azione non è reversibile</label>
+                        </div>
+
+                        <div class="row-btn">
+                            <a href="about.html#profilo" class="outlined-btn">Annulla</a>
+                            <button type="submit" class="btn-primary no-margin">Conferma Eliminazione
+                                Definitiva</button>
+                        </div>
+                    </form>
                 </div>
-                <p>Gestisci le tue informazioni personali</p>
-            </div>
-            <div class="profile-summary">
-                <h3>Mario Rossi</h3>
-                <div>
-                    <span class="username">@mario_rossi</span> <span>Membro da Marzo 2023</span>
+            </section>
+            <section id="prenotazioni" class="content-section content-hidden">
+                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
+                    <p>
+                        Ti trovi in: Area Personale >> <span lang="en">Prenotazioni</span>
+                    </p>
+                </nav>
+                <div class="main-area-personale-title-row">
+                    <h1>Prenotazioni</h1>
+                    <p>Gestisci i tuoi appuntamenti</p>
                 </div>
-            </div>
-            <div class="dettagli-personali">
-                <h3>Dettagli Personali</h3>
-                <form action="">
-                    <fieldset>
-                        <legend aria-hidden="true" class="content-hidden">Dettagli personali</legend>
-                        <div class="details-grid">
-                            <div>
-                                <label for="name">Nome</label>
-                                <input type="text" id="name" value="Gerry" readonly>
-                            </div>
-                            <div>
-                                <label for="surname">Cognome</label>
-                                <input type="text" id="surname" value="Scotti" readonly>
-                            </div>
-                            <div>
-                                <label for="username">Username</label>
-                                <input type="text" id="username" value="Gerry_scottone" readonly>
-                            </div>
-                            <div>
-                                <label for="email">Email</label>
-                                <input type="email" id="email" value="GerryScotti@ciambellina.com" readonly
-                                    autocomplete="email">
-                            </div>
-
-                        </div>
-                        <div class="row-btn"><button type="submit" class="btn-primary" id="save-profile-btn"
-                                hidden>Applica</button>
-                            <button type="submit" class="outlined-btn" id="cancel-edit-btn" hidden>Annulla</button>
-                        </div>
-                    </fieldset>
-                </form>
-
-            </div>
-            <a href="conferma_eliminazione.html" class="delete-account"> <span class="material-symbols-outlined"
-                    aria-hidden="true">delete</span>Elimina Account</a>
-        </section>
-        <section id="delete-confirm" class="content-section">
-            <div>
-                <div class="icon-container-warning"><span class="material-symbols-outlined icon-warning icon-fill"
-                        aria-hidden="true">warning</span></div>
-                <h2>Elimina Account</h2>
-                <p>Sei sicuro di voler elimare il tuo Account dai nostri sistemi? Questa azione è irreversibile e
-                    comporterà l'eliminazione permanente dei tuoi dati.</p>
-                <form action="process-deletion.php" method="POST">
-                    <div class="confirm-check">
-                        <input type="checkbox" id="confirm" name="confirm_deletion" required>
-                        <label for="confirm">Capisco che questa azione non è reversibile</label>
-                    </div>
-
-                    <div class="row-btn">
-                        <a href="about.html#profilo" class="outlined-btn">Annulla</a>
-                        <button type="submit" class="btn-primary no-margin">Conferma Eliminazione
-                            Definitiva</button>
-                    </div>
-                </form>
-            </div>
-        </section>
-        <section id="prenotazioni" class="content-section">
-            <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
-                <p>
-                    Ti trovi in: Area Personale >> <span lang="en">Prenotazioni</span>
-                </p>
-            </nav>
-            <div class="main-area-personale-title-row">
-                <h1>Prenotazioni</h1>
-                <p>Gestisci i tuoi appuntamenti</p>
-            </div>
 
 
-            <div class="appuntamenti-section">
-                <span class="sr-only">Lista Appuntamenti</span>
-                <div class="appuntamenti-column">
-                    <div class="appuntamento-card">
-                        <div class="appuntamento-card-date">
-                            <span class="sr-only"> 24 ottobre</span>
-                            <span aria-hidden="true">OTT <br />
-                                25</span>
-                        </div>
-                        <div class="appuntamento-card-details">
-                            <div>
-                                <h3>Vaccinazione - Influenza - 10:30 AM</h3>
-                                <p>Farmacia Centrale Milano, Via Dante 12</p>
-                            </div>
-
-                            <button type="button" class="btn-primary no-margin"
-                                aria-label="Disdici appuntamento">Disdici</button>
-                        </div>
+                <div class="appuntamenti-section">
+                    <span class="sr-only">Lista Appuntamenti</span>
+                    <div class="appuntamenti-column">
+                        [lista_prenotazioni_completa]
                     </div>
                 </div>
-            </div>
-        </section>
-        <button onclick="topFunction()" id="scroll-btn" title="Go to top">Torna su</button>
-    </main>
+            </section>
 
+        </main>
+    </div>
 
     <footer>
         <p>
@@ -251,6 +207,7 @@
     <script src="assets/js/scroll-top.js"></script>
     <script src="assets/js/area-personale-nav.js"></script>
     <script src="assets/js/profile-forms.js"></script>
+    <script src="assets/js/feedback-messages.js"></script>
 </body>
 
 </html>

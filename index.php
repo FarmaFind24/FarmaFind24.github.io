@@ -1,9 +1,11 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once "dbConnection.php";
+require_once "session-helper.php";
 use DB\DBAccess;
 
 $paginaHTML = file_get_contents("index.html");
@@ -88,6 +90,10 @@ if ($connessioneOk) {
 $paginaHTML = str_replace('[citta_options]', $htmlCitta, $paginaHTML);
 $paginaHTML = str_replace('[farmacieDintorni]', $htmlFarmacieDintorni, $paginaHTML);
 $paginaHTML = str_replace('[index_message]', $indexMessage, $paginaHTML);
+
+// Gestione Area Personale nella navbar
+$paginaHTML = str_replace('[area_personale_href]', getAreaPersonaleHref(), $paginaHTML);
+$paginaHTML = str_replace('[area_personale_text]', getAreaPersonaleText(), $paginaHTML);
 
 echo $paginaHTML;
 ?>

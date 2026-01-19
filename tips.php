@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once "session-helper.php";
+?>
 <!doctype html>
 <html lang="it">
 
@@ -34,7 +38,7 @@
         <li><a href="med-search.php">Medicinali</a></li>
         <li><a href="book-app.php">Prenota Visita</a></li>
         <li><a href="about.php"><span lang="en">About</span></a></li>
-        <li><a href="area-login.html">Area Personale</a></li>
+        <li><a href="<?php echo getAreaPersonaleHref(); ?>"><?php echo getAreaPersonaleText(); ?></a></li>
       </ul>
     </nav>
   </header>

@@ -30,12 +30,16 @@ if ($connessioneOk) {
                 $srcImmagine = "assets/immagine_farmacia.jpg"; 
             }
 
-            // Nota: lo stato "Aperta/Chiusa" è hardcoded per ora.
-            // Per renderlo dinamico servirebbe una logica sugli orari.
+            // Verifica se la farmacia è aperta in base agli orari
+            $idFarmacia = $farmacia['id'];
+            $isAperta = $db->isFarmaciaAperta($idFarmacia);
+            $statoClass = $isAperta ? 'farm-stato-open' : 'farm-stato-closed';
+            $statoText = $isAperta ? 'Aperta' : 'Chiusa';
+
             $response['html'] .= '<div class="farm-card-mini">
                                     <div class="farm-img-container">
                                         <img src="' . $srcImmagine . '" alt="Foto ' . htmlspecialchars($farmacia['nome']) . '">
-                                        <span class="farm-stato-open">Aperta</span>
+                                        <span class="' . $statoClass . '">' . $statoText . '</span>
                                     </div>
                                     <div class="farm-card-content">
                                         <h3 class="title-card">' . htmlspecialchars($farmacia['nome']) . '</h3>

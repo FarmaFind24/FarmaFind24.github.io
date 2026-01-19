@@ -24,14 +24,15 @@ function validateCognome() {
     return true;
 }
 
-// VALIDAZIONE EMAIL
-function validateEmail() {
-    var email = document.getElementById("femail").value;
-    // Regex: lettere e numeri - @ - lettere e numeri . lettere
-    const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+// VALIDAZIONE CODICE FISCALE
+function validateCodiceFiscale() {
+    var codiceFiscale = document.getElementById("fcode").value;
+    // Regex: 6 lettere, 2 numeri, 1 lettera, 2 numeri, 1 lettera, 3 numeri, 1 lettera (16 caratteri totali)
+    const validCF = /^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i;
     
-    if(email.trim() === "") return false;
-    if(!validEmail.test(email)) return false;
+    if(codiceFiscale.trim() === "") return false;
+    if(codiceFiscale.length !== 16) return false;
+    if(!validCF.test(codiceFiscale.toUpperCase())) return false;
     
     return true;
 }

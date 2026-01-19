@@ -1556,12 +1556,16 @@ a.delete-account {
   background-color: var(--main-bg-color);
 
   box-sizing: border-box;
-  display: block;
 
   min-height: 40em;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* Nascondi completamente il form quando ha la classe content-hidden */
+#regForm.content-hidden {
+  display: none !important;
 }
 
 /* nascondere passaggi del form non attivi (prova anche disabilitando js) */
@@ -1766,6 +1770,48 @@ input.invalid + .error-msg {
   font-weight: 600;
 }
 
+/* Intestazioni sezioni tabella */
+.summary-table .section-header {
+  background-color: #eafaea;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.1em;
+  padding: 1em;
+  text-align: left;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.summary-table .section-header .material-symbols-outlined {
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+/* Note finali tabella */
+.summary-table .table-note {
+  background-color: #fffbea;
+  border-left: 3px solid #ffa726;
+  padding: 1em;
+  font-style: italic;
+  color: #666;
+  border-bottom: none;
+}
+
+/* Spaziatura dopo sezioni */
+.summary-table .section-header + tr th,
+.summary-table .section-header + tr td {
+  padding-top: 1em;
+}
+
+/* Nascondi caption visivamente ma mantienila per screen reader */
+.summary-table caption.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* Sezione per dividere Farmacia e Utente */
 .split-section {
   display: flex;
@@ -1917,4 +1963,145 @@ details[open] summary::after {
   padding: 1.5rem;
   line-height: 1.6;
   background-color: var(--main-bg-color);
+}
+
+
+/**********************/
+/* NOTIFICATION SYSTEM */
+/**********************/
+.notification {
+    position: fixed;
+    top: 5rem;
+    right: 2rem;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    animation: slideInRight 0.3s ease-out;
+    transition: opacity 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification-success {
+    background-color: #d4edda;
+    border-left: 4px solid #28a745;
+    color: #155724;
+}
+
+.notification-error {
+    background-color: #f8d7da;
+    border-left: 4px solid #dc3545;
+    color: #721c24;
+}
+
+.notification .material-symbols-outlined {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.notification-success .material-symbols-outlined {
+    color: #28a745;
+}
+
+.notification-error .material-symbols-outlined {
+    color: #dc3545;
+}
+
+.notification span:not(.material-symbols-outlined) {
+    flex: 1;
+    font-weight: 500;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    padding: 0;
+    width: auto;
+    height: auto;
+    margin: 0;
+    line-height: 1;
+    transition: opacity 0.2s;
+}
+
+.notification-close:hover {
+    opacity: 1;
+}
+
+/* Authentication required message */
+.auth-required-message {
+    margin: 4em auto;
+    max-width: 700px;
+    text-align: center;
+    padding: 3em 2em;
+    background-color: var(--main-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-required-message h2 {
+    color: var(--primary-color);
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.auth-required-message p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 1.5em;
+}
+
+.auth-required-message p:last-of-type {
+    font-size: 1em;
+    margin-top: 2em;
+    margin-bottom: 0;
+}
+
+.auth-required-message a:not(.btn-primary) {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--primary-color);
+    transition: border-color 0.2s;
+}
+
+.auth-required-message a:not(.btn-primary):hover {
+    border-color: var(--primary-color-hover);
+}
+
+.auth-required-message .btn-primary {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.8em 2em;
+    font-size: 1.1em;
+    margin: 0.5em 0;
+}
+
+/* Utility classes for visibility */
+.content-hidden {
+    display: none !important;
+}
+
+/* Error message styling for booking page */
+.booking-error-message {
+    margin: 1em 0;
 }
