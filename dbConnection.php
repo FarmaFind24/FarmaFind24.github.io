@@ -241,7 +241,7 @@ class DBAccess {
                   FROM orari_farmacie 
                   WHERE farmacia_id = ? 
                   AND giorno_settimana = ? 
-                  AND ? BETWEEN ora_apertura AND ora_chiusura";
+                  AND TIME(?) BETWEEN TIME(ora_apertura) AND TIME(ora_chiusura)";
     
         $stmt = mysqli_prepare($this->connection, $query);
         
