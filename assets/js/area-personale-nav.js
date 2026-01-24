@@ -2,33 +2,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.querySelectorAll('a[href^="#"]');
     const sections = document.querySelectorAll(".content-section");
 
-    // --- FUNZIONE PER CAMBIARE SEZIONE ---
     const activateSection = (targetId) => {
-        // 1. Nascondi tutte le sezioni
-        sections.forEach(s => s.classList.add("content-hidden"));
+        const targetElement = document.querySelector(targetId);
+        if (!targetElement) return;
 
-        // 2. Mostra la sezione target
-        const targetSection = document.querySelector(targetId);
-        if (targetSection) {
-            targetSection.classList.remove("content-hidden");
-        }
+        // Trova la sezione (.content-section) che contiene l'elemento cliccato
+        // Se l'elemento stesso è una sezione, prenderà se stesso
+        const parentSection = targetElement.closest(".content-section");
 
-        // 3. Aggiorna lo stato dei link (CSS e Accessibilità)
-        navLinks.forEach(link => {
-            link.classList.remove("current");
-            link.removeAttribute("aria-current");
+        if (parentSection) {
+            // 1. Nascondi tutte le sezioni
+            sections.forEach(s => s.classList.add("content-hidden"));
 
-            if (link.getAttribute("href") === targetId) {
-                link.classList.add("current");
-                link.ariaCurrent = "page"; // Corretto: assegna la stringa
+            // 2. Mostra la sezione che contiene l'obiettivo
+            parentSection.classList.remove("content-hidden");
+
+            // 3. Aggiorna i link della navigazione laterale (sidenav)
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href");
+                link.classList.remove("current");
+                link.removeAttribute("aria-current");
+
+                // Se il link punta alla sezione ora attiva, evidenzialo
+                if (href === `#${parentSection.id}`) {
+                    link.classList.add("current");
+                    link.ariaCurrent = "page";
+                }
+            });
+
+            // 4. Se l'obiettivo era un elemento interno (es. breadcrumb), spostaci il focus
+            // Questo permette all'accessibilità di funzionare correttamente
+            if (targetElement !== parentSection) {
+                targetElement.focus();
             }
-        });
+        }
     };
 
-    // --- LOGICA DI AVVIO (Sempre Dashboard all'inizio) ---
+    // Avvio: attiva la dashboard
     activateSection("#dashboard");
 
-    // --- GESTIONE DEI CLICK ---
     navLinks.forEach(link => {
         link.addEventListener("click", (e) => {
             const targetId = link.getAttribute("href");
@@ -36,6 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (targetId && targetId.startsWith("#") && targetId.length > 1) {
                 e.preventDefault();
                 activateSection(targetId);
+                
+                // Aggiorna l'URL nel browser (opzionale, mantiene la cronologia)
+                history.pushState(null, null, targetId);
             }
         });
     });

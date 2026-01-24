@@ -91,9 +91,8 @@ if ($farmacie && count($farmacie) > 0) {
         }
         
         $htmlFarmacie .= '<div class="row-btn">';
-        $htmlFarmacie .= '<button type="button" class="btn-primary"><a href="info-farm.php?id=' . $idFarm . '">Vedi Dettagli</a></button>';
+        $htmlFarmacie .= '<a href="info-farm.php?id=' . $idFarm . '" class="btn-like primary">Vedi Dettagli</a>';
         $htmlFarmacie .= '</div>';
-        $htmlFarmacie .= '</div></div>';
     }
 } else {
     $htmlFarmacie = '<p class="no-results">Nessuna farmacia disponibile per questo farmaco al momento.</p>';

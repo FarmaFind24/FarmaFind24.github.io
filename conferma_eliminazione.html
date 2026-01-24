@@ -40,30 +40,26 @@
         </nav>
     </header>
 
-    <div class="page-wrapper">
-        <main class="main-area-personale">
-            <section id="delete-confirm" class="content-section">
-                <div>
-                    <div class="icon-container-warning"><span class="material-symbols-outlined icon-warning icon-fill"
-                            aria-hidden="true">warning</span></div>
-                    <h2>Elimina Account</h2>
-                    <p>Sei sicuro di voler eliminare il tuo Account dai nostri sistemi? Questa azione è irreversibile e
-                        comporterà l'eliminazione permanente dei tuoi dati.</p>
-                    <form action="process-deletion.php" method="POST">
-                        <div class="confirm-check">
-                            <input type="checkbox" id="confirm" name="confirm_deletion" required>
-                            <label for="confirm">Capisco che questa azione non è reversibile</label>
-                        </div>
-
-                        <div class="row-btn">
-                            <a href="area-personale.php" class="outlined-btn">Annulla</a>
-                            <button type="submit" class="btn-primary no-margin">Conferma Eliminazione</button>
-                        </div>
-                    </form>
+    <main id="delete-page">
+        <div id="delete-confirm">
+            <div class="icon-container-warning"><span class="material-symbols-outlined icon-warning icon-fill"
+                    aria-hidden="true">warning</span></div>
+            <h2>Elimina Account</h2>
+            <p>Sei sicuro di voler eliminare il tuo Account dai nostri sistemi? Questa azione è irreversibile e
+                comporterà l'eliminazione permanente dei tuoi dati.</p>
+            <form action="process-deletion.php" method="POST">
+                <div class="confirm-check">
+                    <input type="checkbox" id="confirm" name="confirm_deletion" required>
+                    <label for="confirm">Capisco che questa azione non è reversibile</label>
                 </div>
-            </section>
-        </main>
-    </div>
+
+                <div class="row-btn">
+                    <a href="area-personale.php" class="outlined-btn">Annulla</a>
+                    <button type="submit" class="btn-primary no-margin">Conferma Eliminazione</button>
+                </div>
+            </form>
+        </div>
+    </main>
 
     <footer>
         <p>
