@@ -56,7 +56,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['codice_minsan']) . '</p>';
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['obbligo_ricetta']) . '</p>';
                 $htmlRisultati .= '<div class="row-btn">
-                <a href="#" class="btn-like primary">Dettagli</a>
+                <a href="info-med.php?id=' . $row['id'] . '" class="btn-like primary">Dettagli</a>
                 </div>';
                 $htmlRisultati .= '</div></div>';
             }

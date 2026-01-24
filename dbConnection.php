@@ -291,6 +291,41 @@ class DBAccess {
         return $orari;
     }
 
+    // INFO-MED 
+
+    // Metodo per ottenere dettagli di un farmaco specifico
+        public function getFarmacoById($idFarmaco) {
+        $query = "SELECT * FROM farmaci WHERE id = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $idFarmaco);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+    
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row;
+        }
+        return null;
+    }
+
+// Metodo per ottenere le farmacie che hanno un determinato farmaco
+    public function getFarmacieConFarmaco($idFarmaco) {
+        $query = "SELECT f.*, ff.prezzo, ff.quantita, ff.data_aggiornamento
+                 FROM farmacie f 
+                INNER JOIN farmacia_farmaci ff ON f.id = ff.farmacia_id 
+                WHERE ff.farmaco_id = ? 
+                ORDER BY f.nome ASC";
+    
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $idFarmaco);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+    
+        $farmacie = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $farmacie[] = $row;
+        }
+    return $farmacie;
+    }
 
     // --- AUTENTICAZIONE ---
 
