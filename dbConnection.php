@@ -1,6 +1,8 @@
 <?php
 namespace DB;
 
+date_default_timezone_set('Europe/Rome');
+
 class DBAccess {
 
 	private const HOST_DB = "localhost";
@@ -241,7 +243,7 @@ class DBAccess {
                   FROM orari_farmacie 
                   WHERE farmacia_id = ? 
                   AND giorno_settimana = ? 
-                  AND TIME(?) BETWEEN TIME(ora_apertura) AND TIME(ora_chiusura)";
+                  AND ? BETWEEN ora_apertura AND ora_chiusura";
     
         $stmt = mysqli_prepare($this->connection, $query);
         
@@ -291,7 +293,54 @@ class DBAccess {
         return $orari;
     }
 
+    public function getFarmaciaById($idFarmacia) {
+    	$query = "SELECT * FROM farmacie WHERE id = ?";
+    	$stmt = mysqli_prepare($this->connection, $query);
+    	mysqli_stmt_bind_param($stmt, "i", $idFarmacia);
+    	mysqli_stmt_execute($stmt);
+    	$result = mysqli_stmt_get_result($stmt);
+    
+    	if ($row = mysqli_fetch_assoc($result)) {
+        	return $row;
+    	}
+    	return null;
+    }
 
+    // INFO-MED 
+
+    // Metodo per ottenere dettagli di un farmaco specifico
+        public function getFarmacoById($idFarmaco) {
+        $query = "SELECT * FROM farmaci WHERE id = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $idFarmaco);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+    
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row;
+        }
+        return null;
+    }
+
+// Metodo per ottenere le farmacie che hanno un determinato farmaco
+public function getFarmacieConFarmaco($idFarmaco) {
+    $query = "SELECT f.*, d.prezzo, d.quantita, d.data_aggiornamento
+              FROM farmacie f 
+              INNER JOIN disponibilita d ON f.id = d.farmacia_id 
+              WHERE d.farmaco_id = ? 
+              ORDER BY f.nome ASC";
+    
+    $stmt = mysqli_prepare($this->connection, $query);
+    mysqli_stmt_bind_param($stmt, "i", $idFarmaco);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    $farmacie = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $farmacie[] = $row;
+    }
+    return $farmacie;
+}
     // --- AUTENTICAZIONE ---
 
     // 1. Registrazione nuovo utente
@@ -341,6 +390,30 @@ class DBAccess {
                   JOIN servizi s ON fs.servizio_id = s.id
                   WHERE p.utente_id = ?
                   ORDER BY p.data_appuntamento ASC, p.ora_appuntamento ASC";
+                  
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $idUtente);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        $prenotazioni = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $prenotazioni[] = $row;
+        }
+        return $prenotazioni;
+    }
+
+    public function getPrenotazioniUtentePreview($idUtente) {
+        // MODIFICA: Selezioniamo data_appuntamento e ora_appuntamento separatamente
+        $query = "SELECT p.data_appuntamento, p.ora_appuntamento, 
+                         f.nome AS nome_farmacia, f.indirizzo, s.nome_servizio 
+                  FROM prenotazioni p
+                  JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id
+                  JOIN farmacie f ON fs.farmacia_id = f.id
+                  JOIN servizi s ON fs.servizio_id = s.id
+                  WHERE p.utente_id = ?
+                  ORDER BY p.data_appuntamento ASC, p.ora_appuntamento ASC
+                  LIMIT 5";
                   
         $stmt = mysqli_prepare($this->connection, $query);
         mysqli_stmt_bind_param($stmt, "i", $idUtente);
@@ -505,20 +578,6 @@ class DBAccess {
         }
         return null;
     }
-
-// Aggiungi SOLO questo metodo dentro la classe DBAccess in dbConnection.php
-
-public function getFarmaciaById($idFarmacia) {
-    $query = "SELECT * FROM farmacie WHERE id = ?";
-    $stmt = mysqli_prepare($this->connection, $query);
-    mysqli_stmt_bind_param($stmt, "i", $idFarmacia);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    
-    if ($row = mysqli_fetch_assoc($result)) {
-        return $row;
-    }
-    return null;
 }
-}
+
 ?>

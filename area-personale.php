@@ -20,6 +20,7 @@ $htmlPrenotazioni = "";
 
 if ($connessioneOk) {
     $prenotazioni = $db->getPrenotazioniUtente($_SESSION['user_id']);
+    $prenotazioniShort = $db->getPrenotazioniUtentePreview($_SESSION['user_id']);
     
     // Array per la visualizzazione grafica (Abbreviati)
     $mesi_it = [
@@ -68,6 +69,43 @@ if ($connessioneOk) {
     } else {
         $htmlPrenotazioni = '<li class="appuntamento-card"><p style="padding:1rem;">Nessuna prenotazione futura.</p></li>';
     }
+
+    if ($prenotazioniShort && count($prenotazioniShort) > 0) {
+        foreach ($prenotazioniShort as $p) {
+            $timestamp = strtotime($p['data_appuntamento']);
+            $mese_en = date("M", $timestamp);
+            
+            $mese_visuale = $mesi_it[$mese_en]; 
+            $mese_parlato = $mesi_estesi[$mese_en]; 
+            $giorno = date("d", $timestamp);
+            $ora = date("H:i", strtotime($p['ora_appuntamento']));
+
+            $htmlPrenotazioniShort .= '
+            <li class="appuntamento-card">
+                <span class="sr-only">Appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' il ' . $giorno . ' ' . $mese_parlato . ' alle ore ' . $ora . '.</span>
+
+                <div class="appuntamento-card-date" aria-hidden="true">
+                    <span>' . $mese_visuale . '<br />' . $giorno . '</span>
+                </div>
+                
+                <div class="appuntamento-card-details">
+                    <div>
+                        <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
+                        <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
+                    </div>
+                    <button type="button" class="btn-primary no-margin" 
+                            aria-label="Disdici appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '">
+                        Disdici
+                    </button>
+                </div>
+            </li>';
+        }
+    } else {
+        $htmlPrenotazioniShort = '<li class="appuntamento-card"><p style="padding:1rem;">Nessuna prenotazione futura.</p></li>';
+    }
+
+
+
     $db->closeConnection();
 }
 
@@ -86,7 +124,7 @@ $dataReg = isset($_SESSION['data_registrazione']) ? date("d/m/Y", strtotime($_SE
 $paginaHTML = str_replace('[data_registrazione]', $dataReg, $paginaHTML);
 
 // 5. SOSTITUZIONE PLACEHOLDER (Liste generate)
-$paginaHTML = str_replace('[lista_prenotazioni]', $htmlPrenotazioni, $paginaHTML);
+$paginaHTML = str_replace('[lista_prenotazioni]', $htmlPrenotazioniShort, $paginaHTML);
 // Se vuoi usare la stessa lista anche nella sezione "Prenotazioni" in basso:
 $paginaHTML = str_replace('[lista_prenotazioni_completa]', $htmlPrenotazioni, $paginaHTML);
 

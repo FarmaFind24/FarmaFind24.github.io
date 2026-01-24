@@ -65,6 +65,113 @@
       </div>
     </form>
 
+    <div class="drug-list-container">
+
+    <div class="drug-row">
+        <div class="drug-image">
+            <img src="path/to/okidoki.jpg" alt="Farmaco">
+        </div>
+
+        <div class="drug-info">
+            <div class="drug-header">
+                <h3>OkiDoki Task <span class="producer">by SuperSano</span></h3>
+                <span class="badge badge-warning">Ricetta Richiesta</span>
+            </div>
+            <p class="active-ingredient">Principio Attivo: <strong>Ketoprofene</strong></p>
+            <div class="drug-meta">
+                <span><i class="icon-form"></i> Bustine</span>
+                <span><i class="icon-dose"></i> 80 mg</span>
+            </div>
+            <p class="drug-desc-short">Analgesico ad effetto rapido contro il mal di testa...</p>
+        </div>
+
+        <div class="drug-action">
+            <a href="/farmaco/3" class="btn-details">Scheda Tecnica &rarr;</a>
+        </div>
+    </div>
+
+    <div class="drug-row">
+        <div class="drug-image">
+            <img src="path/to/paracetamolo.jpg" alt="Farmaco">
+        </div>
+        <div class="drug-info">
+            <div class="drug-header">
+                <h3>Paracetamolo Advanced <span class="producer">by PharmaLife</span></h3>
+                <span class="badge badge-success">Banco (OTC)</span>
+            </div>
+            <p class="active-ingredient">Principio Attivo: <strong>Paracetamolo</strong></p>
+            <div class="drug-meta">
+                <span>Compresse</span>
+                <span>500 mg</span>
+            </div>
+            <p class="drug-desc-short">Analgesico e antipiretico indicato per il trattamento...</p>
+        </div>
+        <div class="drug-action">
+            <a href="/farmaco/4" class="btn-details">Scheda Tecnica &rarr;</a>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .drug-list-container { max-width: 900px; margin: 0 auto; font-family: sans-serif; }
+    
+    .drug-row {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        padding: 16px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .drug-row:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-color: #007bff;
+    }
+
+    .drug-image img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        border-radius: 6px;
+        margin-right: 20px;
+        background: #f9f9f9;
+        padding: 5px;
+    }
+
+    .drug-info { flex-grow: 1; padding-right: 20px; }
+    
+    .drug-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+    .drug-header h3 { margin: 0; color: #333; font-size: 1.1rem; }
+    .drug-header .producer { font-weight: normal; font-size: 0.8rem; color: #888; margin-left: 8px; }
+
+    .active-ingredient { color: #0056b3; margin: 0 0 8px 0; font-size: 0.95rem; }
+    
+    .drug-meta { display: flex; gap: 15px; font-size: 0.85rem; color: #555; margin-bottom: 8px; }
+    .drug-meta span { background: #f4f6f8; padding: 2px 8px; border-radius: 4px; }
+    
+    .drug-desc-short { margin: 0; color: #666; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 400px;}
+
+    .badge { padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+    .badge-warning { background: #fff3cd; color: #856404; } /* Ricetta */
+    .badge-success { background: #d4edda; color: #155724; } /* Banco */
+
+    .drug-action { min-width: 140px; text-align: right; border-left: 1px solid #eee; padding-left: 15px; }
+    .btn-details { text-decoration: none; color: #007bff; font-weight: 600; font-size: 0.9rem; }
+    .btn-details:hover { text-decoration: underline; }
+
+    /* Mobile Responsive */
+    @media (max-width: 600px) {
+        .drug-row { flex-direction: column; align-items: flex-start; }
+        .drug-image { margin-bottom: 10px; }
+        .drug-action { border-left: none; padding-left: 0; margin-top: 10px; width: 100%; }
+        .btn-details { display: block; width: 100%; text-align: center; background: #f0f0f0; padding: 8px; border-radius: 4px; }
+    }
+</style>
+
 
     <section class="farm-list-section">
       <div class="grid-4c">
