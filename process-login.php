@@ -4,8 +4,35 @@ require_once "dbConnection.php";
 use DB\DBAccess;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    // Recupera e pulisce input
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+    
+    // VALIDAZIONE INPUT
+    
+    // 1. Controllo campi vuoti
+    if (empty($username) || empty($password)) {
+        header("Location: area-login.html?error=empty_fields");
+        exit;
+    }
+    
+    // 2. Validazione lunghezza username (min 3, max 50 caratteri)
+    if (strlen($username) < 3 || strlen($username) > 50) {
+        header("Location: area-login.html?error=invalid_username_length");
+        exit;
+    }
+    
+    // 3. Validazione caratteri username (alfanumerici, underscore, trattino)
+    if (!preg_match("/^[a-zA-Z0-9_-]+$/", $username)) {
+        header("Location: area-login.html?error=invalid_username_format");
+        exit;
+    }
+    
+    // 4. Validazione lunghezza password (min 6 caratteri)
+    if (strlen($password) < 6) {
+        header("Location: area-login.html?error=invalid_password_length");
+        exit;
+    }
 
     $db = new DBAccess();
     if ($db->openDBConnection()) {

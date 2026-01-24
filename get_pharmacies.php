@@ -14,8 +14,30 @@ if (!isset($_GET['service_id']) || !isset($_GET['city'])) {
     exit;
 }
 
-$service_id = $_GET['service_id'];
-$city = $_GET['city'];
+// VALIDAZIONE INPUT
+
+// 1. Validazione service_id (deve essere un intero positivo)
+$service_id = filter_var($_GET['service_id'], FILTER_VALIDATE_INT);
+if ($service_id === false || $service_id <= 0) {
+    $response['html'] = '<p class="error">ID servizio non valido.</p>';
+    echo json_encode($response);
+    exit;
+}
+
+// 2. Validazione city (lunghezza e caratteri permessi)
+$city = trim($_GET['city']);
+if (empty($city) || strlen($city) > 100) {
+    $response['html'] = '<p class="error">Nome città non valido.</p>';
+    echo json_encode($response);
+    exit;
+}
+
+// 3. Sanitizzazione city (solo lettere, spazi, apostrofi, trattini)
+if (!preg_match("/^[A-Za-zÀ-ù\s'\-]{1,100}$/", $city)) {
+    $response['html'] = '<p class="error">Nome città contiene caratteri non validi.</p>';
+    echo json_encode($response);
+    exit;
+}
 
 $db = new DBAccess();
 $connessioneOk = $db->openDBConnection();

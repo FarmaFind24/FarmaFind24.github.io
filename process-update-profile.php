@@ -10,19 +10,40 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome = trim($_POST['name']);
-    $cognome = trim($_POST['surname']);
-    $email = trim($_POST['email']);
+    $nome = trim($_POST['name'] ?? '');
+    $cognome = trim($_POST['surname'] ?? '');
+    $email = trim($_POST['email'] ?? '');
     $idUtente = $_SESSION['user_id'];
     
-    // Validazione base
+    // VALIDAZIONE INPUT
+    
+    // 1. Controllo campi vuoti
     if (empty($nome) || empty($cognome) || empty($email)) {
         header("Location: area-personale.php?error=campi_vuoti");
         exit;
     }
     
+    // 2. Validazione nome (solo lettere, spazi, apostrofi e caratteri accentati)
+    if (!preg_match("/^[A-Za-zÀ-ù\s']{2,50}$/", $nome)) {
+        header("Location: area-personale.php?error=nome_non_valido");
+        exit;
+    }
+    
+    // 3. Validazione cognome (solo lettere, spazi, apostrofi e caratteri accentati)
+    if (!preg_match("/^[A-Za-zÀ-ù\s']{2,50}$/", $cognome)) {
+        header("Location: area-personale.php?error=cognome_non_valido");
+        exit;
+    }
+    
+    // 4. Validazione email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         header("Location: area-personale.php?error=email_non_valida");
+        exit;
+    }
+    
+    // 5. Validazione lunghezza email
+    if (strlen($email) > 100) {
+        header("Location: area-personale.php?error=email_troppo_lunga");
         exit;
     }
     

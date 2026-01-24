@@ -17,6 +17,12 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
     
     $testoCercato = trim($_GET['q']);
     
+    // VALIDAZIONE INPUT RICERCA
+    // Validazione lunghezza (min 2, max 100 caratteri)
+    if (strlen($testoCercato) < 2 || strlen($testoCercato) > 100) {
+        $htmlRisultati = '<p class="no-results">La ricerca deve contenere tra 2 e 100 caratteri.</p>';
+    } else {
+    
     $db = new DBAccess();
     $connessioneOk = $db->openDBConnection();
 
@@ -68,6 +74,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
     } else {
         $htmlRisultati = '<p class="error">Errore di connessione al database.</p>';
     }
+    } // Chiusura else validazione lunghezza
 } 
 
 $paginaHTML = str_replace('[listaFarmacie]', $htmlRisultati, $paginaHTML);

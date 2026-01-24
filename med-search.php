@@ -51,7 +51,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 $htmlRisultati .= '<h3 class="title-card">' . htmlspecialchars($row['nome_commerciale']) . '</h3>';
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['descrizione']) . '</p>';
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['forma_farmaceutica']) . '</p>';
-                $htmlRisultati .= '<p>' . htmlspecialchars($row['dosaggio']) . '</p>';
+                $htmlRisultati .= '<p>' . $row['dosaggio'] . '</p>';
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['produttore']) . '</p>';
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['codice_minsan']) . '</p>';
                 $htmlRisultati .= '<p>' . htmlspecialchars($row['obbligo_ricetta']) . '</p>';

@@ -14,7 +14,22 @@ if (!isset($_GET['city'])) {
     exit;
 }
 
-$city = $_GET['city'];
+// VALIDAZIONE INPUT
+
+// 1. Validazione city (lunghezza e caratteri permessi)
+$city = trim($_GET['city']);
+if (empty($city) || strlen($city) > 100) {
+    $response['html'] = '<p class="error">Nome città non valido.</p>';
+    echo json_encode($response);
+    exit;
+}
+
+// 2. Sanitizzazione city (solo lettere, spazi, apostrofi, trattini)
+if (!preg_match("/^[A-Za-zÀ-ù\s'\-]{1,100}$/", $city)) {
+    $response['html'] = '<p class="error">Nome città contiene caratteri non validi.</p>';
+    echo json_encode($response);
+    exit;
+}
 
 $db = new DBAccess();
 $connessioneOk = $db->openDBConnection();
