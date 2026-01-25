@@ -47,9 +47,10 @@ try {
     
     // Status (Aperto/Chiuso)
     $isAperta = $db->isFarmaciaAperta($idFarmacia);
-    $statusHTML = '<span class="' . ($isAperta ? 'aperto' : 'chiuso') . '">' . 
-                  ($isAperta ? 'Aperto' : 'Chiuso') . '</span>';
-    
+    $statusHTML = '<div class="status-container ' . ($isAperta ? 'status-aperto' : 'status-chiuso') . '">' .
+              '<span class="' . ($isAperta ? 'aperto' : 'chiuso') . '">' . 
+              ($isAperta ? 'Aperto' : 'Chiuso') . '</span>' .
+              '</div>';
     // Immagine
     $immagine = !empty($farmacia['immagine']) 
                 ? 'assets/' . htmlspecialchars($farmacia['immagine']) 

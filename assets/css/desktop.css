@@ -1178,12 +1178,23 @@ a.delete-account {
   text-align: left;
 }
 
-#InfoFarmStatus {
+#InfoFarmStatus .aperto{
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
-  background-color: #e6f7ed;
+  background-color: #fef1f1;
   color: #155724;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+#InfoFarmStatus .chiuso{
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #fef1f1;
+  color: #d32f2f;
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.95rem;
