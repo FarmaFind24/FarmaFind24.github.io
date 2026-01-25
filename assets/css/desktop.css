@@ -1635,7 +1635,7 @@ a.delete-account {
 }
 
 /* Se JS è attivo, aggiungiamo una classe al body o usiamo JS per nascondere questo bottone */
-.js-enabled .no-js-visible {
+.js-active #check-time-btn {
   display: none;
 }
 
