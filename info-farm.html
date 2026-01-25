@@ -2,10 +2,11 @@
 <html lang="it">
 
 <head>
-  <title>Info Farmacia - Farma Find 24</title>
+  <title>Informazioni farmacia - Farma Find 24</title>
   <meta charset="utf-8">
-  <meta name="description" content="Pagina home ">
-  <meta name="keywords" content="salute">
+  <meta name="description"
+    content="Leggi gli orari di apertura, i dettagli, i servizi offerti e i contatti della farmacia.">
+  <meta name="keywords" content="farmacia, padova, dettagli, orari, indirizzo, contatti, servizi">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +22,16 @@
 
 <body>
   <header class="main-header">
-    <h1 class="hide">FarmaFind24</h1>
+    <nav aria-label="Aiuti alla navigazione" class="help-nav">
+      <a href="#main-content">Vai al contenuto principale</a>
+    </nav>
+
+    <h1>
+      <a href="index.php" class="hide" title="Torna alla pagina principale">
+        Farma<span lang="en">Find</span>24
+      </a>
+    </h1>
+
     <nav class="Top-NavBar">
       <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false">
         ?
@@ -33,22 +43,25 @@
         <li><a aria-current="page" href="farm-search.php" class="current-page">
             <span class="sr-only">Pagina Corrente:</span>
             Farmacie</a>
-        <li><a href="med-search.php">Medicinali</a></li>
         </li>
+        <li><a href="med-search.php">Medicinali</a></li>
+
         <li><a href="book-app.php">Prenota Visita</a></li>
         <li>
           <a href="about.php"><span lang="en">About</span></a>
         </li>
+	<li>
+	  <a href="[area_personale_href]">[area_personale_text]</a>
+	</li>
       </ul>
     </nav>
   </header>
 
   <nav id="breadcrumb" aria-label="Percorso di navigazione">
-    <p> Ti trovi in: <a href="index.php"> <span lang="en">Home</span></a> >> <a href="farm-search.php">Farmacie</a>
-      >> Informazioni</p>
+    <p> Ti trovi in: <a href="farm-search.php">Farmacie</a> >> Informazioni</p>
   </nav>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <div id="TopContainerInfoFarm">
       <h1>[nomeFarmacia]</h1>
       <div id="InfoFarmStatus">
@@ -57,8 +70,7 @@
     </div>
 
     <div class="FarmImageWrapper">
-      <img src="assets/farmacia21.png"
-        alt="Facciata della Farmacia Centrale con vetrine illuminate e insegna verde" />
+      <img src="assets/farmacia21.png" alt="Facciata della Farmacia Centrale con vetrine illuminate e insegna verde">
     </div>
 
     <div class="info-farm-grid">
@@ -75,7 +87,7 @@
 
       <div id="SeriviziOfferti">
         <h2>Servizi Offerti</h2>
-        [serviziOfferti]
+          [serviziOfferti]
       </div>
 
     </div>
