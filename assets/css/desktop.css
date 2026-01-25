@@ -1259,6 +1259,11 @@ a.delete-account {
 }
 
 /* Servizi Offerti */
+.lista-servizi {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 .SerivzioOfferto {
   padding: 0.75rem;
   margin-bottom: 0.5rem;
@@ -1267,10 +1272,13 @@ a.delete-account {
   border-radius: 6px;
 }
 
-.SerivzioOfferto p {
-  margin: 0;
-  font-weight: 500;
+.SerivzioOfferto {
+  font-weight: bold;
 }
+.descrizione-servizio {
+  font-weight: normal;
+}
+
 
 /* Layout Container per griglia a 3 colonne */
 .info-farm-grid {

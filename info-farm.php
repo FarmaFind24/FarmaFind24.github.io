@@ -122,16 +122,18 @@ try {
     // Servizi offerti - usa il metodo esistente getServiziFarmacia
     $servizi = $db->getServiziFarmacia($idFarmacia);
     $serviziHTML = '';
-    
+
     if ($servizi && count($servizi) > 0) {
+        $serviziHTML = '<ul class="lista-servizi">';
         foreach ($servizi as $servizio) {
-            $serviziHTML .= '<div class="SerivzioOfferto">';
-            $serviziHTML .= '<p>' . htmlspecialchars($servizio['nome_servizio']) . '</p>';
+            $serviziHTML .= '<li class="SerivzioOfferto">';
+            $serviziHTML .= '<p aria-hidden="true">' . htmlspecialchars($servizio['nome_servizio']) . '</p>';
             if (!empty($servizio['descrizione'])) {
-                $serviziHTML .= '<p class="descrizione-servizio">' . htmlspecialchars($servizio['descrizione']) . '</p>';
+                $serviziHTML .= '<p class="descrizione-servizio" aria-hidden="true">' . htmlspecialchars($servizio['descrizione']) . '</p>';
             }
-            $serviziHTML .= '</div>';
+            $serviziHTML .= '</li>';
         }
+        $serviziHTML .= '</ul>';
     } else {
         $serviziHTML = '<p>Nessun servizio disponibile al momento.</p>';
     }
