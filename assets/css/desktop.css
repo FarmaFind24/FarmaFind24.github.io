@@ -59,7 +59,10 @@ footer {
   z-index: var(--z-index-footer);
   width: 100%;
 }
-
+footer p{
+  width: 80%;
+  margin: 0 auto;
+}
 section {
   width: 100%;
   display: flex;
@@ -154,6 +157,7 @@ a.btn-like {
   grid-template-columns: repeat(auto-fit, 18.165rem);
   width: 100%;
   justify-content: center;
+  justify-items: center;
 }
 
 /* Nasconde l'elemento ma lo mantiene nel flusso dei Tab */
@@ -669,27 +673,40 @@ nav.breadcrumb-area-personale {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  border-radius: 12px;
-  text-decoration: none;
-  width: 180px;
-  height: 220px;
+  justify-content: center;
+  gap: 1em;
+  border-radius: 8px;
+  width: 12.5em; 
+  height: 16em;
   padding: 1.5rem;
   text-align: center;
   border: var(--primary-color) solid 1px;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.5s ease;
-  box-shadow: 0px 9px 5px var(--accent);
+  background-color: color-mix(in srgb, var(--primary-color), transparent 95%);
+
+  position: relative;    /* Serve per z-index */
+  
+  /* Transizione fluida per tutte le proprietà che cambieremo */
+  transition: 
+    transform 0.2s ease-out, 
+    box-shadow 0.2s ease-out, 
+    border-color 0.2s ease;
+}
+.avatar-container:hover,
+.avatar-container:focus-visible {
+  transform: translateY(-0.35em); 
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.3); 
+  box-shadow: 
+    0 0.5em 1em rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px var(--primary-color);
 }
 .avatar-img {
-  width: 100px;
+width: 6.25em;
+  height: 6.25em;
   background-size: cover;
-  height: 100px;
+  background-position: center;
   border-radius: 50%;
+  border: 0.15em solid white;
+  transition: transform 0.2s ease;
 }
 .ghp_1 {
   background-image: url("https://github.com/Scafu.png");
@@ -705,22 +722,7 @@ nav.breadcrumb-area-personale {
 }
 .avatar-container span {
   font-size: 1.3rem;
-  color: black;
   transition: color 0.2s;
-}
-
-.avatar-container:hover {
-  transform: translateY(2px);
-  overflow: hidden;
-  background-color: var(--primary-color);
-  color: var(--main-bg-color);
-  border-color: var(--accent);
-  box-shadow:
-    0 10px 20px rgba(0, 0, 0, 0.25),
-    0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.avatar-container:hover span {
-  color: var(--main-bg-color);
 }
 
 .sponsor-card {
@@ -753,7 +755,6 @@ nav.breadcrumb-area-personale {
   background-image: url("../universita-logo.webp");
   height: 70%;
 }
-
 .uni-logo {
   height: 70%;
   width: 100%;
@@ -761,21 +762,29 @@ nav.breadcrumb-area-personale {
 }
 .contact-info {
   box-sizing: border-box;
-  width: 40%;
+  width: 40%; 
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 2rem;
-  margin: 0 auto;
-}
-.contact-info ul {
-  padding: 0;
-  list-style: none;
-}
-.contact-info ul li {
-  margin-top: 1rem;
+  gap: 1.5em; 
+  padding: 2em;
+  margin: 1em auto;
 }
 
+address {
+  font-style: normal;
+}
+.contact-item {
+  margin-bottom: 1em; 
+}
+.contact-item dt {
+  font-weight: 700;
+  margin-bottom: 0.3em; 
+  line-height: 1.2;
+}
+.contact-item dd {
+  margin-left: 1.5em; 
+  margin-bottom: 0;   
+}
 /**********************/
 /*     LOGIN-PAGE     */
 /**********************/
@@ -2010,6 +2019,7 @@ input.invalid + .error-msg {
   border: 3px solid var(--primary-color);
   border-radius: 8px;
   margin-bottom: 1.5em;
+  overflow: hidden;
 }
 summary {
   display: flex;
