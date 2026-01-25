@@ -1,6 +1,8 @@
 <?php
 namespace DB;
 
+date_default_timezone_set('Europe/Rome');
+
 class DBAccess {
 
 	private const HOST_DB = "localhost";
@@ -81,7 +83,7 @@ class DBAccess {
     // Aggiungi dentro class DBAccess in dbConnection.php
 	
 	public function cercaFarmacie($testoRicerca) {
-		// Cerca per nome della farmacia O per città
+		// Cerca per nome della farmacia O per cittÃ 
 		$query = "SELECT * FROM farmacie 
 				  WHERE nome LIKE ? OR citta LIKE ? 
 				  ORDER BY nome ASC";
@@ -100,7 +102,7 @@ class DBAccess {
 		return $result;
 	}
 
-    // 5. Funzione per cercare FARMACIE per nome o città (precedentemente duplicata)
+    // 5. Funzione per cercare FARMACIE per nome o cittÃ  (precedentemente duplicata)
     public function cercaFarmaciePerNomeOCitta($testoRicerca) {
         $query = "SELECT * FROM farmacie WHERE nome LIKE ? OR citta LIKE ? ORDER BY nome ASC";
         $stmt = mysqli_prepare($this->connection, $query);
@@ -134,7 +136,7 @@ class DBAccess {
         return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
     }
 
-    // 7. Funzione per ottenere la lista di tutte le CITTÀ uniche
+    // 7. Funzione per ottenere la lista di tutte le CITTÃ€ uniche
     public function getListaCitta() {
         $query = "SELECT DISTINCT citta FROM farmacie ORDER BY citta ASC";
         $queryResult = mysqli_query($this->connection, $query);
@@ -144,7 +146,7 @@ class DBAccess {
         return [];
     }
 
-    // 8. Funzione per trovare le farmacie che offrono un dato servizio in una data città
+    // 8. Funzione per trovare le farmacie che offrono un dato servizio in una data cittÃ 
     public function getFarmaciePerServizioECitta($idServizio, $citta) {
         $query = "SELECT f.id, f.nome, f.indirizzo 
                   FROM farmacie f 
@@ -157,9 +159,9 @@ class DBAccess {
         return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
     }
 
-    // 9. Funzione per trovare farmacie "vicine" (in altre città) che offrono un servizio
+    // 9. Funzione per trovare farmacie "vicine" (in altre cittÃ ) che offrono un servizio
     public function getFarmacieVicinePerServizio($idServizio, $cittaEsclusa, $limit = 5) {
-        // Step 1: Ottiene le coordinate medie (lat, lon) per la città selezionata, usandole come centro per la ricerca
+        // Step 1: Ottiene le coordinate medie (lat, lon) per la cittÃ  selezionata, usandole come centro per la ricerca
         $coordQuery = "SELECT AVG(latitudine) as lat, AVG(longitudine) as lon FROM farmacie WHERE citta = ?";
         $coordStmt = mysqli_prepare($this->connection, $coordQuery);
         mysqli_stmt_bind_param($coordStmt, "s", $cittaEsclusa);
@@ -167,7 +169,7 @@ class DBAccess {
         $coordResult = mysqli_stmt_get_result($coordStmt);
         $coords = mysqli_fetch_assoc($coordResult);
 
-        // Se non è possibile trovare le coordinate per la città (es. nessuna farmacia presente), non si può calcolare la distanza.
+        // Se non Ã¨ possibile trovare le coordinate per la cittÃ  (es. nessuna farmacia presente), non si puÃ² calcolare la distanza.
         if (!$coords || is_null($coords['lat']) || is_null($coords['lon'])) {
             return [];
         }
@@ -177,7 +179,7 @@ class DBAccess {
         $distanzaMassima = 20; // Distanza massima in KM. Puoi modificare questo valore.
 
         // Step 2: Trova le farmacie vicine usando la formula di Haversine per calcolare la distanza in km.
-        // 6371 è il raggio della Terra in km.
+        // 6371 Ã¨ il raggio della Terra in km.
         $query = "SELECT f.id, f.nome, f.indirizzo, f.citta,
                     ( 6371 * acos( cos( radians(?) ) * cos( radians( f.latitudine ) ) * cos( radians( f.longitudine ) - radians(?) ) + sin( radians(?) ) * sin( radians( f.latitudine ) ) ) ) AS distanza
                   FROM farmacie f 
@@ -195,7 +197,7 @@ class DBAccess {
     }
 
     public function getFarmacieDintorni($cittaRiferimento, $limit = 4) {
-        // Step 1: Ottiene le coordinate medie (lat, lon) per la città selezionata, usandole come centro per la ricerca
+        // Step 1: Ottiene le coordinate medie (lat, lon) per la cittÃ  selezionata, usandole come centro per la ricerca
         $coordQuery = "SELECT AVG(latitudine) as lat, AVG(longitudine) as lon FROM farmacie WHERE citta = ?";
         $coordStmt = mysqli_prepare($this->connection, $coordQuery);
         mysqli_stmt_bind_param($coordStmt, "s", $cittaRiferimento);
@@ -203,7 +205,7 @@ class DBAccess {
         $coordResult = mysqli_stmt_get_result($coordStmt);
         $coords = mysqli_fetch_assoc($coordResult);
 
-        // Se non è possibile trovare le coordinate per la città (es. nessuna farmacia presente), non si può calcolare la distanza.
+        // Se non Ã¨ possibile trovare le coordinate per la cittÃ  (es. nessuna farmacia presente), non si puÃ² calcolare la distanza.
         if (!$coords || is_null($coords['lat']) || is_null($coords['lon'])) {
             return [];
         }
@@ -213,7 +215,7 @@ class DBAccess {
         $distanzaMassima = 20; // Distanza massima in KM. Puoi modificare questo valore.
 
         // Step 2: Trova le farmacie vicine usando la formula di Haversine per calcolare la distanza in km.
-        // 6371 è il raggio della Terra in km.
+        // 6371 Ã¨ il raggio della Terra in km.
         $query = "SELECT f.id, f.nome, f.indirizzo, f.citta, f.telefono, f.immagine,
                     ( 6371 * acos( cos( radians(?) ) * cos( radians( f.latitudine ) ) * cos( radians( f.longitudine ) - radians(?) ) + sin( radians(?) ) * sin( radians( f.latitudine ) ) ) ) AS distanza
                   FROM farmacie f 
@@ -236,12 +238,12 @@ class DBAccess {
         $oraAdesso = date('H:i:s');
     
         // 2. Query - Verifica se esiste almeno una fascia oraria attiva
-        // La farmacia è aperta se l'ora corrente cade in almeno una fascia oraria del giorno corrente
+        // La farmacia Ã¨ aperta se l'ora corrente cade in almeno una fascia oraria del giorno corrente
         $query = "SELECT COUNT(*) as total 
                   FROM orari_farmacie 
                   WHERE farmacia_id = ? 
                   AND giorno_settimana = ? 
-                  AND TIME(?) BETWEEN TIME(ora_apertura) AND TIME(ora_chiusura)";
+                  AND ? BETWEEN ora_apertura AND ora_chiusura";
     
         $stmt = mysqli_prepare($this->connection, $query);
         
@@ -264,7 +266,7 @@ class DBAccess {
         $row = mysqli_fetch_assoc($result);
     
         // 3. Ritorna TRUE se trova almeno 1 riga, altrimenti FALSE
-        // Se non ci sono orari per questo giorno, la farmacia è considerata chiusa
+        // Se non ci sono orari per questo giorno, la farmacia Ã¨ considerata chiusa
         return $row && $row['total'] > 0;
     }
 
@@ -289,6 +291,19 @@ class DBAccess {
             $orari[] = $row;
         }
         return $orari;
+    }
+
+    public function getFarmaciaById($idFarmacia) {
+    	$query = "SELECT * FROM farmacie WHERE id = ?";
+    	$stmt = mysqli_prepare($this->connection, $query);
+    	mysqli_stmt_bind_param($stmt, "i", $idFarmacia);
+    	mysqli_stmt_execute($stmt);
+    	$result = mysqli_stmt_get_result($stmt);
+    
+    	if ($row = mysqli_fetch_assoc($result)) {
+        	return $row;
+    	}
+    	return null;
     }
 
     // INFO-MED 
@@ -326,7 +341,6 @@ public function getFarmacieConFarmaco($idFarmaco) {
     }
     return $farmacie;
 }
-
 
     // --- AUTENTICAZIONE ---
 
@@ -367,16 +381,52 @@ public function getFarmacieConFarmaco($idFarmaco) {
 
     // In dbConnection.php -> class DBAccess
 
-    public function getPrenotazioniUtente($idUtente) {
+public function getPrenotazioniUtente($idUtente) {
+    // MODIFICA: Selezioniamo data_appuntamento e ora_appuntamento separatamente
+    $query = "SELECT p.id, p.data_appuntamento, p.ora_appuntamento, 
+                     f.nome AS nome_farmacia, f.indirizzo, s.nome_servizio 
+              FROM prenotazioni p
+              JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id
+              JOIN farmacie f ON fs.farmacia_id = f.id
+              JOIN servizi s ON fs.servizio_id = s.id
+              WHERE p.utente_id = ?
+              ORDER BY p.data_appuntamento ASC, p.ora_appuntamento ASC";
+              
+    $stmt = mysqli_prepare($this->connection, $query);
+    mysqli_stmt_bind_param($stmt, "i", $idUtente);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    $prenotazioni = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $prenotazioni[] = $row;
+    }
+    return $prenotazioni;
+}
+    // Metodo per eliminare una prenotazione
+    public function eliminaPrenotazione($idPrenotazione, $idUtente) {
+        // Verifica che la prenotazione appartenga all'utente prima di eliminarla
+        $query = "DELETE FROM prenotazioni WHERE id = ? AND utente_id = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ii", $idPrenotazione, $idUtente);
+    
+        try {
+            return mysqli_stmt_execute($stmt);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+    public function getPrenotazioniUtentePreview($idUtente) {
         // MODIFICA: Selezioniamo data_appuntamento e ora_appuntamento separatamente
-        $query = "SELECT p.data_appuntamento, p.ora_appuntamento, 
+        $query = "SELECT p.id, p.data_appuntamento, p.ora_appuntamento, 
                          f.nome AS nome_farmacia, f.indirizzo, s.nome_servizio 
                   FROM prenotazioni p
                   JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id
                   JOIN farmacie f ON fs.farmacia_id = f.id
                   JOIN servizi s ON fs.servizio_id = s.id
                   WHERE p.utente_id = ?
-                  ORDER BY p.data_appuntamento ASC, p.ora_appuntamento ASC";
+                  ORDER BY p.data_appuntamento ASC, p.ora_appuntamento ASC
+                  LIMIT 5";
                   
         $stmt = mysqli_prepare($this->connection, $query);
         mysqli_stmt_bind_param($stmt, "i", $idUtente);
@@ -406,7 +456,7 @@ public function getFarmacieConFarmaco($idFarmaco) {
 
     // 4. Eliminazione account utente
     public function eliminaUtente($idUtente) {
-        // Prima eliminiamo le prenotazioni dell'utente (per integrità referenziale)
+        // Prima eliminiamo le prenotazioni dell'utente (per integritÃ  referenziale)
         $query1 = "DELETE FROM prenotazioni WHERE utente_id = ?";
         $stmt1 = mysqli_prepare($this->connection, $query1);
         mysqli_stmt_bind_param($stmt1, "i", $idUtente);
@@ -452,9 +502,9 @@ public function getFarmacieConFarmaco($idFarmaco) {
         return false;
     }
 
-    // 7. Verifica disponibilità di uno slot orario
+    // 7. Verifica disponibilitÃ  di uno slot orario
     public function verificaDisponibilitaSlot($idFarmaciaServizio, $data, $ora) {
-        // Verifica se esiste già una prenotazione per quella combinazione farmacia-servizio, data e ora
+        // Verifica se esiste giÃ  una prenotazione per quella combinazione farmacia-servizio, data e ora
         $query = "SELECT COUNT(*) as conteggio 
                   FROM prenotazioni 
                   WHERE farmacia_servizio_id = ? 
@@ -467,7 +517,7 @@ public function getFarmacieConFarmaco($idFarmaco) {
         $result = mysqli_stmt_get_result($stmt);
         
         if ($row = mysqli_fetch_assoc($result)) {
-            // Se il conteggio è 0, lo slot è disponibile
+            // Se il conteggio Ã¨ 0, lo slot Ã¨ disponibile
             return $row['conteggio'] == 0;
         }
         return false;
@@ -541,20 +591,6 @@ public function getFarmacieConFarmaco($idFarmaco) {
         }
         return null;
     }
-
-// Aggiungi SOLO questo metodo dentro la classe DBAccess in dbConnection.php
-
-public function getFarmaciaById($idFarmacia) {
-    $query = "SELECT * FROM farmacie WHERE id = ?";
-    $stmt = mysqli_prepare($this->connection, $query);
-    mysqli_stmt_bind_param($stmt, "i", $idFarmacia);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    
-    if ($row = mysqli_fetch_assoc($result)) {
-        return $row;
-    }
-    return null;
 }
-}
+
 ?>
