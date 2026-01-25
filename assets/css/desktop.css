@@ -1275,7 +1275,7 @@ a.delete-account {
     
     .drug-row {
         display: flex;
-        flex-wrap: column;
+        flex-wrap: wrap;
         align-items: center;
         background: #fff;
         border: 2px solid var(--primary-color);
