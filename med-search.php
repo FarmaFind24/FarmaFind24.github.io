@@ -70,7 +70,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 $htmlRisultati .= '<dt>Formato:</dt>';
                 $htmlRisultati .= '<dd>' . htmlspecialchars($row['forma_farmaceutica']) . '</dd>';
                 $htmlRisultati .= '<dt>Dosaggio:</dt>';
-                $htmlRisultati .= '<dd>' . htmlspecialchars($row['dosaggio']) . '</dd>';
+                $htmlRisultati .= '<dd>' . $row['dosaggio'] . '</dd>';
                 $htmlRisultati .= '</dl>';
                 $htmlRisultati .= '<dt>Indicazioni:</dt>';
                 $htmlRisultati .= '<dd class="drug-desc-short">' . htmlspecialchars($row['descrizione']) . '</dd>';

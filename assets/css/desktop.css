@@ -1425,13 +1425,13 @@ a.delete-account {
 .MedImageWrapper img {
   width: 100%;
   height: auto;
-  max-width: 900px;
-  max-height: 450px;
-  object-fit: cover;
-  object-position: bottom; /* Da vedere perchè cosi si aspetta medicinale in basso e quindi in caso taglia dall'alto*/
+  max-width: 400px;
+  max-height: 200px;
+  object-fit: contain;
+  object-position: center; /* Da vedere perchè cosi si aspetta medicinale in basso e quindi in caso taglia dall'alto*/
   aspect-ratio: 2 / 1;
-  background-color: #ffffff;
-  padding: 2rem;
+  background-color: var(--primary-color);
+  padding: 0rem 0.5rem 0rem 0.5rem;
   border-radius: 12px;
   border: 1px solid var(--border-color);
 }
