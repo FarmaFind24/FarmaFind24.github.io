@@ -1,14 +1,11 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Disabilita la cache del browser
-header("Cache-Control: no-cache, no-store, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
-
 require_once "dbConnection.php";
+require_once "session-helper.php";
 use DB\DBAccess;
 
 $paginaHTML = file_get_contents("info-farm.html");
@@ -50,9 +47,10 @@ try {
     
     // Status (Aperto/Chiuso)
     $isAperta = $db->isFarmaciaAperta($idFarmacia);
-    $statusHTML = '<span class="' . ($isAperta ? 'aperto' : 'chiuso') . '">' . 
-                  ($isAperta ? 'Aperto' : 'Chiuso') . '</span>';
-    
+    $statusHTML = '<div class="status-container ' . ($isAperta ? 'status-aperto' : 'status-chiuso') . '">' .
+              '<span class="' . ($isAperta ? 'aperto' : 'chiuso') . '">' . 
+              ($isAperta ? 'Aperto' : 'Chiuso') . '</span>' .
+              '</div>';
     // Immagine
     $immagine = !empty($farmacia['immagine']) 
                 ? 'assets/' . htmlspecialchars($farmacia['immagine']) 
@@ -122,16 +120,18 @@ try {
     // Servizi offerti - usa il metodo esistente getServiziFarmacia
     $servizi = $db->getServiziFarmacia($idFarmacia);
     $serviziHTML = '';
-    
+
     if ($servizi && count($servizi) > 0) {
+        $serviziHTML = '<ul class="lista-servizi">';
         foreach ($servizi as $servizio) {
-            $serviziHTML .= '<div class="SerivzioOfferto">';
-            $serviziHTML .= '<p>' . htmlspecialchars($servizio['nome_servizio']) . '</p>';
+            $serviziHTML .= '<li class="SerivzioOfferto">';
+            $serviziHTML .= '<p aria-hidden="true">' . htmlspecialchars($servizio['nome_servizio']) . '</p>';
             if (!empty($servizio['descrizione'])) {
-                $serviziHTML .= '<p class="descrizione-servizio">' . htmlspecialchars($servizio['descrizione']) . '</p>';
+                $serviziHTML .= '<p class="descrizione-servizio" aria-hidden="true">' . htmlspecialchars($servizio['descrizione']) . '</p>';
             }
-            $serviziHTML .= '</div>';
+            $serviziHTML .= '</li>';
         }
+        $serviziHTML .= '</ul>';
     } else {
         $serviziHTML = '<p>Nessun servizio disponibile al momento.</p>';
     }
@@ -145,7 +145,9 @@ try {
     $paginaHTML = str_replace('[infoGenerali]', $infoGeneraliHTML, $paginaHTML);
     $paginaHTML = str_replace('[orariApertura]', $orariHTML, $paginaHTML);
     $paginaHTML = str_replace('[serviziOfferti]', $serviziHTML, $paginaHTML);
-    
+    // Gestione Area Personale nella navbar
+    $paginaHTML = str_replace('[area_personale_href]', getAreaPersonaleHref(), $paginaHTML);
+    $paginaHTML = str_replace('[area_personale_text]', getAreaPersonaleText(), $paginaHTML);
     $db->closeConnection();
     
 } catch (\mysqli_sql_exception $e) {

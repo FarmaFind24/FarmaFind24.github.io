@@ -1178,12 +1178,23 @@ a.delete-account {
   text-align: left;
 }
 
-#InfoFarmStatus {
+#InfoFarmStatus .aperto{
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
-  background-color: #e6f7ed;
+  background-color: #fef1f1;
   color: #155724;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+#InfoFarmStatus .chiuso{
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #fef1f1;
+  color: #d32f2f;
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.95rem;
@@ -1259,6 +1270,11 @@ a.delete-account {
 }
 
 /* Servizi Offerti */
+.lista-servizi {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 .SerivzioOfferto {
   padding: 0.75rem;
   margin-bottom: 0.5rem;
@@ -1267,10 +1283,13 @@ a.delete-account {
   border-radius: 6px;
 }
 
-.SerivzioOfferto p {
-  margin: 0;
-  font-weight: 500;
+.SerivzioOfferto {
+  font-weight: bold;
 }
+.descrizione-servizio {
+  font-weight: normal;
+}
+
 
 /* Layout Container per griglia a 3 colonne */
 .info-farm-grid {
