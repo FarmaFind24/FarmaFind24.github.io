@@ -727,38 +727,23 @@ width: 6.25em;
 
 .sponsor-card {
   border: 1px solid var(--primary-color);
-  width: 200px;
-  height: 150px;
+  width: 12.5em;
+  height: 9.5em;
   border-radius: 1rem;
   padding: 1rem;
   display: flex;
   align-items: center;
+  justify-content: center;
+  display:flex;
   background-color: color-mix(in srgb, var(--primary-color), transparent 95%);
 }
-.sponsor-img {
+.sponsor-card img{
   height: 50%;
   width: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.sponsor_1 {
-  background-image: url("../joogle-icon.webp");
-}
-.sponsor_2 {
-  background-image: url("../mirkosoft-icon.webp");
-}
-.sponsor_3 {
-  background-image: url("../closedAI-logo.webp");
-}
-.sponsor_4 {
-  background-image: url("../universita-logo.webp");
-  height: 70%;
-}
-.uni-logo {
-  height: 70%;
-  width: 100%;
   object-fit: contain;
+}
+.sponsor-card .uni-logo {
+  height: 0%;
 }
 .contact-info {
   box-sizing: border-box;
