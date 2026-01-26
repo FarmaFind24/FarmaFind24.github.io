@@ -9,8 +9,8 @@
     <meta name="keywords" content="salute">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
-    <link rel="stylesheet" href="../assets/css/desktop.css" media="screen">
-    <link rel="stylesheet" href="../assets/css/mini.css" media="screen and (max-width:950px)">
+    <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
+    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
@@ -80,19 +80,6 @@
                     <p>Bentornato nella tua dashboard</p>
                 </div>
 
-                <div class="activity-row">
-                    <div class="activity-card" tabindex="-1">
-                        <div class="activity-title">
-                            <h2>Prossimo Appuntamento</h2>
-                            <span class="material-symbols-outlined" aria-hidden="true">event</span>
-                        </div>
-                        <div class="activity-date">
-                            <span>24 <abbr title="Ottobre">OTT</abbr>, <abbr title="12">12.00</abbr></span>
-                            <p>Tra due giorni</p>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="appuntamenti-section">
                     <div class="appuntamenti-section title-row">
                         <h2 aria-hidden="true">Appuntamenti in arrivo</h2>
@@ -173,10 +160,10 @@
 
 
                 <div class="appuntamenti-section">
-                    <span class="sr-only">Lista Appuntamenti</span>
-                    <div class="appuntamenti-column">
+                    <span class="sr-only">lista appuntamenti</span>
+                    <ol class="appuntamenti-column">
                         [lista_prenotazioni_completa]
-                    </div>
+                    </ol>
                 </div>
             </section>
             <button onclick="topFunction()" id="scroll-btn" title="Go to top">Torna su</button>

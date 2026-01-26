@@ -7,7 +7,7 @@
   <title>Dettagli Prenotazione - Farma Find 24</title>
   <meta charset="utf-8">
   <meta name="description" content="Visualizza i dettagli della tua prenotazione presso FarmaFind24">
-  <meta name="keywords" content="salute">
+  <meta name="keywords" content="prenotazione, appuntamento, riepilogo, dettagli">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,15 @@
 
 <body>
   <header>
-    <h1 class="hide">Farma<span lang="en">Find</span>24</h1>
+    <nav aria-label="Aiuti alla navigazione" class="help-nav">
+      <a href="#main-content">Vai al contenuto principale</a>
+    </nav>
+
+    <h1>
+        <a href="index.php" class="hide" title="Torna alla pagina principale">
+          Farma<span lang="en">Find</span>24
+        </a>
+    </h1>
     <nav class="Top-NavBar">
       <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false">
         ☰
@@ -43,118 +51,76 @@
   <nav id="breadcrumb" aria-label="Percorso di navigazione">
     <p> Ti trovi in: Conferma Prenotazione</p>
   </nav>
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="title-main small">
       <h1>Dettagli della Prenotazione</h1>
-      <p>Di seguito sono riportati i dettagli della tua prenotazione. Puoi stampare questa pagina per i tuoi
-        riferimenti.</p>
+      <p>Di seguito sono riportati i dettagli della tua prenotazione: stampa questa pagina per avere il riepilogo sempre con te</p>
     </div>
 
-    <div class="booking-summary-wrapper">
+    <section id="regForm">
+      <h2>Prenotazione #[numero_prenotazione]</h2>
 
-      <div class="booking-header">
-        <h2>
-          <span class="material-symbols-outlined icon-fill icon-white" aria-hidden="true">check_circle</span>
-          Prenotazione #[numero_prenotazione]
-        </h2>
-        <p>Stato: <strong>Confermata</strong></p>
-      </div>
+      <h3>Dettagli Appuntamento</h3>
 
-      <table class="summary-table">
-        <caption class="sr-only">Riepilogo completo della prenotazione</caption>
+      <dl class="info-app">
 
-        <!-- Sezione Appuntamento -->
-        <tr>
-          <th scope="row" colspan="2" class="section-header">
-            <span class="material-symbols-outlined" aria-hidden="true">event</span>
-            Dettagli Appuntamento
-          </th>
-        </tr>
-        <tr>
-          <th scope="row">Servizio Prenotato</th>
-          <td>
-            <strong>[servizio]</strong>
-            <br>
-            <span>Durata stimata: [durata_servizio] min</span>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">Data</th>
-          <td>
-            <div>
-              <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
-              <strong>[data]</strong>
-            </div>
+        <div class="data-row">
+          <dt>Servizio Prenotato</dt>
+          <dd>[servizio]</dd>
+        </div>
 
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">Orario</th>
-          <td>
-            <div>
-              <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
-              <strong>[orario]</strong>
-            </div>
-          </td>
-        </tr>
+        <div class="data-row">
+          <dt>Data</dt>
+          <dd>[data]</dd>
+        </div>
 
-        <!-- Sezione Farmacia -->
-        <tr>
-          <th scope="row" colspan="2" class="section-header">
-            <span class="material-symbols-outlined" aria-hidden="true">store</span>
-            Dettagli Farmacia
-          </th>
-        </tr>
-        <tr>
-          <th scope="row">Nome e Indirizzo</th>
-          <td>
-            <strong>[nome_farmacia]</strong><br>
-            [indirizzo_farmacia], [citta_farmacia]
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">Telefono</th>
-          <td>
-            <a href="tel:[telefono_farmacia]" aria-label="Chiama farmacia al numero [telefono_farmacia]">
+        <div class="data-row">
+          <dt>Orario</dt>
+          <dd>[orario]</dd>
+        </div>
+      </dl>
+
+      <h3>Dettagli Farmacia</h3>
+
+      <dl class="info-app">
+
+        <div class="data-row">
+          <dt>Nome e indirizzo</dt>
+          <dd><strong>[nome_farmacia]</strong><br>
+            [indirizzo_farmacia], [citta_farmacia]</dd>
+        </div>
+
+        <div class="data-row">
+          <dt>Telefono</dt>
+          <dd><a href="tel:[telefono_farmacia]" aria-label="Chiama farmacia al numero [telefono_farmacia]">
               [telefono_farmacia]
-            </a>
-          </td>
-        </tr>
+            </a></dd>
+        </div>
+      </dl>
 
-        <!-- Sezione Paziente -->
-        <tr>
-          <th scope="row" colspan="2" class="section-header">
-            <span class="material-symbols-outlined" aria-hidden="true">person</span>
-            Dati Paziente
-          </th>
-        </tr>
-        <tr>
-          <th scope="row">Nome</th>
-          <td>[nome_paziente]</td>
-        </tr>
-        <tr>
-          <th scope="row">Cognome</th>
-          <td>[cognome_paziente]</td>
-        </tr>
-        <tr>
-          <th scope="row">Email</th>
-          <td>[email_paziente]</td>
-        </tr>
+      <h3>Dettagli Paziente</h3>
 
-        <!-- Note finali -->
-        <tr>
-          <td colspan="2" class="table-note">
-            <em>Note: Presentarsi 10 minuti prima dell'appuntamento con la tessera sanitaria.</em>
-          </td>
-        </tr>
-      </table>
+      <dl class="info-app">
 
-      <div class="booking-footer">
-        <p>FarmaFind24 - Il tuo portale per la salute.</p>
-        <p>In caso di impossibilità a presentarsi, si prega di disdire tramite Area Personale almeno 24 ore prima.</p>
-      </div>
+        <div class="data-row">
+          <dt>Nome</dt>
+          <dd>[nome_paziente]</dd>
+        </div>
 
-    </div>
+                <div class="data-row">
+          <dt>Cognome</dt>
+          <dd>[cognome_paziente]</dd>
+        </div>
+
+                <div class="data-row">
+          <dt>Email</dt>
+          <dd>[email_paziente]</dd>
+        </div>
+      </dl>
+
+    </section>
+
+  
 
     <div class="booking-actions">
       <button onclick="window.print()" class="outlined-btn">
@@ -162,9 +128,57 @@
         Stampa
       </button>
 
-      <a href="index.php" class="btn-primary">Torna alla <span lang="en">Home</span></a>
+      <a href="index.php" class="back-home-anchor">Torna alla <span lang="en">Home</span></a>
 
     </div>
+
+    <section>
+            <div class="service-section-content">
+                <div class="title-main medium">
+                    <h3>Come prepararsi alla visita</h3>
+                    <p>Per assicurarti che la visita si svolga correttamente, segui queste semplici regole:</p>
+                </div>
+
+                <div class="grid">
+                    <div class="service-card">
+                        <div class="icon-container">
+                            <span class="material-symbols-outlined" aria-hidden="true">badge</span>
+                        </div>
+                        <h3 class="title-card">Cosa portare</h3>
+                        <ul>
+                            <li>Tessera Sanitaria</li>
+                            <li>Documento d'identità</li>
+                            <li>Conferma della prenotazione</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon-container">
+                            <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+                        </div>
+                        <h3 class="title-card">Puntualità</h3>
+                        <p>
+                            Ti consigliamo di presentarti con 10 minuti di anticipo per l'accettazione.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon-container">
+                            <span class="material-symbols-outlined" aria-hidden="true">event_busy</span>
+                        </div>
+                        <h3 class="title-card">Cancellazione</h3>
+                        <p>
+                            Se non puoi presentarti, annulla l'appuntamento tramite la tua AREA PERSONALE per liberare
+                            il posto.
+                        </p>
+                    </div>
+
+                </div>
+                <p>Hai dubbi specifici o esigenze particolari? <br>
+                    Contatta direttamente la farmacia. Nella pagina <a href="farm-search.php"> Ricerca Farmacie</a>
+                    troverai tutti i contatti e gli altri servizi offerti.
+                </p>
+            </div>
+
+        </section>
 
 
     <button onclick="topFunction()" id="scroll-btn" title="Go to top">Torna su</button>

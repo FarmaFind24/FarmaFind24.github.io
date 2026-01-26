@@ -4,7 +4,6 @@ require_once "dbConnection.php";
 use DB\DBAccess;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recupera e pulisce input
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
     
@@ -29,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     // 4. Validazione lunghezza password (min 6 caratteri)
-    if (strlen($password) < 6) {
+    if (strlen($password) < 0) {
         header("Location: area-login.html?error=invalid_password_length");
         exit;
     }

@@ -8,7 +8,7 @@ require_once "dbConnection.php";
 require_once "session-helper.php";
 use DB\DBAccess;
 
-// 1. CONTROLLO SICUREZZA: Se non è loggato, via al login
+// 1. CONTROLLO SICUREZZA: Se non � loggato, via al login
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: area-login.html");
     exit;
@@ -21,7 +21,7 @@ $paginaHTML = file_get_contents("area-personale.html");
 $db = new DBAccess();
 $connessioneOk = $db->openDBConnection();
 $htmlPrenotazioni = "";
-$htmlPrenotazioniShort = ""; // ⬅️ AGGIUNGI QUESTA RIGA (mancava l'inizializzazione)
+$htmlPrenotazioniShort = ""; // ?? AGGIUNGI QUESTA RIGA (mancava l'inizializzazione)
 
 if ($connessioneOk) {
     $prenotazioni = $db->getPrenotazioniUtente($_SESSION['user_id']);

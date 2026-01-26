@@ -9,22 +9,20 @@ header('Content-Type: text/html; charset=utf-8');
 $farmaciaId = $_GET['id'] ?? null;
 $date = $_GET['date'] ?? null;
 
-// VALIDAZIONE INPUT
-
-// 1. Controllo presenza parametri
+// Controllo input minimi
 if (!$farmaciaId || !$date) {
     echo '<p class="error">Seleziona una farmacia e una data.</p>';
     exit;
 }
 
-// 2. Validazione farmaciaId (deve essere un intero positivo)
+// Validazione farmaciaId (deve essere un intero positivo)
 $farmaciaId = filter_var($farmaciaId, FILTER_VALIDATE_INT);
 if ($farmaciaId === false || $farmaciaId <= 0) {
     echo '<p class="error">ID farmacia non valido.</p>';
     exit;
 }
 
-// 3. Validazione formato data (YYYY-MM-DD)
+// Validazione formato data (YYYY-MM-DD)
 $dateValidated = DateTime::createFromFormat('Y-m-d', $date);
 if (!$dateValidated || $dateValidated->format('Y-m-d') !== $date) {
     echo '<p class="error">Formato data non valido.</p>';

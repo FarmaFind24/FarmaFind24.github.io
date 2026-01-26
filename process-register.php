@@ -59,10 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: area-register.php?error=password_weak");
         exit;
     }
-    
-    // 8. Controllo corrispondenza password
+
     if ($password !== $confirm) {
-        header("Location: area-register.php?error=passwords_mismatch");
+        header("Location: area-register.html?error=passwords_mismatch");
         exit;
     }
 
@@ -74,10 +73,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($successo) {
             header("Location: area-login.html?success=registered");
         } else {
-            header("Location: area-register.php?error=username_taken");
+            header("Location: area-register.html?error=username_taken");
         }
     } else {
-        header("Location: area-register.php?error=db_connection");
+        header("Location: area-register.html?error=db_connection");
     }
 }
 ?>

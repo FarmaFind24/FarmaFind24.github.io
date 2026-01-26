@@ -36,29 +36,50 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 
                 // Controlla se il campo 'immagine' nel DB è pieno, altrimenti usa un placeholder
                 if (!empty($row['immagine'])) {
-                    $srcImmagine = "assets/" . htmlspecialchars($row['immagine']);
+                    $srcImmagine = "assets/medImages/" . htmlspecialchars($row['immagine']);
                 } else {
                     // Immagine di default se il farmaco non ha foto
                     $srcImmagine = "assets/immagine_farmaco.jpg"; 
                 }
+
+                if ($row['obbligo_ricetta'] == 1) {
+                    $obbligoricetta = '<div class="badge badge-ricetta">Ricetta Richiesta</div>';
+                } else {
+                    $obbligoricetta = '<div class="badge badge-banco">Banco (OTC)</div>';
+                }
                 
                 // Stampa HTML
-                $htmlRisultati .= '<div class="med-card">';
-                $htmlRisultati .= '<img src="' . $srcImmagine . '" alt="Foto ' . htmlspecialchars($row['nome_commerciale']) . '">';
-                // ... resto del codice ...
+                $htmlRisultati .= '<dl class="drug-row">';
+                $htmlRisultati .= '<dt></dt>';
+                $htmlRisultati .= '<dt></dt>';
+                $htmlRisultati .= '<dd class="drug-image">';
+                $htmlRisultati .= '<img src="' . htmlspecialchars($srcImmagine) . '" alt="Farmaco">';
+                $htmlRisultati .= '</dd>'; 
                 
-                $htmlRisultati .= '<div class="med-card-content">';
-                $htmlRisultati .= '<h3 class="title-card">' . htmlspecialchars($row['nome_commerciale']) . '</h3>';
-                $htmlRisultati .= '<p>' . htmlspecialchars($row['descrizione']) . '</p>';
-                $htmlRisultati .= '<p>' . htmlspecialchars($row['forma_farmaceutica']) . '</p>';
-                $htmlRisultati .= '<p>' . $row['dosaggio'] . '</p>';
-                $htmlRisultati .= '<p>' . htmlspecialchars($row['produttore']) . '</p>';
-                $htmlRisultati .= '<p>' . htmlspecialchars($row['codice_minsan']) . '</p>';
-                $htmlRisultati .= '<p>' . htmlspecialchars($row['obbligo_ricetta']) . '</p>';
-                $htmlRisultati .= '<div class="row-btn">
-                <a href="info-med.php?id=' . $row['id'] . '" class="btn-like primary">Dettagli</a>
-                </div>';
-                $htmlRisultati .= '</div></div>';
+                $htmlRisultati .= '<dl class="drug-info">';
+                $htmlRisultati .= '<dt>Nome farmaco:</dt>';
+                $htmlRisultati .= '<dd class="drug-header">';
+                $htmlRisultati .= '<h3>' . htmlspecialchars($row['nome_commerciale']) . '</h3>';
+                $htmlRisultati .= '</dd>';
+                $htmlRisultati .=  $obbligoricetta;
+                $htmlRisultati .= '<div  class="active-ingredient">';
+                $htmlRisultati .= '<dt id="nohide">Principio Attivo:</dt>';
+                $htmlRisultati .= '<dd><strong>' . htmlspecialchars($row['principio_attivo']) . '</strong></dd>';
+                $htmlRisultati .= '</div>';
+                $htmlRisultati .= '<dl class="drug-meta">';
+                $htmlRisultati .= '<dt>Formato:</dt>';
+                $htmlRisultati .= '<dd>' . htmlspecialchars($row['forma_farmaceutica']) . '</dd>';
+                $htmlRisultati .= '<dt>Dosaggio:</dt>';
+                $htmlRisultati .= '<dd>' . $row['dosaggio'] . '</dd>';
+                $htmlRisultati .= '</dl>';
+                $htmlRisultati .= '<dt>Indicazioni:</dt>';
+                $htmlRisultati .= '<dd class="drug-desc-short">' . htmlspecialchars($row['descrizione']) . '</dd>';
+                $htmlRisultati .= '</dl>';
+                $htmlRisultati .= '';
+                $htmlRisultati .= '<div class="drug-action">';
+                $htmlRisultati .= '<a href="info-med.php?id=' . htmlspecialchars($row['id']) . '" class="btn-details">Scheda Tecnica &rarr;</a>';
+                $htmlRisultati .= '</div>';
+                $htmlRisultati .= '      </dl>';
             }
             
         } else {
