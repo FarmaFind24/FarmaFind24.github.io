@@ -62,6 +62,8 @@ $htmlFarmacie = '<p>Seleziona un servizio e un comune, poi clicca su "Trova Farm
 $htmlFarmacieMessage = '';
 // NUOVO: Variabile per gli slot orari
 $htmlTimeSlots = '<p>Seleziona una farmacia e una data per visualizzare gli orari disponibili.</p>';
+// Variabile per controllare se ci sono farmacie disponibili
+$noFarmacieDisponibili = false;
 
 // Variabili per messaggi di autenticazione
 $authMessageClass = $isLoggedIn ? 'content-hidden' : '';
@@ -115,8 +117,9 @@ if ($connessioneOk) {
                                     </div>';
                 }
             } else {
-                $htmlFarmacieMessage = ''; 
-                $htmlFarmacie = '<p class="no-results">Nessuna farmacia trovata a ' . htmlspecialchars($selectedCity) . ' o nei comuni limitrofi.</p>';
+                $htmlFarmacieMessage = '<p class="error">Nessuna farmacia disponibile a ' . htmlspecialchars($selectedCity) . ' o nei comuni limitrofi per questo servizio. <strong>Seleziona un altro comune per continuare.</strong></p>'; 
+                $htmlFarmacie = '';
+                $noFarmacieDisponibili = true;
             }
         }
     }
@@ -220,6 +223,10 @@ $paginaHTML = str_replace('[farmacie_grid]', $htmlFarmacie, $paginaHTML);
 $paginaHTML = str_replace('[auth_message_class]', $authMessageClass, $paginaHTML);
 $paginaHTML = str_replace('[form_class]', $formClass, $paginaHTML);
 $paginaHTML = str_replace('[error_message]', $errorMessageHtml, $paginaHTML);
+
+// Placeholder per il controllo farmacie disponibili
+$btnDisabledAttr = $noFarmacieDisponibili ? 'disabled' : '';
+$paginaHTML = str_replace('[btn_disabled]', $btnDisabledAttr, $paginaHTML);
 
 // Gestione Area Personale nella navbar
 $paginaHTML = str_replace('[area_personale_href]', getAreaPersonaleHref(), $paginaHTML);

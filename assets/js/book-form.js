@@ -21,11 +21,16 @@ function showTab(n) {
   // mostra tab corrente
   x[n].style.display = "block";
 
-  //pulsante indietro
+  //pulsante indietro - usa disabled invece di display:none per accessibilità
+  var prevBtn = document.getElementById("prevBtn");
   if (n == 0) {
-    document.getElementById("prevBtn").style.display = "none";
+    prevBtn.disabled = true;
+    prevBtn.setAttribute("aria-hidden", "true");
+    prevBtn.style.visibility = "hidden";
   } else {
-    document.getElementById("prevBtn").style.display = "inline";
+    prevBtn.disabled = false;
+    prevBtn.removeAttribute("aria-hidden");
+    prevBtn.style.visibility = "visible";
   }
 
   // pulsanti avanti conferma
