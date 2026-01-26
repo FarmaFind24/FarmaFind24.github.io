@@ -341,6 +341,7 @@ public function getFarmacieConFarmaco($idFarmaco) {
     }
     return $farmacie;
 }
+
     // --- AUTENTICAZIONE ---
 
     // 1. Registrazione nuovo utente
@@ -380,32 +381,44 @@ public function getFarmacieConFarmaco($idFarmaco) {
 
     // In dbConnection.php -> class DBAccess
 
-    public function getPrenotazioniUtente($idUtente) {
-        // MODIFICA: Selezioniamo data_appuntamento e ora_appuntamento separatamente
-        $query = "SELECT p.data_appuntamento, p.ora_appuntamento, 
-                         f.nome AS nome_farmacia, f.indirizzo, s.nome_servizio 
-                  FROM prenotazioni p
-                  JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id
-                  JOIN farmacie f ON fs.farmacia_id = f.id
-                  JOIN servizi s ON fs.servizio_id = s.id
-                  WHERE p.utente_id = ?
-                  ORDER BY p.data_appuntamento ASC, p.ora_appuntamento ASC";
-                  
-        $stmt = mysqli_prepare($this->connection, $query);
-        mysqli_stmt_bind_param($stmt, "i", $idUtente);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        
-        $prenotazioni = [];
-        while ($row = mysqli_fetch_assoc($result)) {
-            $prenotazioni[] = $row;
-        }
-        return $prenotazioni;
+public function getPrenotazioniUtente($idUtente) {
+    // MODIFICA: Selezioniamo data_appuntamento e ora_appuntamento separatamente
+    $query = "SELECT p.id, p.data_appuntamento, p.ora_appuntamento, 
+                     f.nome AS nome_farmacia, f.indirizzo, s.nome_servizio 
+              FROM prenotazioni p
+              JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id
+              JOIN farmacie f ON fs.farmacia_id = f.id
+              JOIN servizi s ON fs.servizio_id = s.id
+              WHERE p.utente_id = ?
+              ORDER BY p.data_appuntamento ASC, p.ora_appuntamento ASC";
+              
+    $stmt = mysqli_prepare($this->connection, $query);
+    mysqli_stmt_bind_param($stmt, "i", $idUtente);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    $prenotazioni = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $prenotazioni[] = $row;
     }
-
+    return $prenotazioni;
+}
+    // Metodo per eliminare una prenotazione
+    public function eliminaPrenotazione($idPrenotazione, $idUtente) {
+        // Verifica che la prenotazione appartenga all'utente prima di eliminarla
+        $query = "DELETE FROM prenotazioni WHERE id = ? AND utente_id = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ii", $idPrenotazione, $idUtente);
+    
+        try {
+            return mysqli_stmt_execute($stmt);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
     public function getPrenotazioniUtentePreview($idUtente) {
         // MODIFICA: Selezioniamo data_appuntamento e ora_appuntamento separatamente
-        $query = "SELECT p.data_appuntamento, p.ora_appuntamento, 
+        $query = "SELECT p.id, p.data_appuntamento, p.ora_appuntamento, 
                          f.nome AS nome_farmacia, f.indirizzo, s.nome_servizio 
                   FROM prenotazioni p
                   JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id

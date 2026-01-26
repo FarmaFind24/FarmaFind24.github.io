@@ -1,10 +1,14 @@
 <?php
 session_start();
+// Impedisce al browser di memorizzare la pagina
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
 require_once "dbConnection.php";
 require_once "session-helper.php";
 use DB\DBAccess;
 
-// 1. CONTROLLO SICUREZZA: Se non Ã¨ loggato, via al login
+// 1. CONTROLLO SICUREZZA: Se non è loggato, via al login
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: area-login.html");
     exit;
@@ -17,6 +21,7 @@ $paginaHTML = file_get_contents("area-personale.html");
 $db = new DBAccess();
 $connessioneOk = $db->openDBConnection();
 $htmlPrenotazioni = "";
+$htmlPrenotazioniShort = ""; // ?? AGGIUNGI QUESTA RIGA (mancava l'inizializzazione)
 
 if ($connessioneOk) {
     $prenotazioni = $db->getPrenotazioniUtente($_SESSION['user_id']);
@@ -36,6 +41,7 @@ if ($connessioneOk) {
         "Sep" => "settembre", "Oct" => "ottobre", "Nov" => "novembre", "Dec" => "dicembre"
     ];
 
+    
     if ($prenotazioni && count($prenotazioni) > 0) {
         foreach ($prenotazioni as $p) {
             $timestamp = strtotime($p['data_appuntamento']);
@@ -48,7 +54,6 @@ if ($connessioneOk) {
 
             $htmlPrenotazioni .= '
             <li class="appuntamento-card">
-                <span class="sr-only">Appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' il ' . $giorno . ' ' . $mese_parlato . ' alle ore ' . $ora . '.</span>
 
                 <div class="appuntamento-card-date" aria-hidden="true">
                     <span>' . $mese_visuale . '<br />' . $giorno . '</span>
@@ -59,10 +64,14 @@ if ($connessioneOk) {
                         <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
                         <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
                     </div>
-                    <button type="button" class="btn-primary no-margin" 
-                            aria-label="Disdici appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '">
-                        Disdici
-                    </button>
+                    <form method="POST" action="process-cancellation.php" style="margin: 0;">
+                        <input type="hidden" name="prenotazione_id" value="' . $p['id'] . '">
+                        <button type="submit" class="btn-primary no-margin" 
+                                aria-label="Disdici appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '"
+                                onclick="return confirm(\'Sei sicuro di voler disdire questo appuntamento?\')">
+                            Disdici
+                        </button>
+                    </form>
                 </div>
             </li>';
         }
@@ -70,6 +79,7 @@ if ($connessioneOk) {
         $htmlPrenotazioni = '<li class="appuntamento-card"><p style="padding:1rem;">Nessuna prenotazione futura.</p></li>';
     }
 
+    
     if ($prenotazioniShort && count($prenotazioniShort) > 0) {
         foreach ($prenotazioniShort as $p) {
             $timestamp = strtotime($p['data_appuntamento']);
@@ -82,7 +92,6 @@ if ($connessioneOk) {
 
             $htmlPrenotazioniShort .= '
             <li class="appuntamento-card">
-                <span class="sr-only">Appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' il ' . $giorno . ' ' . $mese_parlato . ' alle ore ' . $ora . '.</span>
 
                 <div class="appuntamento-card-date" aria-hidden="true">
                     <span>' . $mese_visuale . '<br />' . $giorno . '</span>
@@ -93,10 +102,14 @@ if ($connessioneOk) {
                         <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
                         <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
                     </div>
-                    <button type="button" class="btn-primary no-margin" 
-                            aria-label="Disdici appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '">
-                        Disdici
-                    </button>
+                    <form method="POST" action="process-cancellation.php" style="margin: 0;">
+                        <input type="hidden" name="prenotazione_id" value="' . $p['id'] . '">
+                        <button type="submit" class="btn-primary no-margin" 
+                                aria-label="Disdici appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '"
+                                onclick="return confirm(\'Sei sicuro di voler disdire questo appuntamento?\')">
+                            Disdici
+                        </button>
+                    </form>
                 </div>
             </li>';
         }
@@ -104,14 +117,10 @@ if ($connessioneOk) {
         $htmlPrenotazioniShort = '<li class="appuntamento-card"><p style="padding:1rem;">Nessuna prenotazione futura.</p></li>';
     }
 
-
-
     $db->closeConnection();
 }
 
 // 4. SOSTITUZIONE PLACEHOLDER (Dati Utente dalla Sessione)
-// Questi dati li abbiamo salvati in $_SESSION durante il login (vedi process-login.php che abbiamo fatto prima)
-
 $paginaHTML = str_replace('[nome_utente]', htmlspecialchars($_SESSION['nome']), $paginaHTML);
 $paginaHTML = str_replace('[nome]', htmlspecialchars($_SESSION['nome']), $paginaHTML);
 $paginaHTML = str_replace('[cognome]', htmlspecialchars($_SESSION['cognome']), $paginaHTML);
@@ -119,15 +128,15 @@ $paginaHTML = str_replace('[cognome_utente]', htmlspecialchars($_SESSION['cognom
 $paginaHTML = str_replace('[username]', htmlspecialchars($_SESSION['username']), $paginaHTML);
 $paginaHTML = str_replace('[email]', htmlspecialchars($_SESSION['email']), $paginaHTML);
 
-// Formattazione data registrazione (se presente in sessione, altrimenti metti una data fissa o vuota)
+// Formattazione data registrazione
 $dataReg = isset($_SESSION['data_registrazione']) ? date("d/m/Y", strtotime($_SESSION['data_registrazione'])) : "N/D";
 $paginaHTML = str_replace('[data_registrazione]', $dataReg, $paginaHTML);
 
 // 5. SOSTITUZIONE PLACEHOLDER (Liste generate)
 $paginaHTML = str_replace('[lista_prenotazioni]', $htmlPrenotazioniShort, $paginaHTML);
-// Se vuoi usare la stessa lista anche nella sezione "Prenotazioni" in basso:
 $paginaHTML = str_replace('[lista_prenotazioni_completa]', $htmlPrenotazioni, $paginaHTML);
 
 // 6. STAMPA FINALE
 echo $paginaHTML;
+
 ?>

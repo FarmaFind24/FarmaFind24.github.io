@@ -25,6 +25,7 @@ html {
   margin: 0;
 }
 body {
+  height: 100%;
   font-family: "Lexend", sans-serif;
   display: flex;
   flex-direction: column;
@@ -58,8 +59,12 @@ footer {
   border-top: 1.5px solid black;
   z-index: var(--z-index-footer);
   width: 100%;
+  margin-top: auto;
 }
-
+footer p{
+  width: 80%;
+  margin: 0 auto;
+}
 section {
   width: 100%;
   display: flex;
@@ -151,9 +156,10 @@ a.btn-like {
   gap: 1rem;
   margin-top: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 18.165rem);
+  grid-template-columns: repeat(auto-fit, 17.165rem);
   width: 100%;
   justify-content: center;
+  justify-items: center;
 }
 
 .sr-only {
@@ -163,6 +169,10 @@ a.btn-like {
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+.help-nav{
+  position: absolute;
+  text-indent: -999em;
 }
 .row-btn {
   margin-top: auto;
@@ -231,10 +241,13 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: var(--primary-color-hover);
 }
-h1.hide {
-  background-image: url("../h1.webp");
-  margin-left: 1rem;
-  margin-top: 1rem;
+.hide {
+  display: block; 
+  height: 1.3em;
+  width: 10em;
+  background-image: url("../logo_h1.png");
+  margin-left: 0.5em;
+  margin-top: 0.5em;
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -242,7 +255,7 @@ h1.hide {
   background-size: contain;
 }
 .title-main {
-  font-size: 2.5em;
+  font-size: 1em;
   text-align: center;
   width: 100%;
   display: block;
@@ -295,13 +308,12 @@ h1.hide {
 }
 
 .col-img {
-  background-image: url("../about-hero.webp");
   width: 30%;
   aspect-ratio: 16/9;
   background-size: cover;
   background-position: center;
   display: block;
-  border-radius: 12px;
+  border-radius: 8px;
   background-repeat: no-repeat;
 }
 
@@ -570,7 +582,7 @@ nav.breadcrumb-area-personale {
   background-color: var(--primary-color-hover);
 }
 
-.med-card-content,
+/*.med-card-content,
 .farm-card-content {
   flex-grow: 1;
   padding: 1rem;
@@ -579,6 +591,7 @@ nav.breadcrumb-area-personale {
   flex-direction: column;
   gap: 0.5rem;
 }
+
 .med-card img,
 .farm-card img {
   object-fit: cover;
@@ -587,7 +600,125 @@ nav.breadcrumb-area-personale {
   height: auto;
   aspect-ratio: 2 / 1;
   border-radius: 1rem 1rem 0 0;
+}*/
+/* --- CARD FARMACIA (Nuovo Stile) --- */
+.farm-card {
+  display: flex;
+  flex-direction: column; 
+  height: 100%;
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  overflow: hidden;
+    transition: 
+    transform 0.2s ease-out, 
+    box-shadow 0.2s ease-out, 
+    border-color 0.2s ease;
+  
+  /* Rimuovi max-width fisso se la griglia gestisce già le colonne */
+  width: 100%; 
 }
+
+/* Effetto Hover sulla card */
+.farm-card:hover {
+  transform: translateY(-0.35em); 
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.3); 
+  box-shadow: 
+    0 0.5em 1em rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px var(--primary-color);
+}
+
+/* --- IMMAGINE --- */
+.card-image-header {
+  width: 100%;
+  height: 10em; /* Altezza fissa per uniformare le card */
+  overflow: hidden;
+}
+
+.card-image-header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ritaglia l'immagine per riempire lo spazio */
+  object-position: center;
+  display: block;
+}
+
+/* --- CONTENUTO INTERNO --- */
+.farm-card-content {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Fondamentale: occupa tutto lo spazio rimanente per spingere giù il bottone */
+  gap: 0.8rem;
+}
+
+/* Intestazione (Titolo e Indirizzo) */
+.card-header .title-card {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  line-height: 1.2;
+}
+
+.card-header .address {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  font-style: normal;
+}
+
+/* Contatti */
+.card-meta .phone-link {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --- SERVIZI A BADGE (Pillole) --- */
+.services-preview {
+  margin-top: 0.5rem;
+}
+
+.service-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.4rem;
+}
+
+.service-tags {
+  list-style: none; /* Toglie i pallini della lista */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;  /* Permette alle pillole di andare a capo */
+  gap: 0.5rem;      /* Spazio tra le pillole */
+}
+
+/* Stile della singola pillola */
+.service-tags li {
+  font-size: 0.8rem;
+  background-color: #e8f5e9; /* Verde chiarissimo sfondo */
+  color: var(--primary-color); /* Testo verde scuro */
+  padding: 0.25em 0.7em;
+  border-radius: 50px;       /* Bordo rotondo */
+  font-weight: 500;
+  border: 1px solid #c8e6c9;
+}
+
+/* Stile speciale per il badge "+ altri" */
+.service-tags li.more-badge {
+  background-color: #f3f4f6; /* Grigio */
+  color: #666;
+  border-color: #e5e7eb;
+  font-weight: 600;
+}
+
 .farm-orario {
   text-align: right;
 }
@@ -641,32 +772,41 @@ nav.breadcrumb-area-personale {
 .col-testo li::marker {
   color: var(--primary-color);
 }
-
 .avatar-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  border-radius: 12px;
-  text-decoration: none;
-  width: 180px;
-  height: 220px;
+  justify-content: center;
+  gap: 1em;
+  border-radius: 8px;
+  width: 12.5em; 
+  height: 16em;
   padding: 1.5rem;
   text-align: center;
   border: var(--primary-color) solid 1px;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.5s ease;
-  box-shadow: 0px 9px 5px var(--accent);
+  background-color: color-mix(in srgb, var(--primary-color), transparent 95%);
+  position: relative;
+  transition: 
+    transform 0.2s ease-out, 
+    box-shadow 0.2s ease-out, 
+    border-color 0.2s ease;
+}
+.avatar-container:hover,
+.avatar-container:focus-visible {
+  transform: translateY(-0.35em); 
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.3); 
+  box-shadow: 
+    0 0.5em 1em rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px var(--primary-color);
 }
 .avatar-img {
-  width: 100px;
+width: 6.25em;
+  height: 6.25em;
   background-size: cover;
-  height: 100px;
+  background-position: center;
   border-radius: 50%;
+  border: 0.15em solid white;
+  transition: transform 0.2s ease;
 }
 .ghp_1 {
   background-image: url("https://github.com/Scafu.png");
@@ -682,24 +822,33 @@ nav.breadcrumb-area-personale {
 }
 .avatar-container span {
   font-size: 1.3rem;
-  color: black;
   transition: color 0.2s;
 }
-
-.avatar-container:hover {
-  transform: translateY(2px);
-  overflow: hidden;
-  background-color: var(--primary-color);
-  color: var(--main-bg-color);
-  border-color: var(--accent);
-  box-shadow:
-    0 10px 20px rgba(0, 0, 0, 0.25),
-    0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.avatar-container:hover span {
-  color: var(--main-bg-color);
+.contact-info {
+  box-sizing: border-box;
+  width: 40%; 
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em; 
+  padding: 2em;
+  margin: 1em auto;
 }
 
+address {
+  font-style: normal;
+}
+.contact-item {
+  margin-bottom: 1em; 
+}
+.contact-item dt {
+  font-weight: 700;
+  margin-bottom: 0.3em; 
+  line-height: 1.2;
+}
+.contact-item dd {
+  margin-left: 1.5em; 
+  margin-bottom: 0;   
+}
 .sponsor-card {
   border: 1px solid var(--primary-color);
   width: 200px;
@@ -710,47 +859,14 @@ nav.breadcrumb-area-personale {
   align-items: center;
   background-color: color-mix(in srgb, var(--primary-color), transparent 95%);
 }
-.sponsor-img {
+
+.sponsor-card img {
   height: 50%;
   width: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  object-fit: contain; 
 }
-.sponsor_1 {
-  background-image: url("../joogle-icon.webp");
-}
-.sponsor_2 {
-  background-image: url("../mirkosoft-icon.webp");
-}
-.sponsor_3 {
-  background-image: url("../closedAI-logo.webp");
-}
-.sponsor_4 {
-  background-image: url("../universita-logo.webp");
+.sponsor-card .uni-logo {
   height: 70%;
-}
-
-.uni-logo {
-  height: 70%;
-  width: 100%;
-  object-fit: contain;
-}
-.contact-info {
-  box-sizing: border-box;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 2rem;
-  margin: 0 auto;
-}
-.contact-info ul {
-  padding: 0;
-  list-style: none;
-}
-.contact-info ul li {
-  margin-top: 1rem;
 }
 
 /**********************/
@@ -829,9 +945,9 @@ nav.breadcrumb-area-personale {
 /**********************/
 /*   AREA-PERSONALE   */
 /**********************/
+
 .page-wrapper {
   display: flex;
-  flex: 1;
   overflow: hidden;
 }
 
@@ -899,9 +1015,6 @@ nav.breadcrumb-area-personale {
 .current-row a {
   color: white;
   cursor: default;
-}
-li.logout {
-  margin-top: auto;
 }
 
 .activity-row {
@@ -986,6 +1099,7 @@ li.logout {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 .row-details {
   display: flex;
@@ -1158,18 +1272,28 @@ a.delete-account {
   text-align: left;
 }
 
-#InfoFarmStatus {
+#InfoFarmStatus .aperto{
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
-  background-color: #e6f7ed;
+  background-color: #fef1f1;
   color: #155724;
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.95rem;
   white-space: nowrap;
 }
-
+#InfoFarmStatus .chiuso{
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #fef1f1;
+  color: #d32f2f;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
 .FarmImageWrapper {
   margin: 0 auto 2.5rem;
   max-width: 1200px;
@@ -1239,6 +1363,11 @@ a.delete-account {
 }
 
 /* Servizi Offerti */
+.lista-servizi {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 .SerivzioOfferto {
   padding: 0.75rem;
   margin-bottom: 0.5rem;
@@ -1246,11 +1375,13 @@ a.delete-account {
   background-color: var(--second-bg-color);
   border-radius: 6px;
 }
-
-.SerivzioOfferto p {
-  margin: 0;
-  font-weight: 500;
+.SerivzioOfferto {
+  font-weight: bold;
 }
+.descrizione-servizio {
+  font-weight: normal;
+}
+
 
 /* Layout Container per griglia a 3 colonne */
 .info-farm-grid {
@@ -1260,142 +1391,6 @@ a.delete-account {
   max-width: 1200px;
   margin: 0 auto 2rem;
 }
-
-/**********************/
-/*     MED-SEARCH     */
-/**********************/
-
-.drug-list-container { 
-      max-width: 1000px; 
-      margin: 0 auto; 
-      font-family: inherit;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .drug-row {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        background: #fff;
-        border: 2px solid var(--primary-color);
-        border-radius: 8px;
-        margin-bottom: 16px;
-        padding: 16px;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .drug-row:hover {
-        box-shadow: 0 0 0 3px var(--primary-color);
-    }
-
-    .drug-image img {
-        width: 200px;
-        height: 100px;
-        object-fit: fill;
-        border-radius: 6px;
-        margin-right: 20px;
-        background: var(--primary-color);
-        padding: 2px; 
-    }
-
-    dl.drug-row dt {
-      display: none;
-    }
-
-    #nohide {
-      display:inline;
-    }
-
-    .drug-info { 
-      flex-grow: 1; 
-      padding-right: 20px; 
-    }
-    
-    .drug-header { 
-      display: flex; 
-      align-items: center; 
-      justify-content: space-between; 
-      margin-bottom: 4px; 
-    }
-
-    .drug-header h3 { 
-      margin: 0; 
-      color: #333; 
-      font-size: 1.1rem; 
-    }
-
-    .active-ingredient { 
-      color: #0056b3; 
-      margin: 0 0 6px 0; 
-      font-size: 0.95rem;
-      display: flex; 
-      flex-direction: row; gap: 6px; 
-    }
-    
-    .drug-meta { 
-      display: flex; 
-      gap: 15px; 
-      font-size: 0.85rem; 
-      color: #555; 
-    }
-
-    .drug-meta dd { 
-      background: #f4f6f8; 
-      padding: 2px 8px; 
-      border-radius: 4px; 
-      display: inline-block; 
-      margin-top: 4px; 
-      margin-bottom: 4px; 
-    }
-
-    
-    .drug-desc-short { 
-      margin-top: 2px; 
-      color: #666; 
-      font-size: 0.9rem; 
-      overflow: hidden; 
-      max-width: 400px;
-    }
-
-    .badge { 
-      display: inline-block; 
-      padding: 4px 8px; 
-      border-radius: 12px; 
-      font-size: 0.75rem; 
-      font-weight: bold; 
-      text-transform: uppercase; 
-      margin: 8px 0;
-    }
-
-    .badge-ricetta { 
-      background: #fff3cd; 
-      color: #856404; 
-    } /* Ricetta */
-
-    .badge-banco { 
-      background: #d4edda; 
-      color: #155724; 
-    } /* Banco */
-
-    .drug-action { 
-      min-width: 140px; 
-      text-align: right; 
-      border-left: 1px solid #eee; 
-      padding-left: 15px;
-      border-left: 1px solid #eee; 
-      padding-left: 15px; 
-    }
-    
-    .btn-details { 
-      text-decoration: none; 
-      color: #007bff; 
-      font-weight: 600; 
-      font-size: 0.9rem;
-    }
-    .btn-details:hover { 
-      text-decoration: underline;
-    }
 
 /******* INFO MED *******/
 
@@ -1855,107 +1850,62 @@ input.invalid + .error-msg {
   text-align: right;
 }
 
-/*************************/
-/* CONFERMA PRENOTAZIONE */
-/*************************/
-
-/* --- STILE PAGINA RIEPILOGO PRENOTAZIONE --- */
-
-.booking-summary-wrapper {
-  max-width: 50em;
-  margin: 3rem auto 0;
-  background-color: var(--main-bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  overflow: hidden; /* Per i bordi arrotondati */
-}
-
-/* Header della ricevuta */
-.booking-header {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 1.5em;
-  text-align: center;
-}
-
-.booking-header h2 {
-  color: white; /* Sovrascrive il colore nero di default */
-  margin-bottom: 0.5em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-/* Stile delle Tabelle Dati */
-.summary-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 0;
-}
-
-.summary-table th,
-.summary-table td {
-  padding: 1em;
-  text-align: left;
-  border-bottom: 1px solid var(--border-color);
-}
-.summary-table td > div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.2rem;
-}
-
-.summary-table th {
-  background-color: var(--second-bg-color);
-  width: 35%; /* Larghezza fissa per le etichette */
-  color: #333;
+#regForm h3 {
+  background-color: #e9faea; 
+  color: var(--primary-color);            
   font-weight: 600;
+  padding: 12px 15px;        
+  margin-bottom: 0;          
+  margin-top: 1.5rem;
+  border-bottom: 3px solid var(--primary-color);      
+  border-radius: 8px 8px 0 0; 
 }
 
-/* Intestazioni sezioni tabella */
-.summary-table .section-header {
-  background-color: #eafaea;
-  color: var(--primary-color);
-  font-weight: 700;
-  font-size: 1.1em;
-  padding: 1em;
-  text-align: left;
-  border-bottom: 2px solid var(--primary-color);
+.info-app {
+  border-radius: 0 0 8px 8px;     
+  background-color: #fff; 
+  padding: 0;             
+  margin: 0;
+  overflow: hidden;  
 }
 
-.summary-table .section-header .material-symbols-outlined {
-  vertical-align: middle;
-  margin-right: 0.5rem;
+.data-row {
+  display: flex;          
+  align-items: stretch;
+  padding: 0;
+  border-bottom: 1px solid #eee;  
 }
 
-/* Note finali tabella */
-.summary-table .table-note {
-  background-color: #fffbea;
-  border-left: 3px solid #ffa726;
-  padding: 1em;
-  font-style: italic;
-  color: #666;
+.data-row:last-child {
   border-bottom: none;
 }
 
-/* Spaziatura dopo sezioni */
-.summary-table .section-header + tr th,
-.summary-table .section-header + tr td {
-  padding-top: 1em;
+.data-row dt {
+  flex-basis: 30%;  
+  flex-shrink: 0;     
+  font-weight: 600;  
+  background-color: #f6f7f9; 
+  padding: 1em;
 }
 
-/* Nascondi caption visivamente ma mantienila per screen reader */
-.summary-table caption.sr-only {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+.data-row dt::after {
+  content: ":";
 }
+
+.data-row dd {
+  flex-basis: 70%;    
+  margin: 0;        
+  color: #000;        
+  line-height: 1.5;  
+  padding: 1em;
+}
+
+
+
+
+
+
+
 
 /* Sezione per dividere Farmacia e Utente */
 .split-section {
@@ -2001,7 +1951,6 @@ input.invalid + .error-msg {
   margin-top: 2rem;
   margin-bottom: 3rem;
 }
-
 .back-home-anchor,
 .booking-actions button {
   width: 10rem;
@@ -2062,22 +2011,20 @@ input.invalid + .error-msg {
 
 /* --- PAGINA CONSIGLI --- */
 .banner-tips {
-  margin-top: 1.5em; /* Questo è quello che cercavi! Aumenta se vuoi più aria */
-  background-color: #ecf5a5; /* Un azzurrino clinico/pulito (o usa il tuo colore) */
-  border-radius: 8px; /* Angoli arrotondati (niente spigoli vivi ai lati schermo) */
-  max-width: 60em; /* Non si allarga all'infinito */
-  margin-left: auto; /* Centra il blocco orizzontalmente */
-  margin-right: auto; /* Centra il blocco orizzontalmente */
-  padding: 1em 2em; /* Spazio interno */
+  margin-top: 1.5em; 
+  background-color: #ecf5a5; 
+  border-radius: 8px; 
+  max-width: 60em; 
+  margin-left: auto; 
+  margin-right: auto; 
+  padding: 1em 2em;
 
-  /* 3. LAYOUT (Allinea testo e bottone) */
+ 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem; /* Distanza tra testo e link */
+  gap: 2em; 
 
-  /* Ombra leggera per farlo "galleggiare" */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 .banner-btn {
   margin-left: 1em;
@@ -2107,6 +2054,7 @@ input.invalid + .error-msg {
   border: 3px solid var(--primary-color);
   border-radius: 8px;
   margin-bottom: 1.5em;
+  overflow: hidden;
 }
 summary {
   display: flex;
@@ -2279,3 +2227,141 @@ details[open] summary::after {
 .booking-error-message {
   margin: 1em 0;
 }
+
+
+
+/**********************/
+/*     MED-SEARCH     */
+/**********************/
+
+.drug-list-container { 
+      max-width: 1000px; 
+      margin: 0 auto; 
+      font-family: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .drug-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        background: #fff;
+        border: 2px solid var(--primary-color);
+        border-radius: 8px;
+        margin-bottom: 16px;
+        padding: 16px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .drug-row:hover {
+        box-shadow: 0 0 0 3px var(--primary-color);
+    }
+
+    .drug-image img {
+        width: 200px;
+        height: 100px;
+        object-fit: fill;
+        border-radius: 6px;
+        margin-right: 20px;
+        background: var(--primary-color);
+        padding: 2px; 
+    }
+
+    dl.drug-row dt {
+      display: none;
+    }
+
+    #nohide {
+      display:inline;
+    }
+
+    .drug-info { 
+      flex-grow: 1; 
+      padding-right: 20px; 
+    }
+    
+    .drug-header { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      margin-bottom: 4px; 
+    }
+
+    .drug-header h3 { 
+      margin: 0; 
+      color: #333; 
+      font-size: 1.1rem; 
+    }
+
+    .active-ingredient { 
+      color: #0056b3; 
+      margin: 0 0 6px 0; 
+      font-size: 0.95rem;
+      display: flex; 
+      flex-direction: row; gap: 6px; 
+    }
+    
+    .drug-meta { 
+      display: flex; 
+      gap: 15px; 
+      font-size: 0.85rem; 
+      color: #555; 
+    }
+
+    .drug-meta dd { 
+      background: #f4f6f8; 
+      padding: 2px 8px; 
+      border-radius: 4px; 
+      display: inline-block; 
+      margin-top: 4px; 
+      margin-bottom: 4px; 
+    }
+
+    
+    .drug-desc-short { 
+      margin-top: 2px; 
+      color: #666; 
+      font-size: 0.9rem; 
+      overflow: hidden; 
+      max-width: 400px;
+    }
+
+    .badge { 
+      display: inline-block; 
+      padding: 4px 8px; 
+      border-radius: 12px; 
+      font-size: 0.75rem; 
+      font-weight: bold; 
+      text-transform: uppercase; 
+      margin: 8px 0;
+    }
+
+    .badge-ricetta { 
+      background: #fff3cd; 
+      color: #856404; 
+    } /* Ricetta */
+
+    .badge-banco { 
+      background: #d4edda; 
+      color: #155724; 
+    } /* Banco */
+
+    .drug-action { 
+      min-width: 140px; 
+      text-align: right; 
+      border-left: 1px solid #eee; 
+      padding-left: 15px;
+      border-left: 1px solid #eee; 
+      padding-left: 15px; 
+    }
+    
+    .btn-details { 
+      text-decoration: none; 
+      color: #007bff; 
+      font-weight: 600; 
+      font-size: 0.9rem;
+    }
+    .btn-details:hover { 
+      text-decoration: underline;
+    }

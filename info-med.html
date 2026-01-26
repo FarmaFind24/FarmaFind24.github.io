@@ -23,7 +23,7 @@
     <h1 class="hide">FarmaFind24</h1>
     <nav class="Top-NavBar">
       <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false">
-       ☰
+       ?
       </button>
       <ul aria-label="menu di navigazione">
         <li>
@@ -42,121 +42,44 @@
         <li>
           <a href="about.php"><span lang="en-GB">About</span></a>
         </li>
+        <li><a href="[area_personale_href]">[area_personale_text]</a></li>
       </ul>
     </nav>
   </header>
 
   <nav id="breadcrumb" aria-label="Percorso di navigazione">
-    <p>Ti trovi in: <a href="index.php"><span lang="en">Home</span></a> >> <a href="med-search.php">Medicinali</a> >> Informazioni</p>
+    <p>Ti trovi in: <a href="med-search.php">Medicinali</a> >> Informazioni</p>
   </nav>
 
   <main>
     <div id="TopContainerInfoMed">
-      <h1>Benagol</h1>
+      <h1>[nome_farmaco]</h1>
     </div>
     
     <div class="MedImageWrapper">
-      <img src="./assets/medicina21.png" alt="Confezione di Benagol pastiglie per il mal di gola" />
+      <img src="[immagine_farmaco]" alt="[alt_immagine]" />
     </div>
 
     <div id="InfoGeneraliGridInfoMed">
       <h2>Informazioni Generali</h2>
-      <p>Benagol è un farmaco da banco usato soprattutto per mal di gola e infiammazioni della bocca. Contiene
-        generalmente benzidamina cloridrato, un antinfiammatorio e analgesico locale che riduce dolore, bruciore e
-        gonfiore. È disponibile in diverse forme, come pastiglie, spray e collutorio, per un'azione mirata su gola e
-        cavo orale.</p>
+      <p>[descrizione]</p>
     </div>
 
     <div id="InfoGeneraliGridInfoMed">
       <h2>Dettagli del Farmaco</h2>
       <ul class="lista-dettagli-med">
-        <li><strong>Principio attivo:</strong> Benzidamina cloridrato</li>
-        <li><strong>Formato:</strong> Pastiglie, Spray orale, Collutorio</li>
-        <li><strong>Dosaggio:</strong> Variabile in base alla forma</li>
-        <li><strong>Obbligo di ricetta:</strong> No (OTC)</li>
+        <li><strong>Principio attivo:</strong> [principio_attivo]</li>
+        <li><strong>Formato:</strong> [formato]</li>
+        <li><strong>Dosaggio:</strong> [dosaggio]</li>
+        <li><strong>Obbligo di ricetta:</strong> [obbligo_ricetta]</li>
+        <li><strong>Produttore:</strong> [produttore]</li>
       </ul>
     </div>
 
     <div id="FarmacieDisponibili">
-      <h2>Farmacie dove si può reperire il farmaco</h2>
+      <h2>Farmacie dove si pu&ograve reperire il farmaco</h2>
       <div class="grid-med-card">
-        
-        <div class="farm-card">
-          <img src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
-            alt="Facciata della Farmacia Centrale" />
-          <div class="farm-card-content">
-            <h3 class="title-card">Farmacia Centrale</h3>
-            <p>Via Francesco Petrarca, 14r, 16121 Genova GE</p>
-            <span class="farm-orario">08:30 - 20:00</span>
-            <p><strong>Servizi:</strong></p>
-            <ul aria-label="Servizi disponibili">
-              <li>Misurazione Pressione</li>
-              <li>Screening Prevenzione</li>
-              <li>Test Rapidi Covid</li>
-            </ul>
-            <div class="row-btn">
-              <button type="button" class="btn-primary"><a href="info-farm.html">Vedi Dettagli</a></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="farm-card">
-          <img src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
-            alt="Facciata della Farmacia Comunale" />
-          <div class="farm-card-content">
-            <h3 class="title-card">Farmacia Comunale</h3>
-            <p>Via Roma, 45, 16121 Genova GE</p>
-            <span class="farm-orario">09:00 - 19:30</span>
-            <p><strong>Servizi:</strong></p>
-            <ul aria-label="Servizi disponibili">
-              <li>Misurazione Pressione</li>
-              <li>Screening Prevenzione</li>
-              <li>Test Rapidi Covid</li>
-            </ul>
-            <div class="row-btn">
-              <button type="button" class="btn-primary"><a href="info-farm.html">Vedi Dettagli</a></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="farm-card">
-          <img src="https://farmaciaalvigini.it/wp-content/uploads/2021/10/Farmacia-a-Genova-Farmacia-Alvigini-8.jpg"
-            alt="Facciata della Farmacia San Marco" />
-          <div class="farm-card-content">
-            <h3 class="title-card">Farmacia San Marco</h3>
-            <p>Piazza San Marco, 8, 16121 Genova GE</p>
-            <span class="farm-orario">08:00 - 20:30</span>
-            <p><strong>Servizi:</strong></p>
-            <ul aria-label="Servizi disponibili">
-              <li>Misurazione Pressione</li>
-              <li>Screening Prevenzione</li>
-              <li>Test Rapidi Covid</li>
-            </ul>
-            <div class="row-btn">
-              <button type="button" class="btn-primary"><a href="info-farm.html">Vedi Dettagli</a></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="farm-card">
-          <img src="assets/farmacia21.png"
-            alt="Facciata della Farmacia Europa" />
-          <div class="farm-card-content">
-            <h3 class="title-card">Farmacia Europa</h3>
-            <p>Via Garibaldi, 123, 16121 Genova GE</p>
-            <span class="farm-orario">08:30 - 19:00</span>
-            <p><strong>Servizi:</strong></p>
-            <ul aria-label="Servizi disponibili">
-              <li>Misurazione Pressione</li>
-              <li>Screening Prevenzione</li>
-              <li>Test Rapidi Covid</li>
-            </ul>
-            <div class="row-btn">
-              <button type="button" ><a href="info-farm.html">Vedi Dettagli</a></button>
-            </div>
-          </div>
-        </div>
-
+        [lista_farmacie]
       </div>
     </div>
 
