@@ -16,7 +16,7 @@ $htmlRisultati = "";
 if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
     
     $testoCercato = trim($_GET['q']);
-    
+
     // VALIDAZIONE INPUT RICERCA
     // Validazione lunghezza (min 2, max 100 caratteri)
     if (strlen($testoCercato) < 2 || strlen($testoCercato) > 100) {
@@ -32,36 +32,80 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
             
             if ($risultati && count($risultati) > 0) {
                 
-                foreach ($risultati as $row) {
-                    
-                    if (!empty($row['immagine'])) {
-                        $srcImmagine = "assets/farmCovers/" . htmlspecialchars($row['immagine']);
-                    } else {
-                        $srcImmagine = "assets/immagine_farmacia.jpg"; 
-                    }
-                    
-                    $htmlRisultati .= '<div class="farm-card">';
-                    $htmlRisultati .= '<img src="' . $srcImmagine . '" alt="Foto ' . htmlspecialchars($row['nome']) . '">';
-                    $htmlRisultati .= '<div class="farm-card-content">';
-                    $htmlRisultati .= '<h3 class="title-card">' . htmlspecialchars($row['nome']) . '</h3>';
-                    $htmlRisultati .= '<p>' . htmlspecialchars($row['indirizzo']) . ', ' . htmlspecialchars($row['citta']) . '</p>';
-                    $htmlRisultati .= '<span class="farm-orario">Tel: ' . htmlspecialchars($row['telefono']) . '</span>';
+foreach ($risultati as $row) {
+    
+    // GESTIONE IMMAGINE (Invariata)
+    if (!empty($row['immagine'])) {
+        $srcImmagine = "assets/farmCovers/" . htmlspecialchars($row['immagine']);
+    } else {
+        $srcImmagine = "assets/immagine_farmacia.jpg"; 
+    }
+    
+    $idFarm = $row['id']; // Salviamo l'ID subito
+    
+    // --- INIZIO COSTRUZIONE CARD ---
+    $htmlRisultati .= '<div class="farm-card">';
+    
+    // Immagine Header
+    $htmlRisultati .= '<div class="card-image-header">';
+    $htmlRisultati .= '<img src="' . $srcImmagine . '" alt="Foto ' . htmlspecialchars($row['nome']) . '">';
+    $htmlRisultati .= '</div>'; // chiusura card-image-header
 
-                    $idFarm = $row['id'];
-                    $servizi = $db->getServiziFarmacia($idFarm);
-                    if ($servizi && count($servizi) > 0) {
-                        $htmlRisultati .= '<span>Servizi</span><ul aria-label="Servizi disponibili">';
-                        foreach ($servizi as $servizio) {
-                            $htmlRisultati .= '<li>' . htmlspecialchars($servizio['nome_servizio']) . '</li>';
-                        }
-                        $htmlRisultati .= '</ul>';
-                    }
-                    $htmlRisultati .= '<div class="row-btn">
-                                        <a href="mailto:farmafind24@gmail.com" class="btn-like outlined" aria-label="Contatta via Email">Email</a>
-                                        <a href="info-farm.php?id=' . $idFarm . '" class="btn-like primary">Dettagli</a>
-                                        </div>';
-                    $htmlRisultati .= '</div></div>';
-                }
+    // Contenuto Card
+    $htmlRisultati .= '<div class="farm-card-content">';
+    
+    // Header: Titolo e Indirizzo
+    $htmlRisultati .= '<div class="card-header">';
+    $htmlRisultati .= '<h3 class="title-card">' . htmlspecialchars($row['nome']) . '</h3>';
+    $htmlRisultati .= '<p class="address"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' . htmlspecialchars($row['indirizzo']) . ', ' . htmlspecialchars($row['citta']) . '</p>';
+    $htmlRisultati .= '</div>';
+
+    // Contatti
+    $htmlRisultati .= '<div class="card-meta">';
+    $telefonoPulito = str_replace(' ', '', $row['telefono']);
+    $htmlRisultati .= '<a href="tel:' . htmlspecialchars($telefonoPulito) . '" class="phone-link">';
+    $htmlRisultati .= '<i class="fa-solid fa-phone" aria-hidden="true"></i> ';
+    $htmlRisultati .= '<span class="phone-number-text">' . htmlspecialchars($row['telefono']) . '</span>';
+    $htmlRisultati .= '</a>';
+    $htmlRisultati .= '</div>';
+
+    // Servizi
+    $servizi = $db->getServiziFarmacia($idFarm);
+    
+    if ($servizi && count($servizi) > 0) {
+        $maxVisibili = 3;
+        $totaleServizi = count($servizi);
+        $rimanenti = $totaleServizi - $maxVisibili;
+        $serviziDaMostrare = array_slice($servizi, 0, $maxVisibili);
+
+        $htmlRisultati .= '<div class="services-preview">';
+        $lblId = 'lbl-serv-' . $idFarm; 
+        $htmlRisultati .= '<span class="service-label" id="' . $lblId . '">Servizi principali:</span>';
+        $htmlRisultati .= '<ul class="service-tags" aria-labelledby="' . $lblId . '">';
+
+        foreach ($serviziDaMostrare as $servizio) {
+            $htmlRisultati .= '<li>' . htmlspecialchars($servizio['nome_servizio']) . '</li>';
+        }
+
+        if ($rimanenti > 0) {
+            $htmlRisultati .= '<li class="more-badge">';
+            $htmlRisultati .= '<span aria-hidden="true">+' . $rimanenti . ' servizi </span>';
+            $htmlRisultati .= '<span class="sr-only">e altri ' . $rimanenti . ' servizi disponibili</span>';
+            $htmlRisultati .= '</li>';
+        }
+
+        $htmlRisultati .= '</ul>';
+        $htmlRisultati .= '</div>';
+    }
+
+    // Bottone (spinto in fondo dal CSS margin-top: auto)
+    $htmlRisultati .= '<div class="row-btn">
+                        <a href="info-farm.php?id=' . $idFarm . '" class="btn-like primary">Dettagli</a>
+                       </div>';
+
+    $htmlRisultati .= '</div>'; // chiusura farm-card-content
+    $htmlRisultati .= '</div>'; // chiusura farm-card
+}
             } else {
                 $htmlRisultati = '<p class="no-results">Nessuna farmacia o città trovata per "<strong>' . htmlspecialchars($testoCercato) . '</strong>".</p>';
             }
@@ -75,8 +119,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
         $htmlRisultati = '<p class="error">Errore di connessione al database.</p>';
     }
     } // Chiusura else validazione lunghezza
-} 
-
+}
 $paginaHTML = str_replace('[listaFarmacie]', $htmlRisultati, $paginaHTML);
 $paginaHTML = str_replace('[valore_ricerca]', htmlspecialchars($testoCercato), $paginaHTML);
 

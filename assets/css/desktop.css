@@ -119,7 +119,7 @@ button.btn-primary:hover {
   background-color: var(--primary-color-hover);
   color: white;
 }
-button.btn-primary:disabled {
+/*button.btn-primary:disabled {
   background-color: #cccccc;
   color: #666666;
   cursor: not-allowed;
@@ -127,7 +127,7 @@ button.btn-primary:disabled {
 }
 button.btn-primary:disabled:hover {
   background-color: #cccccc;
-}
+}*/
 a.btn-like {
   border-radius: 0.5rem;
   height: 2.5rem;
@@ -623,12 +623,8 @@ nav.breadcrumb-area-personale {
     transform 0.2s ease-out, 
     box-shadow 0.2s ease-out, 
     border-color 0.2s ease;
-  
-  /* Rimuovi max-width fisso se la griglia gestisce già le colonne */
   width: 100%; 
 }
-
-/* Effetto Hover sulla card */
 .farm-card:hover {
   transform: translateY(-0.35em); 
   box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.3); 
@@ -636,98 +632,81 @@ nav.breadcrumb-area-personale {
     0 0.5em 1em rgba(0, 0, 0, 0.3),
     inset 0 0 0 1px var(--primary-color);
 }
-
-/* --- IMMAGINE --- */
 .card-image-header {
   width: 100%;
-  height: 10em; /* Altezza fissa per uniformare le card */
+  height: 10em;
   overflow: hidden;
 }
-
 .card-image-header img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ritaglia l'immagine per riempire lo spazio */
+  object-fit: cover;
   object-position: center;
   display: block;
 }
 
-/* --- CONTENUTO INTERNO --- */
 .farm-card-content {
-  padding: 1.2rem;
+  padding: 1.2em;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Fondamentale: occupa tutto lo spazio rimanente per spingere giù il bottone */
-  gap: 0.8rem;
+  flex-grow: 1;
+  gap: 0.8em;
 }
-
-/* Intestazione (Titolo e Indirizzo) */
 .card-header .title-card {
-  margin: 0 0 0.3rem 0;
+  margin: 0 0 0.3em 0;
   font-size: 1.3rem;
   color: var(--primary-color);
-  line-height: 1.2;
+  line-height: 1.5;
 }
-
 .card-header .address {
   margin: 0;
-  font-size: 0.9rem;
   color: #666;
-  font-style: normal;
 }
-
-/* Contatti */
 .card-meta .phone-link {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #333;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.5em;
+  text-decoration: none;
 }
-
-/* --- SERVIZI A BADGE (Pillole) --- */
+.phone-number-text {
+  text-decoration: underline;
+}
 .services-preview {
   margin-top: 0.5rem;
 }
-
 .service-label {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.7em;
   font-weight: 700;
   text-transform: uppercase;
-  color: #888;
-  margin-bottom: 0.4rem;
+  color: #666;
+  margin-bottom: 0.4em;
 }
-
 .service-tags {
-  list-style: none; /* Toglie i pallini della lista */
+  list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  flex-wrap: wrap;  /* Permette alle pillole di andare a capo */
-  gap: 0.5rem;      /* Spazio tra le pillole */
+  flex-wrap: wrap; 
+  gap: 0.5rem;
 }
-
-/* Stile della singola pillola */
 .service-tags li {
   font-size: 0.8rem;
-  background-color: #e8f5e9; /* Verde chiarissimo sfondo */
-  color: var(--primary-color); /* Testo verde scuro */
+  background-color: #e8f5e9;
+  color: var(--primary-color);
   padding: 0.25em 0.7em;
-  border-radius: 50px;       /* Bordo rotondo */
-  font-weight: 500;
-  border: 1px solid #c8e6c9;
+  border-radius: 50px;
+  font-weight: 600;
+  border: 1px solid var(--primary-color);
 }
-
-/* Stile speciale per il badge "+ altri" */
 .service-tags li.more-badge {
-  background-color: #f3f4f6; /* Grigio */
+  background-color: #f3f4f6;
   color: #666;
   border-color: #e5e7eb;
-  font-weight: 600;
+  font-weight: 700;
 }
-
 .farm-orario {
   text-align: right;
 }
@@ -1848,7 +1827,7 @@ input.invalid,
 select.invalid,
 textarea.invalid {
   border: 2px solid #c62828;
-  background-color: #fff;
+  background-color: #ff7474;
   outline-color: #c62828;
 }
 

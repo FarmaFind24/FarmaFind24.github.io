@@ -15,8 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email'] ?? '');
     $idUtente = $_SESSION['user_id'];
     
-    // VALIDAZIONE INPUT
-    
     // 1. Controllo campi vuoti
     if (empty($nome) || empty($cognome) || empty($email)) {
         header("Location: area-personale.php?error=campi_vuoti");
