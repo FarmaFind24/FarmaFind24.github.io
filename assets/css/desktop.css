@@ -889,7 +889,7 @@ address {
   gap: 1.5rem;
 }
 
-.login-container p {
+.login-container p:not(.error-message):not(.general-error):not(.success-message) {
   color: #5e5e5e;
   font-size: 1em;
 }
@@ -1668,6 +1668,12 @@ a.delete-account {
   color: white;
 }
 
+.time-slot input[type="radio"]:focus + label {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+  border-color: var(--primary-color);
+}
+
 .time-slot label:hover {
   border-color: var(--primary-color);
   background-color: #f0f0f0;
@@ -1810,7 +1816,7 @@ a.delete-account {
 }
 
 .instruction {
-  color: #5e5e5e;
+  color: #f70000;
   font-style: italic;
   text-align: center;
   margin-bottom: 1em;
@@ -1837,22 +1843,72 @@ a.delete-account {
   margin-bottom: 2em;
 }
 /*VALIDAZIONE INPUT FORM*/
-input.invalid {
-  border-color: #d93025;
-  background-color: #fff4f4;
-}
-.error-msg {
-  display: none;
-  color: #d93025;
-  font-size: 0.85rem;
-  font-weight: bold;
-  margin-top: 5px;
+/* Campo con errore */
+input.invalid,
+select.invalid,
+textarea.invalid {
+  border: 2px solid #c62828;
+  background-color: #fff;
+  outline-color: #c62828;
 }
 
-input.invalid + .error-msg {
+input.invalid:focus,
+select.invalid:focus,
+textarea.invalid:focus {
+  border-color: #c62828;
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.15);
+}
+
+/* Messaggio errore sotto il campo */
+.error-message {
+  display: none;
+  color: #b71c1c;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #ffebee;
+  border-left: 4px solid #c62828;
+  border-radius: 4px;
+}
+
+.error-message:not(:empty) {
   display: block;
 }
 
+/* Errore generale in cima al form */
+.general-error {
+  display: none;
+  color: #b71c1c;
+  background-color: #ffebee;
+  border: 2px solid #c62828;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.general-error:not(:empty) {
+  display: block;
+}
+
+/* Messaggio successo */
+.success-message {
+  display: none;
+  color: #1b5e20;
+  background-color: #e8f5e9;
+  border: 2px solid #4caf50;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.success-message:not(:empty) {
+  display: block;
+}
+
+/* Vecchio stile per compatibilità */
 #general-error-msg {
   display: none;
   color: #d93025;

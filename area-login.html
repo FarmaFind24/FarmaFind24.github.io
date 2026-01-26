@@ -60,12 +60,16 @@
                 <form action="process-login.php" method="POST">
                     <fieldset>
                         <legend class="sr-only">Accedi</legend>
-                        <label for="username">Username</label>
-                        <input type="text" id="username" placeholder="Username" name="username" autocomplete="username"
-                            required>
-                        <label for="password">Password</label>
-                        <input type="password" id="password" placeholder="Password" autocomplete="current-password"
-                            name="password" required>
+                        <div class="form-field">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" placeholder="Username" name="username" autocomplete="username"
+                                required>
+                        </div>
+                        <div class="form-field">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Password" autocomplete="current-password"
+                                name="password" required>
+                        </div>
                         <div class="login-form-row">
                             <div>
                                 <input type="checkbox" value="Ricordami" id="ricordami">
@@ -92,7 +96,8 @@
             Copyright &copy; 2026 | Tutti i diritti riservati. </p>
     </footer>
     <script src="assets/js/scroll-top.js"></script>
-    <script src="assets/js/feedback-messages.js"></script>
+    <script src="assets/js/form-validation.js"></script>
+    <script src="assets/js/login-validation.js"></script>
 </body>
 
 </html>

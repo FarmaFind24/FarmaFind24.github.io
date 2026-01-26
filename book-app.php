@@ -190,8 +190,7 @@ if ($connessioneOk) {
     // Carica città
     $citta = $db->getListaCitta();
     if ($citta && count($citta) > 0) {
-        $disabledSelected = !$selectedCity ? ' selected' : '';
-        $htmlCitta = '<option value="" disabled' . $disabledSelected . '>Seleziona un comune</option>';
+        $htmlCitta = '';
         foreach ($citta as $c) {
             $selectedAttr = ($c['citta'] == $selectedCity) ? ' selected' : '';
             $htmlCitta .= '<option value="' . htmlspecialchars($c['citta']) . '"' . $selectedAttr . '>' . htmlspecialchars($c['citta']) . '</option>';

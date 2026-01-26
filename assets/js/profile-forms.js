@@ -5,53 +5,50 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputs = document.querySelectorAll(".details-grid input");
     const profileForm = document.querySelector("form[action='process-update-profile.php']");
 
-    // FUNZIONI DI VALIDAZIONE
-    
-    function validateNome(nome) {
-        const validChars = /^[A-Za-zÀ-ù\s']{2,50}$/;
-        return nome.trim() !== "" && validChars.test(nome);
-    }
-
-    function validateCognome(cognome) {
-        const validChars = /^[A-Za-zÀ-ù\s']{2,50}$/;
-        return cognome.trim() !== "" && validChars.test(cognome);
-    }
-
-    function validateEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return email.trim() !== "" && emailRegex.test(email) && email.length <= 100;
-    }
-
-    function showError(input, message) {
-        input.classList.add("invalid");
-        let errorMsg = input.parentElement.querySelector(".error-message");
-        if (!errorMsg) {
-            errorMsg = document.createElement("p");
-            errorMsg.className = "error-message";
-            errorMsg.setAttribute("role", "alert");
-            input.parentElement.appendChild(errorMsg);
+    // Mappatura errori URL per area personale
+    const errorMappings = {
+        'campi_vuoti': {
+            message: 'Tutti i campi sono obbligatori.'
+        },
+        'nome_non_valido': {
+            field: 'name',
+            message: 'Nome non valido. Usa solo lettere (2-50 caratteri).'
+        },
+        'cognome_non_valido': {
+            field: 'surname',
+            message: 'Cognome non valido. Usa solo lettere (2-50 caratteri).'
+        },
+        'email_non_valida': {
+            field: 'email',
+            message: 'Inserisci un indirizzo email valido.'
+        },
+        'email_troppo_lunga': {
+            field: 'email',
+            message: 'Email troppo lunga (massimo 100 caratteri).'
+        },
+        'aggiornamento_fallito': {
+            message: 'Impossibile aggiornare il profilo. Email già in uso?'
+        },
+        'db_error': {
+            message: 'Errore di connessione al database. Riprova più tardi.'
         }
-        errorMsg.textContent = message;
-        errorMsg.style.display = "block";
-    }
+    };
 
-    function clearError(input) {
-        input.classList.remove("invalid");
-        const errorMsg = input.parentElement.querySelector(".error-message");
-        if (errorMsg) {
-            errorMsg.style.display = "none";
-        }
-    }
+    const successMappings = {
+        'profilo_aggiornato': 'Profilo aggiornato con successo!',
+        'account_eliminato': 'Account eliminato. Grazie per aver utilizzato FarmaFind24.',
+        'booking_cancelled': 'Prenotazione cancellata con successo.'
+    };
 
-    function clearAllErrors() {
-        inputs.forEach(input => clearError(input));
-    }
+    // Gestisci errori/successi da URL usando il sistema unificato
+    const main = document.querySelector('main');
+    handleURLErrors(errorMappings, successMappings);
 
     // VALIDAZIONE FORM AL SUBMIT
     if (profileForm) {
         profileForm.addEventListener("submit", (e) => {
             let isValid = true;
-            clearAllErrors();
+            clearAllFieldErrors(profileForm);
 
             const nomeInput = document.querySelector("input[name='name']");
             const cognomeInput = document.querySelector("input[name='surname']");
@@ -59,21 +56,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (nomeInput && !nomeInput.disabled && !nomeInput.readOnly) {
                 if (!validateNome(nomeInput.value)) {
-                    showError(nomeInput, "Nome non valido. Usa solo lettere (2-50 caratteri).");
+                    showFieldError(nomeInput, "Nome non valido. Usa solo lettere (2-50 caratteri).");
                     isValid = false;
                 }
             }
 
             if (cognomeInput && !cognomeInput.disabled && !cognomeInput.readOnly) {
                 if (!validateCognome(cognomeInput.value)) {
-                    showError(cognomeInput, "Cognome non valido. Usa solo lettere (2-50 caratteri).");
+                    showFieldError(cognomeInput, "Cognome non valido. Usa solo lettere (2-50 caratteri).");
                     isValid = false;
                 }
             }
 
             if (emailInput && !emailInput.disabled && !emailInput.readOnly) {
                 if (!validateEmail(emailInput.value)) {
-                    showError(emailInput, "Email non valida.");
+                    showFieldError(emailInput, "Email non valida.");
                     isValid = false;
                 }
             }
@@ -89,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (editBtn) {
         editBtn.addEventListener("click", () => {
-            clearAllErrors();
+            clearAllFieldErrors(profileForm);
             inputs.forEach(input => {
                 if (!input.disabled) {
                     input.removeAttribute("readonly");
@@ -109,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cancelBtn) {
         cancelBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            clearAllErrors();
+            clearAllFieldErrors(profileForm);
 
             inputs.forEach(input => {
                 if (!input.disabled) {
@@ -124,4 +121,11 @@ document.addEventListener("DOMContentLoaded", () => {
             editBtn.removeAttribute("hidden");
         });
     }
+
+    // Rimuovi errore quando utente inizia a digitare
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            clearFieldError(input);
+        });
+    });
 });

@@ -59,20 +59,32 @@
                 <form action="process-register.php" method="POST">
                     <fieldset>
                         <legend class="sr-only">Registrati</legend>
-                        <label for="name">Nome</label>
-                        <input type="text" id="name" placeholder="Nome" name="name" required>
-                        <label for="surname">Cognome</label>
-                        <input type="text" id="surname" placeholder="Cognome" name="surname" required>
-                        <label for="username">Username</label>
-                        <input type="text" id="username" placeholder="Username" name="username" autocomplete="username"
-                            required>
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="Email" name="email" required autocomplete="email">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" placeholder="Password" name="password" required>
-                        <label for="confirm-password">Conferma Password</label>
-                        <input type="password" id="confirm-password" placeholder="Conferma Password"
-                            name="confirm-password" required>
+                        <div class="form-field">
+                            <label for="name">Nome</label>
+                            <input type="text" id="name" placeholder="Nome" name="name" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="surname">Cognome</label>
+                            <input type="text" id="surname" placeholder="Cognome" name="surname" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" placeholder="Username" name="username" autocomplete="username"
+                                required>
+                        </div>
+                        <div class="form-field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Email" name="email" required autocomplete="email">
+                        </div>
+                        <div class="form-field">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Password" name="password" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="confirm-password">Conferma Password</label>
+                            <input type="password" id="confirm-password" placeholder="Conferma Password"
+                                name="confirm-password" required>
+                        </div>
                         <button type="submit">Registrati<i class="fa-solid fa-arrow-right-to-bracket"
                                 aria-hidden="true"></i></button>
                     </fieldset>
@@ -91,7 +103,8 @@
             Copyright &copy; 2026 | Tutti i diritti riservati. </p>
     </footer>
     <script src="assets/js/scroll-top.js"></script>
-    <script src="assets/js/feedback-messages.js"></script>
+    <script src="assets/js/form-validation.js"></script>
+    <script src="assets/js/register-validation.js"></script>
 </body>
 
 </html>
