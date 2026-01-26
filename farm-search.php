@@ -35,7 +35,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 foreach ($risultati as $row) {
                     
                     if (!empty($row['immagine'])) {
-                        $srcImmagine = "assets/" . htmlspecialchars($row['immagine']);
+                        $srcImmagine = "assets/farmCovers/" . htmlspecialchars($row['immagine']);
                     } else {
                         $srcImmagine = "assets/immagine_farmacia.jpg"; 
                     }

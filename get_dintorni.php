@@ -40,7 +40,7 @@ if ($connessioneOk) {
     if ($farmacie && count($farmacie) > 0) {
         foreach ($farmacie as $farmacia) {
             if (!empty($farmacia['immagine'])) {
-                $srcImmagine = "assets/" . htmlspecialchars($farmacia['immagine']);
+                $srcImmagine = "assets/farmCovers/" . htmlspecialchars($farmacia['immagine']);
             } else {
                 $srcImmagine = "assets/immagine_farmacia.jpg"; 
             }

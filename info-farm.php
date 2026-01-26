@@ -55,7 +55,7 @@ try {
     
     // Immagine
     $immagine = !empty($farmacia['immagine']) 
-                ? 'assets/' . htmlspecialchars($farmacia['immagine']) 
+                ? 'assets/farmCovers/' . htmlspecialchars($farmacia['immagine']) 
                 : 'assets/immagine_farmacia.jpg';
     $altImmagine = 'Facciata della ' . $nomeFarmacia;
     
