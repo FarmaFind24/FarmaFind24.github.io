@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const citySelect = document.getElementById('city');
     const pharmacyMessageContainer = document.getElementById('index-message-container');
-    const mainSearchForm = document.getElementById('mainSearchForm');
 
     // Gestione submit del form di ricerca principale (supporta Enter)
     if (mainSearchForm) {

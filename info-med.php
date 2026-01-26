@@ -48,7 +48,7 @@ $farmacie = $db->getFarmacieConFarmaco($idFarmaco);
 // Costruzione HTML dettagli farmaco
 $nomeFarmaco = htmlspecialchars($farmaco['nome_commerciale']);
 $immagineFarmaco = !empty($farmaco['immagine']) ? 
-    "assets/" . htmlspecialchars($farmaco['immagine']) : 
+    "assets/medImages/" . htmlspecialchars($farmaco['immagine']) : 
     "assets/immagine_farmaco.jpg";
 $altImmagine = "Confezione di " . $nomeFarmaco;
 
@@ -56,7 +56,7 @@ $descrizione = htmlspecialchars($farmaco['descrizione']);
 $principioAttivo = htmlspecialchars($farmaco['principio_attivo']);
 $formato = htmlspecialchars($farmaco['forma_farmaceutica']);
 $dosaggio = $farmaco['dosaggio'];
-$obbligoRicetta = $farmaco['obbligo_ricetta'] == '1' ? 'S&igrave' : 'No (OTC)';
+$obbligoRicetta = $farmaco['obbligo_ricetta'] == '1' ? 'S&igrave' : 'No (<abbr title="Over The Counter" lang="en">OTC</abbr>)';
 $produttore = htmlspecialchars($farmaco['produttore']);
 
 // Costruzione HTML lista farmacie
@@ -79,7 +79,7 @@ if ($farmacie && count($farmacie) > 0) {
         $statoOrario = $isAperta ? "Aperta ora" : "Chiusa";
         $htmlFarmacie .= '<span class="farm-orario">' . $statoOrario . '</span>';
         
-        // Mostra prezzo e disponibilità
+        // Mostra prezzo e disponibilit�
         if (isset($farmacia['prezzo']) && $farmacia['prezzo'] > 0) {
             $htmlFarmacie .= '<p><strong>Prezzo Farmaco:</strong> &euro;' . number_format($farmacia['prezzo'], 2, ',', '.') . '</p>';
         }
@@ -93,6 +93,7 @@ if ($farmacie && count($farmacie) > 0) {
         $htmlFarmacie .= '<div class="row-btn">';
         $htmlFarmacie .= '<a href="info-farm.php?id=' . $idFarm . '" class="btn-like primary">Vedi Dettagli</a>';
         $htmlFarmacie .= '</div>';
+        $htmlFarmacie .= '</div></div>';
     }
 } else {
     $htmlFarmacie = '<p class="no-results">Nessuna farmacia disponibile per questo farmaco al momento.</p>';
