@@ -47,7 +47,7 @@ if ($connessioneOk) {
                         $srcImmagine = "assets/immagine_farmacia.jpg"; 
                     }
 
-                    $htmlFarmacieDintorni .= '<div class="farm-card-mini">';
+                    $htmlFarmacieDintorni .= '<div class="farm-card">';
                     $htmlFarmacieDintorni .=    '<div class="farm-img-container">';
                     $htmlFarmacieDintorni .=        '<img src="' . $srcImmagine . '" alt="Foto ' . htmlspecialchars($farmacia['nome']) . '">';
 

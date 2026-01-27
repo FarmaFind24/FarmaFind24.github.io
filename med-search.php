@@ -59,7 +59,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 $htmlRisultati .= '<dl class="drug-info">';
                 $htmlRisultati .= '<dt>Nome farmaco:</dt>';
                 $htmlRisultati .= '<dd class="drug-header">';
-                $htmlRisultati .= '<h3>' . htmlspecialchars($row['nome_commerciale']) . '</h3>';
+                $htmlRisultati .= '<h2>' . htmlspecialchars($row['nome_commerciale']) . '</h2>';
                 $htmlRisultati .= '</dd>';
                 $htmlRisultati .=  $obbligoricetta;
                 $htmlRisultati .= '<div  class="active-ingredient">';

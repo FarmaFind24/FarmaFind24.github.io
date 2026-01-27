@@ -56,7 +56,7 @@ foreach ($risultati as $row) {
     
     // Header: Titolo e Indirizzo
     $htmlRisultati .= '<div class="card-header">';
-    $htmlRisultati .= '<h3 class="title-card">' . htmlspecialchars($row['nome']) . '</h3>';
+    $htmlRisultati .= '<h2 class="title-card">' . htmlspecialchars($row['nome']) . '</h2>';
     $htmlRisultati .= '<p class="address"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' . htmlspecialchars($row['indirizzo']) . ', ' . htmlspecialchars($row['citta']) . '</p>';
     $htmlRisultati .= '</div>';
 
