@@ -65,7 +65,7 @@ if ($farmacie && count($farmacie) > 0) {
     foreach ($farmacie as $farmacia) {
         $idFarm = $farmacia['id'];
         $immagineFarmacia = !empty($farmacia['immagine']) ? 
-            "assets/" . htmlspecialchars($farmacia['immagine']) : 
+            "assets/farmCovers/" . htmlspecialchars($farmacia['immagine']) : 
             "assets/immagine_farmacia.jpg";
         
         $htmlFarmacie .= '<div class="farm-card">';
