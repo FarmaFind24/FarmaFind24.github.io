@@ -613,6 +613,12 @@ nav.breadcrumb-area-personale {
   flex-grow: 1;
   gap: 0.8em;
 }
+.farm-card-content .available {
+  color: var(--primary-color);
+}
+.farm-card-content .low-storage {
+  color: #8a0000;
+}
 .card-header .title-card {
   margin: 0 0 0.3em 0;
   font-size: 1.3rem;
