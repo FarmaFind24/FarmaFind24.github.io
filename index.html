@@ -4,13 +4,15 @@
 <head>
   <title>Farmacie di turno e ricerca medicinali - Farma Find 24</title>
   <meta charset="utf-8">
-  <meta name="description" content="Trova farmacie di turno vicine a te nella provincia di Padova, ricerca la disponibilità di farmaci, prenota visite e accedi a consigli per la tua salute.">
+  <meta name="description"
+    content="Trova farmacie di turno vicine a te nella provincia di Padova, ricerca la disponibilità di farmaci, prenota visite e accedi a consigli per la tua salute.">
   <meta name="keywords" content="salute, farmacie padova, farmacia di turno, prenotazione visite">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
   <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
+  <link rel="stylesheet" href="assets/css/medium.css" media="screen and (max-width:1125px)">
   <link rel="stylesheet" href="assets/css/print.css" media="print">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,15 +22,18 @@
 </head>
 
 <body>
-    <nav aria-label="Aiuti alla navigazione" class="help-nav">
-      <a href="#main-content">Vai al contenuto principale</a>
-    </nav>
+  <nav aria-label="Aiuti alla navigazione" class="help-nav">
+    <a href="#main-content">Vai al contenuto principale</a>
+  </nav>
   <header class="main-header">
     <h1>
       <span class="hide">Farma<span lang="en">Find</span>24</span>
     </h1>
 
     <nav class="Top-NavBar" aria-label="Menù di navigazione">
+      <button class="menu-toggle-text" aria-label="Apri menu" aria-expanded="false">
+        Menu di Navigazione
+      </button>
       <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false">
         ☰
       </button>
@@ -44,7 +49,7 @@
         <li>
           <a href="about.php"><span lang="en">About</span></a>
         </li>
-        <li><a href="[area_personale_href]">[area_personale_text]</a></li>
+        <li><a href="[area_personale_href]">Area Personale</a></li>
       </ul>
     </nav>
   </header>
@@ -88,11 +93,11 @@
     </section>
 
     <section class="banner-tips">
-        <div class="banner-text">
-            <h2>Cerchi consigli per il tuo benessere quotidiano?</h2>
-            <p>Scopri le guide pratiche e le rubriche stagionali.</p>
-        </div>
-        <a class="banner-btn" href="tips.php" >Leggi i consigli del farmacista<span aria-hidden="true">&rarr;</span></a>
+      <div class="banner-text">
+        <h2>Cerchi consigli per il tuo benessere quotidiano?</h2>
+        <p>Scopri le guide pratiche e le rubriche stagionali.</p>
+      </div>
+      <a class="banner-btn" href="tips.php">Leggi i consigli del farmacista<span aria-hidden="true">&rarr;</span></a>
     </section>
 
     <section>
@@ -109,7 +114,7 @@
           </div>
         </form>
         <div id="index-message-container">[index_message]</div>
-        <div class="grid-4c">
+        <div class="grid four-columns">
           [farmacieDintorni]
         </div>
       </div>

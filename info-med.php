@@ -85,8 +85,8 @@ if ($farmacie && count($farmacie) > 0) {
         }
         if (isset($farmacia['quantita'])) {
             $disponibilita = $farmacia['quantita'] > 3 ? 
-                '<span style="color: green;">Disponibile (' . $farmacia['quantita'] . ' pezzi)</span>' : 
-                '<span style="color: red;">Ridotta (' . $farmacia['quantita'] . ' pezzi/o)</span>';
+                '<span class="available">Disponibile (' . $farmacia['quantita'] . ' pezzi)</span>' : 
+                '<span class="low-storage">Ridotta (' . $farmacia['quantita'] . ' pezzi/o)</span>';
             $htmlFarmacie .= '<p><strong>Disponibilit&agrave:</strong> ' . $disponibilita . '</p>';
         }
         

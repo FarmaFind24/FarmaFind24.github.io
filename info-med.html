@@ -18,15 +18,19 @@
   <script src="./assets/js/menu.js" defer></script>
   <script>document.documentElement.classList.add('js-active');</script>
 </head>
+
 <body>
-    <nav aria-label="Aiuti alla navigazione" class="help-nav">
-      <a href="#main-content">Vai al contenuto principale</a>
-    </nav>
+  <nav aria-label="Aiuti alla navigazione" class="help-nav">
+    <a href="#main-content">Vai al contenuto principale</a>
+  </nav>
   <header class="main-header">
     <h1 class="hide">FarmaFind24</h1>
-    <nav class="Top-NavBar">
+    <nav class="top-navbar">
+      <button class="menu-toggle-text btn-primary" aria-label="Apri menu" aria-expanded="false">
+        Menu di Navigazione
+      </button>
       <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false">
-       ?
+        ?
       </button>
       <ul aria-label="menu di navigazione">
         <li>
@@ -58,17 +62,17 @@
     <div id="TopContainerInfoMed">
       <h1>[nome_farmaco]</h1>
     </div>
-    
+
     <div class="MedImageWrapper">
       <img src="[immagine_farmaco]" alt="[alt_immagine]" />
     </div>
 
-    <div id="InfoGeneraliGridInfoMed">
+    <div class="info-generali-elemento">
       <h2>Informazioni Generali</h2>
       <p>[descrizione]</p>
     </div>
 
-    <div id="InfoGeneraliGridInfoMed">
+    <div class="info-generali-elemento">
       <h2>Dettagli del Farmaco</h2>
       <ul class="lista-dettagli-med">
         <li><strong>Principio attivo:</strong> [principio_attivo]</li>
@@ -81,7 +85,7 @@
 
     <div id="FarmacieDisponibili">
       <h2>Farmacie dove si pu&ograve reperire il farmaco</h2>
-      <div class="grid-med-card">
+      <div class="grid four-columns">
         [lista_farmacie]
       </div>
     </div>
