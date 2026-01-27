@@ -19,6 +19,9 @@
   <script>document.documentElement.classList.add('js-active');</script>
 </head>
 <body>
+    <nav aria-label="Aiuti alla navigazione" class="help-nav">
+      <a href="#main-content">Vai al contenuto principale</a>
+    </nav>
   <header class="main-header">
     <h1 class="hide">FarmaFind24</h1>
     <nav class="Top-NavBar">
@@ -48,10 +51,10 @@
   </header>
 
   <nav id="breadcrumb" aria-label="Percorso di navigazione">
-    <p>Ti trovi in: <a href="med-search.php">Medicinali</a> >> Informazioni</p>
+    <p>Ti trovi in: <a href="med-search.php">Medicinali</a> &gt;&gt; Informazioni</p>
   </nav>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <div id="TopContainerInfoMed">
       <h1>[nome_farmaco]</h1>
     </div>

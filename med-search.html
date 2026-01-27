@@ -3,23 +3,26 @@
 
 <head>
   <title>FarmaFind24</title>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta name="description"
-    content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate" />
-  <meta name="keywords" content="salute" />
+    content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate">
+  <meta name="keywords" content="salute">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/desktop.css" media="screen" />
-  <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)" />
+  <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
+  <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
   <link rel="stylesheet" href="assets/css/print.css" media="print">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="./assets/js/menu.js" defer></script>
   <script>document.documentElement.classList.add('js-active');</script>
 </head>
 
 <body>
+  <nav aria-label="Aiuti alla navigazione" class="help-nav">
+      <a href="#main-content">Vai al contenuto principale</a>
+  </nav>
   <header class="main-header">
     <h1 class="hide">FarmaFind24</h1>
     <nav class="Top-NavBar">
@@ -50,7 +53,7 @@
     <p> Ti trovi in: Medicinali</p>
   </nav>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <div class="title-main small">
       <h1>Cerca il Medicinale adatto a te</h1>
       <p>Cerca tra i migliori medicinali in circolazione e vedi in quali farmacie c'è disponibilità.</p>
@@ -60,7 +63,7 @@
       <div class="form-search-container">
         <label for="farm-name" class="sr-only">Cerca una farmacia</label>
         <input type="search" id="farm-name" name="q" value="[valore_ricerca]" placeholder="Inserisci il nome del medicinale o del principio attivo"
-          required />
+          required>
         <button type="submit">Cerca</button>
       </div>
     </form>
@@ -78,7 +81,7 @@
     <p>
       Le immagini presenti su questo sito sono state generate tramite
       strumenti di intelligenza artificiale. Eventuali somiglianze tra i nomi
-      dei prodotti e marchi reali sono puramenti casuali.<br />
+      dei prodotti e marchi reali sono puramenti casuali.<br>
       Copyright &copy; 2026 | Tutti i diritti riservati.
     </p>
   </footer>
