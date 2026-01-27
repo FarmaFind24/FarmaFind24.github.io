@@ -1,0 +1,81 @@
+.top-navbar a {
+  height: 2rem;
+  text-decoration: none;
+  padding: 0.5rem;
+  color: black;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  transition:
+    border 0.2s,
+    color 0.2s,
+    background-color 0.3s;
+}
+.top-navbar a:hover {
+  border: var(--primary-color) solid 2px;
+  background-color: var(--primary-color);
+  border-radius: 1rem;
+  color: var(--main-bg-color);
+}
+.top-navbar a:hover a:visited {
+  color: inherit;
+}
+.top-navbar ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  background-color: #fff;
+  z-index: 1000;
+}
+.top-navbar .current-page {
+  pointer-events: none;
+  padding: 0.5rem;
+  border: var(--primary-color) solid 2px;
+  background-color: var(--primary-color);
+  border-radius: 1rem;
+  color: var(--main-bg-color);
+}
+/* BREADCRUMB */
+#breadcrumb {
+  display: block;
+  padding: 0.8em 1em;
+  font-size: 1em;
+  text-align: left;
+  background-color: var(--second-bg-color);
+}
+#breadcrumb a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+h1.hide {
+  background-image: url("../h1.webp");
+  margin-left: 1rem;
+  margin-top: 1rem;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.top-navbar ul.open {
+  display: flex;
+}
+
+.top-navbar li {
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+.menu-toggle-text {
+  display: inline;
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  width: auto;
+}
+.menu-toggle {
+  display: none;
+}

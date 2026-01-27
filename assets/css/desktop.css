@@ -25,7 +25,6 @@ html {
   margin: 0;
 }
 body {
-  height: 100%;
   font-family: "Lexend", sans-serif;
   display: flex;
   flex-direction: column;
@@ -61,7 +60,7 @@ footer {
   width: 100%;
   margin-top: auto;
 }
-footer p{
+footer p {
   width: 80%;
   margin: 0 auto;
 }
@@ -119,15 +118,6 @@ button.btn-primary:hover {
   background-color: var(--primary-color-hover);
   color: white;
 }
-/*button.btn-primary:disabled {
-  background-color: #cccccc;
-  color: #666666;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-button.btn-primary:disabled:hover {
-  background-color: #cccccc;
-}*/
 a.btn-like {
   border-radius: 0.5rem;
   height: 2.5rem;
@@ -154,21 +144,20 @@ a.btn-like {
 .icon-white {
   color: white;
 }
+
 .grid {
   gap: 1em;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
-  padding: 1em 0em 0em 0em;
-  justify-content: center;
-}
-.grid-4c {
-  gap: 1rem;
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 17.165rem);
-  width: 100%;
+  padding-top: 1rem;
   justify-content: center;
   justify-items: center;
+  width: 100%;
+}
+.three-columns {
+  grid-template-columns: repeat(auto-fit, 21.165rem);
+}
+.four-columns {
+  grid-template-columns: repeat(auto-fit, 18rem);
 }
 
 .sr-only {
@@ -179,7 +168,7 @@ a.btn-like {
   height: 1px;
   overflow: hidden;
 }
-.help-nav{
+.help-nav {
   position: absolute;
   text-indent: -999em;
 }
@@ -251,12 +240,10 @@ input[type="submit"]:hover {
   background-color: var(--primary-color-hover);
 }
 .hide {
-  display: block; 
-  height: 1.3em;
-  width: 10em;
+  display: block;
   background-image: url("../logo_h1.png");
   margin-left: 0.5em;
-  margin-top: 0.5em;
+  margin-top: 0.8em;
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -329,7 +316,7 @@ input[type="submit"]:hover {
 /**********************/
 /*       NAVBAR       */
 /**********************/
-.Top-NavBar a {
+.top-navbar a {
   height: 2rem;
   text-decoration: none;
   padding: 0.5rem;
@@ -338,24 +325,24 @@ input[type="submit"]:hover {
   border: 2px solid transparent;
   transition: all 0.3s;
 }
-.Top-NavBar a:hover {
+.top-navbar a:hover {
   border: var(--primary-color) solid 2px;
   background-color: var(--primary-color);
   border-radius: 1rem;
   color: var(--main-bg-color);
 }
-.Top-NavBar a:hover a:visited {
+.top-navbar a:hover a:visited {
   color: inherit;
 }
 
-.Top-NavBar ul {
+.top-navbar ul {
   list-style: none;
   flex-direction: row;
   display: flex;
   gap: 2rem;
 }
 
-.Top-NavBar .current-page {
+.top-navbar .current-page {
   pointer-events: none;
   padding: 0.5rem;
   border: var(--primary-color) solid 2px;
@@ -390,6 +377,7 @@ nav.breadcrumb-area-personale {
 }
 
 /*Per Hamburger*/
+.menu-toggle-text,
 .menu-toggle {
   display: none;
 }
@@ -521,9 +509,7 @@ nav.breadcrumb-area-personale {
   justify-content: center;
   margin-bottom: 1rem;
 }
-.med-card,
-.farm-card,
-.farm-card-mini {
+.med-card {
   max-width: 17.75rem;
   width: 100%;
   height: 100%;
@@ -533,11 +519,6 @@ nav.breadcrumb-area-personale {
   flex-direction: column;
   border-radius: 1rem;
   border: 2px solid var(--border-color);
-}
-.farm-card-mini p {
-  overflow-wrap: anywhere;
-  padding: 0rem 0.75rem;
-  font-size: 0.9rem;
 }
 .farm-img-container {
   position: relative;
@@ -550,8 +531,8 @@ nav.breadcrumb-area-personale {
   height: 130px;
   border-radius: 1rem 1rem 0 0;
 }
-.farm-card-mini .farm-stato-closed,
-.farm-card-mini .farm-stato-open {
+.farm-card .farm-stato-closed,
+.farm-card .farm-stato-open {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -560,19 +541,19 @@ nav.breadcrumb-area-personale {
   font-weight: bold;
   font-size: 0.85rem;
 }
-.farm-card-mini .farm-stato-open {
+.farm-card .farm-stato-open {
   background-color: #e6f7ed;
   color: var(--primary-color);
 }
-.farm-card-mini .farm-stato-closed {
+.farm-card .farm-stato-closed {
   background-color: #fef1f1;
   color: #d32f2f;
 }
-.farm-card-mini a {
+/*.farm-card a {
   text-decoration: none;
   width: 7rem;
   height: 2.5rem;
-}
+}*/
 
 #scroll-btn {
   display: none;
@@ -590,45 +571,25 @@ nav.breadcrumb-area-personale {
 #scroll-btn:hover {
   background-color: var(--primary-color-hover);
 }
-
-/*.med-card-content,
-.farm-card-content {
-  flex-grow: 1;
-  padding: 1rem;
-  display: flex;
-  height: auto;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.med-card img,
-.farm-card img {
-  object-fit: cover;
-  object-position: top;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 2 / 1;
-  border-radius: 1rem 1rem 0 0;
-}*/
-/* --- CARD FARMACIA (Nuovo Stile) --- */
+/* --- CARD FARMACIA --- */
 .farm-card {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   height: 100%;
   background-color: var(--main-bg-color);
   border: 1px solid var(--primary-color);
   border-radius: 8px;
   overflow: hidden;
-    transition: 
-    transform 0.2s ease-out, 
-    box-shadow 0.2s ease-out, 
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out,
     border-color 0.2s ease;
-  width: 100%; 
+  width: 100%;
 }
 .farm-card:hover {
-  transform: translateY(-0.35em); 
-  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.3); 
-  box-shadow: 
+  transform: translateY(-0.35em);
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.3);
+  box-shadow:
     0 0.5em 1em rgba(0, 0, 0, 0.3),
     inset 0 0 0 1px var(--primary-color);
 }
@@ -689,7 +650,7 @@ nav.breadcrumb-area-personale {
   padding: 0;
   margin: 0;
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 .service-tags li {
@@ -767,28 +728,28 @@ nav.breadcrumb-area-personale {
   justify-content: center;
   gap: 1em;
   border-radius: 8px;
-  width: 12.5em; 
+  width: 12.5em;
   height: 16em;
   padding: 1.5rem;
   text-align: center;
   border: var(--primary-color) solid 1px;
   background-color: color-mix(in srgb, var(--primary-color), transparent 95%);
   position: relative;
-  transition: 
-    transform 0.2s ease-out, 
-    box-shadow 0.2s ease-out, 
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out,
     border-color 0.2s ease;
 }
 .avatar-container:hover,
 .avatar-container:focus-visible {
-  transform: translateY(-0.35em); 
-  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.3); 
-  box-shadow: 
+  transform: translateY(-0.35em);
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.3);
+  box-shadow:
     0 0.5em 1em rgba(0, 0, 0, 0.3),
     inset 0 0 0 1px var(--primary-color);
 }
 .avatar-img {
-width: 6.25em;
+  width: 6.25em;
   height: 6.25em;
   background-size: cover;
   background-position: center;
@@ -814,10 +775,10 @@ width: 6.25em;
 }
 .contact-info {
   box-sizing: border-box;
-  width: 40%; 
+  width: 40%;
   display: flex;
   flex-direction: column;
-  gap: 1.5em; 
+  gap: 1.5em;
   padding: 2em;
   margin: 1em auto;
 }
@@ -826,16 +787,16 @@ address {
   font-style: normal;
 }
 .contact-item {
-  margin-bottom: 1em; 
+  margin-bottom: 1em;
 }
 .contact-item dt {
   font-weight: 700;
-  margin-bottom: 0.3em; 
+  margin-bottom: 0.3em;
   line-height: 1.2;
 }
 .contact-item dd {
-  margin-left: 1.5em; 
-  margin-bottom: 0;   
+  margin-left: 1.5em;
+  margin-bottom: 0;
 }
 .sponsor-card {
   border: 1px solid var(--primary-color);
@@ -846,14 +807,14 @@ address {
   display: flex;
   align-items: center;
   justify-content: center;
-  display:flex;
+  display: flex;
   background-color: color-mix(in srgb, var(--primary-color), transparent 95%);
 }
 
 .sponsor-card img {
   height: 50%;
   width: 100%;
-  object-fit: contain; 
+  object-fit: contain;
 }
 .sponsor-card .uni-logo {
   height: 70%;
@@ -870,7 +831,8 @@ address {
   gap: 1.5rem;
 }
 
-.login-container p:not(.error-message):not(.general-error):not(.success-message) {
+.login-container
+  p:not(.error-message):not(.general-error):not(.success-message) {
   color: #5e5e5e;
   font-size: 1em;
 }
@@ -1077,6 +1039,7 @@ address {
   padding: 0.5em 0.8em;
   background-color: var(--second-bg-color);
   text-align: center;
+  width: 4em;
 }
 .appuntamento-card-details {
   width: 100%;
@@ -1089,7 +1052,6 @@ address {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 .row-details {
   display: flex;
@@ -1130,6 +1092,11 @@ address {
 #profilo.content-section {
   gap: 1.5rem;
 }
+#profile-heading {
+  font-size: 2em;
+  text-align: start;
+}
+
 .content-hidden {
   display: none;
 }
@@ -1262,7 +1229,7 @@ a.delete-account {
   text-align: left;
 }
 
-#InfoFarmStatus .aperto{
+#InfoFarmStatus .aperto {
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
@@ -1273,7 +1240,7 @@ a.delete-account {
   font-size: 0.95rem;
   white-space: nowrap;
 }
-#InfoFarmStatus .chiuso{
+#InfoFarmStatus .chiuso {
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
@@ -1303,18 +1270,16 @@ a.delete-account {
 }
 
 /* Sezioni comuni (Info, Orari, Servizi) */
-#InfoGeneraliGridInfoFarm,
-#OrariDiApertura,
-#SeriviziOfferti {
+.info-generali-elemento {
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid var(--border-color);
+  margin: 0 auto 2rem;
+  width: 100%;
 }
 
-#InfoGeneraliGridInfoFarm h2,
-#OrariDiApertura h2,
-#SeriviziOfferti h2 {
+.info-generali-elemento h2 {
   font-size: 1.4rem;
   color: var(--primary-color);
   margin: 0 0 1rem 0;
@@ -1324,7 +1289,7 @@ a.delete-account {
 }
 
 /* Info Generali */
-#InfoGeneraliGridInfoFarm p {
+.info-generali-elemento p {
   padding: 0.75rem;
   margin: 0 0 0.5rem 0;
   border-left: 3px solid var(--primary-color);
@@ -1358,7 +1323,7 @@ a.delete-account {
   padding-left: 0;
 }
 
-.SerivzioOfferto {
+.servizio-offerto {
   padding: 0.75rem;
   margin-bottom: 0.5rem;
   border-left: 3px solid var(--primary-color);
@@ -1370,16 +1335,6 @@ a.delete-account {
 }
 .descrizione-servizio {
   font-weight: normal;
-}
-
-
-/* Layout Container per griglia a 3 colonne */
-.info-farm-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto 2rem;
 }
 
 /******* INFO MED *******/
@@ -1405,6 +1360,13 @@ a.delete-account {
   max-width: 1200px;
   display: flex;
   justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--primary-color);
+  padding: 0.5em;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .MedImageWrapper img {
@@ -1413,41 +1375,16 @@ a.delete-account {
   max-width: 400px;
   max-height: 200px;
   object-fit: contain;
-  object-position: center; /* Da vedere perchè cosi si aspetta medicinale in basso e quindi in caso taglia dall'alto*/
+  object-position: center;
   aspect-ratio: 2 / 1;
+  object-position: center;
   background-color: var(--primary-color);
-  padding: 0rem 0.5rem 0rem 0.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
+  padding: 0rem 0.5em 0rem 0.5em;
+  padding: 0;
+  border-radius: 8px;
 }
 
 /* Sezioni Info Medicinale */
-#InfoGeneraliGridInfoMed {
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  max-width: 1200px;
-  margin: 0 auto 2rem;
-}
-
-#InfoGeneraliGridInfoMed h2 {
-  font-size: 1.4rem;
-  color: var(--primary-color);
-  margin: 0 0 1rem 0;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--second-bg-color);
-  text-align: left;
-}
-
-#InfoGeneraliGridInfoMed > p {
-  padding: 0.75rem;
-  margin: 0;
-  border-left: 3px solid var(--primary-color);
-  background-color: var(--second-bg-color);
-  border-radius: 6px;
-  line-height: 1.6;
-}
 
 /* Lista dettagli medicinale */
 .lista-dettagli-med {
@@ -1897,29 +1834,29 @@ textarea.invalid:focus {
 }
 
 #regForm h3 {
-  background-color: #e9faea; 
-  color: var(--primary-color);            
+  background-color: #e9faea;
+  color: var(--primary-color);
   font-weight: 600;
-  padding: 12px 15px;        
-  margin-bottom: 0;          
+  padding: 12px 15px;
+  margin-bottom: 0;
   margin-top: 1.5rem;
-  border-bottom: 3px solid var(--primary-color);      
-  border-radius: 8px 8px 0 0; 
+  border-bottom: 3px solid var(--primary-color);
+  border-radius: 8px 8px 0 0;
 }
 
 .info-app {
-  border-radius: 0 0 8px 8px;     
-  background-color: #fff; 
-  padding: 0;             
+  border-radius: 0 0 8px 8px;
+  background-color: #fff;
+  padding: 0;
   margin: 0;
-  overflow: hidden;  
+  overflow: hidden;
 }
 
 .data-row {
-  display: flex;          
+  display: flex;
   align-items: stretch;
   padding: 0;
-  border-bottom: 1px solid #eee;  
+  border-bottom: 1px solid #eee;
 }
 
 .data-row:last-child {
@@ -1927,10 +1864,10 @@ textarea.invalid:focus {
 }
 
 .data-row dt {
-  flex-basis: 30%;  
-  flex-shrink: 0;     
-  font-weight: 600;  
-  background-color: #f6f7f9; 
+  flex-basis: 30%;
+  flex-shrink: 0;
+  font-weight: 600;
+  background-color: #f6f7f9;
   padding: 1em;
 }
 
@@ -1939,19 +1876,12 @@ textarea.invalid:focus {
 }
 
 .data-row dd {
-  flex-basis: 70%;    
-  margin: 0;        
-  color: #000;        
-  line-height: 1.5;  
+  flex-basis: 70%;
+  margin: 0;
+  color: #000;
+  line-height: 1.5;
   padding: 1em;
 }
-
-
-
-
-
-
-
 
 /* Sezione per dividere Farmacia e Utente */
 .split-section {
@@ -2057,20 +1987,18 @@ textarea.invalid:focus {
 
 /* --- PAGINA CONSIGLI --- */
 .banner-tips {
-  margin-top: 1.5em; 
-  background-color: #ecf5a5; 
-  border-radius: 8px; 
-  max-width: 60em; 
-  margin-left: auto; 
-  margin-right: auto; 
+  margin-top: 1.5em;
+  background-color: #ecf5a5;
+  border-radius: 8px;
+  max-width: 60em;
+  margin-left: auto;
+  margin-right: auto;
   padding: 1em 2em;
 
- 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2em; 
-
+  gap: 2em;
 }
 .banner-btn {
   margin-left: 1em;
@@ -2078,8 +2006,8 @@ textarea.invalid:focus {
   padding: 0.5em;
 }
 .banner-text h2 {
-    font-size: 1em;
-    margin-bottom: 0.5em;
+  font-size: 1em;
+  margin-bottom: 0.5em;
 }
 .banner-text p {
   margin: 0;
@@ -2278,140 +2206,382 @@ details[open] summary::after {
   margin: 1em 0;
 }
 
-
-
 /**********************/
 /*     MED-SEARCH     */
 /**********************/
 
-.drug-list-container { 
-      max-width: 1000px; 
-      margin: 0 auto; 
-      font-family: inherit;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .drug-row {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        background: #fff;
-        border: 2px solid var(--primary-color);
-        border-radius: 8px;
-        margin-bottom: 16px;
-        padding: 16px;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
+.drug-list-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+}
 
-    .drug-row:hover {
-        box-shadow: 0 0 0 3px var(--primary-color);
-    }
+.drug-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background: #fff;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  padding: 16px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
 
-    .drug-image img {
-        width: 200px;
-        height: 100px;
-        object-fit: fill;
-        border-radius: 6px;
-        margin-right: 20px;
-        background: var(--primary-color);
-        padding: 2px; 
-    }
+.drug-row:hover {
+  box-shadow: 0 0 0 3px var(--primary-color);
+}
 
-    dl.drug-row dt {
-      display: none;
-    }
+.drug-image img {
+  width: 200px;
+  height: 100px;
+  object-fit: fill;
+  border-radius: 6px;
+  margin-right: 20px;
+  background: var(--primary-color);
+  padding: 2px;
+}
 
-    #nohide {
-      display:inline;
-    }
+dl.drug-row dt {
+  display: none;
+}
 
-    .drug-info { 
-      flex-grow: 1; 
-      padding-right: 20px; 
-    }
-    
-    .drug-header { 
-      display: flex; 
-      align-items: center; 
-      justify-content: space-between; 
-      margin-bottom: 4px; 
-    }
+#nohide {
+  display: inline;
+}
 
-    .drug-header h3 { 
-      margin: 0; 
-      color: #333; 
-      font-size: 1.1rem; 
-    }
+.drug-info {
+  flex-grow: 1;
+  padding-right: 20px;
+}
 
-    .active-ingredient { 
-      color: #0056b3; 
-      margin: 0 0 6px 0; 
-      font-size: 0.95rem;
-      display: flex; 
-      flex-direction: row; gap: 6px; 
-    }
-    
-    .drug-meta { 
-      display: flex; 
-      gap: 15px; 
-      font-size: 0.85rem; 
-      color: #555; 
-    }
+.drug-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
 
-    .drug-meta dd { 
-      background: #f4f6f8; 
-      padding: 2px 8px; 
-      border-radius: 4px; 
-      display: inline-block; 
-      margin-top: 4px; 
-      margin-bottom: 4px; 
-    }
+.drug-header h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
 
-    
-    .drug-desc-short { 
-      margin-top: 2px; 
-      color: #666; 
-      font-size: 0.9rem; 
-      overflow: hidden; 
-      max-width: 400px;
-    }
+.active-ingredient {
+  color: #0056b3;
+  margin: 0 0 6px 0;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
 
-    .badge { 
-      display: inline-block; 
-      padding: 4px 8px; 
-      border-radius: 12px; 
-      font-size: 0.75rem; 
-      font-weight: bold; 
-      text-transform: uppercase; 
-      margin: 8px 0;
-    }
+.drug-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 0.85rem;
+  color: #555;
+}
 
-    .badge-ricetta { 
-      background: #fff3cd; 
-      color: #856404; 
-    } /* Ricetta */
+.drug-meta dd {
+  background: #f4f6f8;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
 
-    .badge-banco { 
-      background: #d4edda; 
-      color: #155724; 
-    } /* Banco */
+.drug-desc-short {
+  margin-top: 2px;
+  color: #666;
+  font-size: 0.9rem;
+  overflow: hidden;
+  max-width: 400px;
+}
 
-    .drug-action { 
-      min-width: 140px; 
-      text-align: right; 
-      border-left: 1px solid #eee; 
-      padding-left: 15px;
-      border-left: 1px solid #eee; 
-      padding-left: 15px; 
-    }
-    
-    .btn-details { 
-      text-decoration: none; 
-      color: #007bff; 
-      font-weight: 600; 
-      font-size: 0.9rem;
-    }
-    .btn-details:hover { 
-      text-decoration: underline;
-    }
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 8px 0;
+}
+
+.badge-ricetta {
+  background: #fff3cd;
+  color: #856404;
+} /* Ricetta */
+
+.badge-banco {
+  background: #d4edda;
+  color: #155724;
+} /* Banco */
+
+.drug-action {
+  min-width: 140px;
+  text-align: right;
+  border-left: 1px solid #eee;
+  padding-left: 15px;
+  border-left: 1px solid #eee;
+  padding-left: 15px;
+}
+
+.btn-details {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.btn-details:hover {
+  text-decoration: underline;
+}
+
+/**********************/
+/* GESTIONE FARMACIE (ADMIN) */
+/**********************/
+
+/* Messaggi di feedback */
+.message {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.message.success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+/* Contenitore bottoni */
+.button-container {
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.button-container .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Tabella farmacie */
+.farmacie-table-container {
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.data-table thead {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.data-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.data-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Form inline per pulsante elimina */
+.inline-form {
+  display: inline;
+  margin: 0;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+.btn-delete:focus {
+  outline: 2px solid #721c24;
+  outline-offset: 2px;
+}
+
+/* Contenitore form */
+.form-container {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Nasconde il form solo se JavaScript aggiunge questa classe */
+.form-container.js-hidden {
+  display: none;
+}
+
+.form-container h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+/* Fieldset e legend */
+.form-container fieldset {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-container legend {
+  font-weight: 600;
+  color: var(--primary-color);
+  padding: 0 0.5rem;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-color: var(--primary-color);
+}
+
+.form-group small {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+/* Radio groups */
+.radio-group {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radio-group input[type="radio"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.radio-group label {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+/* Azioni form */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-secondary:focus,
+.form-actions .btn-primary:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Abbr per campo obbligatorio */
+.form-container abbr[title] {
+  color: #dc3545;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+/* Testo no-data */
+.no-data {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+}

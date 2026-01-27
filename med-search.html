@@ -21,7 +21,7 @@
 
 <body>
   <nav aria-label="Aiuti alla navigazione" class="help-nav">
-      <a href="#main-content">Vai al contenuto principale</a>
+    <a href="#main-content">Vai al contenuto principale</a>
   </nav>
   <header class="main-header">
     <h1 class="hide">FarmaFind24</h1>
@@ -54,7 +54,6 @@
   </nav>
 
   <main id="main-content" tabindex="-1">
-  <main id="main-content" tabindex="-1">
     <div class="title-main small">
       <h1>Cerca il Medicinale adatto a te</h1>
       <p>Cerca tra i migliori medicinali in circolazione e vedi in quali farmacie c'è disponibilità.</p>
@@ -63,18 +62,18 @@
     <form>
       <div class="form-search-container">
         <label for="farm-name" class="sr-only">Cerca una farmacia</label>
-        <input type="search" id="farm-name" name="q" value="[valore_ricerca]" placeholder="Inserisci il nome del medicinale o del principio attivo"
-          required>
+        <input type="search" id="farm-name" name="q" value="[valore_ricerca]"
+          placeholder="Inserisci il nome del medicinale o del principio attivo" required>
         <button type="submit">Cerca</button>
       </div>
     </form>
 
     <section class="drug-list-container">
-      
+
       [listaFarmaci]
 
     </section>
-    
+
 
     <button onclick="topFunction()" id="scroll-btn" title="Go to top">Torna su</button>
   </main>

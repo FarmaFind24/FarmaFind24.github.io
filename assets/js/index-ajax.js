@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function fetchPharmacies() {
-        const pharmacyGrid = document.querySelector('.grid-4c');
+        const pharmacyGrid = document.querySelector('.grid.four-columns');
         const selectedCity = citySelect.value;
         if (!pharmacyGrid) {
-            console.error("Errore: Elemento .grid-4c non trovato!");
+            console.error("Errore: Elemento .grid four-columns non trovato!");
             return;
         }
         // Pulisce la lista precedente e il messaggio
