@@ -154,7 +154,7 @@ try {
     error_log($e->getMessage());
     $paginaHTML = str_replace('[nomeFarmacia]', 'Errore', $paginaHTML);
     $paginaHTML = str_replace('[statusFarmacia]', '', $paginaHTML);
-    $paginaHTML = str_replace('[infoGenerali]', '<p class="error">Si è verificato un errore. Riprova più tardi.</p>', $paginaHTML);
+    $paginaHTML = str_replace('[infoGenerali]', '<p class="error">Si � verificato un errore. Riprova pi� tardi.</p>', $paginaHTML);
     $paginaHTML = str_replace('[orariApertura]', '', $paginaHTML);
     $paginaHTML = str_replace('[serviziOfferti]', '', $paginaHTML);
 }

@@ -4,7 +4,6 @@ require_once "dbConnection.php";
 use DB\DBAccess;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recupera e pulisce input
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
     

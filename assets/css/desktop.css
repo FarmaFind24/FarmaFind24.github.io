@@ -839,12 +839,14 @@ address {
 }
 .sponsor-card {
   border: 1px solid var(--primary-color);
-  width: 200px;
-  height: 150px;
+  width: 12.5em;
+  height: 9.5em;
   border-radius: 1rem;
   padding: 1rem;
   display: flex;
   align-items: center;
+  justify-content: center;
+  display:flex;
   background-color: color-mix(in srgb, var(--primary-color), transparent 95%);
 }
 

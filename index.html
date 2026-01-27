@@ -2,10 +2,10 @@
 <html lang="it">
 
 <head>
-  <title>Home - Farma Find 24</title>
+  <title>Farmacie di turno e ricerca medicinali - Farma Find 24</title>
   <meta charset="utf-8">
-  <meta name="description" content="Pagina home ">
-  <meta name="keywords" content="salute">
+  <meta name="description" content="Trova farmacie di turno vicine a te nella provincia di Padova, ricerca la disponibilità di farmaci, prenota visite e accedi a consigli per la tua salute.">
+  <meta name="keywords" content="salute, farmacie padova, farmacia di turno, prenotazione visite">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,8 +21,14 @@
 
 <body>
   <header class="main-header">
+    <nav aria-label="Aiuti alla navigazione" class="help-nav">
+      <a href="#main-content">Vai al contenuto principale</a>
+    </nav>
 
-    <h1 class="hide">FarmaFind24</h1>
+  <h1>
+    <span class="hide">Farma<span lang="en">Find</span>24</span>
+  </h1>
+
     <nav class="Top-NavBar">
       <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false">
         ☰
@@ -51,13 +57,13 @@
     </p>
   </nav>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="home-hero-section">
       <div class="home-hero-content">
         <h1>Farmacie e servizi sanitari nella provincia di Padova</h1>
         <p>
           Cerca farmacie di turno aperte, verifica la disponibilità dei medicinali e prenota prestazioni sanitarie nella
-          provincia di Padova con FarmaFind24.
+          provincia di Padova con Farma<span lang="en">Find</span>24.
         </p>
         <form class="home-hero-form-container" id="mainSearchForm">
           <fieldset>
@@ -129,7 +135,7 @@
             </div>
             <h3 class="title-card">Cerca farmaci</h3>
             <p>
-              Puoi cercera un farmaco e verificarne la disponibilità nelle farmacie vicino a te
+              Puoi cercare un farmaco e verificarne la disponibilità nelle farmacie vicino a te
             </p>
           </div>
           <div class="service-card">

@@ -14,7 +14,7 @@ $paginaHTML = file_get_contents("index.html");
 $htmlCitta = "";
 $htmlFarmacieDintorni = ""; 
 $indexMessage = '<p class="instruction">Seleziona un comune per vedere le farmacie nei dintorni.</p>';
-$selectedCity = $_POST['city'] ?? null; // Recupera la città dal POST (per fallback no-JS)
+$selectedCity = $_POST['city'] ?? null; // Recupera la citt� dal POST (per fallback no-JS)
 
 // --- Connessione al DB ---
 $db = new DBAccess();
@@ -22,7 +22,7 @@ $connessioneOk = $db->openDBConnection();
 
 if ($connessioneOk) {
     try {
-        // Carica la lista delle città per la dropdown
+        // Carica la lista delle citt� per la dropdown
         $citta = $db->getListaCitta();
         if ($citta && count($citta) > 0) {
             $htmlCitta = '';
@@ -34,7 +34,7 @@ if ($connessioneOk) {
             $htmlCitta = '<option value="">Nessun comune disponibile</option>';
         }
 
-        // Se una città è stata inviata tramite POST (fallback no-JS), cerca le farmacie
+        // Se una citt� � stata inviata tramite POST (fallback no-JS), cerca le farmacie
         if ($selectedCity) {
             $farmacie = $db->getFarmacieDintorni($selectedCity);
 
@@ -64,7 +64,7 @@ if ($connessioneOk) {
                     $htmlFarmacieDintorni .=        '<p>' . htmlspecialchars($farmacia['indirizzo']) . ', ' . htmlspecialchars($farmacia['citta']) . '</p>';
                     $htmlFarmacieDintorni .=       '<div class="row-btn">';
                     $htmlFarmacieDintorni .=            '<a href="mailto:farmafind24@gmail.com" class="btn-like outlined" aria-label="Contatta via Email">Email</a>';
-                    $htmlFarmacieDintorni .=            '<a href="info-farm.php?id=' . $idFarmacia . '" class="btn-primary">Dettagli</a>';
+                    $htmlFarmacieDintorni .=            '<a href="info-farm.php?id=' . $idFarmacia . '" class="btn-like primary">Dettagli</a>';
                     $htmlFarmacieDintorni .=        '</div>';
                     $htmlFarmacieDintorni .=    '</div>';
                     $htmlFarmacieDintorni .= '</div>';
@@ -76,14 +76,14 @@ if ($connessioneOk) {
 
     } catch (\mysqli_sql_exception $e) {
         $htmlCitta = '<option value="">Errore nel caricamento dati</option>';
-        $indexMessage = '<p class="error">Si è verificato un errore. Riprova più tardi.</p>';
+        $indexMessage = '<p class="error">Si � verificato un errore. Riprova pi� tardi.</p>';
     } finally {
         $db->closeConnection();
     }
 } else {
     // Gestione errore connessione DB
     $htmlCitta = '<option value="">Errore di connessione</option>';
-    $indexMessage = '<p class="error">Impossibile caricare i dati. Riprova più tardi.</p>';
+    $indexMessage = '<p class="error">Impossibile caricare i dati. Riprova pi� tardi.</p>';
 }
 
 $paginaHTML = str_replace('[citta_options]', $htmlCitta, $paginaHTML);
