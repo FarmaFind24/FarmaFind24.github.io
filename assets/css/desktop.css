@@ -2052,9 +2052,13 @@ input.invalid + .error-msg {
   align-self: center;
   padding: 0.5em;
 }
+.banner-text h2 {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+}
 .banner-text p {
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.5;
 }
 .faq-container {
   display: block;
