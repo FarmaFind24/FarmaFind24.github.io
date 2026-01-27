@@ -119,6 +119,15 @@ button.btn-primary:hover {
   background-color: var(--primary-color-hover);
   color: white;
 }
+/*button.btn-primary:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+button.btn-primary:disabled:hover {
+  background-color: #cccccc;
+}*/
 a.btn-like {
   border-radius: 0.5rem;
   height: 2.5rem;
@@ -614,12 +623,8 @@ nav.breadcrumb-area-personale {
     transform 0.2s ease-out, 
     box-shadow 0.2s ease-out, 
     border-color 0.2s ease;
-  
-  /* Rimuovi max-width fisso se la griglia gestisce già le colonne */
   width: 100%; 
 }
-
-/* Effetto Hover sulla card */
 .farm-card:hover {
   transform: translateY(-0.35em); 
   box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.3); 
@@ -627,98 +632,81 @@ nav.breadcrumb-area-personale {
     0 0.5em 1em rgba(0, 0, 0, 0.3),
     inset 0 0 0 1px var(--primary-color);
 }
-
-/* --- IMMAGINE --- */
 .card-image-header {
   width: 100%;
-  height: 10em; /* Altezza fissa per uniformare le card */
+  height: 10em;
   overflow: hidden;
 }
-
 .card-image-header img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ritaglia l'immagine per riempire lo spazio */
+  object-fit: cover;
   object-position: center;
   display: block;
 }
 
-/* --- CONTENUTO INTERNO --- */
 .farm-card-content {
-  padding: 1.2rem;
+  padding: 1.2em;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Fondamentale: occupa tutto lo spazio rimanente per spingere giù il bottone */
-  gap: 0.8rem;
+  flex-grow: 1;
+  gap: 0.8em;
 }
-
-/* Intestazione (Titolo e Indirizzo) */
 .card-header .title-card {
-  margin: 0 0 0.3rem 0;
+  margin: 0 0 0.3em 0;
   font-size: 1.3rem;
   color: var(--primary-color);
-  line-height: 1.2;
+  line-height: 1.5;
 }
-
 .card-header .address {
   margin: 0;
-  font-size: 0.9rem;
   color: #666;
-  font-style: normal;
 }
-
-/* Contatti */
 .card-meta .phone-link {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #333;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.5em;
+  text-decoration: none;
 }
-
-/* --- SERVIZI A BADGE (Pillole) --- */
+.phone-number-text {
+  text-decoration: underline;
+}
 .services-preview {
   margin-top: 0.5rem;
 }
-
 .service-label {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.7em;
   font-weight: 700;
   text-transform: uppercase;
-  color: #888;
-  margin-bottom: 0.4rem;
+  color: #666;
+  margin-bottom: 0.4em;
 }
-
 .service-tags {
-  list-style: none; /* Toglie i pallini della lista */
+  list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  flex-wrap: wrap;  /* Permette alle pillole di andare a capo */
-  gap: 0.5rem;      /* Spazio tra le pillole */
+  flex-wrap: wrap; 
+  gap: 0.5rem;
 }
-
-/* Stile della singola pillola */
 .service-tags li {
   font-size: 0.8rem;
-  background-color: #e8f5e9; /* Verde chiarissimo sfondo */
-  color: var(--primary-color); /* Testo verde scuro */
+  background-color: #e8f5e9;
+  color: var(--primary-color);
   padding: 0.25em 0.7em;
-  border-radius: 50px;       /* Bordo rotondo */
-  font-weight: 500;
-  border: 1px solid #c8e6c9;
+  border-radius: 50px;
+  font-weight: 600;
+  border: 1px solid var(--primary-color);
 }
-
-/* Stile speciale per il badge "+ altri" */
 .service-tags li.more-badge {
-  background-color: #f3f4f6; /* Grigio */
+  background-color: #f3f4f6;
   color: #666;
   border-color: #e5e7eb;
-  font-weight: 600;
+  font-weight: 700;
 }
-
 .farm-orario {
   text-align: right;
 }
@@ -824,27 +812,6 @@ width: 6.25em;
   font-size: 1.3rem;
   transition: color 0.2s;
 }
-
-.sponsor-card {
-  border: 1px solid var(--primary-color);
-  width: 12.5em;
-  height: 9.5em;
-  border-radius: 1rem;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display:flex;
-  background-color: color-mix(in srgb, var(--primary-color), transparent 95%);
-}
-.sponsor-card img{
-  height: 50%;
-  width: 100%;
-  object-fit: contain;
-}
-.sponsor-card .uni-logo {
-  height: 0%;
-}
 .contact-info {
   box-sizing: border-box;
   width: 40%; 
@@ -872,12 +839,14 @@ address {
 }
 .sponsor-card {
   border: 1px solid var(--primary-color);
-  width: 200px;
-  height: 150px;
+  width: 12.5em;
+  height: 9.5em;
   border-radius: 1rem;
   padding: 1rem;
   display: flex;
   align-items: center;
+  justify-content: center;
+  display:flex;
   background-color: color-mix(in srgb, var(--primary-color), transparent 95%);
 }
 
@@ -901,7 +870,7 @@ address {
   gap: 1.5rem;
 }
 
-.login-container p {
+.login-container p:not(.error-message):not(.general-error):not(.success-message) {
   color: #5e5e5e;
   font-size: 1em;
 }
@@ -1680,6 +1649,12 @@ a.delete-account {
   color: white;
 }
 
+.time-slot input[type="radio"]:focus + label {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+  border-color: var(--primary-color);
+}
+
 .time-slot label:hover {
   border-color: var(--primary-color);
   background-color: #f0f0f0;
@@ -1822,7 +1797,7 @@ a.delete-account {
 }
 
 .instruction {
-  color: #5e5e5e;
+  color: #f70000;
   font-style: italic;
   text-align: center;
   margin-bottom: 1em;
@@ -1849,22 +1824,72 @@ a.delete-account {
   margin-bottom: 2em;
 }
 /*VALIDAZIONE INPUT FORM*/
-input.invalid {
-  border-color: #d93025;
-  background-color: #fff4f4;
-}
-.error-msg {
-  display: none;
-  color: #d93025;
-  font-size: 0.85rem;
-  font-weight: bold;
-  margin-top: 5px;
+/* Campo con errore */
+input.invalid,
+select.invalid,
+textarea.invalid {
+  border: 2px solid #c62828;
+  background-color: #ff7474;
+  outline-color: #c62828;
 }
 
-input.invalid + .error-msg {
+input.invalid:focus,
+select.invalid:focus,
+textarea.invalid:focus {
+  border-color: #c62828;
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.15);
+}
+
+/* Messaggio errore sotto il campo */
+.error-message {
+  display: none;
+  color: #b71c1c;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #ffebee;
+  border-left: 4px solid #c62828;
+  border-radius: 4px;
+}
+
+.error-message:not(:empty) {
   display: block;
 }
 
+/* Errore generale in cima al form */
+.general-error {
+  display: none;
+  color: #b71c1c;
+  background-color: #ffebee;
+  border: 2px solid #c62828;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.general-error:not(:empty) {
+  display: block;
+}
+
+/* Messaggio successo */
+.success-message {
+  display: none;
+  color: #1b5e20;
+  background-color: #e8f5e9;
+  border: 2px solid #4caf50;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.success-message:not(:empty) {
+  display: block;
+}
+
+/* Vecchio stile per compatibilità */
 #general-error-msg {
   display: none;
   color: #d93025;

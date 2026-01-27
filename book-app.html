@@ -139,8 +139,12 @@
                     <div class="date-picker-container">
                         <label for="date-pick" class="label-title">Scegli il giorno: <span class="required"
                                 aria-hidden="true">*</span></label>
+                        <span id="date-pick-description" class="sr-only">Seleziona una data a partire da oggi. Usa i tasti freccia per navigare tra i giorni, mesi e anni.</span>
                         <input type="date" id="date-pick" name="date-pick" min="[min_date]" value="[valore_data]"
-                            required>
+                            required 
+                            aria-required="true"
+                            aria-describedby="date-pick-description"
+                            aria-label="Data appuntamento, formato giorno mese anno">
 
                         <button type="submit" id="check-time-btn" class="btn-primary" formnovalidate>Verifica
                             Orari</button>
@@ -185,7 +189,7 @@
                 obbligatori prima di proseguire!</div>
 
             <div class="step-actions">
-                <button type="button" id="nextBtn" class="btn-primary" onclick="nextPrev(1)">Prosegui</button>
+                <button type="button" id="nextBtn" class="btn-primary" onclick="nextPrev(1)" [btn_disabled]>Prosegui</button>
                 <button type="button" id="prevBtn" class="outlined-btn" onclick="nextPrev(-1)">Indietro</button>
 
                 <!-- Il pulsante finale per utenti senza JS ora ha un `formaction` per inviare i dati allo script corretto -->
@@ -266,6 +270,7 @@
     </footer>
 
     <script src="assets/js/scroll-top.js"></script>
+    <script src="assets/js/form-validation.js"></script>
     <script src="assets/js/book-form.js"></script>
     <script src="assets/js/book-form-validation.js"></script>
     <!-- Script per la logica AJAX -->

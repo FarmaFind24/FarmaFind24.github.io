@@ -1,9 +1,62 @@
-// Contiene le funzioni specifiche per controllare il formato dei dati 
+// book-form-validation.js - Validazione form prenotazioni
+
+// Mappatura errori URL per il form di prenotazione
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector('form#regForm');
+    
+    if (!form) return;
+    
+    const errorMappings = {
+        'missing_fields': {
+            message: 'Compila tutti i campi obbligatori per completare la prenotazione.'
+        },
+        'invalid_name': {
+            field: 'fname',
+            message: 'Nome non valido. Usa solo lettere.'
+        },
+        'invalid_fiscal_code': {
+            field: 'fcode',
+            message: 'Codice fiscale non valido (16 caratteri, formato corretto).'
+        },
+        'invalid_date': {
+            field: 'date',
+            message: 'Seleziona una data valida.'
+        },
+        'invalid_time': {
+            field: 'time',
+            message: 'Seleziona un orario valido.'
+        },
+        'past_date': {
+            field: 'date',
+            message: 'Non puoi prenotare appuntamenti nel passato.'
+        },
+        'db_connection': {
+            message: 'Errore di connessione al database. Riprova più tardi.'
+        },
+        'session_invalid': {
+            message: 'Sessione non valida. Effettua nuovamente l\'accesso.'
+        },
+        'service_not_available': {
+            message: 'Il servizio selezionato non è disponibile.'
+        },
+        'slot_unavailable': {
+            message: 'L\'orario selezionato non è più disponibile. Scegline un altro.'
+        },
+        'booking_failed': {
+            message: 'Impossibile completare la prenotazione. Riprova.'
+        },
+        'authentication_required': {
+            message: 'Devi effettuare l\'accesso per prenotare un appuntamento.'
+        }
+    };
+    
+    // Gestisci errori da URL
+    handleURLErrors(errorMappings);
+});
 
 // VALIDAZIONE NOME
 function validateNome() {
     var nome = document.getElementById("fname").value;
-    // Regex: solo lettere
     const validChars = /^[A-Za-zÀ-ù\s']+$/; 
     
     if(nome.trim() === "") return false;
@@ -15,7 +68,6 @@ function validateNome() {
 // VALIDAZIONE COGNOME
 function validateCognome() {
     var cognome = document.getElementById("fsurname").value;
-    //solo lettere
     const validChars = /^[A-Za-zÀ-ù\s']+$/;
     
     if(cognome.trim() === "") return false;
@@ -27,7 +79,6 @@ function validateCognome() {
 // VALIDAZIONE CODICE FISCALE
 function validateCodiceFiscale() {
     var codiceFiscale = document.getElementById("fcode").value;
-    // Regex: 6 lettere, 2 numeri, 1 lettera, 2 numeri, 1 lettera, 3 numeri, 1 lettera (16 caratteri totali)
     const validCF = /^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i;
     
     if(codiceFiscale.trim() === "") return false;
@@ -37,18 +88,21 @@ function validateCodiceFiscale() {
     return true;
 }
 
-// resetta errori
+// resetta errori (mantenuto per compatibilità)
 function resetFormError() {
     var errorBox = document.getElementById("general-error-msg");
-    errorBox.style.display = "none";
-    errorBox.innerHTML = "";
-    errorBox.className = "error-message";
+    if (errorBox) {
+        errorBox.style.display = "none";
+        errorBox.innerHTML = "";
+    }
 }
 
-// trovati errori
+// trovati errori (mantenuto per compatibilità)
 function addFormError(msg) {
     var errorBox = document.getElementById("general-error-msg");
-    errorBox.style.display = "block";
-    errorBox.innerHTML = msg; 
-    errorBox.focus();
+    if (errorBox) {
+        errorBox.style.display = "block";
+        errorBox.innerHTML = msg; 
+        errorBox.focus();
+    }
 }

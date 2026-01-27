@@ -38,6 +38,12 @@ button {
   cursor: pointer;
   font-family: inherit;
 }
+button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 ::placeholder {
   color: #5e5e5e;
   opacity: 1;
@@ -92,8 +98,79 @@ a:visited {
   justify-content: space-evenly;
 }
 .row-btn:has(> *:only-child) {
+  justify-content: center;
+}
+
+/*VALIDAZIONE INPUT FORM*/
+/* Campo con errore */
+input.invalid,
+select.invalid,
+textarea.invalid {
+  border: 2px solid #c62828;
+  background-color: #fff;
+  outline-color: #c62828;
+}
+
+input.invalid:focus,
+select.invalid:focus,
+textarea.invalid:focus {
+  border-color: #c62828;
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.15);
+}
+
+/* Messaggio errore sotto il campo */
+.error-message {
+  display: none;
+  color: #b71c1c;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #ffebee;
+  border-left: 4px solid #c62828;
+  border-radius: 4px;
+}
+
+.error-message:not(:empty) {
+  display: block;
+}
+
+/* Errore generale in cima al form */
+.general-error {
+  display: none;
+  color: #b71c1c;
+  background-color: #ffebee;
+  border: 2px solid #c62828;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.general-error:not(:empty) {
+  display: block;
+}
+
+/* Messaggio successo */
+.success-message {
+  display: none;
+  color: #1b5e20;
+  background-color: #e8f5e9;
+  border: 2px solid #4caf50;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.success-message:not(:empty) {
+  display: block;
+}
+
+.row-btn:has(> *:only-child) {
   justify-content: flex-end;
 }
+
 h1 {
   text-align: center;
   font-size: 1em;
@@ -575,6 +652,24 @@ li.logout {
   font-size: 24px;
 }
 
+/* Auth required message responsive */
+.auth-required-message {
+  margin: 2em 1em;
+  padding: 2em 1.5em;
+}
+
+.auth-required-message h2 {
+  font-size: 1.5em;
+}
+
+.auth-required-message p {
+  font-size: 1em;
+}
+
+.auth-required-message .btn-primary {
+  padding: 0.7em 1.5em;
+  font-size: 1em;
+}
 
 /**********************/
 /*     MED-SEARCH     */

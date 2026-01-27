@@ -57,46 +57,45 @@ foreach ($risultati as $row) {
     // Header: Titolo e Indirizzo
     $htmlRisultati .= '<div class="card-header">';
     $htmlRisultati .= '<h3 class="title-card">' . htmlspecialchars($row['nome']) . '</h3>';
-    $htmlRisultati .= '<p class="address"><i class="fa-solid fa-location-dot"></i> ' . htmlspecialchars($row['indirizzo']) . ', ' . htmlspecialchars($row['citta']) . '</p>';
+    $htmlRisultati .= '<p class="address"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' . htmlspecialchars($row['indirizzo']) . ', ' . htmlspecialchars($row['citta']) . '</p>';
     $htmlRisultati .= '</div>';
 
     // Contatti
     $htmlRisultati .= '<div class="card-meta">';
-    $htmlRisultati .= '<span class="phone-link"><i class="fa-solid fa-phone"></i> ' . htmlspecialchars($row['telefono']) . '</span>';
+    $telefonoPulito = str_replace(' ', '', $row['telefono']);
+    $htmlRisultati .= '<a href="tel:' . htmlspecialchars($telefonoPulito) . '" class="phone-link">';
+    $htmlRisultati .= '<i class="fa-solid fa-phone" aria-hidden="true"></i> ';
+    $htmlRisultati .= '<span class="phone-number-text">' . htmlspecialchars($row['telefono']) . '</span>';
+    $htmlRisultati .= '</a>';
     $htmlRisultati .= '</div>';
 
-    // --- LOGICA SERVIZI (AUTOMATIZZATA) ---
+    // Servizi
     $servizi = $db->getServiziFarmacia($idFarm);
     
     if ($servizi && count($servizi) > 0) {
-        $maxVisibili = 3; // DECIDI QUI QUANTI MOSTRARNE
+        $maxVisibili = 3;
         $totaleServizi = count($servizi);
         $rimanenti = $totaleServizi - $maxVisibili;
-
-        // Prende solo i primi 3
         $serviziDaMostrare = array_slice($servizi, 0, $maxVisibili);
 
         $htmlRisultati .= '<div class="services-preview">';
-        // ID univoco per accessibilità
         $lblId = 'lbl-serv-' . $idFarm; 
         $htmlRisultati .= '<span class="service-label" id="' . $lblId . '">Servizi principali:</span>';
         $htmlRisultati .= '<ul class="service-tags" aria-labelledby="' . $lblId . '">';
-        
-        // Ciclo sui servizi visibili
+
         foreach ($serviziDaMostrare as $servizio) {
             $htmlRisultati .= '<li>' . htmlspecialchars($servizio['nome_servizio']) . '</li>';
         }
 
-        // Badge "+ altri" se ce ne sono di più
         if ($rimanenti > 0) {
             $htmlRisultati .= '<li class="more-badge">';
-            $htmlRisultati .= '<span aria-hidden="true">+' . $rimanenti . ' altri</span>';
+            $htmlRisultati .= '<span aria-hidden="true">+' . $rimanenti . ' servizi </span>';
             $htmlRisultati .= '<span class="sr-only">e altri ' . $rimanenti . ' servizi disponibili</span>';
             $htmlRisultati .= '</li>';
         }
 
         $htmlRisultati .= '</ul>';
-        $htmlRisultati .= '</div>'; // chiusura services-preview
+        $htmlRisultati .= '</div>';
     }
 
     // Bottone (spinto in fondo dal CSS margin-top: auto)

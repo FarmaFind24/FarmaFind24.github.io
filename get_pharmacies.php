@@ -78,8 +78,9 @@ if ($connessioneOk) {
                                 </div>';
             }
         } else {
-            $response['message'] = ''; // Svuota il messaggio precedente
-            $response['html'] = '<p class="no-results">Nessuna farmacia trovata a ' . htmlspecialchars($city) . ' o nei comuni limitrofi che offra il servizio selezionato.</p>';
+            $response['message'] = '<p class="error">Nessuna farmacia disponibile a ' . htmlspecialchars($city) . ' o nei comuni limitrofi per questo servizio. <strong>Seleziona un altro comune per continuare.</strong></p>'; 
+            $response['html'] = '';
+            $response['noPharmacies'] = true; // Flag per indicare nessuna farmacia disponibile
         }
     }
     $db->closeConnection();

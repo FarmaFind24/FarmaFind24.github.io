@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function fetchPharmacies() {
         const selectedService = document.querySelector('input[name="service"]:checked');
         const selectedCity = citySelect.value;
+        const nextBtn = document.getElementById('nextBtn');
 
         pharmacyGrid.innerHTML = '';
         pharmacyMessageContainer.innerHTML = '';
@@ -24,16 +25,26 @@ document.addEventListener('DOMContentLoaded', function () {
             pharmacyGrid.innerHTML = '<p>Caricamento farmacie...</p>';
             const serviceId = selectedService.value;
             
-            // Assicurati che get_pharmacies.php restituisca JSON {message: "...", html: "..."}
+            // Assicurati che get_pharmacies.php restituisca JSON {message: "...", html: "...", noPharmacies: bool}
             fetch(`get_pharmacies.php?service_id=${serviceId}&city=${selectedCity}`)
                 .then(response => response.json())
                 .then(data => {
                     pharmacyMessageContainer.innerHTML = data.message;
-                    pharmacyGrid.innerHTML = data.html || '<p>Nessuna farmacia corrisponde ai criteri.</p>';
+                    pharmacyGrid.innerHTML = data.html || '';
+                    
+                    // Gestione del bottone Prosegui: disabilita se non ci sono farmacie
+                    if (nextBtn) {
+                        if (data.noPharmacies === true) {
+                            nextBtn.disabled = true;
+                        } else {
+                            nextBtn.disabled = false;
+                        }
+                    }
                 })
                 .catch(error => {
                     console.error('Errore:', error);
                     pharmacyGrid.innerHTML = '<p class="error">Impossibile caricare le farmacie.</p>';
+                    if (nextBtn) nextBtn.disabled = true;
                 });
         }
     }

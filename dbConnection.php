@@ -525,16 +525,69 @@ public function getPrenotazioniUtente($idUtente) {
 
     // 8. Crea una nuova prenotazione
     public function creaPrenotazione($idUtente, $idFarmaciaServizio, $data, $ora, $nome, $cognome, $codiceFiscale) {
+        error_log("creaPrenotazione chiamata con: utente=$idUtente, fs_id=$idFarmaciaServizio, data=$data, ora=$ora, nome=$nome, cognome=$cognome, cf=$codiceFiscale");
+        
         $query = "INSERT INTO prenotazioni (utente_id, farmacia_servizio_id, data_appuntamento, ora_appuntamento, nome, cognome, codice_fiscale) 
                   VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = mysqli_prepare($this->connection, $query);
+        
+        if (!$stmt) {
+            error_log("creaPrenotazione: ERRORE PREPARE - " . mysqli_error($this->connection));
+            return false;
+        }
+        
         mysqli_stmt_bind_param($stmt, "iisssss", $idUtente, $idFarmaciaServizio, $data, $ora, $nome, $cognome, $codiceFiscale);
         
         try {
-            mysqli_stmt_execute($stmt);
-            // Restituisce l'ID della prenotazione appena creata
-            return mysqli_insert_id($this->connection);
+            $executeResult = mysqli_stmt_execute($stmt);
+            
+            if (!$executeResult) {
+                error_log("creaPrenotazione: ERRORE EXECUTE - " . mysqli_stmt_error($stmt));
+                return false;
+            }
+            
+            $affectedRows = mysqli_affected_rows($this->connection);
+            $insertId = mysqli_insert_id($this->connection);
+            
+            error_log("creaPrenotazione: affected_rows=$affectedRows, insert_id=$insertId");
+            
+            // Se almeno una riga è stata inserita, considera l'operazione riuscita
+            if ($affectedRows > 0) {
+                // Se l'ID è 0 o negativo, proviamo a recuperare l'ultimo ID inserito con una query
+                if ($insertId <= 0) {
+                    $lastIdQuery = "SELECT LAST_INSERT_ID() as last_id";
+                    $result = mysqli_query($this->connection, $lastIdQuery);
+                    if ($result && $row = mysqli_fetch_assoc($result)) {
+                        $insertId = $row['last_id'];
+                        error_log("creaPrenotazione: recuperato last_id dalla query = $insertId");
+                    }
+                    
+                    // Se ancora 0, proviamo a trovare la prenotazione appena creata
+                    if ($insertId <= 0) {
+                        $findQuery = "SELECT id FROM prenotazioni 
+                                     WHERE utente_id = ? AND farmacia_servizio_id = ? 
+                                     AND data_appuntamento = ? AND ora_appuntamento = ? 
+                                     AND codice_fiscale = ? 
+                                     ORDER BY id DESC LIMIT 1";
+                        $findStmt = mysqli_prepare($this->connection, $findQuery);
+                        mysqli_stmt_bind_param($findStmt, "iisss", $idUtente, $idFarmaciaServizio, $data, $ora, $codiceFiscale);
+                        mysqli_stmt_execute($findStmt);
+                        $findResult = mysqli_stmt_get_result($findStmt);
+                        if ($findRow = mysqli_fetch_assoc($findResult)) {
+                            $insertId = $findRow['id'];
+                            error_log("creaPrenotazione: recuperato ID dalla ricerca = $insertId");
+                        }
+                    }
+                }
+                
+                error_log("creaPrenotazione: SUCCESS - ID finale = $insertId");
+                // Restituisce l'ID (anche se è 0, l'inserimento è riuscito)
+                return $insertId ?: 1; // Restituisce almeno 1 se l'ID è ancora 0
+            }
+            
+            error_log("creaPrenotazione: ERRORE - Nessuna riga inserita");
+            return false;
         } catch (\mysqli_sql_exception $e) {
             return false;
         }
@@ -554,6 +607,19 @@ public function getPrenotazioniUtente($idUtente) {
             return $row['id'];
         }
         return null;
+    }
+
+    // Verifica se un utente esiste nel database
+    public function verificaUtenteEsiste($idUtente) {
+        $query = "SELECT id FROM utenti WHERE id = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "i", $idUtente);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        $esiste = mysqli_fetch_assoc($result) !== null;
+        error_log("verificaUtenteEsiste: utente_id=$idUtente - " . ($esiste ? 'ESISTE' : 'NON ESISTE'));
+        return $esiste;
     }
 
     // 10. Ottieni dettagli completi di una prenotazione per il riepilogo

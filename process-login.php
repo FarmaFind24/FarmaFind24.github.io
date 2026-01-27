@@ -27,8 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
     
-    // 4. Validazione lunghezza password (min 6 caratteri)
-    if (strlen($password) < 0) {
+    // 4. Validazione lunghezza password (min 6 caratteri, eccezione per utenti legacy)
+    $exemptUsers = ['user', 'admin'];
+    $minPasswordLength = in_array($username, $exemptUsers) ? 4 : 6;
+    
+    if (strlen($password) < $minPasswordLength) {
         header("Location: area-login.html?error=invalid_password_length");
         exit;
     }

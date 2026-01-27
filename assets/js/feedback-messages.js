@@ -1,4 +1,4 @@
-// feedback-messages.js - Sistema di notifiche per l'utente
+// feedback-messages.js - Sistema di messaggi di feedback per l'utente
 
 document.addEventListener("DOMContentLoaded", () => {
     // Leggi i parametri URL
@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
         success: {
             'profilo_aggiornato': 'Profilo aggiornato con successo!',
             'account_eliminato': 'Account eliminato. Grazie per aver utilizzato FarmaFind24.',
-            'registered': 'Registrazione completata! Accedi per continuare.'
+            'registered': 'Registrazione completata! Accedi per continuare.',
+            'booking_cancelled': 'Prenotazione cancellata con successo.'
         },
         error: {
             'campi_vuoti': 'Errore: tutti i campi sono obbligatori.',
@@ -24,57 +25,67 @@ document.addEventListener("DOMContentLoaded", () => {
             'username_taken': 'Errore: username già in uso.',
             'db_connection': 'Errore: impossibile connettersi al database.',
             'conferma_mancante': 'Errore: devi confermare l\'eliminazione.',
-            'authentication_required': 'Devi effettuare l\'accesso per prenotare un appuntamento.'
+            'authentication_required': 'Devi effettuare l\'accesso per prenotare un appuntamento.',
+            'session_invalid': 'Sessione non valida. Effettua nuovamente l\'accesso.',
+            'cancellation_failed': 'Errore: impossibile cancellare la prenotazione.'
         }
     };
     
     // Mostra il messaggio se presente
     if (success && messages.success[success]) {
-        showNotification(messages.success[success], 'success');
+        showMessage(messages.success[success], 'success');
     } else if (error && messages.error[error]) {
-        showNotification(messages.error[error], 'error');
+        showMessage(messages.error[error], 'error');
+    }
+    
+    // Pulisci URL (rimuovi parametri success/error)
+    if (success || error) {
+        const cleanUrl = window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, cleanUrl);
     }
 });
 
-function showNotification(message, type) {
-    // Crea l'elemento notifica
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.setAttribute('role', 'alert');
-    notification.setAttribute('aria-live', 'polite');
+// Mostra messaggio di feedback
+function showMessage(message, type) {
+    // Cerca un contenitore di messaggi nella pagina
+    let messageBox = document.getElementById('feedback-message');
     
-    // Icona
-    const icon = document.createElement('span');
-    icon.className = 'material-symbols-outlined';
-    icon.setAttribute('aria-hidden', 'true');
-    icon.textContent = type === 'success' ? 'check_circle' : 'error';
+    // Se non esiste, crealo e inseriscilo all'inizio del main
+    if (!messageBox) {
+        messageBox = document.createElement('div');
+        messageBox.id = 'feedback-message';
+        messageBox.setAttribute('role', 'alert');
+        messageBox.setAttribute('aria-live', 'polite');
+        messageBox.setAttribute('tabindex', '-1');
+        
+        const main = document.querySelector('main');
+        if (main) {
+            main.insertBefore(messageBox, main.firstChild);
+        } else {
+            document.body.insertBefore(messageBox, document.body.firstChild);
+        }
+    }
     
-    // Testo
-    const text = document.createElement('span');
-    text.textContent = message;
+    // Imposta classe e contenuto
+    messageBox.className = type === 'success' ? 'success-message' : 'error-message';
+    messageBox.style.display = 'block';
+    messageBox.innerHTML = message;
     
-    // Bottone chiudi
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'notification-close';
-    closeBtn.setAttribute('aria-label', 'Chiudi notifica');
-    closeBtn.innerHTML = '&times;';
-    closeBtn.onclick = () => notification.remove();
+    // Metti il focus sul messaggio per gli screen reader
+    messageBox.focus();
     
-    // Assembla
-    notification.appendChild(icon);
-    notification.appendChild(text);
-    notification.appendChild(closeBtn);
-    
-    // Aggiungi al body
-    document.body.appendChild(notification);
-    
-    // Rimuovi dopo 5 secondi
+    // Rimuovi dopo 8 secondi
     setTimeout(() => {
-        notification.style.opacity = '0';
-        setTimeout(() => notification.remove(), 300);
-    }, 5000);
-    
-    // Pulisci URL (rimuovi parametri)
-    const cleanUrl = window.location.pathname;
-    window.history.replaceState({}, document.title, cleanUrl);
+        hideMessage();
+    }, 8000);
 }
+
+// Nascondi messaggio di feedback
+function hideMessage() {
+    const messageBox = document.getElementById('feedback-message');
+    if (messageBox) {
+        messageBox.style.display = 'none';
+        messageBox.innerHTML = '';
+    }
+}
+
