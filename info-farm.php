@@ -12,7 +12,7 @@ $paginaHTML = file_get_contents("info-farm.html");
 
 // Verifica che sia stato passato l'ID della farmacia
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header("Location: farm-search.php");
+    header("Location: farm-search.php?error=missing_pharmacy_id");
     exit;
 }
 
@@ -38,7 +38,8 @@ try {
     $farmacia = $db->getFarmaciaById($idFarmacia);
     
     if (!$farmacia) {
-        header("Location: farm-search.php");
+        $db->closeConnection();
+        header("Location: farm-search.php?error=pharmacy_not_found");
         exit;
     }
     

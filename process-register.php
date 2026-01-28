@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $db->closeConnection();
 
         if ($successo) {
-            header("Location: area-login.html?success=registered");
+            header("Location: area-login.php?success=registered");
         } else {
             header("Location: area-register.html?error=username_taken");
         }

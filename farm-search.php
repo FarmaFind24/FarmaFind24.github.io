@@ -11,9 +11,25 @@ use DB\DBAccess;
 $paginaHTML = file_get_contents("farm-search.html");
 
 $testoCercato = "";
-$htmlRisultati = ""; 
+$htmlRisultati = "";
 
-if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
+// Gestione messaggi di errore da parametri URL
+if (isset($_GET['error'])) {
+    switch ($_GET['error']) {
+        case 'missing_pharmacy_id':
+            $htmlRisultati = '<p class="error-message" role="alert">ID farmacia mancante. Effettua una ricerca per trovare la farmacia desiderata.</p>';
+            break;
+        case 'pharmacy_not_found':
+            $htmlRisultati = '<p class="error-message" role="alert">La farmacia richiesta non è stata trovata. Potrebbe essere stata rimossa dal sistema.</p>';
+            break;
+        default:
+            $htmlRisultati = '<p class="error-message" role="alert">Si è verificato un errore. Riprova.</p>';
+            break;
+    }
+} 
+
+// Esegui ricerca solo se non ci sono errori da parametri URL e c'è un testo cercato
+if (empty($htmlRisultati) && isset($_GET['q']) && !empty(trim($_GET['q']))) {
     
     $testoCercato = trim($_GET['q']);
 

@@ -669,6 +669,7 @@ footer img {
   gap: 1rem;
   align-items: start;
   width: 100%;
+  position: relative;
 }
 
 #profilo.content-section {
@@ -677,6 +678,20 @@ footer img {
 
 .content-hidden {
   display: none;
+}
+
+/* Icona decorativa ingranaggio - ridotta su mobile */
+.content-section::after {
+  content: "\e8b8";
+  font-family: 'Material Symbols Outlined';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80px;
+  color: var(--primary-color);
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .breadcrumb-area-personale {

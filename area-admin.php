@@ -10,7 +10,7 @@ use DB\DBAccess;
 
 // 1. CONTROLLO SICUREZZA: Se non è loggato, via al login
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: area-login.html");
+    header("Location: area-login.php");
     exit;
 }
 
@@ -108,7 +108,7 @@ if ($connessioneOk) {
                         <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
                     </div>
                     <div>
-                        <h3>Prenotato da: @' . htmlspecialchars($p['username']) . '</h3>
+                        <p>Prenotato da: @' . htmlspecialchars($p['username']) . '</p>
                     </div>
                     <form method="POST" action="process-cancellation.php" style="margin: 0;">
                         <input type="hidden" name="prenotazione_id" value="' . $p['id'] . '">
@@ -168,14 +168,15 @@ if ($connessioneOk) {
     
     if ($farmacie && count($farmacie) > 0) {
         $htmlListaFarmacie = '<table class="data-table" aria-describedby="farmacie-table-description">
-            <caption class="sr-only" id="farmacie-table-description">Elenco delle farmacie registrate nel sistema con le opzioni di eliminazione.</caption>
+            <caption class="sr-only" id="farmacie-table-description">Elenco delle farmacie registrate nel sistema con le opzioni di visualizzazione ed eliminazione.</caption>
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
                     <th scope="col">Indirizzo</th>
                     <th scope="col">Città</th>
                     <th scope="col">Telefono</th>
-                    <th scope="col">Azioni</th>
+                    <th scope="col">Dettagli</th>
+                    <th scope="col">Elimina</th>
                 </tr>
             </thead>
             <tbody>';
@@ -186,6 +187,12 @@ if ($connessioneOk) {
                 <td>' . htmlspecialchars($farmacia['indirizzo']) . '</td>
                 <td>' . htmlspecialchars($farmacia['citta']) . '</td>
                 <td>' . htmlspecialchars($farmacia['telefono']) . '</td>
+                <td>
+                    <a href="info-farm.php?id=' . $farmacia['id'] . '" class="btn-primary" aria-label="Visualizza dettagli di ' . htmlspecialchars($farmacia['nome']) . '">
+                        <span class="material-symbols-outlined" aria-hidden="true">info</span>
+                        Dettagli
+                    </a>
+                </td>
                 <td>
                     <form action="process-delete-farmacia.php" method="POST" class="inline-form" onsubmit="return confirm(\'Sei sicuro di voler eliminare la farmacia ' . htmlspecialchars($farmacia['nome'], ENT_QUOTES) . '? Questa azione eliminerà anche tutti i dati associati (prenotazioni, servizi, orari).\');">
                         <input type="hidden" name="id_farmacia" value="' . $farmacia['id'] . '">

@@ -5,7 +5,7 @@ use DB\DBAccess;
 
 // 1. CONTROLLO SICUREZZA: Solo admin loggati possono accedere
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || $_SESSION['ruolo'] !== 'admin') {
-    header("Location: area-login.html");
+    header("Location: area-login.php");
     exit;
 }
 

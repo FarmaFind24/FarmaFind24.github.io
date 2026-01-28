@@ -20,7 +20,7 @@ echo "<!-- GET: " . print_r($_GET, true) . " -->\n";
 // Controllo autenticazione
 if (!isLoggedIn()) {
     echo "<!-- DEBUG: Utente NON loggato -->\n";
-    header("Location: area-login.html?error=authentication_required");
+    header("Location: area-login.php?error=authentication_required");
     exit();
 }
 

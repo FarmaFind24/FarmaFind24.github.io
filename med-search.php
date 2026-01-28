@@ -12,8 +12,28 @@ $paginaHTML = file_get_contents("med-search.html");
 $testoCercato = "";
 $htmlRisultati = ""; // Qui costruiremo la lista o la tabella
 
-// 3. Verifica se c'è una ricerca in corso
-if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
+// Gestione messaggi di errore da parametri URL
+if (isset($_GET['error'])) {
+    switch ($_GET['error']) {
+        case 'missing_medicine_id':
+            $htmlRisultati = '<p class="error" role="alert">ID medicinale mancante. Effettua una ricerca per trovare il medicinale desiderato.</p>';
+            break;
+        case 'invalid_medicine_id':
+            $htmlRisultati = '<p class="error" role="alert">ID medicinale non valido.</p>';
+            break;
+        case 'medicine_not_found':
+            $htmlRisultati = '<p class="error" role="alert">Il medicinale richiesto non è stato trovato. Potrebbe essere stato rimosso dal sistema.</p>';
+            break;
+        default:
+            $htmlRisultati = '<p class="error" role="alert">Si è verificato un errore. Riprova.</p>';
+            break;
+    }
+}
+
+
+
+// 3. Esegui ricerca solo se non ci sono errori da parametri URL e c'è una ricerca in corso
+if (empty($htmlRisultati) && isset($_GET['q']) && !empty(trim($_GET['q']))) {
     
     // Pulisci l'input per sicurezza (anche se usiamo prepared statements dopo)
     $testoCercato = trim($_GET['q']);

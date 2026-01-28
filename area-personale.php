@@ -8,9 +8,9 @@ require_once "dbConnection.php";
 require_once "session-helper.php";
 use DB\DBAccess;
 
-// 1. CONTROLLO SICUREZZA: Se non è loggato, via al login
+// 1. CONTROLLO SICUREZZA: Se non ï¿½ loggato, via al login
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: area-login.html");
+    header("Location: area-login.php");
     exit;
 }
 
@@ -64,6 +64,12 @@ if ($connessioneOk) {
                         <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
                         <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
                     </div>
+                    <div>
+                        <a href="booking-details.php?id=' . $p['id'] . '" class="btn-primary" aria-label="Visualizza dettagli della prenotazione per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '">
+                        <span class="material-symbols-outlined" aria-hidden="true">info</span>
+                        Dettagli
+                        </a>
+                    </div>
                     <form method="POST" action="process-cancellation.php" style="margin: 0;">
                         <input type="hidden" name="prenotazione_id" value="' . $p['id'] . '">
                         <button type="submit" class="btn-primary no-margin" 
@@ -101,6 +107,12 @@ if ($connessioneOk) {
                     <div>
                         <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
                         <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
+                    </div>
+                    <div>
+                        <a href="booking-details.php?id=' . $p['id'] . '" class="btn-primary" aria-label="Visualizza dettagli della prenotazione per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '">
+                        <span class="material-symbols-outlined" aria-hidden="true">info</span>
+                        Dettagli
+                        </a>
                     </div>
                     <form method="POST" action="process-cancellation.php" style="margin: 0;">
                         <input type="hidden" name="prenotazione_id" value="' . $p['id'] . '">

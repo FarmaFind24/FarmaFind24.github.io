@@ -1126,12 +1126,28 @@ address {
   padding: 0;
   gap: 1rem;
   align-items: start;
+  position: relative;
 }
 #profilo.content-section {
   gap: 1.5rem;
 }
 .content-hidden {
   display: none;
+}
+
+/* Icona decorativa ingranaggio */
+.content-section::after {
+  content: "\e8b8"; /* Icona 'settings' da Material Symbols */
+  font-family: 'Material Symbols Outlined'; /* Specifica il font */
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 150px;
+  color: var(--primary-color);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
 }
 
 .profile-summary {
@@ -1797,7 +1813,7 @@ a.delete-account {
 }
 
 .instruction {
-  color: #f70000;
+  color: #8A0000;
   font-style: italic;
   text-align: center;
   margin-bottom: 1em;
@@ -2244,7 +2260,7 @@ details[open] summary::after {
   margin-bottom: 0;
 }
 
-.auth-required-message a:not(.btn-primary) {
+.auth-required-message a {
   color: var(--primary-color);
   font-weight: 600;
   text-decoration: none;
@@ -2252,16 +2268,17 @@ details[open] summary::after {
   transition: border-color 0.2s;
 }
 
-.auth-required-message a:not(.btn-primary):hover {
+.auth-required-message a:hover {
   border-color: var(--primary-color-hover);
 }
 
-.auth-required-message .btn-primary {
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.8em 2em;
-  font-size: 1.1em;
-  margin: 0.5em 0;
+
+
+.auth-required-message a:visited {
+  color: #870058;
+  border-bottom: 2px solid #870058;
+
+
 }
 
 /* Utility classes for visibility */
@@ -2398,6 +2415,7 @@ div.drug-row dt {
 .btn-details:hover { 
   text-decoration: underline;
 }
+
 
 /**********************/
 /* GESTIONE FARMACIE (ADMIN) */

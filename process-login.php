@@ -11,19 +11,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // 1. Controllo campi vuoti
     if (empty($username) || empty($password)) {
-        header("Location: area-login.html?error=empty_fields");
+        header("Location: area-login.php?error=empty_fields");
         exit;
     }
     
     // 2. Validazione lunghezza username (min 3, max 50 caratteri)
     if (strlen($username) < 3 || strlen($username) > 50) {
-        header("Location: area-login.html?error=invalid_username_length");
+        header("Location: area-login.php?error=invalid_username_length");
         exit;
     }
     
     // 3. Validazione caratteri username (alfanumerici, underscore, trattino)
     if (!preg_match("/^[a-zA-Z0-9_-]+$/", $username)) {
-        header("Location: area-login.html?error=invalid_username_format");
+        header("Location: area-login.php?error=invalid_username_format");
         exit;
     }
     
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $minPasswordLength = in_array($username, $exemptUsers) ? 4 : 6;
     
     if (strlen($password) < $minPasswordLength) {
-        header("Location: area-login.html?error=invalid_password_length");
+        header("Location: area-login.php?error=invalid_password_length");
         exit;
     }
 
@@ -60,10 +60,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             exit;
         } else {
-            header("Location: area-login.html?error=invalid_credentials");
+            header("Location: area-login.php?error=invalid_credentials");
         }
     } else {
-        header("Location: area-login.html?error=db_error");
+        header("Location: area-login.php?error=db_error");
     }
 }
 ?>

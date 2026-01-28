@@ -14,14 +14,14 @@ $paginaHTML = file_get_contents("info-med.html");
 $idFarmaco = $_GET['id'] ?? null;
 
 if (!$idFarmaco) {
-    header("Location: med-search.php");
+    header("Location: med-search.php?error=missing_medicine_id");
     exit;
 }
 
 // Validazione ID (deve essere un intero positivo)
 $idFarmaco = filter_var($idFarmaco, FILTER_VALIDATE_INT);
 if ($idFarmaco === false || $idFarmaco <= 0) {
-    header("Location: med-search.php");
+    header("Location: med-search.php?error=invalid_medicine_id");
     exit;
 }
 
@@ -38,7 +38,7 @@ $farmaco = $db->getFarmacoById($idFarmaco);
 
 if (!$farmaco) {
     $db->closeConnection();
-    header("Location: med-search.php");
+    header("Location: med-search.php?error=medicine_not_found");
     exit;
 }
 

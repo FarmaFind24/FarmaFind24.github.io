@@ -5,7 +5,7 @@ use DB\DBAccess;
 
 // Controllo sicurezza: solo utenti loggati
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: area-login.html");
+    header("Location: area-login.php");
     exit;
 }
 

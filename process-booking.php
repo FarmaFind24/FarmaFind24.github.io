@@ -12,7 +12,7 @@ error_log("POST data: " . print_r($_POST, true));
 if (!isLoggedIn()) {
     // Reindirizzamento al login se si tenta di accedere direttamente senza essere loggati
     error_log("Utente non autenticato");
-    header("Location: area-login.html?error=authentication_required");
+    header("Location: area-login.php?error=authentication_required");
     exit();
 }
 
@@ -98,7 +98,7 @@ if (!$db->verificaUtenteEsiste($idUtente)) {
     $db->closeConnection();
     session_unset();
     session_destroy();    
-    header("Location: area-login.html?error=session_invalid");
+    header("Location: area-login.php?error=session_invalid");
     exit();
 }
 
