@@ -52,8 +52,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['email'] = $utente['email'];
             $_SESSION['data_registrazione'] = $utente['data_registrazione'];
 
-            // Redirect in base al ruolo o alla pagina personale
-            header("Location: area-personale.php"); 
+            // Redirect in base al ruolo
+            if ($utente['ruolo'] === 'admin') {
+                header("Location: area-admin.php");
+            } else {
+                header("Location: area-personale.php");
+            }
+            exit;
         } else {
             header("Location: area-login.html?error=invalid_credentials");
         }

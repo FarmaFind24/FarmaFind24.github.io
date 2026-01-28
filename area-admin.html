@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>Area Amministrativa - FarmaFind24</title>
+    <meta charset="utf-8">
+    <meta name="description"
+        content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate">
+    <meta name="keywords" content="salute">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
+    <link rel="stylesheet" href="assets/css/medium.css" media="screen and (max-width:1125px)">
+    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>document.documentElement.classList.add('js-active');</script>
+</head>
+
+<body>
+    <nav aria-label="Aiuti alla navigazione" class="help-nav">
+        <a href="area-admin.php#breadcrumb-dash">Vai alla dashboard</a>
+    </nav>
+    <header class="main-header">
+        <h1>
+            <span class="hide">Farma<span lang="en">Find</span>24</span>
+        </h1>
+        <nav class="top-navbar" aria-label="Menù di navigazione">
+            <button class="menu-toggle-text btn-primary" aria-label="Apri menu" aria-expanded="false"> Menu di Navigazione
+            </button>
+            <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false"> ☰
+            </button>
+            <ul>
+                <li>
+                    <a href="index.php"><span lang="en">Home</span></a>
+                </li>
+                <li><a href="farm-search.php">Farmacie</a></li>
+                <li><a href="med-search.php">Medicinali</a></li>
+                <li><a href="book-app.php">Prenota Visita</a></li>
+                <li>
+                    <a href="about.php"><span lang="en">About</span></a>
+                </li>
+                <li>
+                    <a aria-current="page" href="#" class="current-page">
+                        Area Amministrativa
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        <nav class="sidenav">
+            <ul aria-label="barra di navigazione dell'area amministrativa">
+                <li>
+                    <a href="#dashboard">
+                        <span class="material-symbols-outlined" aria-hidden="true">dashboard</span>Dashboard</a>
+                </li>
+                <li>
+                    <a href="#prenotazioni"><span class="material-symbols-outlined"
+                            aria-hidden="true">event</span>Prenotazioni</a>
+                </li>
+                <li>
+                    <a href="#gestione-farmacie">
+                        <span class="material-symbols-outlined" aria-hidden="true">local_pharmacy</span>
+                        <span lang="it">Gestione Farmacie</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="logout.php" lang="en"><span class="material-symbols-outlined"
+                            aria-hidden="true">logout</span>Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="page-wrapper">
+
+        <main class="main-area-personale">
+            <section id="dashboard" class="content-section">
+                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione" id="breadcrumb-dash">
+                    <p>
+                        Ti trovi in: Area Amministrativa &gt;&gt; <span lang="en">Dashboard</span>
+                    </p>
+                </nav>
+                <div class="main-area-personale-title-row">
+                    <h1>Ciao [nome_utente]</h1>
+                    <p>Bentornato nella tua dashboard</p>
+                </div>
+
+                <div class="appuntamenti-section">
+                    <div class="appuntamenti-section title-row">
+                        <h2>Appuntamenti nel portale</h2>
+                        <a href="#prenotazioni">Visualizza Tutti</a>
+                    </div>
+
+
+                    <ol aria-label="lista appuntamenti" class="appuntamenti-column">
+                        [lista_prenotazioni]
+                    </ol>
+                </div>
+            </section>
+            
+            <section id="prenotazioni" class="content-section">
+                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione" tabindex="0">
+                    <p>
+                        Ti trovi in: Area Amministrativa &gt;&gt; Prenotazioni
+                    </p>
+                </nav>
+                <div class="main-area-personale-title-row">
+                    <h1>Prenotazioni</h1>
+                    <p>Gestisci i tuoi appuntamenti</p>
+                </div>
+
+
+                <div class="appuntamenti-section">
+                    <span class="sr-only">lista appuntamenti</span>
+                    <ol class="appuntamenti-column">
+                        [lista_prenotazioni_completa]
+                    </ol>
+                </div>
+            </section>
+
+            <section id="gestione-farmacie" class="content-section" aria-labelledby="farmacie-heading">
+                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione">
+                    <p>Ti trovi in: Area Amministrativa &gt;&gt; <span lang="it">Gestione Farmacie</span></p>
+                </nav>
+                <div class="main-area-personale-title-row">
+                    <h1 id="farmacie-heading">Gestione Farmacie</h1>
+                    <p>Gestisci l'inserimento e la cancellazione delle farmacie nel sistema.</p>
+                </div>
+
+                <div class="button-container">
+                    <a href="#add-farmacia-form-container" id="addFarmaciaBtn" class="btn-primary" aria-controls="add-farmacia-form-container">
+                        <span class="material-symbols-outlined" aria-hidden="true">add</span>
+                        Aggiungi Nuova Farmacia
+                    </a>
+                </div>
+
+                <div class="farmacie-table-container">
+                    <h2 class="sr-only">Elenco Farmacie</h2>
+                    [lista_farmacie_admin]
+                </div>
+
+                <h2>Aggiungi Nuova Farmacia</h2>
+
+                [feedback_messages]
+
+                <div id="add-farmacia-form-container" class="form-container">
+                    <form id="add-farmacia-form" method="POST" action="process-add-farmacia.php" novalidate>
+                    
+                    
+                    <fieldset>
+                        <legend>Informazioni Base</legend>
+                        
+                        <div class="form-group">
+                            <label for="nome">Nome Farmacia<abbr title="Campo obbligatorio" aria-label="Obbligatorio">*</abbr></label>
+                            <input type="text" id="nome" name="nome" required aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="indirizzo">Indirizzo<abbr title="Campo obbligatorio" aria-label="Obbligatorio">*</abbr></label>
+                            <input type="text" id="indirizzo" name="indirizzo" required aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="citta">Città<abbr title="Campo obbligatorio" aria-label="Obbligatorio">*</abbr></label>
+                            <select id="citta" name="citta" required aria-required="true">
+                                [comuni]
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefono">Telefono<abbr title="Campo obbligatorio" aria-label="Obbligatorio">*</abbr></label>
+                            <input type="tel" id="telefono" name="telefono" required aria-required="true" placeholder="es. 049 123 4567">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="immagine">Path Immagine (opzionale)</label>
+                            <input type="text" id="immagine" name="immagine" placeholder="es. png/farmacia-nome.png">
+                            <small>Specificare il percorso relativo dell'immagine nella cartella "assets/farmCovers/"</small>
+                        </div>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Localizzazione Geografica<abbr title="Campo obbligatorio" aria-label="Obbligatorio">*</abbr></legend>
+                        <p>Le coordinate saranno generate automaticamente in base alla zona selezionata.</p>
+                        
+                        <div class="radio-group">
+                            <input type="radio" id="zona_alta" name="zona" value="alta_padovana" required aria-required="true">
+                            <label for="zona_alta">Alta Padovana (nord)</label>
+                        </div>
+                        
+                        <div class="radio-group">
+                            <input type="radio" id="zona_centro" name="zona" value="padova_centro" required aria-required="true">
+                            <label for="zona_centro">Padova e Limitrofi (centro)</label>
+                        </div>
+                        
+                        <div class="radio-group">
+                            <input type="radio" id="zona_colli" name="zona" value="colli_euganei" required aria-required="true">
+                            <label for="zona_colli">Colli Euganei (sud)</label>
+                        </div>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Orari di Apertura<abbr title="Campo obbligatorio" aria-label="Obbligatorio">*</abbr></legend>
+                        <p>Seleziona il tipo di orario. La farmacia sarà chiusa la domenica.</p>
+                        
+                        <div class="radio-group">
+                            <input type="radio" id="orario_continuato" name="tipo_orario" value="continuato" required aria-required="true">
+                            <label for="orario_continuato">
+                                <strong>Continuato</strong><br>
+                                <small>Lun-Ven: 08:00-20:00 | Sab: 08:00-13:00</small>
+                            </label>
+                        </div>
+                        
+                        <div class="radio-group">
+                            <input type="radio" id="orario_spezzato" name="tipo_orario" value="spezzato" required aria-required="true">
+                            <label for="orario_spezzato">
+                                <strong>Spezzato</strong><br>
+                                <small>Lun-Ven: 08:00-13:00, 15:00-19:00 | Sab: 08:00-13:00</small>
+                            </label>
+                        </div>
+                    </fieldset>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="cancelAddBtn" class="btn-secondary">Annulla</button>
+                        <button type="submit" class="btn-primary">Salva Farmacia</button>
+                    </div>
+                </form>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <button onclick="topFunction()" id="scroll-btn" title="Go to top">Torna su</button>
+
+    <footer>
+        <p>
+            Le immagini presenti su questo sito sono state generate tramite
+            strumenti di intelligenza artificiale. Eventuali somiglianze tra i nomi
+            dei prodotti e marchi reali sono puramenti casuali.<br>
+            Copyright &copy; 2026 | Tutti i diritti riservati.
+        </p>
+    </footer>
+    <script src="assets/js/scroll-top.js"></script>
+    <script src="assets/js/form-validation.js"></script>
+    <script src="assets/js/profile-forms.js"></script>
+    <script src="assets/js/admin-farmacie.js"></script>
+</body>
+
+</html>

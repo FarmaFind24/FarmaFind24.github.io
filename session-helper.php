@@ -24,7 +24,8 @@ function isLoggedIn() {
 function getAreaPersonaleLink() {
     if (isLoggedIn()) {
         $username = htmlspecialchars($_SESSION['username']);
-        return '<a href="area-personale.php"><span class="material-symbols-outlined" aria-hidden="true">person</span>' . $username . '</a>';
+        $href = (isset($_SESSION['ruolo']) && $_SESSION['ruolo'] === 'admin') ? 'area-admin.php' : 'area-personale.php';
+        return '<a href="' . $href . '"><span class="material-symbols-outlined" aria-hidden="true">person</span>' . $username . '</a>';
     } else {
         return '<a href="area-login.html">Area Personale</a>';
     }
@@ -46,6 +47,10 @@ function getAreaPersonaleText() {
  */
 function getAreaPersonaleHref() {
     if (isLoggedIn()) {
+        // Se è admin, rimanda a area-admin.php
+        if (isset($_SESSION['ruolo']) && $_SESSION['ruolo'] === 'admin') {
+            return 'area-admin.php';
+        }
         return 'area-personale.php';
     } else {
         return 'area-login.html';

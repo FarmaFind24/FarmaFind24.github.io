@@ -9,6 +9,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     exit;
 }
 
+// Funzione helper per determinare la pagina di redirect corretta
+function getAreaPage() {
+    return (isset($_SESSION['ruolo']) && $_SESSION['ruolo'] === 'admin') ? 'area-admin.php' : 'area-personale.php';
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = trim($_POST['name'] ?? '');
     $cognome = trim($_POST['surname'] ?? '');
@@ -17,31 +22,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // 1. Controllo campi vuoti
     if (empty($nome) || empty($cognome) || empty($email)) {
-        header("Location: area-personale.php?error=campi_vuoti");
+        header("Location: " . getAreaPage() . "?error=campi_vuoti");
         exit;
     }
     
     // 2. Validazione nome (solo lettere, spazi, apostrofi e caratteri accentati)
     if (!preg_match("/^[A-Za-zÀ-ù\s']{2,50}$/", $nome)) {
-        header("Location: area-personale.php?error=nome_non_valido");
+        header("Location: " . getAreaPage() . "?error=nome_non_valido");
         exit;
     }
     
     // 3. Validazione cognome (solo lettere, spazi, apostrofi e caratteri accentati)
     if (!preg_match("/^[A-Za-zÀ-ù\s']{2,50}$/", $cognome)) {
-        header("Location: area-personale.php?error=cognome_non_valido");
+        header("Location: " . getAreaPage() . "?error=cognome_non_valido");
         exit;
     }
     
     // 4. Validazione email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: area-personale.php?error=email_non_valida");
+        header("Location: " . getAreaPage() . "?error=email_non_valida");
         exit;
     }
     
     // 5. Validazione lunghezza email
     if (strlen($email) > 100) {
-        header("Location: area-personale.php?error=email_troppo_lunga");
+        header("Location: " . getAreaPage() . "?error=email_troppo_lunga");
         exit;
     }
     
@@ -56,14 +61,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['cognome'] = $cognome;
             $_SESSION['email'] = $email;
             
-            header("Location: area-personale.php?success=profilo_aggiornato");
+            header("Location: " . getAreaPage() . "?success=profilo_aggiornato");
         } else {
-            header("Location: area-personale.php?error=aggiornamento_fallito");
+            header("Location: " . getAreaPage() . "?error=aggiornamento_fallito");
         }
     } else {
-        header("Location: area-personale.php?error=db_error");
+        header("Location: " . getAreaPage() . "?error=db_error");
     }
 } else {
-    header("Location: area-personale.php");
+    header("Location: " . getAreaPage());
 }
 ?>

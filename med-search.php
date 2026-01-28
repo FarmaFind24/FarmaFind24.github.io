@@ -49,37 +49,41 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 }
                 
                 // Stampa HTML
-                $htmlRisultati .= '<dl class="drug-row">';
-                $htmlRisultati .= '<dt></dt>';
+                $htmlRisultati .= '<div class="drug-row">';
+                $htmlRisultati .= '<dl>';
                 $htmlRisultati .= '<dt></dt>';
                 $htmlRisultati .= '<dd class="drug-image">';
                 $htmlRisultati .= '<img src="' . htmlspecialchars($srcImmagine) . '" alt="Farmaco">';
                 $htmlRisultati .= '</dd>'; 
-                
+                $htmlRisultati .= '</dl>';
+                $htmlRisultati .= '<div>';
                 $htmlRisultati .= '<dl class="drug-info">';
                 $htmlRisultati .= '<dt>Nome farmaco:</dt>';
                 $htmlRisultati .= '<dd class="drug-header">';
-                $htmlRisultati .= '<h3>' . htmlspecialchars($row['nome_commerciale']) . '</h3>';
+                $htmlRisultati .= '<h2>' . htmlspecialchars($row['nome_commerciale']) . '</h2>';
                 $htmlRisultati .= '</dd>';
+                $htmlRisultati .= '</dl>';
                 $htmlRisultati .=  $obbligoricetta;
                 $htmlRisultati .= '<div  class="active-ingredient">';
-                $htmlRisultati .= '<dt id="nohide">Principio Attivo:</dt>';
-                $htmlRisultati .= '<dd><strong>' . htmlspecialchars($row['principio_attivo']) . '</strong></dd>';
+                $htmlRisultati .= '<p id="nohide">Principio Attivo:</p>';
+                $htmlRisultati .= '<p><strong>' . htmlspecialchars($row['principio_attivo']) . '</strong></p>';
                 $htmlRisultati .= '</div>';
+                
                 $htmlRisultati .= '<dl class="drug-meta">';
                 $htmlRisultati .= '<dt>Formato:</dt>';
                 $htmlRisultati .= '<dd>' . htmlspecialchars($row['forma_farmaceutica']) . '</dd>';
                 $htmlRisultati .= '<dt>Dosaggio:</dt>';
                 $htmlRisultati .= '<dd>' . $row['dosaggio'] . '</dd>';
                 $htmlRisultati .= '</dl>';
+                $htmlRisultati .= '<dl>';
                 $htmlRisultati .= '<dt>Indicazioni:</dt>';
                 $htmlRisultati .= '<dd class="drug-desc-short">' . htmlspecialchars($row['descrizione']) . '</dd>';
                 $htmlRisultati .= '</dl>';
-                $htmlRisultati .= '';
-                $htmlRisultati .= '<div class="drug-action">';
-                $htmlRisultati .= '<a href="info-med.php?id=' . htmlspecialchars($row['id']) . '" class="btn-details">Scheda Tecnica &rarr;</a>';
                 $htmlRisultati .= '</div>';
-                $htmlRisultati .= '      </dl>';
+                $htmlRisultati .= '<div class="drug-action">';
+                $htmlRisultati .= '<a href="info-med.php?id=' . htmlspecialchars($row['id']) . '" class="btn-details">Dettagli/Disponibilità &rarr;</a>';
+                $htmlRisultati .= '</div>';
+                $htmlRisultati .= '</div>';
             }
             
         } else {

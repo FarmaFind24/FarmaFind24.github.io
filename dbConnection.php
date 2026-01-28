@@ -403,6 +403,29 @@ public function getPrenotazioniUtente($idUtente) {
     }
     return $prenotazioni;
 }
+
+public function getAllPrenotazioni() {
+    // MODIFICA: Selezioniamo data_appuntamento e ora_appuntamento separatamente
+    $query = "SELECT p.id, p.data_appuntamento, p.ora_appuntamento, 
+                     f.nome AS nome_farmacia, f.indirizzo, s.nome_servizio, u.username
+              FROM prenotazioni p
+              JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id
+              JOIN farmacie f ON fs.farmacia_id = f.id
+              JOIN servizi s ON fs.servizio_id = s.id
+              JOIN utenti u ON p.utente_id = u.id
+              ORDER BY p.data_appuntamento ASC, p.ora_appuntamento ASC";
+              
+    $stmt = mysqli_prepare($this->connection, $query);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    $prenotazioni = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $prenotazioni[] = $row;
+    }
+    return $prenotazioni;
+}
+
     // Metodo per eliminare una prenotazione
     public function eliminaPrenotazione($idPrenotazione, $idUtente) {
         // Verifica che la prenotazione appartenga all'utente prima di eliminarla
@@ -439,6 +462,29 @@ public function getPrenotazioniUtente($idUtente) {
         }
         return $prenotazioni;
     }
+
+    public function getAllPrenotazioniPreview() {
+    // MODIFICA: Selezioniamo data_appuntamento e ora_appuntamento separatamente
+    $query = "SELECT p.id, p.data_appuntamento, p.ora_appuntamento, 
+                     f.nome AS nome_farmacia, f.indirizzo, s.nome_servizio, u.username
+              FROM prenotazioni p
+              JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id
+              JOIN farmacie f ON fs.farmacia_id = f.id
+              JOIN servizi s ON fs.servizio_id = s.id
+              JOIN utenti u ON p.utente_id = u.id
+              ORDER BY p.data_appuntamento ASC, p.ora_appuntamento ASC
+              LIMIT 5";
+              
+    $stmt = mysqli_prepare($this->connection, $query);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    $prenotazioni = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $prenotazioni[] = $row;
+    }
+    return $prenotazioni;
+}
 
     // 3. Aggiornamento profilo utente
     public function aggiornaProfiloUtente($idUtente, $nome, $cognome, $email) {
@@ -656,6 +702,201 @@ public function getPrenotazioniUtente($idUtente) {
             return $row;
         }
         return null;
+    }
+
+    // === METODI PER GESTIONE FARMACIE (ADMIN) ===
+    
+    // Restituisce tutte le farmacie per la tabella amministrativa
+    public function getAllFarmacie() {
+        $query = "SELECT id, nome, indirizzo, citta, telefono, immagine FROM farmacie ORDER BY nome ASC";
+        $queryResult = mysqli_query($this->connection, $query);
+        
+        if (!$queryResult || mysqli_num_rows($queryResult) == 0) {
+            return null;
+        } else {
+            $result = array();
+            while ($row = mysqli_fetch_assoc($queryResult)) {
+                array_push($result, $row);
+            }
+            return $result;
+        }
+    }
+
+    // Restituisce la lista dei comuni della provincia di Padova
+    public function getComuniProvinciaPadova() {
+        // Lista completa dei 104 comuni della provincia di Padova
+        return [
+            'Abano Terme', 'Agna', 'Albignasego', 'Anguillara Veneta', 'Arquà Petrarca',
+            'Arre', 'Arzergrande', 'Bagnoli di Sopra', 'Baone', 'Barbona',
+            'Battaglia Terme', 'Boara Pisani', 'Borgoricco', 'Bovolenta', 'Brugine',
+            'Cadoneghe', 'Campodarsego', 'Campodoro', 'Camposampiero', 'Campo San Martino',
+            'Candiana', 'Carceri', 'Carmignano di Brenta', 'Cartura', 'Casale di Scodosia',
+            'Casalserugo', 'Castelbaldo', 'Cervarese Santa Croce', 'Cinto Euganeo', 'Cittadella',
+            'Codevigo', 'Conselve', 'Correzzola', 'Curtarolo', 'Este',
+            'Fontaniva', 'Galliera Veneta', 'Galzignano Terme', 'Gazzo', 'Grantorto',
+            'Granze', 'Legnaro', 'Limena', 'Loreggia', 'Lozzo Atestino',
+            'Maserà di Padova', 'Masi', 'Massanzago', 'Megliadino San Fidenzio', 'Megliadino San Vitale',
+            'Merlara', 'Mestrino', 'Monselice', 'Montagnana', 'Montegrotto Terme',
+            'Noventa Padovana', 'Ospedaletto Euganeo', 'Padova', 'Pernumia', 'Perzumiano',
+            'Piacenza d\'Adige', 'Piazzola sul Brenta', 'Piombino Dese', 'Piove di Sacco', 'Polverara',
+            'Ponso', 'Pontelongo', 'Ponte San Nicolò', 'Pozzonovo', 'Rovolon',
+            'Rubano', 'Saccolongo', 'Saletto', 'San Giorgio delle Pertiche', 'San Giorgio in Bosco',
+            'San Martino di Lupari', 'San Pietro in Gu', 'San Pietro Viminario', 'Santa Giustina in Colle', 'Santa Margherita d\'Adige',
+            'Sant\'Angelo di Piove di Sacco', 'Sant\'Elena', 'Sant\'Urbano', 'Saonara', 'Selvazzano Dentro',
+            'Solesino', 'Stanghella', 'Teolo', 'Terrassa Padovana', 'Tomba',
+            'Tombolo', 'Torreglia', 'Trebaseleghe', 'Tribano', 'Urbana',
+            'Veggiano', 'Vescovana', 'Vighizzolo d\'Este', 'Vigodarzere', 'Vigonza',
+            'Villa del Conte', 'Villa Estense', 'Villafranca Padovana', 'Villanova di Camposampiero', 'Vo\''
+        ];
+    }
+
+    // Genera coordinate random per una zona geografica
+    public function generaCoordinatePerZona($zona) {
+        switch($zona) {
+            case 'alta_padovana':
+                $latMin = 45.50; $latMax = 45.65;
+                $lonMin = 11.80; $lonMax = 12.00;
+                break;
+            case 'padova_centro':
+                $latMin = 45.35; $latMax = 45.50;
+                $lonMin = 11.80; $lonMax = 12.05;
+                break;
+            case 'colli_euganei':
+                $latMin = 45.20; $latMax = 45.35;
+                $lonMin = 11.60; $lonMax = 11.90;
+                break;
+            default:
+                // Default to Padova centro se la zona non è valida
+                $latMin = 45.35; $latMax = 45.50;
+                $lonMin = 11.80; $lonMax = 12.05;
+        }
+        
+        // Genera coordinate random con 6 decimali (precisione ~10 metri)
+        $lat = $latMin + (mt_rand() / mt_getrandmax()) * ($latMax - $latMin);
+        $lon = $lonMin + (mt_rand() / mt_getrandmax()) * ($lonMax - $lonMin);
+        
+        return [
+            'latitudine' => round($lat, 6),
+            'longitudine' => round($lon, 6)
+        ];
+    }
+
+    // Inserisce una nuova farmacia
+    public function inserisciFarmacia($nome, $indirizzo, $citta, $telefono, $latitudine, $longitudine, $immagine) {
+        $query = "INSERT INTO farmacie (nome, indirizzo, citta, telefono, latitudine, longitudine, immagine) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ssssdds", $nome, $indirizzo, $citta, $telefono, $latitudine, $longitudine, $immagine);
+        
+        try {
+            $result = mysqli_stmt_execute($stmt);
+            if ($result) {
+                return mysqli_insert_id($this->connection);
+            }
+            return false;
+        } catch (\mysqli_sql_exception $e) {
+            return false;
+        }
+    }
+
+    // Salva gli orari di una farmacia (Continuato o Spezzato)
+    public function salvaOrariFarmacia($idFarmacia, $tipoOrario) {
+        // La domenica (giorno 0) è sempre chiusa
+        
+        if ($tipoOrario === 'continuato') {
+            // Lunedì-Venerdì: 08:00-20:00
+            for ($giorno = 1; $giorno <= 5; $giorno++) {
+                $query = "INSERT INTO orari_farmacie (farmacia_id, giorno_settimana, ora_apertura, ora_chiusura) 
+                          VALUES (?, ?, '08:00:00', '20:00:00')";
+                $stmt = mysqli_prepare($this->connection, $query);
+                mysqli_stmt_bind_param($stmt, "ii", $idFarmacia, $giorno);
+                mysqli_stmt_execute($stmt);
+            }
+            
+            // Sabato: 08:00-13:00
+            $query = "INSERT INTO orari_farmacie (farmacia_id, giorno_settimana, ora_apertura, ora_chiusura) 
+                      VALUES (?, 6, '08:00:00', '13:00:00')";
+            $stmt = mysqli_prepare($this->connection, $query);
+            mysqli_stmt_bind_param($stmt, "i", $idFarmacia);
+            mysqli_stmt_execute($stmt);
+            
+        } elseif ($tipoOrario === 'spezzato') {
+            // Lunedì-Venerdì: 08:00-13:00 e 15:00-19:00 (due fasce)
+            for ($giorno = 1; $giorno <= 5; $giorno++) {
+                // Fascia mattina
+                $query1 = "INSERT INTO orari_farmacie (farmacia_id, giorno_settimana, ora_apertura, ora_chiusura) 
+                           VALUES (?, ?, '08:00:00', '13:00:00')";
+                $stmt1 = mysqli_prepare($this->connection, $query1);
+                mysqli_stmt_bind_param($stmt1, "ii", $idFarmacia, $giorno);
+                mysqli_stmt_execute($stmt1);
+                
+                // Fascia pomeriggio
+                $query2 = "INSERT INTO orari_farmacie (farmacia_id, giorno_settimana, ora_apertura, ora_chiusura) 
+                           VALUES (?, ?, '15:00:00', '19:00:00')";
+                $stmt2 = mysqli_prepare($this->connection, $query2);
+                mysqli_stmt_bind_param($stmt2, "ii", $idFarmacia, $giorno);
+                mysqli_stmt_execute($stmt2);
+            }
+            
+            // Sabato: 08:00-13:00
+            $query = "INSERT INTO orari_farmacie (farmacia_id, giorno_settimana, ora_apertura, ora_chiusura) 
+                      VALUES (?, 6, '08:00:00', '13:00:00')";
+            $stmt = mysqli_prepare($this->connection, $query);
+            mysqli_stmt_bind_param($stmt, "i", $idFarmacia);
+            mysqli_stmt_execute($stmt);
+        }
+        
+        return true;
+    }
+
+    // Elimina una farmacia e tutti i dati associati (integrità referenziale)
+    public function eliminaFarmacia($idFarmacia) {
+        try {
+            // 1. Elimina prenotazioni associate ai servizi di questa farmacia
+            $query1 = "DELETE p FROM prenotazioni p 
+                       INNER JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id 
+                       WHERE fs.farmacia_id = ?";
+            $stmt1 = mysqli_prepare($this->connection, $query1);
+            mysqli_stmt_bind_param($stmt1, "i", $idFarmacia);
+            mysqli_stmt_execute($stmt1);
+            
+            // 2. Elimina collegamenti servizi
+            $query2 = "DELETE FROM farmacia_servizi WHERE farmacia_id = ?";
+            $stmt2 = mysqli_prepare($this->connection, $query2);
+            mysqli_stmt_bind_param($stmt2, "i", $idFarmacia);
+            mysqli_stmt_execute($stmt2);
+            
+            // 3. Elimina orari
+            $query3 = "DELETE FROM orari_farmacie WHERE farmacia_id = ?";
+            $stmt3 = mysqli_prepare($this->connection, $query3);
+            mysqli_stmt_bind_param($stmt3, "i", $idFarmacia);
+            mysqli_stmt_execute($stmt3);
+            
+            // 4. Elimina la farmacia
+            $query4 = "DELETE FROM farmacie WHERE id = ?";
+            $stmt4 = mysqli_prepare($this->connection, $query4);
+            mysqli_stmt_bind_param($stmt4, "i", $idFarmacia);
+            $result = mysqli_stmt_execute($stmt4);
+            
+            return $result;
+        } catch (\mysqli_sql_exception $e) {
+            return false;
+        }
+    }
+
+    // Verifica se esiste già una farmacia con lo stesso nome nella stessa città
+    public function verificaDuplicatoFarmacia($nome, $citta) {
+        $query = "SELECT COUNT(*) as conteggio FROM farmacie WHERE nome = ? AND citta = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ss", $nome, $citta);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row['conteggio'] > 0;
+        }
+        return false;
     }
 }
 

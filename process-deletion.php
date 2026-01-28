@@ -9,6 +9,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     exit;
 }
 
+// Funzione helper per determinare la pagina di redirect corretta
+function getAreaPage() {
+    return (isset($_SESSION['ruolo']) && $_SESSION['ruolo'] === 'admin') ? 'area-admin.php' : 'area-personale.php';
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica che l'utente abbia confermato
     if (!isset($_POST['confirm_deletion']) || $_POST['confirm_deletion'] !== 'on') {
@@ -31,12 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Redirect alla home con messaggio di conferma
             header("Location: index.php?success=account_eliminato");
         } else {
-            header("Location: area-personale.php?error=eliminazione_fallita");
+            header("Location: " . getAreaPage() . "?error=eliminazione_fallita");
         }
     } else {
-        header("Location: area-personale.php?error=db_error");
+        header("Location: " . getAreaPage() . "?error=db_error");
     }
 } else {
-    header("Location: area-personale.php");
+    header("Location: " . getAreaPage());
 }
 ?>

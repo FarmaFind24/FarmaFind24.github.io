@@ -9,13 +9,18 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     exit;
 }
 
+// Funzione helper per determinare la pagina di redirect corretta
+function getAreaPage() {
+    return (isset($_SESSION['ruolo']) && $_SESSION['ruolo'] === 'admin') ? 'area-admin.php' : 'area-personale.php';
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idPrenotazione = $_POST['prenotazione_id'] ?? null;
     $idUtente = $_SESSION['user_id'];
     
     // Validazione input
     if (!$idPrenotazione || !is_numeric($idPrenotazione)) {
-        header("Location: area-personale.php?error=invalid_booking_id");
+        header("Location: " . getAreaPage() . "?error=invalid_booking_id");
         exit;
     }
     
@@ -25,15 +30,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $db->closeConnection();
         
         if ($successo) {
-            header("Location: area-personale.php?success=booking_cancelled#prenotazioni");
+            header("Location: " . getAreaPage() . "?success=booking_cancelled#prenotazioni");
         } else {
-            header("Location: area-personale.php?error=cancellation_failed#prenotazioni");
+            header("Location: " . getAreaPage() . "?error=cancellation_failed#prenotazioni");
         }
     } else {
-        header("Location: area-personale.php?error=db_error#prenotazioni");
+        header("Location: " . getAreaPage() . "?error=db_error#prenotazioni");
     }
 } else {
-    header("Location: area-personale.php");
+    header("Location: " . getAreaPage());
 }
 exit;
 ?>

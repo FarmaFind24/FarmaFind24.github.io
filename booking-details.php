@@ -8,6 +8,11 @@ require_once "dbConnection.php";
 require_once "session-helper.php";
 use DB\DBAccess;
 
+// Funzione helper per determinare la pagina di redirect corretta
+function getAreaPage() {
+    return (isset($_SESSION['ruolo']) && $_SESSION['ruolo'] === 'admin') ? 'area-admin.php' : 'area-personale.php';
+}
+
 echo "<!-- DEBUG: Script iniziato -->\n";
 echo "<!-- SESSION: " . print_r($_SESSION, true) . " -->\n";
 echo "<!-- GET: " . print_r($_GET, true) . " -->\n";
@@ -27,7 +32,7 @@ echo "<!-- DEBUG: ID Prenotazione = " . ($idPrenotazione ?? 'NULL') . " -->\n";
 if (!$idPrenotazione) {
     echo "<!-- DEBUG: Nessun ID prenotazione trovato, redirect -->\n";
     // Nessuna prenotazione da visualizzare
-    header("Location: area-personale.php");
+    header("Location: " . getAreaPage());
     exit();
 }
 
@@ -57,7 +62,7 @@ $db->closeConnection();
 if (!$dettagli) {
     echo "<!-- DEBUG: Prenotazione non trovata, redirect -->\n";
     // Prenotazione non trovata o non appartiene all'utente
-    header("Location: area-personale.php?error=booking_not_found");
+    header("Location: " . getAreaPage() . "?error=booking_not_found");
     exit();
 }
 

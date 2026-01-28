@@ -157,7 +157,8 @@ function handleURLErrors(errorMappings, successMappings) {
     
     // Pulisci URL
     if (error || success) {
-        const cleanUrl = window.location.pathname;
+        // Mantieni l'ancora (hash) se presente
+        const cleanUrl = window.location.pathname + window.location.hash;
         window.history.replaceState({}, document.title, cleanUrl);
     }
 }
