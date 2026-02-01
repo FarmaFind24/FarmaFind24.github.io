@@ -25,7 +25,7 @@ if (!$connessioneOk) {
     // Gestione errore connessione
     $paginaHTML = str_replace('[nomeFarmacia]', 'Errore', $paginaHTML);
     $paginaHTML = str_replace('[statusFarmacia]', '', $paginaHTML);
-    $paginaHTML = str_replace('src="assets/farmacia21.png"', 'src="assets/immagine_farmacia.jpg"', $paginaHTML);
+    $paginaHTML = str_replace('[coverImage]', 'src="assets/immagine_farmacia.webp"', $paginaHTML);
     $paginaHTML = str_replace('[infoGenerali]', '<p class="error">Errore di connessione al database.</p>', $paginaHTML);
     $paginaHTML = str_replace('[orariApertura]', '', $paginaHTML);
     $paginaHTML = str_replace('[serviziOfferti]', '', $paginaHTML);
@@ -55,13 +55,14 @@ try {
     // Immagine
     $immagine = !empty($farmacia['immagine']) 
                 ? 'assets/farmCovers/' . htmlspecialchars($farmacia['immagine']) 
-                : 'assets/immagine_farmacia.jpg';
+                : 'assets/immagine_farmacia.webp';
     $altImmagine = 'Facciata della ' . $nomeFarmacia;
     
     // Informazioni generali
     $infoGeneraliHTML = '<p>Indirizzo: ' . htmlspecialchars($farmacia['indirizzo']) . 
                        ', ' . htmlspecialchars($farmacia['citta']) . '</p>';
-    $infoGeneraliHTML .= '<p>Telefono: ' . htmlspecialchars($farmacia['telefono']) . '</p>';
+    $telefonoPulito = str_replace(' ', '', $farmacia['telefono']);
+    $infoGeneraliHTML .= '<p>Telefono: <a href="tel:' . htmlspecialchars($telefonoPulito) . '" class="phone-link">' . htmlspecialchars($farmacia['telefono']) . '</a></p>';
     
     if (!empty($farmacia['email'])) {
         $infoGeneraliHTML .= '<p>Email: ' . htmlspecialchars($farmacia['email']) . '</p>';
@@ -123,12 +124,12 @@ try {
     $serviziHTML = '';
 
     if ($servizi && count($servizi) > 0) {
-        $serviziHTML = '<ul class="lista-servizi">';
+        $serviziHTML = '<ul class="lista-servizi" aria-label="lista servizi">';
         foreach ($servizi as $servizio) {
-            $serviziHTML .= '<li class="SerivzioOfferto">';
-            $serviziHTML .= '<p aria-hidden="true">' . htmlspecialchars($servizio['nome_servizio']) . '</p>';
+            $serviziHTML .= '<li>';
+            $serviziHTML .= '<p><strong>' . htmlspecialchars($servizio['nome_servizio']) . '</strong></p>';
             if (!empty($servizio['descrizione'])) {
-                $serviziHTML .= '<p class="descrizione-servizio" aria-hidden="true">' . htmlspecialchars($servizio['descrizione']) . '</p>';
+                $serviziHTML .= '<p class="descrizione-servizio">' . htmlspecialchars($servizio['descrizione']) . '</p>';
             }
             $serviziHTML .= '</li>';
         }
@@ -140,9 +141,8 @@ try {
     // Sostituzioni nel template HTML
     $paginaHTML = str_replace('[nomeFarmacia]', $nomeFarmacia, $paginaHTML);
     $paginaHTML = str_replace('[statusFarmacia]', $statusHTML, $paginaHTML);
-    $paginaHTML = str_replace('src="assets/farmacia21.png"', 'src="' . $immagine . '"', $paginaHTML);
-    $paginaHTML = str_replace('alt="Facciata della Farmacia Centrale con vetrine illuminate e insegna verde"', 
-                             'alt="' . $altImmagine . '"', $paginaHTML);
+    $paginaHTML = str_replace('[coverImage]', $immagine, $paginaHTML);
+    $paginaHTML = str_replace('[coverAlt]', $altImmagine, $paginaHTML);
     $paginaHTML = str_replace('[infoGenerali]', $infoGeneraliHTML, $paginaHTML);
     $paginaHTML = str_replace('[orariApertura]', $orariHTML, $paginaHTML);
     $paginaHTML = str_replace('[serviziOfferti]', $serviziHTML, $paginaHTML);

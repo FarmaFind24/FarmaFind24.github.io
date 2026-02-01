@@ -54,7 +54,7 @@ foreach ($risultati as $row) {
     if (!empty($row['immagine'])) {
         $srcImmagine = "assets/farmCovers/" . htmlspecialchars($row['immagine']);
     } else {
-        $srcImmagine = "assets/immagine_farmacia.jpg"; 
+        $srcImmagine = "assets/immagine_farmacia.webp"; 
     }
     
     $idFarm = $row['id']; // Salviamo l'ID subito
@@ -72,15 +72,14 @@ foreach ($risultati as $row) {
     
     // Header: Titolo e Indirizzo
     $htmlRisultati .= '<div class="card-header">';
-    $htmlRisultati .= '<h3 class="title-card">' . htmlspecialchars($row['nome']) . '</h3>';
-    $htmlRisultati .= '<p class="address"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' . htmlspecialchars($row['indirizzo']) . ', ' . htmlspecialchars($row['citta']) . '</p>';
+    $htmlRisultati .= '<h2 class="title-card">' . htmlspecialchars($row['nome']) . '</h2>';
+    $htmlRisultati .= '<p class="address"> ' . htmlspecialchars($row['indirizzo']) . ', ' . htmlspecialchars($row['citta']) . '</p>';
     $htmlRisultati .= '</div>';
 
     // Contatti
     $htmlRisultati .= '<div class="card-meta">';
     $telefonoPulito = str_replace(' ', '', $row['telefono']);
     $htmlRisultati .= '<a href="tel:' . htmlspecialchars($telefonoPulito) . '" class="phone-link">';
-    $htmlRisultati .= '<i class="fa-solid fa-phone" aria-hidden="true"></i> ';
     $htmlRisultati .= '<span class="phone-number-text">' . htmlspecialchars($row['telefono']) . '</span>';
     $htmlRisultati .= '</a>';
     $htmlRisultati .= '</div>';

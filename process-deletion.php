@@ -5,7 +5,7 @@ use DB\DBAccess;
 
 // Controllo sicurezza: solo utenti loggati
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: area-login.php");
+    header("Location: area-login.html");
     exit;
 }
 
@@ -15,11 +15,7 @@ function getAreaPage() {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verifica che l'utente abbia confermato
-    if (!isset($_POST['confirm_deletion']) || $_POST['confirm_deletion'] !== 'on') {
-        header("Location: conferma_eliminazione.html?error=conferma_mancante");
-        exit;
-    }
+    
     
     $idUtente = $_SESSION['user_id'];
     

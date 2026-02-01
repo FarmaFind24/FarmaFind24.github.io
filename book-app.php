@@ -4,6 +4,7 @@ require_once "dbConnection.php";
 require_once "session-helper.php";
 use DB\DBAccess;
 
+
 // Controllo autenticazione
 $isLoggedIn = isLoggedIn();
 
@@ -47,12 +48,9 @@ if (isset($_GET['error'])) {
 // Carica il template HTML
 $paginaHTML = file_get_contents("book-app.html");
 
-// --- LOGICA PER PROGRESSIVE ENHANCEMENT (NO-JS) ---
-
 // Recupera i valori selezionati dal POST, se esistono.
 $selectedServiceId = $_POST['service'] ?? null;
 $selectedCity = $_POST['city'] ?? null;
-// NUOVO: Recuperiamo anche Farmacia, Data e Ora
 $selectedPharmacyId = $_POST['pharmacy-selection'] ?? null;
 $selectedDate = $_POST['date-pick'] ?? null;
 $selectedTime = $_POST['time-pick'] ?? null;
@@ -60,9 +58,7 @@ $selectedTime = $_POST['time-pick'] ?? null;
 // Inizializza le variabili per l'HTML
 $htmlFarmacie = '<p>Seleziona un servizio e un comune, poi clicca su "Trova Farmacie" per visualizzare le opzioni.</p>';
 $htmlFarmacieMessage = '';
-// NUOVO: Variabile per gli slot orari
 $htmlTimeSlots = '<p>Seleziona una farmacia e una data per visualizzare gli orari disponibili.</p>';
-// Variabile per controllare se ci sono farmacie disponibili
 $noFarmacieDisponibili = false;
 
 // Variabili per messaggi di autenticazione

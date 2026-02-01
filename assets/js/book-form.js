@@ -1,192 +1,143 @@
-document.body.classList.add('js-active');
+/* 
+    DOCUMENTO: JS per la gestione del form di prenotazione visita
+    DESCRIZIONE: Gestisce validazione e spostamento tra tab
+*/
 
-// Verifica se il form è visibile prima di inizializzare
+document.body.classList.add('js-active');
 var regForm = document.getElementById("regForm");
 
+
+
 if (regForm && !regForm.classList.contains('content-hidden')) {
-    // tab di indice 0
-    var currentTab = 0; 
+    var currentTab = 0;
     showTab(currentTab);
 } else {
-    // Form nascosto (utente non autenticato), non fare nulla
     var currentTab = null;
 }
 
 function showTab(n) {
-  if (currentTab === null) return; // Non eseguire se il form è nascosto
-  
-  document.getElementById("general-error-msg").style.display = "none";
-  var x = document.getElementsByClassName("tab");
-  
-  // mostra tab corrente
-  x[n].style.display = "block";
+    if (currentTab === null) return;
 
-  //pulsante indietro - usa disabled invece di display:none per accessibilità
-  var prevBtn = document.getElementById("prevBtn");
-  if (n == 0) {
-    prevBtn.disabled = true;
-    prevBtn.setAttribute("aria-hidden", "true");
-    prevBtn.style.visibility = "hidden";
-  } else {
-    prevBtn.disabled = false;
-    prevBtn.removeAttribute("aria-hidden");
-    prevBtn.style.visibility = "visible";
-  }
-
-  // pulsanti avanti conferma
-  if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Conferma Prenotazione";
-  } else {
-    document.getElementById("nextBtn").innerHTML = "Prosegui";
-  }
-
-  // cerchietti progresso
-  fixStepIndicator(n);
+    document.getElementById("general-error-msg").style.display = "none";
+    var x = document.getElementsByClassName("tab");
+    x[n].style.display = "block";
+    var prevBtn = document.getElementById("prevBtn");
+    if (n == 0) {
+        prevBtn.disabled = true;
+        prevBtn.setAttribute("aria-hidden", "true");
+        prevBtn.style.visibility = "hidden";
+    } else {
+        prevBtn.disabled = false;
+        prevBtn.removeAttribute("aria-hidden");
+        prevBtn.style.visibility = "visible";
+    }
+    if (n == (x.length - 1)) {
+        document.getElementById("nextBtn").innerHTML = "Conferma Prenotazione";
+    } else {
+        document.getElementById("nextBtn").innerHTML = "Prosegui";
+    }
+    fixStepIndicator(n);
 }
 
 function nextPrev(n) {
-  if (currentTab === null) return; // Non eseguire se il form è nascosto
-  
-  var x = document.getElementsByClassName("tab");
-
-  // 1. Validazione: Se provi ad andare avanti (n=1) e il form NON è valido, fermati.
-  if (n == 1 && !validateForm()) return false;
-
-  // 2. Controllo Finale: Se siamo all'ultima tab e premiamo avanti
-  if (currentTab >= x.length - 1 && n == 1) {
-    submitBookingForm(); 
-    return false; 
-  }
-
-  // 3. Cabio Tab Standard
-  x[currentTab].style.display = "none"; 
-  currentTab = currentTab + n; 
-  showTab(currentTab); 
-
-  // sposta focus sul titolo del nuovo passaggio
-  var title = x[currentTab].querySelector(".tab-title");
-  if (title) {
-      title.setAttribute("tabindex", "-1");
-      title.focus();
-      title.style.outline = "none"; 
-  }
+    if (currentTab === null) return;
+    var x = document.getElementsByClassName("tab");
+    if (n == 1 && !validateForm()) return false;
+    if (currentTab >= x.length - 1 && n == 1) {
+        submitBookingForm();
+        return false;
+    }
+    x[currentTab].style.display = "none";
+    currentTab = currentTab + n;
+    showTab(currentTab);
+    var title = x[currentTab].querySelector(".tab-title");
+    if (title) {
+        title.setAttribute("tabindex", "-1");
+        title.focus();
+        title.style.outline = "none";
+    }
 }
 function validateForm() {
-  var x = document.getElementsByClassName("tab");
-  var inputs = x[currentTab].querySelectorAll("input, select");
-  var isValid = true;
-  var msg = ""; 
-  
-  // array per ricordare quali gruppi radio abbiamo già controllato
-  var radioCheckedGroups = [];
+    var x = document.getElementsByClassName("tab");
+    var inputs = x[currentTab].querySelectorAll("input, select");
+    var isValid = true;
+    var msg = "";
+    var radioCheckedGroups = [];
+    if (typeof resetFormError === "function") { resetFormError(); }
 
-  // pulizia errori
-  if (typeof resetFormError === "function") { resetFormError(); }
+    for (var i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+        if (input.type === "text" || input.type === "email") {
 
-  for (var i = 0; i < inputs.length; i++) {
-    var input = inputs[i];
-
-    //dati personali
-    if (input.type === "text" || input.type === "email") {
-        
-        if (input.id === "fname") { 
-            if (!validateNome()) {
-                isValid = false;
-                msg += "<p>Nome: Inserisci solo lettere.</p>";
-                input.classList.add("invalid");
-            } else { input.classList.remove("invalid"); }
+            if (input.id === "fnote") {
+                if (!input.checkValidity()) {
+                    isValid = false;
+                    msg += "<p>Inserisci una nota valida</p>";
+                    input.classList.add("invalid");
+                } else { input.classList.remove("invalid"); }
+            }
         }
-        else if (input.id === "fsurname") {
-            if (!validateCognome()) {
-                isValid = false;
-                msg += "<p>Cognome: Inserisci solo lettere.</p>";
-                input.classList.add("invalid");
-            } else { input.classList.remove("invalid"); }
+        else if (input.type === "radio") {
+            var groupName = input.name;
+            if (radioCheckedGroups.indexOf(groupName) === -1) {
+                radioCheckedGroups.push(groupName);
+                var isChecked = document.querySelector('input[name="' + groupName + '"]:checked');
+                if (!isChecked) {
+                    isValid = false;
+                }
+            }
         }
-        else if (input.id === "fcode") {
-            if (!validateCodiceFiscale()) {
+        else {
+            if (!input.checkValidity()) {
                 isValid = false;
-                msg += "<p>Codice fiscale: Inserisci un codice fiscale valido (16 caratteri).</p>";
                 input.classList.add("invalid");
-            } else { input.classList.remove("invalid"); }
-        }
-    }
-    //radio buttons
-    else if (input.type === "radio") {
-        var groupName = input.name;
-        
-        
-        if (radioCheckedGroups.indexOf(groupName) === -1) {
-            radioCheckedGroups.push(groupName); 
-
-            
-            var isChecked = document.querySelector('input[name="' + groupName + '"]:checked');
-
-            if (!isChecked) {
-                isValid = false;
+            } else {
+                input.classList.remove("invalid");
             }
         }
     }
 
 
-    else {
-        // type="date" 
-        if (!input.checkValidity()) {
-            isValid = false;
-            input.classList.add("invalid"); 
-        } else {
-            input.classList.remove("invalid");
-        }
+    if (!isValid) {
+        if (msg === "") msg = "<p>Compila tutti i campi obbligatori prima di proseguire!</p>";
+
+        if (typeof addFormError === "function") { addFormError(msg); }
+    } else {
+        document.getElementsByClassName("step")[currentTab].className += " finish";
     }
-  }
 
-
-  if (!isValid) {
-      // errore generico
-      if (msg === "") msg = "<p>Compila tutti i campi obbligatori prima di proseguire!</p>";
-      
-      if (typeof addFormError === "function") { addFormError(msg); }
-  } else {
-      document.getElementsByClassName("step")[currentTab].className += " finish";
-  }
-
-  return isValid;
+    return isValid;
 }
-
-// Invia il form a process-booking.php
 function submitBookingForm() {
     var form = document.getElementById("regForm");
     if (form) {
-        // Cambia l'action del form per puntare a process-booking.php
         form.action = "process-booking.php";
-        // Sottometti il form
         form.submit();
     }
 }
 
 function showSuccessMessage() {
     var x = document.getElementsByClassName("tab");
-    if(x[currentTab]) x[currentTab].style.display = "none"; 
+    if (x[currentTab]) x[currentTab].style.display = "none";
 
     document.querySelector(".step-actions").style.display = "none";
     document.querySelector(".step-indicator-container").style.display = "none";
-    
+
     var instruction = document.querySelector(".instruction");
-    if(instruction) instruction.style.display = "none";
+    if (instruction) instruction.style.display = "none";
 
     var successDiv = document.getElementById("success-step");
-    if(successDiv) {
+    if (successDiv) {
         successDiv.style.display = "block";
-        //window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
 function fixStepIndicator(n) {
-  var i, x = document.getElementsByClassName("step");
-  for (i = 0; i < x.length; i++) {
-    x[i].className = x[i].className.replace(" active", "");
-  }
-  x[n].className += " active";
+    var i, x = document.getElementsByClassName("step");
+    for (i = 0; i < x.length; i++) {
+        x[i].className = x[i].className.replace(" active", "");
+    }
+    x[n].className += " active";
 }
 
 

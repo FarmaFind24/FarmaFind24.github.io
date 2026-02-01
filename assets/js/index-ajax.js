@@ -1,20 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
     const citySelect = document.getElementById('city');
     const pharmacyMessageContainer = document.getElementById('index-message-container');
+    const mainSearchForm = document.getElementById('mainSearchForm');
 
     // Gestione submit del form di ricerca principale (supporta Enter)
     if (mainSearchForm) {
-        mainSearchForm.addEventListener('submit', function(e) {
+        mainSearchForm.addEventListener('submit', function (e) {
             e.preventDefault(); // Previene il submit tradizionale
-            
+
             const formData = new FormData(mainSearchForm);
             const searchType = formData.get('type'); // 'farmacia' o 'medicinale'
             const searchQuery = formData.get('q');
-            
+
             if (!searchQuery || searchQuery.trim() === '') {
                 return; // Non fare nulla se la ricerca è vuota
             }
-            
+
             // Redirect alla pagina appropriata
             if (searchType === 'farmacia') {
                 window.location.href = 'farm-search.php?q=' + encodeURIComponent(searchQuery.trim());
@@ -25,10 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function fetchPharmacies() {
-        const pharmacyGrid = document.querySelector('.grid-4c');
+        const pharmacyGrid = document.querySelector('.grid.four-columns');
         const selectedCity = citySelect.value;
         if (!pharmacyGrid) {
-            console.error("Errore: Elemento .grid-4c non trovato!");
+            console.error("Errore: Elemento .grid.four-columns non trovato!");
             return;
         }
         // Pulisce la lista precedente e il messaggio

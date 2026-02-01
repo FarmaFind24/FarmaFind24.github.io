@@ -1,30 +1,45 @@
-<!-- ABOUT.HTML -->
-
 <!doctype html>
 <html lang="it">
 
 <head>
     <title>Registrati e crea un account - FarmaFind24</title>
-    <meta charset="utf-8" >
+    <meta charset="utf-8">
     <meta name="description"
-        content="Crea il tuo profilo gratuito su FarmaFind24. Prenota servizi e monitora le tue visite online" >
-    <meta name="keywords" content="registrazione, crea account, funzionalità, visite" >
-    <link rel="stylesheet" href="assets/css/desktop.css" media="screen" >
+        content="Crea il tuo profilo gratuito su FarmaFind24. Prenota servizi e monitora le tue visite online">
+    <meta name="keywords" content="registrazione, crea account, funzionalità, visite">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
+    <link rel="stylesheet" href="assets/css/medium.css" media="screen and (max-width:1155px)">
+    <link rel="stylesheet" href="assets/css/print.css" media="print">
     <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
-    <link rel="preconnect" href="https://fonts.googleapis.com" >
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" >
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
+    <script src="./assets/js/menu.js" defer></script>
+    <script>document.documentElement.classList.add('js-active');</script>
 </head>
 
 <body>
+    <nav aria-label="Aiuti alla navigazione" class="help-nav">
+        <a href="#main-content">Vai al contenuto principale</a>
+    </nav>
     <header>
         <h1>
             <a href="index.php" class="hide" title="Torna alla pagina principale">
                 Farma<span lang="en">Find</span>24
             </a>
         </h1>
-        <nav class="Top-NavBar">
+        <nav class="top-navbar">
+            <button class="menu-toggle-text btn-primary" aria-label="Menù di Navigazione" aria-expanded="false">
+                Menù di Navigazione
+            </button>
+            <button class="menu-toggle" aria-label="Apri menù" aria-expanded="false">
+                ☰
+            </button>
             <ul aria-label="menu di navigazione">
                 <li>
                     <a href="index.php"><span lang="en-GB">Home</span></a>
@@ -45,7 +60,7 @@
     </header>
 
     <nav id="breadcrumb" aria-label="Percorso di navigazione">
-        <p> Ti trovi in: Area Personale
+        <p> Ti trovi in: Area Personale &gt;&gt; Registrati
         </p>
     </nav>
 
@@ -69,31 +84,38 @@
                         </div>
                         <div class="form-field">
                             <label for="username">Username</label>
-                            <input type="text" id="username" placeholder="Username" name="username" autocomplete="username"
-                                required>
+                            <input type="text" id="username" placeholder="Username" name="username"
+                                autocomplete="username" required>
                         </div>
                         <div class="form-field">
                             <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="Email" name="email" required autocomplete="email">
+                            <input type="email" id="email" placeholder="Email" name="email" required
+                                autocomplete="email">
                         </div>
                         <div class="form-field">
                             <label for="password">Password</label>
-                            <input type="password" id="password" placeholder="Password" name="password" required>
+                            <input type="password" id="password" placeholder="Password" name="password"
+                                autocomplete="new-password" required>
+                            <ul class="password-requirements">
+                                <li>La password deve essere lunga almeno 8 caratteri.</li>
+                                <li>La password deve contenere almeno una lettera.</li>
+                                <li>La password deve contenere almeno un numero.</li>
+                            </ul>
                         </div>
                         <div class="form-field">
                             <label for="confirm-password">Conferma Password</label>
                             <input type="password" id="confirm-password" placeholder="Conferma Password"
-                                name="confirm-password" required>
+                                name="confirm-password" autocomplete="new-password" required>
                         </div>
-                        <button type="submit">Registrati<i class="fa-solid fa-arrow-right-to-bracket"
-                                aria-hidden="true"></i></button>
+                        <button type="submit">Registrati</button>
                     </fieldset>
                 </form>
                 <div>
-                    <p>Hai già un Account?</p><a href="area-login.php">Accedi</a>
+                    <p>Hai già un Account?</p><a href="area-login.html">Accedi</a>
                 </div>
             </div>
         </div>
+        <button onclick="topFunction()" id="scroll-btn">Torna su</button>
     </main>
     <footer>
         <p> Le immagini presenti su questo sito sono state generate
@@ -103,6 +125,9 @@
             Copyright &copy; 2026 | Tutti i diritti riservati. </p>
     </footer>
     <script src="assets/js/scroll-top.js"></script>
+    <script src="assets/js/index-ajax.js"></script>
+    <script src="assets/js/home-redirect.js"></script>
+    <script src="assets/js/feedback-messages.js"></script>
     <script src="assets/js/form-validation.js"></script>
     <script src="assets/js/register-validation.js"></script>
 </body>

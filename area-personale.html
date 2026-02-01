@@ -5,28 +5,43 @@
     <title>Area Personale - FarmaFind24</title>
     <meta charset="utf-8">
     <meta name="description"
-        content="Pagina dedicata alla ricerca di farmacie di turno aperte e di farmaci disponibili nelle farmacie ricercate">
-    <meta name="keywords" content="salute">
+        content="Pagina dove si possono controllare le proprie prenotazioni o modificare i dati dell'account utente">
+    <meta name="keywords" content="salute, account, prenotazioni">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
+    <link rel="stylesheet" href="assets/css/medium.css" media="screen and (max-width:1155px)">
+    <link rel="stylesheet" href="assets/css/print.css" media="print">
     <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="./assets/js/menu.js" defer></script>
     <script>document.documentElement.classList.add('js-active');</script>
 </head>
 
 <body>
-    <nav class="sr-only" aria-label="aiuti alla navigazione">
-        <ul>
-            <li><a href="area-personale.html#breadcrumb-dash">Vai alla dashboard</a></li>
-        </ul>
+    <nav aria-label="aiuti alla navigazione" class="help-nav">
+        <a href="#main-content">
+            Vai al contenuto principale
+        </a>
     </nav>
-    <header>
-        <h1 class="hide">Farma<span lang="en-GB">Find</span>24</h1>
-        <nav class="Top-NavBar">
+    <header class="main-header">
+        <h1>
+            <a href="index.php" class="hide" title="Torna alla pagina principale">
+                Farma<span lang="en">Find</span>24
+            </a>
+        </h1>
+        <nav class="top-navbar" aria-label="Menù di navigazione">
+            <button class="menu-toggle-text btn-primary" aria-label="Menù di navigazione" aria-expanded="false">
+                Menù di Navigazione
+            </button>
+            <button class="menu-toggle" aria-label="Apri menù" aria-expanded="false">
+                ☰
+            </button>
             <ul aria-label="menu di navigazione">
                 <li>
                     <a href="index.php"><span lang="en">Home</span></a>
@@ -45,34 +60,41 @@
             </ul>
         </nav>
     </header>
-    <div>
-        <nav class="sidenav">
-            <ul aria-label="barra di navigazione dell'area personale">
-                <li>
-                    <a href="#dashboard">
-                        <span class="material-symbols-outlined" aria-hidden="true">dashboard</span>Dashboard</a>
-                </li>
-                <li>
-                    <a href="#profilo"><span class="material-symbols-outlined"
-                            aria-hidden="true">person</span>Profilo</a>
-                </li>
-                <li>
-                    <a href="#prenotazioni"><span class="material-symbols-outlined"
-                            aria-hidden="true">event</span>Prenotazioni</a>
-                </li>
-                <li>
-                    <a href="logout.php" lang="en"><span class="material-symbols-outlined"
-                            aria-hidden="true">logout</span>Logout</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
     <div class="page-wrapper">
-        <main class="main-area-personale">
+        <div>
+            <nav class="sidenav" aria-label="Menu laterale area personale">
+                <ul>
+                    <li>
+                        <a href="#dashboard">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#profilo">
+                            Profilo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#prenotazioni">
+
+                            Prenotazioni
+                        </a>
+                    </li>
+                    <li>
+                        <a href="logout.php" lang="en">
+
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <main class="main-area-personale" id="main-content">
             <section id="dashboard" class="content-section">
-                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione" id="breadcrumb-dash">
+                <nav class="breadcrumb-area-personale" aria-label="Breadcrumb Dashboard" id="breadcrumb-dash">
                     <p>
-                        Ti trovi in: Area Personale >> <span lang="en">Dashboard</span>
+                        Ti trovi in: Area Personale &gt;&gt; <span lang="en">Dashboard</span>
                     </p>
                 </nav>
                 <div class="main-area-personale-title-row">
@@ -93,12 +115,12 @@
                 </div>
             </section>
             <section id="profilo" class="content-section">
-                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione" tabindex="0">
-                    <p>Ti trovi in: Area Personale >> Profilo</p>
+                <nav class="breadcrumb-area-personale" aria-label="Breadcrumb Profilo" tabindex="0">
+                    <p>Ti trovi in: Area Personale &gt;&gt; Profilo</p>
                 </nav>
                 <div class="main-area-personale-title-row">
                     <div>
-                        <h1>Profilo</h1>
+                        <h2>Profilo</h2>
                         <button type="button" class="btn-primary" id="edit-profile-btn">Modifica Profilo</button>
                     </div>
                     <p>Gestisci le tue informazioni personali</p>
@@ -113,48 +135,47 @@
                     <h3>Dettagli Personali</h3>
                     <form action="process-update-profile.php" method="POST">
                         <fieldset>
-                            <legend aria-hidden="true">Dettagli personali</legend>
-                            <div class="details-grid">
-                                <div>
+                            <legend class="sr-only">Dettagli personali</legend>
+                            <div class="grid two-columns">
+                                <div class="details-div">
                                     <label for="name">Nome</label>
                                     <input type="text" id="name" name="name" value="[nome]" readonly autocomplete="off">
                                 </div>
-                                <div>
+                                <div class="details-div">
                                     <label for="surname">Cognome</label>
                                     <input type="text" id="surname" name="surname" value="[cognome]" readonly
                                         autocomplete="off">
                                 </div>
-                                <div>
+                                <div class="details-div">
                                     <label for="username">Username</label>
                                     <input type="text" id="username" name="username" value="[username]" readonly
                                         autocomplete="off">
                                 </div>
-                                <div>
+                                <div class="details-div">
                                     <label for="email">Email</label>
                                     <input type="email" id="email" name="email" value="[email]" readonly
                                         autocomplete="off">
                                 </div>
 
                             </div>
-                            <div class="row-btn"><button type="submit" class="btn-primary" id="save-profile-btn"
-                                    hidden>Applica</button>
+                            <div class="row-btn">
+                                <button type="submit" class="btn-primary" id="save-profile-btn" hidden>Applica</button>
                                 <button type="button" class="outlined-btn" id="cancel-edit-btn" hidden>Annulla</button>
                             </div>
                         </fieldset>
                     </form>
 
                 </div>
-                <a href="conferma_eliminazione.html" class="delete-account"> <span class="material-symbols-outlined"
-                        aria-hidden="true">delete</span>Elimina Account</a>
+                <a href="conferma_eliminazione.html" class="delete-account"> Elimina Account</a>
             </section>
             <section id="prenotazioni" class="content-section">
-                <nav class="breadcrumb-area-personale" aria-label="Percorso di navigazione" tabindex="0">
+                <nav class="breadcrumb-area-personale" aria-label="Breadcrumb Prenotazioni" tabindex="0">
                     <p>
-                        Ti trovi in: Area Personale >>Prenotazioni
+                        Ti trovi in: Area Personale &gt;&gt; Prenotazioni
                     </p>
                 </nav>
                 <div class="main-area-personale-title-row">
-                    <h1>Prenotazioni</h1>
+                    <h2>Prenotazioni</h2>
                     <p>Gestisci i tuoi appuntamenti</p>
                 </div>
 

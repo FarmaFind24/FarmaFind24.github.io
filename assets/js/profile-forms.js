@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const editBtn = document.getElementById("edit-profile-btn");
     const saveBtn = document.getElementById("save-profile-btn");
     const cancelBtn = document.getElementById("cancel-edit-btn");
-    const inputs = document.querySelectorAll(".details-grid input");
+    const inputs = document.querySelectorAll(".grid.two-columns input");
     const profileForm = document.querySelector("form[action='process-update-profile.php']");
 
     // Mappatura errori URL per area personale
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cancelBtn.addEventListener("click", (e) => {
             e.preventDefault();
             clearAllFieldErrors(profileForm);
-
+            profileForm.reset();
             inputs.forEach(input => {
                 if (!input.disabled) {
                     input.setAttribute("readonly", "true");

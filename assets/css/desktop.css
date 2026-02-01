@@ -9,23 +9,24 @@
   --z-index-header: 1000;
   --z-index-footer: 1000;
 }
+/**************/
+/*   GLOBALI  */
+/**************/
 
 * {
   border: 0;
   margin: 0;
+  box-sizing: border-box;
 }
-*,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-
 html {
   height: 100%;
   margin: 0;
 }
 body {
-  height: 100%;
   font-family: "Lexend", sans-serif;
   display: flex;
   flex-direction: column;
@@ -71,7 +72,6 @@ section {
   justify-content: center;
   padding-top: 2.5em;
 }
-
 button {
   border-radius: 0.5rem;
   width: 6.5rem;
@@ -85,6 +85,10 @@ button {
   cursor: pointer;
   font-family: inherit;
 }
+
+.strong {
+  font-weight: 600;
+}
 ::placeholder {
   color: #5e5e5e;
   opacity: 1;
@@ -92,53 +96,70 @@ button {
 a:link {
   color: var(--primary-color);
 }
+
+
 a:visited {
   color: #870058;
 }
-a.outlined,
-button.outlined-btn {
-  transition: all 0.3s;
-  background-color: var(--second-bg-color);
-  border: 1px solid black;
+
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
   color: black;
 }
-a.outlined:hover,
-button.outlined-btn:hover {
-  background-color: black;
-  border: 1px solid black;
-  color: white;
+h2 {
+  font-size: 2em;
+
 }
-a.primary,
-button.btn-primary {
+h3 {
+  font-family: inherit;
+  margin: 0.1em 0 0.2em 0;
+  line-height: 1.2;
+}
+p {
+  font-family: inherit;
+  line-height: 1.5;
+  margin-bottom: 0.5em;
+}
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.75em;
+  border: 1px solid black;
+  border-radius: 1em;
+  box-sizing: border-box;
+  margin-top: 0.4em;
+  margin-bottom: 1em;
+  resize: vertical;
+  font-family: inherit;
+}
+textarea#fnote{
+  height: 10rem;
+}
+input[type="submit"] {
+  cursor: pointer;
   background-color: var(--primary-color);
   color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
   font-family: inherit;
 }
-a.primary:hover,
-button.btn-primary:hover {
+input[type="submit"]:hover {
   background-color: var(--primary-color-hover);
-  color: white;
 }
-/*button.btn-primary:disabled {
-  background-color: #cccccc;
-  color: #666666;
-  cursor: not-allowed;
-  opacity: 0.6;
+
+address {
+  font-style: normal;
 }
-button.btn-primary:disabled:hover {
-  background-color: #cccccc;
-}*/
-a.btn-like {
-  border-radius: 0.5rem;
-  height: 2.5rem;
-  text-decoration: none;
-  width: 6.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: inherit;
-  font-size: 0.9rem;
-}
+
+/*************/
+/*   ICONE   */
+/*************/
 .material-symbols-outlined {
   font-size: 27px;
   color: var(--primary-color);
@@ -154,21 +175,133 @@ a.btn-like {
 .icon-white {
   color: white;
 }
-.grid {
-  gap: 1em;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
-  padding: 1em 0em 0em 0em;
-  justify-content: center;
+
+/*ACCESSO*/
+.top-navbar ul li:nth-child(6) span::before,
+.user-login button::after,
+.appuntamento-card-details a::before,
+.contact-item dd::before, 
+a.delete-account::before {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.4em;
+  margin-right: 0.2em;
 }
-.grid-4c {
+.user-login button::after{
+  color: white;
+}
+
+.top-navbar ul li:nth-child(6) span::before,
+.user-login button::after{
+  content: "\ea77"; 
+  font-family: 'Material Symbols Outlined'; 
+}
+
+/*DASHBOARD*/
+.sidenav li:nth-child(1) a::before,
+.sidenav.admin li:nth-child(2) a::before  {
+  content: "\e871"; 
+  font-family: 'Material Symbols Outlined';
+  
+}
+/*PROFILO*/
+.sidenav li:nth-child(2) a::before {
+  content: "\e7fd"; 
+  font-family: 'Material Symbols Outlined';
+  
+}
+/*PRENOTAZIONI*/
+.sidenav li:nth-child(3) a::before, 
+.sidenav.admin li:nth-child(2) a::before {
+  content: "\e878"; 
+  font-family: 'Material Symbols Outlined';
+  
+}
+/*LOGOUT*/
+.sidenav li:nth-child(4) a::before,
+.sidenav.admin li:nth-child(4) a::before {
+  content: "\e9ba";
+  font-family: 'Material Symbols Outlined'; 
+  
+}
+/*GESTIONE FARMACIE*/
+.sidenav.admin li:nth-child(3) a::before {
+  content: "\e550"; 
+  font-family: 'Material Symbols Outlined';   
+}
+/*ELIMINA ACCOUNT*/
+a.delete-account::before {
+  content: "\e872"; 
+  font-family: 'Material Symbols Outlined'; 
+  font-size: 1.7em;
+  color: rgb(153, 5, 5);
+}
+/*INFO*/
+.appuntamento-card-details a::before {
+  content: "\e88e";
+  font-family: 'Material Symbols Outlined'; 
+  color: var(--primary-color);
+  margin-right: 0.2em;
+}
+/*POSIZIONE*/
+.address::before,
+.contact-item:nth-child(1) dd::before{
+  content: "\e0c8";
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 1;
+}
+/*TELEFONO*/
+.phone-link::before,
+.contact-item:nth-child(2) dd::before{
+ content: "\e0b0";
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 1;
+}
+/*EMAIL*/
+.contact-item:nth-child(3) dd::before{
+ content: "\e158";
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 1;
+}
+
+#addFarmaciaBtn::before {
+  content: "\e145";
+  font-family: 'Material Symbols Outlined'; 
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.7em;
+  color: var(--primary-color);
+  margin-right: 0.2em;
+}
+
+
+/************/
+/*   GRID   */
+/************/
+
+.grid {
   gap: 1rem;
-  margin-top: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 17.165rem);
-  width: 100%;
+  padding-top: 1rem;
   justify-content: center;
   justify-items: center;
+  width: 100%;
+}
+.three-columns{
+  grid-template-columns: repeat(auto-fit, 21.165rem);
+}
+.two-columns{
+  grid-template-columns: 1fr 1fr;
+  justify-items: stretch;
+}
+.four-columns{
+  grid-template-columns: repeat(auto-fit, 18rem);
+}
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
+  gap: 0.8em;
+  margin-top: 1em;
 }
 
 .sr-only {
@@ -183,6 +316,10 @@ a.btn-like {
   position: absolute;
   text-indent: -999em;
 }
+.help-nav:focus{
+  text-indent: 0em;
+  position: static;
+}
 .row-btn {
   margin-top: auto;
   padding-top: 1rem;
@@ -191,72 +328,15 @@ a.btn-like {
   justify-content: space-evenly;
 }
 
-h1 {
-  text-align: center;
-  font-size: 2.5em;
-  margin-bottom: 0.5em;
-  color: black;
-}
-h2 {
-  font-size: 2em;
-  margin-top: 0;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-h3 {
-  font-family: inherit;
-  margin: 0.1em 0 0.2em 0;
-  line-height: 1.2;
-}
-p {
-  font-family: inherit;
-  line-height: 1.5;
-  margin-bottom: 0.5em;
+input[type="text"]#fnote{
+  height: 5rem;
 }
 
-/*
-h1 + p {
-  text-align: center;
-  max-width: 800px;       
-  margin: 0 auto 1em auto;
-  font-size: 1.2em;
-  padding: 0 1em;        
-} Da modificare l'about le search page e book app*/
-input[type="text"],
-input[type="email"],
-select,
-textarea {
-  width: 100%;
-  padding: 0.75em;
-  border: 1px solid black;
-  border-radius: 1em;
-  box-sizing: border-box;
-  margin-top: 0.4em;
-  margin-bottom: 1em;
-  resize: vertical;
-  font-family: inherit;
-}
-input[type="submit"] {
-  cursor: pointer;
-  background-color: var(--primary-color);
-  color: white;
-  padding: 1rem;
-  border-radius: 1rem;
-  font-weight: 600;
-  transition: background-color 0.2s;
-  font-family: inherit;
-}
-input[type="submit"]:hover {
-  background-color: var(--primary-color-hover);
-}
 .hide {
   display: block; 
-  height: 1.3em;
-  width: 10em;
   background-image: url("../logo_h1.png");
-  margin-left: 0.5em;
-  margin-top: 0.5em;
+  margin-left: 1rem;
+  margin-top: 2rem;
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -297,6 +377,7 @@ input[type="submit"]:hover {
   border: 1px solid black;
   padding-left: 1rem;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .form-search-container button {
@@ -326,45 +407,47 @@ input[type="submit"]:hover {
   background-repeat: no-repeat;
 }
 
-/**********************/
-/*       NAVBAR       */
-/**********************/
-.Top-NavBar a {
+/******************/
+/*   NAVIGAZIONE  */
+/******************/
+.top-navbar a {
   height: 2rem;
-  text-decoration: none;
   padding: 0.5rem;
   color: black;
   border-radius: 1rem;
   border: 2px solid transparent;
   transition: all 0.3s;
 }
-.Top-NavBar a:hover {
+.top-navbar a:hover {
   border: var(--primary-color) solid 2px;
   background-color: var(--primary-color);
   border-radius: 1rem;
   color: var(--main-bg-color);
 }
-.Top-NavBar a:hover a:visited {
+
+.top-navbar a:hover a:visited {
   color: inherit;
 }
 
-.Top-NavBar ul {
+.top-navbar ul {
   list-style: none;
   flex-direction: row;
   display: flex;
   gap: 2rem;
+  align-items: center;
 }
 
-.Top-NavBar .current-page {
+.top-navbar a.current-page {
   pointer-events: none;
   padding: 0.5rem;
   border: var(--primary-color) solid 2px;
   background-color: var(--primary-color);
   border-radius: 1rem;
   color: var(--main-bg-color);
+  text-decoration: none;
 }
 
-/* BREADCRUMB */
+
 #breadcrumb {
   display: block;
   padding: 0.8em 1em 0.1em;
@@ -385,18 +468,155 @@ nav.breadcrumb-area-personale {
   background-color: var(--second-bg-color);
 }
 
+.sidenav {
+  height: 100%;
+  width: 15rem;
+  position: fixed;
+  top: 4rem;
+  background-color: var(--main-bg-color);
+  z-index: var(--z-index-sidenav);
+  overflow-x: hidden;
+  padding: 0.5rem;
+  border-right: 1px solid black;
+}
+
+.sidenav li a::before {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.7em;
+  color: var(--primary-color);
+}
+.sidenav li a.current::before,
+.sidenav li a:hover::before {
+  color: white;
+}
+
+.sidenav a {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  width: 100%;
+  border-radius: 0px 12px;
+  transition: all 0.35s;
+  border: 2px solid transparent;
+}
+.sidenav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+.sidenav a:hover {
+  border: var(--primary-color) solid 2px;
+  background-color: var(--primary-color);
+  border-radius: 0px 12px;
+  color: white;
+}
+.sidenav .current {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: default;
+}
+/**************/
+/*   BOTTONI  */
+/**************/
+a.outlined,
+button.outlined-btn {
+  transition: all 0.3s;
+  background-color: var(--second-bg-color);
+  border: 1px solid black;
+  color: black;
+}
+a.outlined:hover,
+button.outlined-btn:hover {
+  background-color: black;
+  border: 1px solid black;
+  color: white;
+}
+a.primary,
+button.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  font-family: inherit;
+}
+a.primary:hover,
+button.btn-primary:hover {
+  background-color: var(--primary-color-hover);
+  color: white;
+}
+a.btn-like {
+  border-radius: 0.5rem;
+  height: 2.5rem;
+  width: 6.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+a.btn-like:visited{
+  background-color: #870058;
+}
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-secondary:focus,
+.form-actions .btn-primary:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+#scroll-btn {
+  display: none;
+  position: fixed;
+  bottom: 2em;
+  right: 3em;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5em;
+  min-width: auto;
+  z-index: 1001;
+}
+
+#scroll-btn:hover {
+  background-color: var(--primary-color-hover);
+}
+.farm-card-content .btn-like {
+  margin-top: auto;
+}
+
+.btn-details { 
+  text-decoration: none; 
+  color: #007bff; 
+  font-weight: 600; 
+  font-size: 0.9rem;
+}
+.btn-details:hover { 
+  text-decoration: underline;
+}
+
+
+
 .home-hero-section {
   padding-top: 0.2rem;
 }
 
-/*Per Hamburger*/
+.menu-toggle-text,
 .menu-toggle {
   display: none;
 }
-/**********************/
-/*        HOME        */
-/**********************/
-
 .home-hero-content {
   background-color: var(--primary-color);
   border-radius: 1.5rem;
@@ -521,9 +741,7 @@ nav.breadcrumb-area-personale {
   justify-content: center;
   margin-bottom: 1rem;
 }
-.med-card,
-.farm-card,
-.farm-card-mini {
+.med-card {
   max-width: 17.75rem;
   width: 100%;
   height: 100%;
@@ -534,11 +752,6 @@ nav.breadcrumb-area-personale {
   border-radius: 1rem;
   border: 2px solid var(--border-color);
 }
-.farm-card-mini p {
-  overflow-wrap: anywhere;
-  padding: 0rem 0.75rem;
-  font-size: 0.9rem;
-}
 .farm-img-container {
   position: relative;
 }
@@ -548,69 +761,27 @@ nav.breadcrumb-area-personale {
   object-position: top;
   width: 100%;
   height: 130px;
-  border-radius: 1rem 1rem 0 0;
+  overflow: hidden;
 }
-.farm-card-mini .farm-stato-closed,
-.farm-card-mini .farm-stato-open {
+.farm-card .farm-stato-closed,
+.farm-card .farm-stato-open {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 1rem 1rem;
+  top: 1em;
+  right: 1em;
+  padding: 0.7em 0.7em;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 0.85rem;
+  font-size: 0.85em;
 }
-.farm-card-mini .farm-stato-open {
+.farm-card .farm-stato-open {
   background-color: #e6f7ed;
   color: var(--primary-color);
 }
-.farm-card-mini .farm-stato-closed {
+.farm-card .farm-stato-closed {
   background-color: #fef1f1;
   color: #d32f2f;
 }
-.farm-card-mini a {
-  text-decoration: none;
-  width: 7rem;
-  height: 2.5rem;
-}
 
-#scroll-btn {
-  display: none;
-  position: fixed;
-  bottom: 2em;
-  right: 3em;
-  background-color: var(--primary-color);
-  color: white;
-  cursor: pointer;
-  border-radius: 0.5em;
-  min-width: auto;
-  z-index: 1001;
-}
-
-#scroll-btn:hover {
-  background-color: var(--primary-color-hover);
-}
-
-/*.med-card-content,
-.farm-card-content {
-  flex-grow: 1;
-  padding: 1rem;
-  display: flex;
-  height: auto;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.med-card img,
-.farm-card img {
-  object-fit: cover;
-  object-position: top;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 2 / 1;
-  border-radius: 1rem 1rem 0 0;
-}*/
-/* --- CARD FARMACIA (Nuovo Stile) --- */
 .farm-card {
   display: flex;
   flex-direction: column; 
@@ -652,13 +823,22 @@ nav.breadcrumb-area-personale {
   flex-grow: 1;
   gap: 0.8em;
 }
-.card-header .title-card {
+
+
+
+.farm-card-content .available{
+  color:var(--primary-color);
+}
+.farm-card-content .low-storage{
+  color: #8A0000;
+}
+.farm-card-content .title-card {
   margin: 0 0 0.3em 0;
   font-size: 1.3rem;
   color: var(--primary-color);
   line-height: 1.5;
 }
-.card-header .address {
+.farm-card-content .address {
   margin: 0;
   color: #666;
 }
@@ -673,6 +853,8 @@ nav.breadcrumb-area-personale {
 .phone-number-text {
   text-decoration: underline;
 }
+
+
 .services-preview {
   margin-top: 0.5rem;
 }
@@ -748,6 +930,7 @@ nav.breadcrumb-area-personale {
 .intro-community h2 {
   margin-top: 1rem;
   color: var(--primary-color);
+  text-align: center;
 }
 .col-testo ul {
   padding-left: 1.5em;
@@ -788,7 +971,7 @@ nav.breadcrumb-area-personale {
     inset 0 0 0 1px var(--primary-color);
 }
 .avatar-img {
-width: 6.25em;
+  width: 6.25em;
   height: 6.25em;
   background-size: cover;
   background-position: center;
@@ -822,9 +1005,7 @@ width: 6.25em;
   margin: 1em auto;
 }
 
-address {
-  font-style: normal;
-}
+
 .contact-item {
   margin-bottom: 1em; 
 }
@@ -832,10 +1013,6 @@ address {
   font-weight: 700;
   margin-bottom: 0.3em; 
   line-height: 1.2;
-}
-.contact-item dd {
-  margin-left: 1.5em; 
-  margin-bottom: 0;   
 }
 .sponsor-card {
   border: 1px solid var(--primary-color);
@@ -935,10 +1112,10 @@ address {
 /**********************/
 /*   AREA-PERSONALE   */
 /**********************/
-
-.page-wrapper {
+.page-wrapper{
   display: flex;
-  overflow: hidden;
+  flex-direction: row;
+  flex-grow: 1;
 }
 
 .main-area-personale {
@@ -949,55 +1126,6 @@ address {
   padding: 0 2rem 1rem;
   overflow-y: auto;
 }
-
-.sidenav {
-  height: 100%;
-  width: 15rem;
-  position: fixed;
-  top: 4rem;
-  background-color: var(--main-bg-color);
-  z-index: var(--z-index-sidenav);
-  overflow-x: hidden;
-  padding: 0.5rem;
-  border-right: 1px solid black;
-}
-.sidenav a {
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-  color: var(--primary-color);
-  text-decoration: none;
-  width: 100%;
-  border-radius: 0px 12px;
-  transition: all 0.35s;
-  border: 2px solid transparent;
-}
-.sidenav ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  height: 100%;
-}
-.sidenav a:hover {
-  border: var(--primary-color) solid 2px;
-  background-color: var(--primary-color);
-  border-radius: 0px 12px;
-  color: white;
-}
-.sidenav .current {
-  background-color: var(--primary-color);
-  color: white;
-  cursor: default;
-}
-.current .material-symbols-outlined,
-.sidenav a:hover .material-symbols-outlined {
-  color: white;
-}
-
 .current-row {
   background-color: var(--primary-color);
   border-radius: 12px;
@@ -1006,7 +1134,6 @@ address {
   color: white;
   cursor: default;
 }
-
 .activity-row {
   display: flex;
   flex-direction: row;
@@ -1075,8 +1202,8 @@ address {
   border: 1px solid var(--primary-color);
   border-radius: 12px;
   padding: 0.5em 0.8em;
-  background-color: var(--second-bg-color);
   text-align: center;
+  width: 4em;
 }
 .appuntamento-card-details {
   width: 100%;
@@ -1085,12 +1212,17 @@ address {
   justify-content: space-between;
   align-items: center;
 }
+.appuntamento-card-details .row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .appuntamento-card-details div {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
+
 .row-details {
   display: flex;
   flex-direction: row;
@@ -1128,21 +1260,20 @@ address {
   align-items: start;
   position: relative;
 }
-#profilo.content-section {
-  gap: 1.5rem;
-}
+
 .content-hidden {
   display: none;
 }
 
 /* Icona decorativa ingranaggio */
 .content-section::after {
-  content: "\e8b8"; /* Icona 'settings' da Material Symbols */
-  font-family: 'Material Symbols Outlined'; /* Specifica il font */
+  content: "\e8b8";
+  font-family: 'Material Symbols Outlined';
   position: absolute;
-  top: 2rem;
-  right: 2rem;
-  font-size: 150px;
+  transform: rotate(45deg);
+  top: -10rem;
+  right: 10rem;
+  font-size: 40em;
   color: var(--primary-color);
   opacity: 0.08;
   pointer-events: none;
@@ -1182,16 +1313,12 @@ address {
   border: 1px solid var(--primary-color);
 }
 
-.details-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-.details-grid > div {
+.details-div{
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
-.details-grid input {
+.details-div input {
   height: 3rem;
   font-size: 1rem;
 }
@@ -1208,6 +1335,9 @@ address {
   gap: 0.5rem;
   text-decoration: none;
 }
+
+
+
 a.delete-account span,
 a.delete-account {
   color: rgb(153, 5, 5);
@@ -1258,11 +1388,11 @@ a.delete-account {
   margin-top: 2rem;
 }
 
-/**********************/
-/*     INFO-FARM      */
-/**********************/
+/********************************/
+/*     INFO-FARM E INFO-MED     */
+/********************************/
 
-#TopContainerInfoFarm {
+.TopContainerInfoFarm {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1271,25 +1401,26 @@ a.delete-account {
   margin: 0 auto 2rem;
 }
 
-#TopContainerInfoFarm h1 {
+.TopContainerInfoFarm h1 {
   margin: 0;
   font-size: 2rem;
   font-weight: 700;
   text-align: left;
 }
 
-#InfoFarmStatus .aperto{
+.InfoFarmStatus .aperto{
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
-  background-color: #fef1f1;
+  background-color: #e6f7ed;
   color: #155724;
+  border: 1px solid var(--primary-color);
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.95rem;
   white-space: nowrap;
 }
-#InfoFarmStatus .chiuso{
+.InfoFarmStatus .chiuso{
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
@@ -1306,7 +1437,6 @@ a.delete-account {
   border-radius: 12px;
   overflow: hidden;
 }
-
 .FarmImageWrapper img {
   width: 100%;
   height: auto;
@@ -1317,20 +1447,15 @@ a.delete-account {
   object-position: center;
   display: block;
 }
-
-/* Sezioni comuni (Info, Orari, Servizi) */
-#InfoGeneraliGridInfoFarm,
-#OrariDiApertura,
-#SeriviziOfferti {
+.info-generali-elemento{
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid var(--border-color);
+  margin: 0 auto 2rem;
+  width: 100%;
 }
-
-#InfoGeneraliGridInfoFarm h2,
-#OrariDiApertura h2,
-#SeriviziOfferti h2 {
+.info-generali-elemento h2{
   font-size: 1.4rem;
   color: var(--primary-color);
   margin: 0 0 1rem 0;
@@ -1338,9 +1463,9 @@ a.delete-account {
   border-bottom: 2px solid var(--second-bg-color);
   text-align: left;
 }
-
-/* Info Generali */
-#InfoGeneraliGridInfoFarm p {
+.info-generali-elemento > ul > li, 
+.info-generali-elemento > div, 
+.info-generali-elemento > p {
   padding: 0.75rem;
   margin: 0 0 0.5rem 0;
   border-left: 3px solid var(--primary-color);
@@ -1348,8 +1473,11 @@ a.delete-account {
   border-radius: 6px;
   line-height: 1.5;
 }
+.info-generali-elemento > div,
+.info-generali-elemento > p {
+  padding: 1rem;
+}
 
-/* Orari di Apertura */
 .OrarioGiorno {
   display: flex;
   justify-content: space-between;
@@ -1368,37 +1496,22 @@ a.delete-account {
   margin: 0;
 }
 
-/* Servizi Offerti */
 .lista-servizi {
   list-style-type: none;
   padding-left: 0;
 }
 
-.SerivzioOfferto {
+.servizio-offerto {
   padding: 0.75rem;
   margin-bottom: 0.5rem;
   border-left: 3px solid var(--primary-color);
   background-color: var(--second-bg-color);
   border-radius: 6px;
 }
-.SerivzioOfferto {
-  font-weight: bold;
-}
+
 .descrizione-servizio {
   font-weight: normal;
 }
-
-
-/* Layout Container per griglia a 3 colonne */
-.info-farm-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto 2rem;
-}
-
-/******* INFO MED *******/
 
 #TopContainerInfoMed {
   display: flex;
@@ -1421,6 +1534,13 @@ a.delete-account {
   max-width: 1200px;
   display: flex;
   justify-content: center;
+  width: 100%; 
+  max-width: 400px; 
+  background-color: var(--primary-color);
+  padding: 0.5em; 
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .MedImageWrapper img {
@@ -1429,43 +1549,14 @@ a.delete-account {
   max-width: 400px;
   max-height: 200px;
   object-fit: contain;
-  object-position: center; /* Da vedere perchè cosi si aspetta medicinale in basso e quindi in caso taglia dall'alto*/
+  object-position: center; 
   aspect-ratio: 2 / 1;
+  object-position: center;
   background-color: var(--primary-color);
-  padding: 0rem 0.5rem 0rem 0.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
+  padding: 0rem 0.5em 0rem 0.5em;
+  padding: 0;
+  border-radius: 8px;
 }
-
-/* Sezioni Info Medicinale */
-#InfoGeneraliGridInfoMed {
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  max-width: 1200px;
-  margin: 0 auto 2rem;
-}
-
-#InfoGeneraliGridInfoMed h2 {
-  font-size: 1.4rem;
-  color: var(--primary-color);
-  margin: 0 0 1rem 0;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--second-bg-color);
-  text-align: left;
-}
-
-#InfoGeneraliGridInfoMed > p {
-  padding: 0.75rem;
-  margin: 0;
-  border-left: 3px solid var(--primary-color);
-  background-color: var(--second-bg-color);
-  border-radius: 6px;
-  line-height: 1.6;
-}
-
-/* Lista dettagli medicinale */
 .lista-dettagli-med {
   list-style: none;
   padding: 0;
@@ -1480,8 +1571,6 @@ a.delete-account {
   background-color: var(--second-bg-color);
   border-radius: 6px;
 }
-
-/* Sezione Farmacie Disponibili */
 #FarmacieDisponibili {
   max-width: 1200px;
   margin: 0 auto;
@@ -1493,12 +1582,6 @@ a.delete-account {
   color: var(--primary-color);
   margin-bottom: 1.5rem;
   text-align: left;
-}
-
-.grid-med-card {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
 }
 
 /******* PAGINA PRENOTAZIONE VISITA *******/
@@ -1563,29 +1646,6 @@ a.delete-account {
   margin-bottom: 0.3em;
 }
 
-/*
-.service-box span {
-    display: block;
-    font-size: 0.9em;
-    color: #666;
-    line-height: 1.2;
-}*/
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
-  gap: 1em;
-  width: 100%;
-}
-
-.farm-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  width: 100%;
-}
-
 .card-clickable-label {
   cursor: pointer;
 }
@@ -1620,9 +1680,6 @@ a.delete-account {
   padding: 0.8em 1.2em;
   font-size: 1.1em;
   font-family: inherit;
-  /*border: 0.125em solid var(--header-border-color); 
-    border-radius: 0.5em;
-    background-color: #f8f9fa;*/
   cursor: pointer;
   text-align: center;
   color: #666;
@@ -1643,12 +1700,7 @@ a.delete-account {
   height: 0;
   width: 0;
 }
-.time-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
-  gap: 0.8em;
-  margin-top: 1em;
-}
+
 .time-slot label {
   display: block;
   padding: 0.8em 0.5em;
@@ -1715,11 +1767,6 @@ a.delete-account {
   display: none !important;
 }
 
-/* nascondere passaggi del form non attivi (prova anche disabilitando js) */
-/*.tab {
-  display: none;
-}*/
-
 /*senza js*/
 .tab {
   display: block;
@@ -1745,41 +1792,22 @@ a.delete-account {
   margin: 1.5rem auto;
 }
 
-/* con js attivo*/
-.js-active .tab {
-  display: none;
-}
 .js-active .step-indicator-container {
-  display: flex; /* O block, come avevi prima */
+  display: flex;
 }
 .js-active .tab.show {
   display: block;
 }
+.js-active .tab,
+.js-active #check-time-btn,
+.js-active #findDintorniBtn,
+.js-active #findPharmaciesBtn,
 .js-active #submitBtnNoJs {
   display: none;
 }
-.js-active #submitBtnNoJs {
-  display: none;
-}
-.js-active #submitBtnNoJs {
-  display: none;
-}
-/* Nascondi il pulsante di ricerca manuale se JS è attivo */
-.js-active #findPharmaciesBtn {
-  display: none;
-}
-.js-active #findDintorniBtn {
-  display: none;
-}
-
 .js-active #nextBtn,
 .js-active #prevBtn {
   display: inline-block;
-}
-
-/* Se JS è attivo, aggiungiamo una classe al body o usiamo JS per nascondere questo bottone */
-.js-active #check-time-btn {
-  display: none;
 }
 
 .step {
@@ -2012,8 +2040,9 @@ textarea.invalid:focus {
   gap: 1.5rem;
   margin-top: 2rem;
   margin-bottom: 3rem;
+  align-items: center;
 }
-.back-home-anchor,
+
 .booking-actions button {
   width: 10rem;
   height: 3rem;
@@ -2034,20 +2063,7 @@ textarea.invalid:focus {
   background-color: var(--primary-color);
   color: white;
 }
-.back-home-anchor {
-  transition: all 0.3s;
-  background-color: var(--second-bg-color);
-  border: 1px solid black;
-  color: black;
-}
-.back-home-anchor:visited {
-  color: inherit;
-}
-.back-home-anchor:hover {
-  background-color: black;
-  border: 1px solid black;
-  color: white;
-}
+
 
 .booking-actions button:hover {
   border: 2px solid var(--primary-color);
@@ -2059,6 +2075,8 @@ textarea.invalid:focus {
 .booking-actions button:hover span {
   color: white;
 }
+
+
 
 /******* PAGINE ERRORI *******/
 
@@ -2093,9 +2111,13 @@ textarea.invalid:focus {
   align-self: center;
   padding: 0.5em;
 }
+.banner-text h2 {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+}
 .banner-text p {
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.5;
 }
 .faq-container {
   display: block;
@@ -2331,9 +2353,11 @@ details[open] summary::after {
 div.drug-row dt {
   display: none;
 }
-#nohide {
+
+.nohide {
   display:inline;
 }
+
 .drug-info { 
   flex-grow: 1; 
   padding-right: 20px; 
@@ -2406,15 +2430,6 @@ div.drug-row dt {
   margin-left: auto;
 }
 
-.btn-details { 
-  text-decoration: none; 
-  color: #007bff; 
-  font-weight: 600; 
-  font-size: 0.9rem;
-}
-.btn-details:hover { 
-  text-decoration: underline;
-}
 
 
 /**********************/
@@ -2461,6 +2476,8 @@ div.drug-row dt {
   overflow-x: auto;
 }
 
+
+
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -2481,12 +2498,12 @@ div.drug-row dt {
   font-weight: 600;
   font-size: 0.95rem;
 }
-
-.data-table td {
+.data-table tbody th,
+.data-table tbody td {
   padding: 1rem;
   border-bottom: 1px solid #eee;
 }
-
+.data-table tbody th:last-child th,
 .data-table tbody tr:last-child td {
   border-bottom: none;
 }
@@ -2495,10 +2512,21 @@ div.drug-row dt {
   background-color: #f8f9fa;
 }
 
+
 /* Form inline per pulsante elimina */
 .inline-form {
   display: inline;
   margin: 0;
+}
+
+.data-table tr td a::before{
+  content: "\e88e"; /* Icona 'info' da Material Symbols */
+  font-family: 'Material Symbols Outlined'; /* Specifica il font */
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.4em;
+  color: var(--primary-color);
+  margin-right: 0.2em;
 }
 
 .btn-delete {
@@ -2509,10 +2537,8 @@ div.drug-row dt {
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
   transition: background-color 0.2s;
+  margin-bottom: 1.1em;
 }
 
 .btn-delete:hover {
@@ -2575,7 +2601,7 @@ div.drug-row dt {
 .form-group select {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid black;
   border-radius: 4px;
   font-size: 1rem;
   font-family: inherit;
@@ -2624,35 +2650,14 @@ div.drug-row dt {
   border-top: 1px solid #eee;
 }
 
-.btn-secondary {
-  background-color: #6c757d;
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s;
-}
 
-.btn-secondary:hover {
-  background-color: #5a6268;
-}
 
-.btn-secondary:focus,
-.form-actions .btn-primary:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
-}
-
-/* Abbr per campo obbligatorio */
 .form-container abbr[title] {
   color: #dc3545;
   text-decoration: none;
   margin-left: 0.25rem;
 }
 
-/* Testo no-data */
 .no-data {
   text-align: center;
   padding: 2rem;

@@ -3,9 +3,9 @@
 // Mappatura errori URL per il form di prenotazione
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector('form#regForm');
-    
+
     if (!form) return;
-    
+
     const errorMappings = {
         'missing_fields': {
             message: 'Compila tutti i campi obbligatori per completare la prenotazione.'
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
             message: 'Devi effettuare l\'accesso per prenotare un appuntamento.'
         }
     };
-    
+
     // Gestisci errori da URL
     handleURLErrors(errorMappings);
 });
@@ -57,36 +57,15 @@ document.addEventListener("DOMContentLoaded", () => {
 // VALIDAZIONE NOME
 function validateNome() {
     var nome = document.getElementById("fname").value;
-    const validChars = /^[A-Za-zÀ-ù\s']+$/; 
-    
-    if(nome.trim() === "") return false;
-    if(!validChars.test(nome)) return false; 
-    
-    return true;
-}
-
-// VALIDAZIONE COGNOME
-function validateCognome() {
-    var cognome = document.getElementById("fsurname").value;
     const validChars = /^[A-Za-zÀ-ù\s']+$/;
-    
-    if(cognome.trim() === "") return false;
-    if(!validChars.test(cognome)) return false;
-    
+
+    if (nome.trim() === "") return true;
+    if (!validChars.test(nome)) return false;
+
     return true;
 }
 
-// VALIDAZIONE CODICE FISCALE
-function validateCodiceFiscale() {
-    var codiceFiscale = document.getElementById("fcode").value;
-    const validCF = /^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i;
-    
-    if(codiceFiscale.trim() === "") return false;
-    if(codiceFiscale.length !== 16) return false;
-    if(!validCF.test(codiceFiscale.toUpperCase())) return false;
-    
-    return true;
-}
+
 
 // resetta errori (mantenuto per compatibilità)
 function resetFormError() {
@@ -102,7 +81,7 @@ function addFormError(msg) {
     var errorBox = document.getElementById("general-error-msg");
     if (errorBox) {
         errorBox.style.display = "block";
-        errorBox.innerHTML = msg; 
+        errorBox.innerHTML = msg;
         errorBox.focus();
     }
 }

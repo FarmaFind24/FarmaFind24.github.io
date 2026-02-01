@@ -1,78 +1,83 @@
 *{
 background: none;  
-    color: #000;
+    color: black;
     box-shadow: none;  
     text-shadow: none;  
     border-color: #000;  
 }
 
-html{
+html, body{
     font-size: 12pt; 
     font-family: "Times New Roman", serif;
     line-height: 1.4em;
     margin: auto;
 }
 
-.Top-NavBar,  
-.form-search-container, 
+a {
+    text-decoration: none;
+}
+
+.top-navbar, 
+.menu-toggle,
+.menu-toggle-text,
+.help-nav, 
+.sr-only,
+.banner-tips,
+.farm-content,
 button, 
 #scroll-btn,
-iframe,
+.home-hero-form-container,
+.form-search-container,
 .hero-image,
 .avatar-img,
 .icon-container, 
 .material-symbols-outlined,
-.banner-tips {
-    display: none;   
+.step-indicator-container,
+.step-actions, 
+.service-section-content,
+.booking-actions,
+.col-img{
+    display: none !important;   
 }
 
-h1{
-    display: block;  
-    font-size: 24pt;  
-    text-align: center;
-    margin: 0 0 10px 0;  
-    /*text-indent: 0;   /* l'h1.hide che nascondeva il testo */
-    background: none;  
-    width: auto;  
-    height: auto;  
-    overflow: visible;  
-    white-space: normal;  
-}
 
-h1.hide {
-    display: block;  
-    background-image: url("/assets/logo2.png");
-    filter: grayscale(100%);
-    text-indent: -9999px; 
-    overflow: hidden;
-    color: transparent;
-    background-size: 10rem auto;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 3em;
-    width: 100%;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-}
-.main-header {
-    position: static; 
-    display: block;
-    background: none;
-    height: auto; 
+header, .main-header {
     border-bottom: 2px solid #000;
-    padding-top: 5px;
-    padding-bottom: px; 
+    margin-bottom: 20px;
+    padding-bottom: 10px;
     text-align: center;
-    margin-bottom: 5px; 
 }
+
+h1 .hide {
+    display: block;
+    content: url("../../assets/logo_h1.png"); 
+    width: 250px;
+    height: auto;
+    margin: 0 auto;
+    text-indent: -9999px;
+    background: none;
+    border: none;
+    text-decoration: none;
+}
+
+h1 {
+    display: block;
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0 10px 0;
+    color: #000;
+    line-height: 1.4em;
+}
+h1 + p {
+    text-align: center;
+    font-size: 14pt;
+    margin-bottom: 20px;
+    display: block;
+}
+
+
 /*********************************************************Index*****************************************************************************/
-#mainSearchForm,
-.home-hero-form-container {
-    display: none; 
-}
-.dintorni-form {
-    display: none; 
-}
 .home-hero-content {
     background-color: transparent; 
     color: #000; 
@@ -81,11 +86,6 @@ h1.hide {
     min-height: auto;  
     padding: 0; 
     margin-bottom: 2em; 
-}
-.home-hero-content h1,
-.home-hero-content p {
-    color: #000; 
-    text-shadow: none;
 }
 .service-card {
     width: 100%; 
@@ -97,21 +97,166 @@ h1.hide {
 .grid {
     display: block; 
 }
+/***************************************************Ricerca Farmacie***************************************************************************/
+
+.farm-list-section .grid, 
+#FarmacieDisponibili .grid {
+    display: block ;
+    width: 100% ;
+}
+
+.farm-card {
+    display: block; 
+    border-radius: 0;
+    margin-bottom: 10px; 
+    padding: 10px;
+    page-break-inside: avoid; 
+    box-shadow: none;
+    background: transparent;
+}
+
+
+.card-image-header,   
+.farm-card img,      
+.row-btn,            
+.service-label,       
+.more-badge,
+.farm-orario        
+{
+    display: none !important;
+}
+
+.farm-card-content {
+    padding: 0;
+    width: 100%;
+}
+
+.farm-card .address {
+    font-size: 12pt;
+    margin: 0 0 5px 0;
+    font-style: normal;
+}
+
+.farm-card .card-meta {
+    margin-bottom: 10px;
+}
+/***************************************************Info Farmacie***************************************************************************/
+
+#TopContainerInfoFarm {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#InfoFarmStatus, 
+.status-container,
+.status-aperto, 
+.status-chiuso, 
+.descrizione-servizio {
+    display: none !important;
+}
+
+.FarmImageWrapper {
+    display: none !important;
+}
+
+.grid.three-columns {
+    display: block;
+}
+
+.info-generali-elemento {
+    padding: 15px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.OrarioGiorno {
+    display: flex;
+    justify-content: space-between;
+}
+
+.OrarioGiorno:last-child {
+    border-bottom: none;
+}
+.lista-servizi {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.SerivzioOfferto {
+    list-style-type: disc;
+    margin-bottom: 5px;
+}
+
+/*********************************************************Cerca Medicinle***************************************************************************/
+
+.drug-list-container {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.drug-row {
+    display: block;        
+    margin-bottom: 15px;
+    padding: 15px;
+    page-break-inside: avoid;         
+    background: transparent;
+}
+
+.drug-image,      
+.drug-action,     
+.btn-details      
+{
+    display: none !important;
+}
+
+.badge {
+    background: transparent;
+    display: inline-block;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.active-ingredient strong {
+    font-weight: normal;
+    margin: 0 0 0 40px;
+}
+
+/*********************************************************Info Medicinle***************************************************************************/
+
+#TopContainerInfoMed h1 {
+    text-align: center;
+    font-size: 22pt;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.MedImageWrapper {
+    display: none !important;
+}
+
+.info-generali-elemento {
+    padding: 15px;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+}
+
+
 /***************************************************Prenota visita***************************************************************************/
-.step-indicator-container, 
+
 .instruction,              
-.tab,                    
-.step-actions,           
+.tab,                        
 #general-error-msg,        
 .fieldset-city,            
 .fieldset-services {
-    display: none;
+    display: none !important;
 }
 #main-content > p {
-    display: none;
+    display: none !important;
 }
 #success-step {
-
     border: 2px solid #000 ; 
     padding: 2em ; 
     margin: 2em 0 ; 
@@ -119,14 +264,6 @@ h1.hide {
     box-sizing: border-box ; 
     text-align: center ; 
     background: transparent ; 
-    color: #000; 
-}
-
-#success-step h2 {
-    font-size: 18pt; 
-    border-bottom: 1px solid #000; 
-    padding-bottom: 0.5em; 
-    margin-bottom: 1em; 
 }
 
 #success-step p {
@@ -135,21 +272,10 @@ h1.hide {
 }
 
 #success-step a {
-    display: none; 
+    display: none !important; 
 }
 
 /*********************************************************Conferma prenotazione***************************************************************************/
-/*
-#regForm {
-    border: none;
-    background: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 100%;
-    box-shadow: none;
-}
-*/
 .data-row {
     display: flex;    
     flex-direction: row; 
@@ -164,7 +290,6 @@ h1.hide {
     border-radius: 0;
     padding: 0;
     margin: 0;
-
     flex-basis: 30%;  
     text-align: left;
 }
@@ -175,15 +300,9 @@ h1.hide {
     padding: 0;
     margin: 0 ;
     padding-left: 10px; 
-    
-    /* Gestione larghezza */
     flex-basis: 70% ;
     text-align: left;
 }
-.booking-actions {
-    display: none;
-}
-
 /*********************************************************About***************************************************************************/
 .grid-4c {
     display: block;  
@@ -192,54 +311,142 @@ h1.hide {
     margin: 0;
     gap: 0;
 }
-.avatar-container {
-    width: 100%;
-    height: auto;
-    border: none;
-    box-shadow: none;
-    background: transparent;  
-    padding: 0.2em 0;
-    margin: 0;  
+
+.team-section-content .grid {
     display: block;
-    text-align: left;
-    page-break-inside: avoid;
 }
-.avatar-container a {
-    text-decoration: none;  
-    color: #000;  
-    align-items: center;  
+
+.avatar-container {
+    display: list-item;    
+    width: auto;       
+}
+.avatar-container span {
+    display: list-item;
+    font-weight: bold;
+    font-size: 11pt;
+    color: #000;
 }
 .avatar-container span br {
-    display: none;
+    display: none !important;
 }
-.avatar-container:hover {
-    transform: none;  
-    box-shadow: none;  
-    background: transparent;  
-    border: none;  
+.sponsor-section-content .grid {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    margin-top: 10px;
 }
+
 .sponsor-card {
-    border: none ;          
-    background: transparent ;  
-    width: auto ;           
-    height: auto ;          
-    padding: 0 ;  
-    margin-right: 20px ;   
-    display: inline-block ;   
-    box-shadow: none ;  
+    border: none;
+    padding: 0;
+    margin: 0;
 }
-.sponsor-img {
+
+.sponsor-card img {
     height: 30px;
-    width: auto;
-    object-fit: contain ;  
-    filter: grayscale(100%) contrast(150%) ;   
+    width: auto ;
+    filter: grayscale(100%) contrast(200%);
 }
-.uni-logo{
-    height: 30px;
-    width: auto;
-    object-fit: contain ;  
-    filter: grayscale(100%) contrast(150%) ;   
+
+/*********************************************************Area Personale user/admin***************************************************************************/
+.sidenav, 
+#dashboard, 
+.breadcrumb-area-personale,
+.delete-account,            
+.row-btn,                   
+#edit-profile-btn,          
+.button-container,          
+.message,                   
+legend                     
+{
+    display: none !important;
 }
+
+.main-area-personale {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: block;
+}
+
+.content-section {
+    display: block;
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+}
+
+.appuntamento-card {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 10px;
+    page-break-inside: avoid;
+    align-items: center;
+    background: transparent;
+}
+
+.appuntamento-card-date {
+    padding-right: 15px;
+    margin-right: 15px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 60px;
+}
+
+.appuntamento-card-details a, 
+.appuntamento-card-details button,
+.appuntamento-card-details form {
+    display: none !important;
+}
+
+
+/*********************************************************Area Personale - SPECIFICO USER***************************************************************************/
+
+.profile-summary {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #000;
+}
+
+.details-grid div {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+.details-grid input {
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    color: #000;
+    padding: 0;
+    margin-left: 10px;
+    width: auto;
+}
+
+/*********************************************************Area Personale - SPECIFICO ADMIN***************************************************************************/
+
+.farmacie-table-container {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.data-table {
+    width: 100%;
+    font-size: 10pt;
+}
+
+.data-table th, 
+.data-table td {
+    padding: 5px;
+    text-align: left;
+}
+
+.data-table th:nth-last-child(1),
+.data-table td:nth-last-child(1),
+.data-table th:nth-last-child(2),
+.data-table td:nth-last-child(2) {
+    display: none !important;
+}
+
 
 
 footer{

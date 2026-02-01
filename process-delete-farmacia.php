@@ -15,11 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
-// 3. RECUPERO ID FARMACIA
-$idFarmacia = isset($_POST['id_farmacia']) ? (int)$_POST['id_farmacia'] : 0;
+// 3. RECUPERO PARAMETRI
+$farmaciaScelta = isset($_POST['nome_farmacia']) ? htmlspecialchars($_POST['nome_farmacia']) : '';
+$cittaScelta = isset($_POST['citta_farmacia']) ? htmlspecialchars($_POST['citta_farmacia']) : '';
 
 // 4. VALIDAZIONE
-if ($idFarmacia <= 0) {
+if (empty($farmaciaScelta) || empty($cittaScelta)) {
     header("Location: area-admin.php?error=invalid_id#gestione-farmacie");
     exit;
 }
@@ -32,7 +33,7 @@ if (!$db->openDBConnection()) {
 }
 
 // 6. VERIFICA CHE LA FARMACIA ESISTA
-$farmacia = $db->getFarmaciaById($idFarmacia);
+$farmacia = $db->getFarmaciaByNomeCitta($farmaciaScelta, $cittaScelta);
 if (!$farmacia) {
     $db->closeConnection();
     header("Location: area-admin.php?error=farmacia_not_found#gestione-farmacie");
@@ -40,7 +41,7 @@ if (!$farmacia) {
 }
 
 // 7. ELIMINAZIONE FARMACIA (e dati associati)
-$eliminazioneRiuscita = $db->eliminaFarmacia($idFarmacia);
+$eliminazioneRiuscita = $db->eliminaFarmacia($farmaciaScelta, $cittaScelta);
 
 if ($eliminazioneRiuscita) {
     $db->closeConnection();

@@ -10,8 +10,10 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
-  <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
+  <link rel="stylesheet" href="assets/css/medium.css" media="screen and (max-width:1155px)">
+  <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:725px)">
   <link rel="stylesheet" href="assets/css/print.css" media="print">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,20 +23,23 @@
 </head>
 
 <body>
+  <nav aria-label="aiuti alla navigazione" class="help-nav">
+    <a href="#main-content">
+      Vai al contenuto principale
+    </a>
+  </nav>
   <header class="main-header">
-    <nav aria-label="Aiuti alla navigazione" class="help-nav">
-      <a href="#main-content">Vai al contenuto principale</a>
-    </nav>
-
     <h1>
       <a href="index.php" class="hide" title="Torna alla pagina principale">
         Farma<span lang="en">Find</span>24
       </a>
     </h1>
-
-    <nav class="Top-NavBar">
-      <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false">
-        ?
+    <nav class="top-navbar" aria-label="Menù di navigazione">
+      <button class="menu-toggle-text btn-primary" aria-label="Menù di navigazione" aria-expanded="false">
+        Menù di Navigazione
+      </button>
+      <button class="menu-toggle" aria-label="Apri menù" aria-expanded="false">
+        ☰
       </button>
       <ul aria-label="menu di navigazione">
         <li>
@@ -50,9 +55,9 @@
         <li>
           <a href="about.php"><span lang="en">About</span></a>
         </li>
-	<li>
-	  <a href="[area_personale_href]">[area_personale_text]</a>
-	</li>
+        <li>
+          <a href="[area_personale_href]">[area_personale_text]</a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -62,32 +67,32 @@
   </nav>
 
   <main id="main-content" tabindex="-1">
-    <div id="TopContainerInfoFarm">
+    <div class="TopContainerInfoFarm">
       <h1>[nomeFarmacia]</h1>
-      <div id="InfoFarmStatus">
+      <div class="InfoFarmStatus">
         [statusFarmacia]
       </div>
     </div>
 
     <div class="FarmImageWrapper">
-      <img src="assets/farmacia21.png" alt="Facciata della Farmacia Centrale con vetrine illuminate e insegna verde">
+      <img src="[coverImage]" alt="[coverAlt]">
     </div>
 
-    <div class="info-farm-grid">
+    <div class="grid three-columns">
 
-      <div id="InfoGeneraliGridInfoFarm">
+      <div class="info-generali-elemento">
         <h2>Informazioni Generali</h2>
         [infoGenerali]
       </div>
 
-      <div id="OrariDiApertura">
+      <div class="info-generali-elemento">
         <h2>Orari di Apertura</h2>
         [orariApertura]
       </div>
 
-      <div id="SeriviziOfferti">
+      <div class="info-generali-elemento">
         <h2>Servizi Offerti</h2>
-          [serviziOfferti]
+        [serviziOfferti]
       </div>
 
     </div>

@@ -138,7 +138,7 @@ class DBAccess {
 
     // 7. Funzione per ottenere la lista di tutte le CITTÀ uniche
     public function getListaCitta() {
-        $query = "SELECT DISTINCT citta FROM farmacie ORDER BY citta ASC";
+        $query = "SELECT DISTINCT citta FROM comuni ORDER BY citta ASC";
         $queryResult = mysqli_query($this->connection, $query);
         if ($queryResult) {
             return $queryResult->fetch_all(MYSQLI_ASSOC);
@@ -148,87 +148,115 @@ class DBAccess {
 
     // 8. Funzione per trovare le farmacie che offrono un dato servizio in una data città
     public function getFarmaciePerServizioECitta($idServizio, $citta) {
-        $query = "SELECT f.id, f.nome, f.indirizzo 
-                  FROM farmacie f 
-                  INNER JOIN farmacia_servizi fs ON f.id = fs.farmacia_id 
-                  WHERE fs.servizio_id = ? AND f.citta = ? 
-                  ORDER BY f.nome ASC";
-        $stmt = mysqli_prepare($this->connection, $query);
-        mysqli_stmt_bind_param($stmt, "is", $idServizio, $citta);
-        mysqli_stmt_execute($stmt);
-        return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
-    }
+    $query = "
+        SELECT f.id, f.nome, f.indirizzo
+        FROM farmacie f
+        INNER JOIN farmacia_servizi fs ON f.id = fs.farmacia_id
+        INNER JOIN comuni c ON f.citta = c.citta
+        WHERE fs.servizio_id = ? AND f.citta = ?
+        ORDER BY f.nome ASC
+    ";
+
+    $stmt = mysqli_prepare($this->connection, $query);
+    mysqli_stmt_bind_param($stmt, "is", $idServizio, $citta);
+    mysqli_stmt_execute($stmt);
+
+    return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
+}
 
     // 9. Funzione per trovare farmacie "vicine" (in altre città) che offrono un servizio
     public function getFarmacieVicinePerServizio($idServizio, $cittaEsclusa, $limit = 5) {
-        // Step 1: Ottiene le coordinate medie (lat, lon) per la città selezionata, usandole come centro per la ricerca
-        $coordQuery = "SELECT AVG(latitudine) as lat, AVG(longitudine) as lon FROM farmacie WHERE citta = ?";
-        $coordStmt = mysqli_prepare($this->connection, $coordQuery);
-        mysqli_stmt_bind_param($coordStmt, "s", $cittaEsclusa);
-        mysqli_stmt_execute($coordStmt);
-        $coordResult = mysqli_stmt_get_result($coordStmt);
-        $coords = mysqli_fetch_assoc($coordResult);
+    // Step 1: Ottiene le coordinate della citt� di riferimento
+    $coordQuery = "SELECT latitudine, longitudine FROM comuni WHERE citta = ? LIMIT 1";
+    $coordStmt = mysqli_prepare($this->connection, $coordQuery);
+    mysqli_stmt_bind_param($coordStmt, "s", $cittaEsclusa);
+    mysqli_stmt_execute($coordStmt);
+    $coordResult = mysqli_stmt_get_result($coordStmt);
+    $coords = mysqli_fetch_assoc($coordResult);
 
-        // Se non è possibile trovare le coordinate per la città (es. nessuna farmacia presente), non si può calcolare la distanza.
-        if (!$coords || is_null($coords['lat']) || is_null($coords['lon'])) {
-            return [];
-        }
-
-        $lat = $coords['lat'];
-        $lon = $coords['lon'];
-        $distanzaMassima = 20; // Distanza massima in KM. Puoi modificare questo valore.
-
-        // Step 2: Trova le farmacie vicine usando la formula di Haversine per calcolare la distanza in km.
-        // 6371 è il raggio della Terra in km.
-        $query = "SELECT f.id, f.nome, f.indirizzo, f.citta,
-                    ( 6371 * acos( cos( radians(?) ) * cos( radians( f.latitudine ) ) * cos( radians( f.longitudine ) - radians(?) ) + sin( radians(?) ) * sin( radians( f.latitudine ) ) ) ) AS distanza
-                  FROM farmacie f 
-                  INNER JOIN farmacia_servizi fs ON f.id = fs.farmacia_id 
-                  WHERE fs.servizio_id = ? AND f.citta != ? 
-                  HAVING distanza < ?
-                  ORDER BY distanza ASC 
-                  LIMIT ?";
-                  
-        $stmt = mysqli_prepare($this->connection, $query);
-        // I parametri sono: lat, lon, lat, idServizio, cittaEsclusa, distanzaMassima, limit
-        mysqli_stmt_bind_param($stmt, "dddisii", $lat, $lon, $lat, $idServizio, $cittaEsclusa, $distanzaMassima, $limit);
-        mysqli_stmt_execute($stmt);
-        return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
+    if (!$coords) {
+        return [];
     }
+
+    $lat = $coords['latitudine'];
+    $lon = $coords['longitudine'];
+    $distanzaMassima = 20; // Distanza massima in KM
+
+    // Step 2: Trova le farmacie vicine usando le coordinate delle citt� delle farmacie
+    $query = "
+        SELECT f.id, f.nome, f.indirizzo, f.citta,
+               ( 6371 * acos(
+                    cos(radians(?)) 
+                    * cos(radians(c.latitudine)) 
+                    * cos(radians(c.longitudine) - radians(?)) 
+                    + sin(radians(?)) 
+                    * sin(radians(c.latitudine))
+               )) AS distanza
+        FROM farmacie f
+        INNER JOIN farmacia_servizi fs ON f.id = fs.farmacia_id
+        INNER JOIN comuni c ON f.citta = c.citta
+        WHERE fs.servizio_id = ? AND f.citta != ?
+        HAVING distanza < ?
+        ORDER BY distanza ASC
+        LIMIT ?
+    ";
+
+    $stmt = mysqli_prepare($this->connection, $query);
+    mysqli_stmt_bind_param($stmt, "ddddsii", $lat, $lon, $lat, $idServizio, $cittaEsclusa, $distanzaMassima, $limit);
+    mysqli_stmt_execute($stmt);
+
+    return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
+}
+
 
     public function getFarmacieDintorni($cittaRiferimento, $limit = 4) {
-        // Step 1: Ottiene le coordinate medie (lat, lon) per la città selezionata, usandole come centro per la ricerca
-        $coordQuery = "SELECT AVG(latitudine) as lat, AVG(longitudine) as lon FROM farmacie WHERE citta = ?";
-        $coordStmt = mysqli_prepare($this->connection, $coordQuery);
-        mysqli_stmt_bind_param($coordStmt, "s", $cittaRiferimento);
-        mysqli_stmt_execute($coordStmt);
-        $coordResult = mysqli_stmt_get_result($coordStmt);
-        $coords = mysqli_fetch_assoc($coordResult);
 
-        // Se non è possibile trovare le coordinate per la città (es. nessuna farmacia presente), non si può calcolare la distanza.
-        if (!$coords || is_null($coords['lat']) || is_null($coords['lon'])) {
-            return [];
-        }
+    // Prendo le coordinate della citt� di riferimento
+    $coordQuery = "SELECT latitudine, longitudine 
+                   FROM comuni 
+                   WHERE citta = ? 
+                   LIMIT 1";
 
-        $lat = $coords['lat'];
-        $lon = $coords['lon'];
-        $distanzaMassima = 20; // Distanza massima in KM. Puoi modificare questo valore.
+    $coordStmt = mysqli_prepare($this->connection, $coordQuery);
+    mysqli_stmt_bind_param($coordStmt, "s", $cittaRiferimento);
+    mysqli_stmt_execute($coordStmt);
+    $coordResult = mysqli_stmt_get_result($coordStmt);
+    $coords = mysqli_fetch_assoc($coordResult);
 
-        // Step 2: Trova le farmacie vicine usando la formula di Haversine per calcolare la distanza in km.
-        // 6371 è il raggio della Terra in km.
-        $query = "SELECT f.id, f.nome, f.indirizzo, f.citta, f.telefono, f.immagine,
-                    ( 6371 * acos( cos( radians(?) ) * cos( radians( f.latitudine ) ) * cos( radians( f.longitudine ) - radians(?) ) + sin( radians(?) ) * sin( radians( f.latitudine ) ) ) ) AS distanza
-                  FROM farmacie f 
-                  HAVING distanza < ?
-                  ORDER BY distanza ASC 
-                  LIMIT ?";
-                  
-        $stmt = mysqli_prepare($this->connection, $query);
-        // I parametri sono: lat, lon, lat, idServizio, cittaEsclusa, distanzaMassima, limit
-        mysqli_stmt_bind_param($stmt, "dddii", $lat, $lon, $lat, $distanzaMassima, $limit);
-        mysqli_stmt_execute($stmt);
-        return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
+    if (!$coords) {
+        return [];
     }
+
+    $lat = $coords['latitudine'];
+    $lon = $coords['longitudine'];
+    $distanzaMassima = 20; // km
+
+    // Ora join con comuni per prendere lat/lon della citt� di ciascuna farmacia
+    $query = "
+        SELECT f.id, f.nome, f.indirizzo, f.citta, f.telefono, f.immagine,
+        (
+            6371 * acos(
+                cos(radians(?)) 
+                * cos(radians(c.latitudine)) 
+                * cos(radians(c.longitudine) - radians(?)) 
+                + sin(radians(?)) 
+                * sin(radians(c.latitudine))
+            )
+        ) AS distanza
+        FROM farmacie f
+        JOIN comuni c ON f.citta = c.citta
+        HAVING distanza < ?
+        ORDER BY distanza ASC
+        LIMIT ?
+    ";
+
+    $stmt = mysqli_prepare($this->connection, $query);
+    mysqli_stmt_bind_param($stmt, "dddii", $lat, $lon, $lat, $distanzaMassima, $limit);
+    mysqli_stmt_execute($stmt);
+
+    return mysqli_stmt_get_result($stmt)->fetch_all(MYSQLI_ASSOC);
+}
+
 
     // Inserire in dbConnection.php dentro la classe DBAccess
     
@@ -570,11 +598,11 @@ public function getAllPrenotazioni() {
     }
 
     // 8. Crea una nuova prenotazione
-    public function creaPrenotazione($idUtente, $idFarmaciaServizio, $data, $ora, $nome, $cognome, $codiceFiscale) {
-        error_log("creaPrenotazione chiamata con: utente=$idUtente, fs_id=$idFarmaciaServizio, data=$data, ora=$ora, nome=$nome, cognome=$cognome, cf=$codiceFiscale");
+    public function creaPrenotazione($idUtente, $idFarmaciaServizio, $data, $ora, $noteAggiuntive) {
+        error_log("creaPrenotazione chiamata con: utente=$idUtente, fs_id=$idFarmaciaServizio, data=$data, ora=$ora, noteAggiuntive=$noteAggiuntive");
         
-        $query = "INSERT INTO prenotazioni (utente_id, farmacia_servizio_id, data_appuntamento, ora_appuntamento, nome, cognome, codice_fiscale) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO prenotazioni (utente_id, farmacia_servizio_id, data_appuntamento, ora_appuntamento, note_aggiuntive) 
+                  VALUES (?, ?, ?, ?, ?)";
         
         $stmt = mysqli_prepare($this->connection, $query);
         
@@ -583,7 +611,7 @@ public function getAllPrenotazioni() {
             return false;
         }
         
-        mysqli_stmt_bind_param($stmt, "iisssss", $idUtente, $idFarmaciaServizio, $data, $ora, $nome, $cognome, $codiceFiscale);
+        mysqli_stmt_bind_param($stmt, "iisss", $idUtente, $idFarmaciaServizio, $data, $ora, $noteAggiuntive);
         
         try {
             $executeResult = mysqli_stmt_execute($stmt);
@@ -614,10 +642,9 @@ public function getAllPrenotazioni() {
                         $findQuery = "SELECT id FROM prenotazioni 
                                      WHERE utente_id = ? AND farmacia_servizio_id = ? 
                                      AND data_appuntamento = ? AND ora_appuntamento = ? 
-                                     AND codice_fiscale = ? 
                                      ORDER BY id DESC LIMIT 1";
                         $findStmt = mysqli_prepare($this->connection, $findQuery);
-                        mysqli_stmt_bind_param($findStmt, "iisss", $idUtente, $idFarmaciaServizio, $data, $ora, $codiceFiscale);
+                        mysqli_stmt_bind_param($findStmt, "iisss", $idUtente, $idFarmaciaServizio, $data, $ora);
                         mysqli_stmt_execute($findStmt);
                         $findResult = mysqli_stmt_get_result($findStmt);
                         if ($findRow = mysqli_fetch_assoc($findResult)) {
@@ -670,7 +697,7 @@ public function getAllPrenotazioni() {
 
     // 10. Ottieni dettagli completi di una prenotazione per il riepilogo
     public function getDettagliPrenotazione($idPrenotazione, $idUtente = null) {
-        $query = "SELECT p.id, p.data_appuntamento, p.ora_appuntamento, p.nome, p.cognome,
+        $query = "SELECT p.id, p.data_appuntamento, p.ora_appuntamento, p.note_aggiuntive,
                          s.nome_servizio as servizio_nome, s.durata_media_minuti as servizio_durata,
                          f.nome as farmacia_nome, f.indirizzo as farmacia_indirizzo, 
                          f.citta as farmacia_citta, f.telefono as farmacia_telefono,
@@ -722,83 +749,42 @@ public function getAllPrenotazioni() {
         }
     }
 
-    // Restituisce la lista dei comuni della provincia di Padova
-    public function getComuniProvinciaPadova() {
-        // Lista completa dei 104 comuni della provincia di Padova
-        return [
-            'Abano Terme', 'Agna', 'Albignasego', 'Anguillara Veneta', 'Arquà Petrarca',
-            'Arre', 'Arzergrande', 'Bagnoli di Sopra', 'Baone', 'Barbona',
-            'Battaglia Terme', 'Boara Pisani', 'Borgoricco', 'Bovolenta', 'Brugine',
-            'Cadoneghe', 'Campodarsego', 'Campodoro', 'Camposampiero', 'Campo San Martino',
-            'Candiana', 'Carceri', 'Carmignano di Brenta', 'Cartura', 'Casale di Scodosia',
-            'Casalserugo', 'Castelbaldo', 'Cervarese Santa Croce', 'Cinto Euganeo', 'Cittadella',
-            'Codevigo', 'Conselve', 'Correzzola', 'Curtarolo', 'Este',
-            'Fontaniva', 'Galliera Veneta', 'Galzignano Terme', 'Gazzo', 'Grantorto',
-            'Granze', 'Legnaro', 'Limena', 'Loreggia', 'Lozzo Atestino',
-            'Maserà di Padova', 'Masi', 'Massanzago', 'Megliadino San Fidenzio', 'Megliadino San Vitale',
-            'Merlara', 'Mestrino', 'Monselice', 'Montagnana', 'Montegrotto Terme',
-            'Noventa Padovana', 'Ospedaletto Euganeo', 'Padova', 'Pernumia', 'Perzumiano',
-            'Piacenza d\'Adige', 'Piazzola sul Brenta', 'Piombino Dese', 'Piove di Sacco', 'Polverara',
-            'Ponso', 'Pontelongo', 'Ponte San Nicolò', 'Pozzonovo', 'Rovolon',
-            'Rubano', 'Saccolongo', 'Saletto', 'San Giorgio delle Pertiche', 'San Giorgio in Bosco',
-            'San Martino di Lupari', 'San Pietro in Gu', 'San Pietro Viminario', 'Santa Giustina in Colle', 'Santa Margherita d\'Adige',
-            'Sant\'Angelo di Piove di Sacco', 'Sant\'Elena', 'Sant\'Urbano', 'Saonara', 'Selvazzano Dentro',
-            'Solesino', 'Stanghella', 'Teolo', 'Terrassa Padovana', 'Tomba',
-            'Tombolo', 'Torreglia', 'Trebaseleghe', 'Tribano', 'Urbana',
-            'Veggiano', 'Vescovana', 'Vighizzolo d\'Este', 'Vigodarzere', 'Vigonza',
-            'Villa del Conte', 'Villa Estense', 'Villafranca Padovana', 'Villanova di Camposampiero', 'Vo\''
-        ];
+// Restituisce la lista dei comuni della provincia di Padova
+public function getComuniProvinciaPadova() {
+    $query = "SELECT citta FROM comuni ORDER BY citta ASC";
+    $queryResult = mysqli_query($this->connection, $query);
+    
+    if (!$queryResult || mysqli_num_rows($queryResult) == 0) {
+        return [];
     }
-
-    // Genera coordinate random per una zona geografica
-    public function generaCoordinatePerZona($zona) {
-        switch($zona) {
-            case 'alta_padovana':
-                $latMin = 45.50; $latMax = 45.65;
-                $lonMin = 11.80; $lonMax = 12.00;
-                break;
-            case 'padova_centro':
-                $latMin = 45.35; $latMax = 45.50;
-                $lonMin = 11.80; $lonMax = 12.05;
-                break;
-            case 'colli_euganei':
-                $latMin = 45.20; $latMax = 45.35;
-                $lonMin = 11.60; $lonMax = 11.90;
-                break;
-            default:
-                // Default to Padova centro se la zona non è valida
-                $latMin = 45.35; $latMax = 45.50;
-                $lonMin = 11.80; $lonMax = 12.05;
+    
+    $result = [];
+    while ($row = mysqli_fetch_assoc($queryResult)) {
+        $result[] = $row['citta'];
+    }
+    
+    return $result;
+}
+     // Inserisce una nuova farmacia
+public function inserisciFarmacia($nome, $indirizzo, $citta, $telefono, $immagine) {
+    // La citt� deve esistere nella tabella comuni
+    $query = "INSERT INTO farmacie (nome, indirizzo, citta, telefono, immagine) 
+              VALUES (?, ?, ?, ?, ?)";
+    
+    $stmt = mysqli_prepare($this->connection, $query);
+    mysqli_stmt_bind_param($stmt, "sssss", $nome, $indirizzo, $citta, $telefono, $immagine);
+    
+    try {
+        $result = mysqli_stmt_execute($stmt);
+        if ($result) {
+            return mysqli_insert_id($this->connection);
         }
-        
-        // Genera coordinate random con 6 decimali (precisione ~10 metri)
-        $lat = $latMin + (mt_rand() / mt_getrandmax()) * ($latMax - $latMin);
-        $lon = $lonMin + (mt_rand() / mt_getrandmax()) * ($lonMax - $lonMin);
-        
-        return [
-            'latitudine' => round($lat, 6),
-            'longitudine' => round($lon, 6)
-        ];
+        return false;
+    } catch (\mysqli_sql_exception $e) {
+        // Se la citt� non esiste o c'� un errore di chiave esterna, ritorna false
+        return false;
     }
-
-    // Inserisce una nuova farmacia
-    public function inserisciFarmacia($nome, $indirizzo, $citta, $telefono, $latitudine, $longitudine, $immagine) {
-        $query = "INSERT INTO farmacie (nome, indirizzo, citta, telefono, latitudine, longitudine, immagine) 
-                  VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
-        $stmt = mysqli_prepare($this->connection, $query);
-        mysqli_stmt_bind_param($stmt, "ssssdds", $nome, $indirizzo, $citta, $telefono, $latitudine, $longitudine, $immagine);
-        
-        try {
-            $result = mysqli_stmt_execute($stmt);
-            if ($result) {
-                return mysqli_insert_id($this->connection);
-            }
-            return false;
-        } catch (\mysqli_sql_exception $e) {
-            return false;
-        }
-    }
+}
 
     // Salva gli orari di una farmacia (Continuato o Spezzato)
     public function salvaOrariFarmacia($idFarmacia, $tipoOrario) {
@@ -850,34 +836,29 @@ public function getAllPrenotazioni() {
         return true;
     }
 
+
+    public function getFarmaciaByNomeCitta($nome, $citta) {
+        $query = "SELECT * FROM farmacie WHERE nome = ? AND citta = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ss", $nome, $citta);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row;
+        }
+        return null;
+    }
+
     // Elimina una farmacia e tutti i dati associati (integrità referenziale)
-    public function eliminaFarmacia($idFarmacia) {
+    public function eliminaFarmacia($nome, $citta) {
         try {
-            // 1. Elimina prenotazioni associate ai servizi di questa farmacia
-            $query1 = "DELETE p FROM prenotazioni p 
-                       INNER JOIN farmacia_servizi fs ON p.farmacia_servizio_id = fs.id 
-                       WHERE fs.farmacia_id = ?";
-            $stmt1 = mysqli_prepare($this->connection, $query1);
-            mysqli_stmt_bind_param($stmt1, "i", $idFarmacia);
-            mysqli_stmt_execute($stmt1);
             
-            // 2. Elimina collegamenti servizi
-            $query2 = "DELETE FROM farmacia_servizi WHERE farmacia_id = ?";
-            $stmt2 = mysqli_prepare($this->connection, $query2);
-            mysqli_stmt_bind_param($stmt2, "i", $idFarmacia);
-            mysqli_stmt_execute($stmt2);
-            
-            // 3. Elimina orari
-            $query3 = "DELETE FROM orari_farmacie WHERE farmacia_id = ?";
-            $stmt3 = mysqli_prepare($this->connection, $query3);
-            mysqli_stmt_bind_param($stmt3, "i", $idFarmacia);
-            mysqli_stmt_execute($stmt3);
-            
-            // 4. Elimina la farmacia
-            $query4 = "DELETE FROM farmacie WHERE id = ?";
-            $stmt4 = mysqli_prepare($this->connection, $query4);
-            mysqli_stmt_bind_param($stmt4, "i", $idFarmacia);
-            $result = mysqli_stmt_execute($stmt4);
+            // Elimina la farmacia
+            $query = "DELETE FROM farmacie WHERE nome = ? AND citta = ?";
+            $stmt = mysqli_prepare($this->connection, $query);
+            mysqli_stmt_bind_param($stmt, "ss", $nome, $citta);
+            $result = mysqli_stmt_execute($stmt);
             
             return $result;
         } catch (\mysqli_sql_exception $e) {

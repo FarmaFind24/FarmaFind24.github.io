@@ -4,61 +4,38 @@ require_once "dbConnection.php";
 require_once "session-helper.php";
 use DB\DBAccess;
 
-// DEBUG TEMPORANEO - Rimuovere in produzione
 error_log("=== INIZIO PROCESS-BOOKING ===");
 error_log("POST data: " . print_r($_POST, true));
 
-// Controllo autenticazione - FONDAMENTALE
 if (!isLoggedIn()) {
-    // Reindirizzamento al login se si tenta di accedere direttamente senza essere loggati
     error_log("Utente non autenticato");
-    header("Location: area-login.php?error=authentication_required");
+    header("Location: area-login.html?error=authentication_required");
     exit();
 }
 
-// Recupera i dati inviati dal form
 $idUtente = $_SESSION['user_id'];
 $idServizio = $_POST['service'] ?? null;
 $idFarmacia = $_POST['pharmacy-selection'] ?? null;
 $dataPrenotazione = $_POST['date-pick'] ?? null;
 $oraPrenotazione = $_POST['time-pick'] ?? null;
-$nome = $_POST['fname'] ?? null;
-$cognome = $_POST['fsurname'] ?? null;
-$codiceFiscale = $_POST['fcode'] ?? null;
+$noteRaw = $_POST['fnote'] ?? '';
+$noteAggiuntive = mb_substr(strip_tags(trim($noteRaw)), 0, 500);
 
-error_log("Dati recuperati - Servizio: $idServizio, Farmacia: $idFarmacia, Data: $dataPrenotazione, Ora: $oraPrenotazione");
-error_log("Nome: $nome, Cognome: $cognome, CF: $codiceFiscale");
+error_log("Dati recuperati - Servizio: $idServizio, Farmacia: $idFarmacia, Data: $dataPrenotazione, Ora: $oraPrenotazione, NoteAggiuntive: $noteAggiuntive");
 
 // Validazione input
-if (!$idServizio || !$idFarmacia || !$dataPrenotazione || !$oraPrenotazione || !$nome || !$cognome || !$codiceFiscale) {
+if (!$idServizio || !$idFarmacia || !$dataPrenotazione || !$oraPrenotazione) {
     $campiMancanti = [];
     if (!$idServizio) $campiMancanti[] = 'servizio';
     if (!$idFarmacia) $campiMancanti[] = 'farmacia';
     if (!$dataPrenotazione) $campiMancanti[] = 'data';
     if (!$oraPrenotazione) $campiMancanti[] = 'orario';
-    if (!$nome) $campiMancanti[] = 'nome';
-    if (!$cognome) $campiMancanti[] = 'cognome';
-    if (!$codiceFiscale) $campiMancanti[] = 'codice fiscale';
+
     
     error_log("ERRORE: Campi mancanti - " . implode(', ', $campiMancanti));
     header("Location: book-app.php?error=missing_fields&debug=" . urlencode(implode(',', $campiMancanti)));
     exit();
 }
-
-// Validazione nome e cognome (solo lettere, spazi, apostrofi e caratteri accentati)
-if (!preg_match("/^[A-Za-zÀ-ù\s']+$/", $nome) || !preg_match("/^[A-Za-zÀ-ù\s']+$/", $cognome)) {
-    header("Location: book-app.php?error=invalid_name");
-    exit();
-}
-
-// Validazione codice fiscale (16 caratteri: 6 lettere, 2 numeri, 1 lettera, 2 numeri, 1 lettera, 3 numeri, 1 lettera)
-if (!preg_match("/^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i", $codiceFiscale) || strlen($codiceFiscale) !== 16) {
-    header("Location: book-app.php?error=invalid_fiscal_code");
-    exit();
-}
-
-// Normalizza il codice fiscale in maiuscolo
-$codiceFiscale = strtoupper($codiceFiscale);
 
 // Validazione formato data (YYYY-MM-DD)
 $dataValidata = DateTime::createFromFormat('Y-m-d', $dataPrenotazione);
@@ -98,7 +75,7 @@ if (!$db->verificaUtenteEsiste($idUtente)) {
     $db->closeConnection();
     session_unset();
     session_destroy();    
-    header("Location: area-login.php?error=session_invalid");
+    header("Location: area-login.html?error=session_invalid");
     exit();
 }
 
@@ -124,7 +101,7 @@ if (!$slotDisponibile) {
 }
 
 // Inserisci la prenotazione nel database
-$risultato = $db->creaPrenotazione($idUtente, $idFarmaciaServizio, $dataPrenotazione, $oraPrenotazione, $nome, $cognome, $codiceFiscale);
+$risultato = $db->creaPrenotazione($idUtente, $idFarmaciaServizio, $dataPrenotazione, $oraPrenotazione, $noteAggiuntive);
 
 
 $db->closeConnection();

@@ -1,3 +1,8 @@
+<!--
+    DOCUMENTO: HTML di prenotazione visita
+    SCOPO: presentazione pagina prenotazione visita
+
+-->
 <!doctype html>
 <html lang="it">
 
@@ -10,27 +15,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
-    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
+    <link rel="stylesheet" href="assets/css/medium.css" media="screen and (max-width:1155px)">
+    <link rel="stylesheet" href="assets/css/print.css" media="print">
+    <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:650px)">
     <link rel="stylesheet" href="assets/css/print.css" media="print">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="./assets/js/menu.js" defer></script>
+    <script>document.documentElement.classList.add('js-active');</script>
 </head>
 
 <body>
-    <header>
-        <nav aria-label="Aiuti alla navigazione" class="help-nav">
-            <a href="#main-content">Vai al contenuto principale</a>
-        </nav>
-
+    <nav aria-label="aiuti alla navigazione" class="help-nav">
+        <a href="#main-content">
+            Vai al contenuto principale
+        </a>
+    </nav>
+    <header class="main-header">
         <h1>
             <a href="index.php" class="hide" title="Torna alla pagina principale">
                 Farma<span lang="en">Find</span>24
             </a>
         </h1>
-        <nav class="Top-NavBar">
+        <nav class="top-navbar" aria-label="Menù di navigazione">
+            <button class="menu-toggle-text btn-primary" aria-label="Menù di navigazione" aria-expanded="false">
+                Menù di Navigazione
+            </button>
+            <button class="menu-toggle" aria-label="Apri menù" aria-expanded="false">
+                ☰
+            </button>
             <ul aria-label="menu di navigazione">
                 <li>
                     <a lang="en" href="index.php">Home</a>
@@ -70,14 +87,14 @@
         <div class="auth-required-message [auth_message_class]">
             <h2>Accesso Richiesto</h2>
             <p>Per prenotare un appuntamento è necessario effettuare l'accesso al tuo account.</p>
-            <a href="area-login.php" class="btn-primary">Accedi ora</a>
+            <a href="area-login.php?redirect=book-app.php" class="btn-primary">Accedi ora</a>
             <p>Non hai un account? <a href="area-register.html">Registrati qui</a></p>
         </div>
 
         <!-- Messaggi di errore per utenti autenticati -->
         [error_message]
 
-        <!-- Il form ora punta a se stesso per il ricaricamento, il pulsante finale avrà un formaction diverso -->
+        <!-- Il form ora punta a se stesso per il ricaricamento, il pulsante finale avrà un formattazione diversa -->
         <form id="regForm" action="book-app.php" method="POST" class="[form_class]">
 
             <div class="step-indicator-container">
@@ -95,7 +112,7 @@
                     <legend>Seleziona il servizio desiderato: <span class="required" aria-hidden="true">*</span>
                     </legend>
 
-                    <div class="services-grid">
+                    <div class="grid two-columns" id="servizi-grid">
                         [servizi_grid]
                     </div>
                 </fieldset>
@@ -106,7 +123,7 @@
 
                 <fieldset class="fieldset-city">
                     <legend>Seleziona il comune: <span class="required" aria-hidden="true">*</span></legend>
-                    <select id="city" name="city" required>
+                    <select id="city" name="city" required aria-label="Seleziona un comune">
                         <option value="" selected disabled>Seleziona un comune</option>
                         [citta_options]
                     </select>
@@ -124,7 +141,7 @@
                     <div id="farm-message-container">[farmacie_message]</div>
 
                     <!-- La griglia delle farmacie verrà popolata da PHP (no-JS) o da AJAX (con JS) -->
-                    <div class="farm-grid">
+                    <div class="grid two-columns" id="farma-grid">
                         [farmacie_grid]
                     </div>
 
@@ -139,12 +156,10 @@
                     <div class="date-picker-container">
                         <label for="date-pick" class="label-title">Scegli il giorno: <span class="required"
                                 aria-hidden="true">*</span></label>
-                        <span id="date-pick-description" class="sr-only">Seleziona una data a partire da oggi. Usa i tasti freccia per navigare tra i giorni, mesi e anni.</span>
+                        <span id="date-pick-description" class="sr-only">Seleziona una data a partire da oggi. Usa i
+                            tasti freccia per navigare tra i giorni, mesi e anni.</span>
                         <input type="date" id="date-pick" name="date-pick" min="[min_date]" value="[valore_data]"
-                            required 
-                            aria-required="true"
-                            aria-describedby="date-pick-description"
-                            aria-label="Data appuntamento, formato giorno mese anno">
+                            required aria-describedby="date-pick-description">
 
                         <button type="submit" id="check-time-btn" class="btn-primary" formnovalidate>Verifica
                             Orari</button>
@@ -154,7 +169,7 @@
                         <span id="time-selection-label" class="label-title">Scegli l'orario: <span class="required"
                                 aria-hidden="true">*</span></span>
 
-                        <div class="time-grid" role="radiogroup" aria-labelledby="time-selection-label">
+                        <div class="time-grid">
                             [time-slots]
                         </div>
                     </div>
@@ -163,25 +178,16 @@
 
             <div class="tab">
 
-                <h2 class="tab-title"> <span class="sr-only">Passaggio 4 di 4:</span> 4. Per chi stai prenotando il
-                    servizio?
+                <h2 class="tab-title"> <span class="sr-only">Passaggio 4 di 4:</span> 4. Note aggiuntive
                 </h2>
                 <fieldset>
-
+                    <legend hidden>Note Aggiuntive</legend>
                     <div class="input-wrapper">
-                        <label for="fname">Nome: <span class="required" aria-hidden="true">*</span></label>
-                        <input type="text" id="fname" name="fname" placeholder="Es: Giacomo" required>
+                        <label for="fnote">Note aggiuntive:</label>
+                        <textarea id="fnote" name="fnote"
+                            placeholder="Es: Disponibile solo il pomeriggio per eventuale rinvio appuntamento"></textarea>
                     </div>
 
-                    <div class="input-wrapper">
-                        <label for="fsurname">Cognome: <span class="required" aria-hidden="true">*</span></label>
-                        <input type="text" id="fsurname" name="fsurname" placeholder="Es: Leopardi" required>
-                    </div>
-
-                    <div class="input-wrapper">
-                        <label for="fcode">Codice fiscale: <span class="required" aria-hidden="true">*</span></label>
-                        <input type="text" id="fcode" name="fcode" placeholder="Es: RSSMRA85M01H501Z" required>
-                    </div>
                 </fieldset>
             </div>
 
@@ -189,23 +195,13 @@
                 obbligatori prima di proseguire!</div>
 
             <div class="step-actions">
-                <button type="button" id="nextBtn" class="btn-primary" onclick="nextPrev(1)" [btn_disabled]>Prosegui</button>
+                <button type="button" id="nextBtn" class="btn-primary" onclick="nextPrev(1)"
+                    [btn_disabled]>Prosegui</button>
                 <button type="button" id="prevBtn" class="outlined-btn" onclick="nextPrev(-1)">Indietro</button>
 
                 <!-- Il pulsante finale per utenti senza JS ora ha un `formaction` per inviare i dati allo script corretto -->
                 <button type="submit" id="submitBtnNoJs" class="btn-primary" formaction="process-booking.php">Conferma
                     Prenotazione</button>
-            </div>
-
-            <div id="success-step" class="success-container">
-                <h2>Prenotazione Confermata!</h2>
-                <p>
-                    Grazie, la tua richiesta è stata inoltrata correttamente. <br>
-                    <a href="booking-details.php" class="btn-primary" style="text-decoration: none;">Clicca qui</a> per
-                    visualizzare o stampare i dettagli della prenotazione. <br>
-                    <a href="index.php" class="btn-primary" style="text-decoration: none;">Torna alla Home</a>
-                </p>
-
             </div>
 
         </form>
@@ -217,7 +213,7 @@
                     <p>Per assicurarti che la visita si svolga correttamente, segui queste semplici regole:</p>
                 </div>
 
-                <div class="grid">
+                <div class="grid three-columns">
                     <div class="service-card">
                         <div class="icon-container">
                             <span class="material-symbols-outlined" aria-hidden="true">badge</span>
@@ -244,7 +240,8 @@
                         </div>
                         <h3 class="title-card">Cancellazione</h3>
                         <p>
-                            Se non puoi presentarti, annulla l'appuntamento tramite la tua AREA PERSONALE per liberare
+                            Se non puoi presentarti, annulla l'appuntamento tramite la tua <a
+                                href="[area_personale_href]">Area Personale</a> per liberare
                             il posto.
                         </p>
                     </div>

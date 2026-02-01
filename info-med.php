@@ -66,30 +66,33 @@ if ($farmacie && count($farmacie) > 0) {
         $idFarm = $farmacia['id'];
         $immagineFarmacia = !empty($farmacia['immagine']) ? 
             "assets/farmCovers/" . htmlspecialchars($farmacia['immagine']) : 
-            "assets/immagine_farmacia.jpg";
+            "assets/immagine_farmacia.webp";
         
         $htmlFarmacie .= '<div class="farm-card">';
+        $htmlFarmacie .= '<div class="card-image-header">';
         $htmlFarmacie .= '<img src="' . $immagineFarmacia . '" alt="Facciata della ' . htmlspecialchars($farmacia['nome']) . '" />';
+        $htmlFarmacie .= '</div>';
         $htmlFarmacie .= '<div class="farm-card-content">';
+        $htmlFarmacie .= '<div class="card-header">';
         $htmlFarmacie .= '<h3 class="title-card">' . htmlspecialchars($farmacia['nome']) . '</h3>';
-        $htmlFarmacie .= '<p>' . htmlspecialchars($farmacia['indirizzo']) . ', ' . htmlspecialchars($farmacia['citta']) . '</p>';
+        $htmlFarmacie .= '<p class="address">' . htmlspecialchars($farmacia['indirizzo']) . ', ' . htmlspecialchars($farmacia['citta']) . '</p>';
         
         // Calcola orario (puoi migliorare questa parte se hai gli orari nel DB)
         $isAperta = $db->isFarmaciaAperta($idFarm);
         $statoOrario = $isAperta ? "Aperta ora" : "Chiusa";
         $htmlFarmacie .= '<span class="farm-orario">' . $statoOrario . '</span>';
         
-        // Mostra prezzo e disponibilit�
+        // Mostra prezzo e disponibilità
         if (isset($farmacia['prezzo']) && $farmacia['prezzo'] > 0) {
-            $htmlFarmacie .= '<p><strong>Prezzo Farmaco:</strong> &euro;' . number_format($farmacia['prezzo'], 2, ',', '.') . '</p>';
+            $htmlFarmacie .= '<p class="strong">Prezzo Farmaco: &euro;' . number_format($farmacia['prezzo'], 2, ',', '.') . '</p>';
         }
         if (isset($farmacia['quantita'])) {
             $disponibilita = $farmacia['quantita'] > 3 ? 
-                '<span style="color: green;">Disponibile (' . $farmacia['quantita'] . ' pezzi)</span>' : 
-                '<span style="color: red;">Ridotta (' . $farmacia['quantita'] . ' pezzi/o)</span>';
-            $htmlFarmacie .= '<p><strong>Disponibilit&agrave:</strong> ' . $disponibilita . '</p>';
+                '<span class="available">Disponibile (' . $farmacia['quantita'] . ' pezzi)</span>' : 
+                '<span class="low-storage">Ridotta (' . $farmacia['quantita'] . ' pezzi/o)</span>';
+            $htmlFarmacie .= '<p class="strong">Disponibilit&agrave: ' . $disponibilita . '</p>';
         }
-        
+        $htmlFarmacie .= '</div>'; 
         $htmlFarmacie .= '<div class="row-btn">';
         $htmlFarmacie .= '<a href="info-farm.php?id=' . $idFarm . '" class="btn-like primary">Vedi Dettagli</a>';
         $htmlFarmacie .= '</div>';

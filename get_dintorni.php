@@ -51,17 +51,17 @@ if ($connessioneOk) {
             $statoClass = $isAperta ? 'farm-stato-open' : 'farm-stato-closed';
             $statoText = $isAperta ? 'Aperta' : 'Chiusa';
 
-            $response['html'] .= '<div class="farm-card-mini">
+            $response['html'] .= '<div class="farm-card">
                                     <div class="farm-img-container">
                                         <img src="' . $srcImmagine . '" alt="Foto ' . htmlspecialchars($farmacia['nome']) . '">
                                         <span class="' . $statoClass . '">' . $statoText . '</span>
                                     </div>
+
                                     <div class="farm-card-content">
-                                        <h3 class="title-card">' . htmlspecialchars($farmacia['nome']) . '</h3>
-                                        <p>' . htmlspecialchars($farmacia['indirizzo']) . ', ' . htmlspecialchars($farmacia['citta']) . '</p>
-                                        <div class="row-btn">
-					    <a href="mailto:farmafind24@gmail.com" class="btn-like outlined" aria-label="Contatta via Email">Email</a>
-                                            <a href="info-farm.php?id=' . $farmacia['id'] . '" class="btn-like primary">Dettagli</a>
+                                            <h3 class="title-card">' . htmlspecialchars($farmacia['nome']) . '</h3>
+                                            <p class="address"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> ' . htmlspecialchars($farmacia['indirizzo']) . ', ' . htmlspecialchars($farmacia['citta']) . '</p>
+                                            <div class="row-btn">
+                                                <a href="info-farm.php?id=' . $farmacia['id'] . '" class="btn-like primary">Dettagli</a>
                                         </div>
                                     </div>
                                   </div>';

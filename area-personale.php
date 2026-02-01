@@ -10,7 +10,7 @@ use DB\DBAccess;
 
 // 1. CONTROLLO SICUREZZA: Se non � loggato, via al login
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: area-login.php");
+    header("Location: area-login.html");
     exit;
 }
 
@@ -64,25 +64,27 @@ if ($connessioneOk) {
                         <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
                         <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
                     </div>
-                    <div>
-                        <a href="booking-details.php?id=' . $p['id'] . '" class="btn-primary" aria-label="Visualizza dettagli della prenotazione per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '">
-                        <span class="material-symbols-outlined" aria-hidden="true">info</span>
-                        Dettagli
-                        </a>
-                    </div>
-                    <form method="POST" action="process-cancellation.php" style="margin: 0;">
-                        <input type="hidden" name="prenotazione_id" value="' . $p['id'] . '">
-                        <button type="submit" class="btn-primary no-margin" 
-                                aria-label="Disdici appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '"
-                                onclick="return confirm(\'Sei sicuro di voler disdire questo appuntamento?\')">
-                            Disdici
-                        </button>
+                    <div class="row">
+                    
+                        <a href="booking-details.php?id=' . $p['id'] . '" aria-label="Visualizza dettagli della prenotazione per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '">Dettagli</a>
+                    
+                    <form method="POST" action="process-cancellation.php">
+                        <fieldset>
+                                <legend class="sr-only">Disdici appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '"</legend>
+                                
+                                <input type="hidden" name="prenotazione_id" value="' . $p['id'] . '">
+                                
+                                <button type="submit" class="btn-primary no-margin" onclick="return confirm(\'Sei sicuro di voler disdire questo appuntamento?\')">
+                                    Disdici
+                                </button>
+                        </fieldset>
                     </form>
+                    </div>
                 </div>
             </li>';
         }
     } else {
-        $htmlPrenotazioni = '<li class="appuntamento-card"><p style="padding:1rem;">Nessuna prenotazione futura.</p></li>';
+        $htmlPrenotazioni = '<li class="appuntamento-card"><p>Nessuna prenotazione futura.</p></li>';
     }
 
     
@@ -108,25 +110,27 @@ if ($connessioneOk) {
                         <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
                         <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
                     </div>
-                    <div>
-                        <a href="booking-details.php?id=' . $p['id'] . '" class="btn-primary" aria-label="Visualizza dettagli della prenotazione per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '">
-                        <span class="material-symbols-outlined" aria-hidden="true">info</span>
-                        Dettagli
-                        </a>
-                    </div>
-                    <form method="POST" action="process-cancellation.php" style="margin: 0;">
-                        <input type="hidden" name="prenotazione_id" value="' . $p['id'] . '">
-                        <button type="submit" class="btn-primary no-margin" 
-                                aria-label="Disdici appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '"
-                                onclick="return confirm(\'Sei sicuro di voler disdire questo appuntamento?\')">
-                            Disdici
-                        </button>
+                    <div class="row">
+                    
+                        <a href="booking-details.php?id=' . $p['id'] . '" aria-label="Visualizza dettagli della prenotazione per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '">Dettagli</a>
+                    
+                    <form method="POST" action="process-cancellation.php">
+                        <fieldset>
+                                <legend class="sr-only">Disdici appuntamento per ' . htmlspecialchars($p['nome_servizio']) . ' del ' . $giorno . ' ' . $mese_parlato . '"</legend>
+                                
+                                <input type="hidden" name="prenotazione_id" value="' . $p['id'] . '">
+                                
+                                <button type="submit" class="btn-primary no-margin" onclick="return confirm(\'Sei sicuro di voler disdire questo appuntamento?\')">
+                                    Disdici
+                                </button>
+                        </fieldset>
                     </form>
+                    </div>
                 </div>
             </li>';
         }
     } else {
-        $htmlPrenotazioniShort = '<li class="appuntamento-card"><p style="padding:1rem;">Nessuna prenotazione futura.</p></li>';
+        $htmlPrenotazioniShort = '<li class="appuntamento-card"><p>Nessuna prenotazione futura.</p></li>';
     }
 
     $db->closeConnection();

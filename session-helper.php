@@ -17,28 +17,19 @@ function isLoggedIn() {
     return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 }
 
-/**
- * Restituisce l'HTML per il link dell'area personale nella navbar
- * Se l'utente è loggato, mostra lo username, altrimenti "Area Personale"
- */
-function getAreaPersonaleLink() {
-    if (isLoggedIn()) {
-        $username = htmlspecialchars($_SESSION['username']);
-        $href = (isset($_SESSION['ruolo']) && $_SESSION['ruolo'] === 'admin') ? 'area-admin.php' : 'area-personale.php';
-        return '<a href="' . $href . '">Area Personale</a>';
-    } else {
-        return '<a href="area-login.php">Accedi</a>';
-    }
-}
 
 /**
  * Restituisce solo il testo per il link (per template semplici)
  */
 function getAreaPersonaleText() {
     if (isLoggedIn()) {
-        return htmlspecialchars($_SESSION['username']);
+        if ($_SESSION['ruolo'] === 'admin') {
+            return 'Area Amministrativa';
+        } else {
+            return 'Area Personale';
+        }
     } else {
-        return 'Area Personale';
+        return '<span class="login">Accedi</span>';
     }
 }
 

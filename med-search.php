@@ -85,7 +85,7 @@ if (empty($htmlRisultati) && isset($_GET['q']) && !empty(trim($_GET['q']))) {
                 $htmlRisultati .= '</dl>';
                 $htmlRisultati .=  $obbligoricetta;
                 $htmlRisultati .= '<div  class="active-ingredient">';
-                $htmlRisultati .= '<p id="nohide">Principio Attivo:</p>';
+                $htmlRisultati .= '<p class="nohide">Principio Attivo:</p>';
                 $htmlRisultati .= '<p><strong>' . htmlspecialchars($row['principio_attivo']) . '</strong></p>';
                 $htmlRisultati .= '</div>';
                 

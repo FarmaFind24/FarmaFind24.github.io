@@ -94,21 +94,7 @@ h1 {
   width: 100%;
   border-bottom: 1px solid black;
   height: auto;
-  position: fixed;
   padding: 0.1rem;
-}
-.sidenav .current {
-  background-color: var(--primary-color);
-  color: white;
-  cursor: default;
-  height: 100%;
-}
-.sidenav a:hover {
-  border: var(--primary-color) solid 2px;
-  background-color: var(--primary-color);
-  border-radius: 0px 12px;
-  color: white;
-  height: 100%;
 }
 
 .sidenav ul {
@@ -135,7 +121,6 @@ h1 {
   width: 100%;
   padding: 1rem;
   margin-left: 0;
-  margin-top: 4.5rem;
   overflow-y: visible;
 }
 
@@ -485,22 +470,4 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 2em;
-}
-#regForm {
-  width: 95%;
-  max-width: 60em;
-  margin: 2em auto;
-  padding: 0em;
-  border: 3px solid var(--primary-color);
-  border-radius: 0.8em;
-  background-color: var(--main-bg-color);
-  box-sizing: border-box;
-  min-height: 40em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.tab-title{
-  padding: 1rem;
 }

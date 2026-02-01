@@ -1,5 +1,3 @@
-<!-- BOOKING-DETAILS.HTML -->
-
 <!doctype html>
 <html lang="it">
 
@@ -11,7 +9,9 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-25..0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="assets/css/desktop.css" media="screen">
+  <link rel="stylesheet" href="assets/css/medium.css" media="screen and (max-width:1155px)">
   <link rel="stylesheet" href="assets/css/mini.css" media="screen and (max-width:950px)">
   <link rel="stylesheet" href="assets/css/print.css" media="print">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,18 +22,18 @@
 </head>
 
 <body>
-  <header>
-    <nav aria-label="Aiuti alla navigazione" class="help-nav">
-      <a href="#main-content">Vai al contenuto principale</a>
-    </nav>
-
-    <h1>
-        <a href="index.php" class="hide" title="Torna alla pagina principale">
-          Farma<span lang="en">Find</span>24
-        </a>
-    </h1>
-    <nav class="Top-NavBar">
-      <button class="menu-toggle" aria-label="Apri menu" aria-expanded="false">
+  <nav aria-label="Aiuti alla navigazione" class="help-nav">
+    <a href="#main-content">Vai al contenuto principale</a>
+  </nav>
+  <header class="main-header">
+    <h1><a href="index.php" class="hide" title="Torna alla pagina principale">
+        Farma<span lang="en">Find</span>24
+      </a></h1>
+    <nav class="top-navbar">
+      <button class="menu-toggle-text btn-primary" aria-label="Menù di Navigazione" aria-expanded="false">
+        Menù di Navigazione
+      </button>
+      <button class="menu-toggle" aria-label="Apri menù" aria-expanded="false">
         ☰
       </button>
       <ul aria-label="menu di navigazione">
@@ -42,7 +42,11 @@
         </li>
         <li><a href="farm-search.php">Farmacie</a></li>
         <li><a href="med-search.php">Medicinali</a></li>
-        <li><a href="book-app.php">Prenota Visita</a></li>
+        <li>
+          <a aria-current="page" href="book-app.php" class="current-page" tabindex="-1">
+            <span class="sr-only">Pagina Corrente:</span>Prenota Visita
+          </a>
+        </li>
         <li><a href="about.php">About</a></li>
         <li><a href="[area_personale_href]">[area_personale_text]</a></li>
       </ul>
@@ -54,7 +58,8 @@
   <main id="main-content" tabindex="-1">
     <div class="title-main small">
       <h1>Dettagli della Prenotazione</h1>
-      <p>Di seguito sono riportati i dettagli della tua prenotazione: stampa questa pagina per avere il riepilogo sempre con te</p>
+      <p>Di seguito sono riportati i dettagli della tua prenotazione: stampa questa pagina per avere il riepilogo sempre
+        con te</p>
     </div>
 
     <section id="regForm">
@@ -92,35 +97,26 @@
 
         <div class="data-row">
           <dt>Telefono</dt>
-          <dd><a href="tel:[telefono_farmacia]" aria-label="Chiama farmacia al numero [telefono_farmacia]">
-              [telefono_farmacia]
-            </a></dd>
+          <dd>
+            <a href="tel:[tel_link]" class="phone-link" aria-label="Chiama la farmacia al numero [tel_visual]">
+              [tel_visual]
+            </a>
+          </dd>
         </div>
       </dl>
 
-      <h3>Dettagli Paziente</h3>
+      <h3>Note Aggiuntive</h3>
 
       <dl class="info-app">
 
         <div class="data-row">
-          <dt>Nome</dt>
-          <dd>[nome_paziente]</dd>
-        </div>
-
-                <div class="data-row">
-          <dt>Cognome</dt>
-          <dd>[cognome_paziente]</dd>
-        </div>
-
-                <div class="data-row">
-          <dt>Email</dt>
-          <dd>[email_paziente]</dd>
+          <dt>Note</dt>
+          <dd>[note_aggiuntive]</dd>
         </div>
       </dl>
-
     </section>
 
-  
+
 
     <div class="booking-actions">
       <button onclick="window.print()" class="outlined-btn">
@@ -128,57 +124,58 @@
         Stampa
       </button>
 
-      <a href="index.php" class="back-home-anchor">Torna alla <span lang="en">Home</span></a>
+      <a href="index.php">Torna alla <span lang="en">Home</span></a>
 
     </div>
 
     <section>
-            <div class="service-section-content">
-                <div class="title-main medium">
-                    <h3>Come prepararsi alla visita</h3>
-                    <p>Per assicurarti che la visita si svolga correttamente, segui queste semplici regole:</p>
-                </div>
+      <div class="service-section-content">
+        <div class="title-main medium">
+          <h3>Come prepararsi alla visita</h3>
+          <p>Per assicurarti che la visita si svolga correttamente, segui queste semplici regole:</p>
+        </div>
 
-                <div class="grid">
-                    <div class="service-card">
-                        <div class="icon-container">
-                            <span class="material-symbols-outlined" aria-hidden="true">badge</span>
-                        </div>
-                        <h3 class="title-card">Cosa portare</h3>
-                        <ul>
-                            <li>Tessera Sanitaria</li>
-                            <li>Documento d'identità</li>
-                            <li>Conferma della prenotazione</li>
-                        </ul>
-                    </div>
-                    <div class="service-card">
-                        <div class="icon-container">
-                            <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
-                        </div>
-                        <h3 class="title-card">Puntualità</h3>
-                        <p>
-                            Ti consigliamo di presentarti con 10 minuti di anticipo per l'accettazione.
-                        </p>
-                    </div>
-                    <div class="service-card">
-                        <div class="icon-container">
-                            <span class="material-symbols-outlined" aria-hidden="true">event_busy</span>
-                        </div>
-                        <h3 class="title-card">Cancellazione</h3>
-                        <p>
-                            Se non puoi presentarti, annulla l'appuntamento tramite la tua AREA PERSONALE per liberare
-                            il posto.
-                        </p>
-                    </div>
-
-                </div>
-                <p>Hai dubbi specifici o esigenze particolari? <br>
-                    Contatta direttamente la farmacia. Nella pagina <a href="farm-search.php"> Ricerca Farmacie</a>
-                    troverai tutti i contatti e gli altri servizi offerti.
-                </p>
+        <div class="grid three-columns">
+          <div class="service-card">
+            <div class="icon-container">
+              <span class="material-symbols-outlined" aria-hidden="true">badge</span>
             </div>
+            <h3 class="title-card">Cosa portare</h3>
+            <ul>
+              <li>Tessera Sanitaria</li>
+              <li>Documento d'identità</li>
+              <li>Conferma della prenotazione</li>
+            </ul>
+          </div>
+          <div class="service-card">
+            <div class="icon-container">
+              <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+            </div>
+            <h3 class="title-card">Puntualità</h3>
+            <p>
+              Ti consigliamo di presentarti con 10 minuti di anticipo per l'accettazione.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="icon-container">
+              <span class="material-symbols-outlined" aria-hidden="true">event_busy</span>
+            </div>
+            <h3 class="title-card">Cancellazione</h3>
+            <p>
+              Se non puoi presentarti, annulla l'appuntamento tramite la tua <a href="[area_personale_href]">Area
+                Personale</a> per liberare
+              il posto.
+            </p>
+          </div>
 
-        </section>
+        </div>
+        <p>Hai dubbi specifici o esigenze particolari? <br>
+          Contatta direttamente la farmacia. Nella pagina <a href="farm-search.php"> Ricerca Farmacie</a>
+          troverai tutti i contatti e gli altri servizi offerti.
+        </p>
+      </div>
+
+    </section>
 
 
     <button onclick="topFunction()" id="scroll-btn" title="Go to top">Torna su</button>

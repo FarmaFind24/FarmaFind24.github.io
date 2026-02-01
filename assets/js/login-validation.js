@@ -1,5 +1,18 @@
 // login-validation.js - Gestione validazione e errori per login
 
+document.addEventListener('DOMContentLoaded', function() {
+        // Legge i parametri dall'URL del browser
+        const params = new URLSearchParams(window.location.search);
+        // Cerca se esiste un parametro chiamato 'redirect'
+        const redirectUrl = params.get('redirect');
+        
+        // Se esiste, lo mette dentro il campo nascosto del form
+        if (redirectUrl) {
+            document.getElementById('redirect-target').value = redirectUrl;
+        }
+    });
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector('form[action="process-login.php"]');
     
