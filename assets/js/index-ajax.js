@@ -2,21 +2,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const citySelect = document.getElementById('city');
     const pharmacyMessageContainer = document.getElementById('index-message-container');
     const mainSearchForm = document.getElementById('mainSearchForm');
-
-    // Gestione submit del form di ricerca principale (supporta Enter)
     if (mainSearchForm) {
         mainSearchForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // Previene il submit tradizionale
+            e.preventDefault();
 
             const formData = new FormData(mainSearchForm);
-            const searchType = formData.get('type'); // 'farmacia' o 'medicinale'
+            const searchType = formData.get('type');
             const searchQuery = formData.get('q');
 
             if (!searchQuery || searchQuery.trim() === '') {
-                return; // Non fare nulla se la ricerca è vuota
+                return;
             }
-
-            // Redirect alla pagina appropriata
             if (searchType === 'farmacia') {
                 window.location.href = 'farm-search.php?q=' + encodeURIComponent(searchQuery.trim());
             } else if (searchType === 'medicinale') {
@@ -32,12 +28,10 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error("Errore: Elemento .grid.four-columns non trovato!");
             return;
         }
-        // Pulisce la lista precedente e il messaggio
         pharmacyGrid.innerHTML = '';
         pharmacyMessageContainer.innerHTML = '';
 
         if (selectedCity) {
-            // Mostra un loader/messaggio di caricamento
             pharmacyGrid.innerHTML = '<p>Caricamento farmacie...</p>';
 
             fetch(`get_dintorni.php?city=${selectedCity}`)

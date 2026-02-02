@@ -2,10 +2,10 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const main = document.querySelector('main');
-    
+
     if (!main) return;
-    
-    // Mappatura errori URL
+
+    // MAPPATURA ERRORI URL
     const errorMappings = {
         'authentication_required': {
             message: 'Devi effettuare l\'accesso per visualizzare le prenotazioni.'
@@ -23,11 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
             message: 'Errore di connessione al database. Riprova più tardi.'
         }
     };
-    
+
     const successMappings = {
         'booking_cancelled': 'Prenotazione cancellata con successo.'
     };
-    
-    // Gestisci errori/successi da URL
+
     handleURLErrors(errorMappings, successMappings);
 });

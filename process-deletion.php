@@ -1,5 +1,8 @@
 <?php
 session_start();
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
 require_once "dbConnection.php";
 use DB\DBAccess;
 
@@ -25,8 +28,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $db->closeConnection();
         
         if ($successo) {
-            // Distruggi la sessione
+            // Distruggi la sessione completamente
+            $_SESSION = array();
+            
+            // Elimina anche il cookie di sessione
+            if (isset($_COOKIE[session_name()])) {
+                setcookie(session_name(), '', time() - 3600, '/');
+            }
+            
             session_unset();
+            session_destroy();
+            
+            // Rigenera un nuovo ID di sessione per invalidare completamente la vecchia
+            session_start();
+            session_regenerate_id(true);
             session_destroy();
             
             // Redirect alla home con messaggio di conferma

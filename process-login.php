@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['nome'] = $utente['nome'];
             $_SESSION['cognome'] = $utente['cognome'];
             $_SESSION['email'] = $utente['email'];
-            $_SESSION['data_registrazione'] = $utente['data_registrazione'];
+            $_SESSION['created_at'] = $utente['created_at'];
 
             // Determina la destinazione dopo il login
             $destinazione = '';

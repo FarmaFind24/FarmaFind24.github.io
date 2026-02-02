@@ -44,7 +44,7 @@ if ($connessioneOk) {
                     if (!empty($farmacia['immagine'])) {
                         $srcImmagine = "assets/farmCovers/" . htmlspecialchars($farmacia['immagine']);
                     } else {
-                        $srcImmagine = "assets/immagine_farmacia.jpg"; 
+                        $srcImmagine = "assets/immagine_farmacia.webp"; 
                     }
 
                     $htmlFarmacieDintorni .= '<div class="farm-card">';

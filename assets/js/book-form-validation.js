@@ -1,6 +1,6 @@
 // book-form-validation.js - Validazione form prenotazioni
 
-// Mappatura errori URL per il form di prenotazione
+// MAPPATURA ERRORI URL FORM PRENOTAZIONE
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector('form#regForm');
 
@@ -50,11 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Gestisci errori da URL
     handleURLErrors(errorMappings);
 });
 
-// VALIDAZIONE NOME
 function validateNome() {
     var nome = document.getElementById("fname").value;
     const validChars = /^[A-Za-zÀ-ù\s']+$/;
@@ -65,9 +63,6 @@ function validateNome() {
     return true;
 }
 
-
-
-// resetta errori (mantenuto per compatibilità)
 function resetFormError() {
     var errorBox = document.getElementById("general-error-msg");
     if (errorBox) {
@@ -76,7 +71,6 @@ function resetFormError() {
     }
 }
 
-// trovati errori (mantenuto per compatibilità)
 function addFormError(msg) {
     var errorBox = document.getElementById("general-error-msg");
     if (errorBox) {

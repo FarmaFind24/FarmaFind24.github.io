@@ -1,11 +1,8 @@
 // register-validation.js - Gestione validazione e errori per registrazione
 
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector('form[action="process-register.php"]');
-    
+    const form = document.getElementById('register-form');
     if (!form) return;
-    
-    // Mappatura errori URL → campo + messaggio
     const errorMappings = {
         'empty_fields': {
             message: 'Compila tutti i campi per completare la registrazione.'
@@ -50,127 +47,88 @@ document.addEventListener("DOMContentLoaded", () => {
             message: 'Errore di connessione al database. Riprova più tardi.'
         }
     };
-    
     const successMappings = {
         'registered': 'Registrazione completata! Accedi per continuare.'
     };
-    
-    // Gestisci errori/successi da URL
     handleURLErrors(errorMappings, successMappings);
-    
-    // Validazione client-side al submit
-    form.addEventListener('submit', (e) => {
-        clearAllFieldErrors(form);
-        clearGeneralError(form);
-        
-        let isValid = true;
-        let firstInvalidInput = null;
-        
-        const nameInput = document.getElementById('name');
-        const surnameInput = document.getElementById('surname');
-        const usernameInput = document.getElementById('username');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const confirmPasswordInput = document.getElementById('confirm-password');
-        
-        // Validazione nome
-        if (nameInput) {
-            const nome = nameInput.value.trim();
-            if (nome === '') {
-                showFieldError(nameInput, 'Inserisci il tuo nome.');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = nameInput;
-            } else if (!validateNome(nome)) {
-                showFieldError(nameInput, 'Nome non valido. Usa solo lettere (2-50 caratteri).');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = nameInput;
-            }
-        }
-        
-        // Validazione cognome
-        if (surnameInput) {
-            const cognome = surnameInput.value.trim();
-            if (cognome === '') {
-                showFieldError(surnameInput, 'Inserisci il tuo cognome.');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = surnameInput;
-            } else if (!validateCognome(cognome)) {
-                showFieldError(surnameInput, 'Cognome non valido. Usa solo lettere (2-50 caratteri).');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = surnameInput;
-            }
-        }
-        
-        // Validazione username
-        if (usernameInput) {
-            const username = usernameInput.value.trim();
-            if (username === '') {
-                showFieldError(usernameInput, 'Scegli un username.');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = usernameInput;
-            } else if (!validateUsername(username)) {
-                showFieldError(usernameInput, 'Username non valido. Usa lettere, numeri, _ o - (3-50 caratteri).');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = usernameInput;
-            }
-        }
-        
-        // Validazione email
-        if (emailInput) {
-            const email = emailInput.value.trim();
-            if (email === '') {
-                showFieldError(emailInput, 'Inserisci la tua email.');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = emailInput;
-            } else if (!validateEmail(email)) {
-                showFieldError(emailInput, 'Inserisci un indirizzo email valido.');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = emailInput;
-            }
-        }
-        
-        // Validazione password
-        if (passwordInput) {
-            const password = passwordInput.value;
-            if (password === '') {
-                showFieldError(passwordInput, 'Scegli una password.');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = passwordInput;
-            } else if (!validatePassword(password)) {
-                showFieldError(passwordInput, 'La password deve essere di almeno 8 caratteri e contenere una lettera e un numero.');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = passwordInput;
-            }
-        }
-        
-        // Validazione conferma password
-        if (confirmPasswordInput && passwordInput) {
-            const password = passwordInput.value;
-            const confirm = confirmPasswordInput.value;
-            if (confirm === '') {
-                showFieldError(confirmPasswordInput, 'Conferma la tua password.');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = confirmPasswordInput;
-            } else if (password !== confirm) {
-                showFieldError(confirmPasswordInput, 'Le password non coincidono.');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = confirmPasswordInput;
-            }
-        }
-        
-        if (!isValid) {
-            e.preventDefault();
-            if (firstInvalidInput) {
-                firstInvalidInput.focus();
-            }
-        }
-    });
-    
-    // Rimuovi errore quando utente inizia a digitare
-    const inputs = form.querySelectorAll('input');
-    inputs.forEach(input => {
-        input.addEventListener('input', () => {
+    if (form) {
+        const inputs = {
+            name: document.getElementById('name'),
+            surname: document.getElementById('surname'),
+            username: document.getElementById('username'),
+            email: document.getElementById('email'),
+            password: document.getElementById('password'),
+            confirm: document.getElementById('confirm-password')
+        };
+        const validateSingleField = (input) => {
+            if (!input) return true;
+
             clearFieldError(input);
+            const valoreInput = input.value.trim();
+            switch (input.id) {
+                case 'name':
+                    if (valoreInput === '') { showFieldError(input, 'Errore: inserire un nome.'); return false; }
+                    if (!validateNome(valoreInput)) { showFieldError(input, 'Errore: nome non valido, inserire da 2 a 50 lettere.') }
+                    break;
+                case 'surname':
+                    if (valoreInput === '') { showFieldError(input, 'Errore: inserire un cognome.'); return false; }
+                    if (!validateCognome(valoreInput)) { showFieldError(input, 'Errore: cognome non valido (2-50 lettere).'); return false; }
+                    break;
+                case 'username':
+                    if (valoreInput === '') { showFieldError(input, 'Errore: inserire uno username'); return false; }
+                    if (!validateUsername(valoreInput)) { showFieldError(input, 'Errore: username non valido (3-50 caratteri: lettere, numeri, _, -).'); return false; }
+                    break;
+                case 'email':
+                    if (valoreInput === '') { showFieldError(input, 'Errore: inserire una email.'); return false; }
+                    if (!validateEmail(valoreInput)) { showFieldError(input, 'Errore: inserisci un indirizzo email valido.'); return false; }
+                    break;
+                case 'password':
+                    if (valoreInput === '') { showFieldError(input, 'Errore: inserire una password.'); return false; }
+                    if (!validatePassword(valoreInput)) { showFieldError(input, 'Errore: la password ha un formato non valido.'); return false; }
+                    break;
+                case 'confirm-password':
+                    if (valoreInput === '') { showFieldError(input, 'Errore: confermare la password.'); return false; }
+                    if (valoreInput !== inputs.password.value) { showFieldError(input, 'Errore: le password non coincidono.'); return false; }
+                    break;
+
+                default:
+                    return true;
+
+            }
+            return true;
+        };
+        Object.values(inputs).forEach(input => {
+            if (input) {
+                input.addEventListener('blur', (e) => {
+                    const relatedTarget = e.relatedTarget;
+                    const isMovingUp = relatedTarget &&
+                        (input.compareDocumentPosition(relatedTarget) & Node.DOCUMENT_POSITION_PRECEDING);
+
+                    if (!isMovingUp) {
+                        validateSingleField(input);
+                    } else {
+                        clearFieldError(input);
+                    }
+                });
+                input.addEventListener('input', () => {
+                    clearFieldError(input);
+                });
+            }
         });
-    });
+        form.addEventListener('submit', (e) => {
+            let formIsValid = true;
+            let firstError = null;
+            Object.values(inputs).forEach(input => {
+                if (!validateSingleField(input)) {
+                    formIsValid = false;
+                    if (!firstError) firstError = input;
+                }
+            });
+            if (!formIsValid) {
+                e.preventDefault();
+                if (firstError) firstError.focus();
+            }
+        });
+    }
 });
+

@@ -1,8 +1,3 @@
-/* 
-    DOCUMENTO: JS per validazione form di registrazione
-    DESCRIZIONE: Verifica se i campi del form sono corretti 
-*/
-
 function showFieldError(input, message) {
     if (!input) return;
     input.classList.add('invalid');
@@ -41,10 +36,9 @@ function clearAllFieldErrors(form) {
     inputs.forEach(input => clearFieldError(input));
 }
 
-function showGeneralError(form, message) {
-    if (!form) return;
-
+const showGeneralError = (form, message) => {
     let errorBox = form.querySelector('.general-error');
+    const formActions = form.querySelector('.form-actions');
 
     if (!errorBox) {
         errorBox = document.createElement('div');
@@ -52,13 +46,16 @@ function showGeneralError(form, message) {
         errorBox.setAttribute('role', 'alert');
         errorBox.setAttribute('aria-live', 'assertive');
         errorBox.setAttribute('tabindex', '-1');
-        form.insertBefore(errorBox, form.firstChild);
+
+        if (formActions) {
+            formActions.before(errorBox);
+        } else {
+            form.appendChild(errorBox);
+        }
     }
 
     errorBox.textContent = message;
-    errorBox.style.display = 'block';
-    errorBox.focus();
-}
+};
 
 function clearGeneralError(form) {
     if (!form) return;

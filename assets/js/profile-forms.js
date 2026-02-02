@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputs = document.querySelectorAll(".grid.two-columns input");
     const profileForm = document.querySelector("form[action='process-update-profile.php']");
 
-    // Mappatura errori URL per area personale
+    // MAPPATURA ERRORI URL PER AREA PERSONALE
     const errorMappings = {
         'campi_vuoti': {
             message: 'Tutti i campi sono obbligatori.'
@@ -39,8 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
         'account_eliminato': 'Account eliminato. Grazie per aver utilizzato FarmaFind24.',
         'booking_cancelled': 'Prenotazione cancellata con successo.'
     };
-
-    // Gestisci errori/successi da URL usando il sistema unificato
     const main = document.querySelector('main');
     handleURLErrors(errorMappings, successMappings);
 
@@ -77,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!isValid) {
                 e.preventDefault();
-                // Focus sul primo campo con errore
                 const firstInvalid = profileForm.querySelector(".invalid");
                 if (firstInvalid) firstInvalid.focus();
             }
@@ -121,8 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
             editBtn.removeAttribute("hidden");
         });
     }
-
-    // Rimuovi errore quando utente inizia a digitare
     inputs.forEach(input => {
         input.addEventListener('input', () => {
             clearFieldError(input);

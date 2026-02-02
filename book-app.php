@@ -83,7 +83,6 @@ if ($connessioneOk) {
 
         if ($farmacie && count($farmacie) > 0) {
             foreach ($farmacie as $farmacia) {
-                // MODIFICA NECESSARIA: Aggiunto controllo per mantenere il radio button selezionato
                 $checked = ($farmacia['id'] == $selectedPharmacyId) ? 'checked' : '';
                 
                 $id = 'farm-' . htmlspecialchars($farmacia['id']);
@@ -95,10 +94,8 @@ if ($connessioneOk) {
                                 </div>';
             }
         } else {
-            // Logica comuni limitrofi (Tuo codice originale)
             $htmlFarmacieMessage = '<p>Nessuna farmacia trovata a ' . htmlspecialchars($selectedCity) . ' per il servizio scelto. Ecco una lista di farmacie nei comuni limitrofi:</p>';
-            
-            // Nota: Assicurati che questo metodo esista nel tuo DBAccess, altrimenti commentalo
+
             $farmacieVicine = $db->getFarmacieVicinePerServizio($selectedServiceId, $selectedCity); 
 
             if ($farmacieVicine && count($farmacieVicine) > 0) {
@@ -120,13 +117,10 @@ if ($connessioneOk) {
         }
     }
 
-    // 2. NUOVA LOGICA: CALCOLO SLOT ORARI (Solo se ho Farmacia e Data)
     if ($selectedPharmacyId && $selectedDate) {
         // Calcola giorno settimana (0=Dom, 6=Sab)
         $giornoSettimana = date('w', strtotime($selectedDate));
         
-        // Recupera gli orari dal DB usando la funzione che abbiamo creato prima
-        // Assicurati di aver aggiunto getOrariFarmacia($id, $giorno) in DBAccess
         $fasceOrarie = $db->getOrariFarmacia($selectedPharmacyId, $giornoSettimana);
         
         $htmlTimeSlots = '';
@@ -138,13 +132,11 @@ if ($connessioneOk) {
                 $start = strtotime($selectedDate . ' ' . $fascia['ora_apertura']);
                 $end   = strtotime($selectedDate . ' ' . $fascia['ora_chiusura']);
 
-                // Ciclo per creare slot da 1 ora
                 while ($start < $end) {
-                    // Filtro passato: se è oggi, non mostrare ore già passate
                     if (!$isToday || $start > $oraAttuale) {
                         
                         $oraFormat = date("H:i", $start);
-                        // Mantieni la selezione se l'utente ricarica
+
                         $checked = ($oraFormat == $selectedTime) ? 'checked' : '';
 
                         $htmlTimeSlots .= '<div class="time-slot">
@@ -165,7 +157,7 @@ if ($connessioneOk) {
         }
     }
 
-    // 3. LOGICA SERVIZI E CITTÀ (Tuo codice originale)
+
     $htmlServizi = "";
     $htmlCitta = "";
 
@@ -201,29 +193,25 @@ if ($connessioneOk) {
     $htmlCitta = '<option value="">Errore di connessione</option>';
 }
 
-// 4. SOSTITUZIONE SEGNAPOSTI (Originali + Nuovi)
 
-// Nuovi placeholder per Data e Ora
 $paginaHTML = str_replace('[min_date]', date("Y-m-d"), $paginaHTML);
 $paginaHTML = str_replace('[valore_data]', htmlspecialchars($selectedDate ?? ''), $paginaHTML);
 $paginaHTML = str_replace('[time-slots]', $htmlTimeSlots, $paginaHTML);
 
-// Placeholder originali
 $paginaHTML = str_replace('[servizi_grid]', $htmlServizi, $paginaHTML);
 $paginaHTML = str_replace('[citta_options]', $htmlCitta, $paginaHTML);
 $paginaHTML = str_replace('[farmacie_message]', $htmlFarmacieMessage, $paginaHTML);
 $paginaHTML = str_replace('[farmacie_grid]', $htmlFarmacie, $paginaHTML);
 
-// Placeholder per autenticazione
 $paginaHTML = str_replace('[auth_message_class]', $authMessageClass, $paginaHTML);
 $paginaHTML = str_replace('[form_class]', $formClass, $paginaHTML);
 $paginaHTML = str_replace('[error_message]', $errorMessageHtml, $paginaHTML);
 
-// Placeholder per il controllo farmacie disponibili
+
 $btnDisabledAttr = $noFarmacieDisponibili ? 'disabled' : '';
 $paginaHTML = str_replace('[btn_disabled]', $btnDisabledAttr, $paginaHTML);
 
-// Gestione Area Personale nella navbar
+
 $paginaHTML = str_replace('[area_personale_href]', getAreaPersonaleHref(), $paginaHTML);
 $paginaHTML = str_replace('[area_personale_text]', getAreaPersonaleText(), $paginaHTML);
 

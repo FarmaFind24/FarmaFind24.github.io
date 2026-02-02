@@ -1,12 +1,9 @@
 // feedback-messages.js - Sistema di messaggi di feedback per l'utente
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Leggi i parametri URL
     const urlParams = new URLSearchParams(window.location.search);
     const success = urlParams.get('success');
     const error = urlParams.get('error');
-    
-    // Definizione messaggi
     const messages = {
         success: {
             'profilo_aggiornato': 'Profilo aggiornato con successo!',
@@ -30,34 +27,25 @@ document.addEventListener("DOMContentLoaded", () => {
             'cancellation_failed': 'Errore: impossibile cancellare la prenotazione.'
         }
     };
-    
-    // Mostra il messaggio se presente
     if (success && messages.success[success]) {
         showMessage(messages.success[success], 'success');
     } else if (error && messages.error[error]) {
         showMessage(messages.error[error], 'error');
     }
-    
-    // Pulisci URL (rimuovi parametri success/error)
     if (success || error) {
         const cleanUrl = window.location.pathname + window.location.hash;
         window.history.replaceState({}, document.title, cleanUrl);
     }
 });
-
-// Mostra messaggio di feedback
 function showMessage(message, type) {
-    // Cerca un contenitore di messaggi nella pagina
     let messageBox = document.getElementById('feedback-message');
-    
-    // Se non esiste, crealo e inseriscilo all'inizio del main
     if (!messageBox) {
         messageBox = document.createElement('div');
         messageBox.id = 'feedback-message';
         messageBox.setAttribute('role', 'alert');
         messageBox.setAttribute('aria-live', 'polite');
         messageBox.setAttribute('tabindex', '-1');
-        
+
         const main = document.querySelector('main');
         if (main) {
             main.insertBefore(messageBox, main.firstChild);
@@ -65,22 +53,15 @@ function showMessage(message, type) {
             document.body.insertBefore(messageBox, document.body.firstChild);
         }
     }
-    
-    // Imposta classe e contenuto
     messageBox.className = type === 'success' ? 'success-message' : 'error-message';
     messageBox.style.display = 'block';
     messageBox.innerHTML = message;
-    
-    // Metti il focus sul messaggio per gli screen reader
     messageBox.focus();
-    
-    // Rimuovi dopo 8 secondi
     setTimeout(() => {
         hideMessage();
     }, 8000);
 }
 
-// Nascondi messaggio di feedback
 function hideMessage() {
     const messageBox = document.getElementById('feedback-message');
     if (messageBox) {

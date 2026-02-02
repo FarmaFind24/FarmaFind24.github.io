@@ -97,7 +97,7 @@ if ($connessioneOk) {
                 <div class="appuntamento-card-details">
                     <div>
                         <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
-                        <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
+                        <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . ', ore: ' . $ora . '</p>
                     </div>
                     <div class="row">
                         <p>Prenotato da: @' . htmlspecialchars($p['username']) . '</p>
@@ -142,7 +142,7 @@ if ($connessioneOk) {
                 <div class="appuntamento-card-details">
                     <div>
                         <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
-                        <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
+                        <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . ', ore: ' . $ora . '</p>
                     </div>
                     <form method="POST" action="process-cancellation.php">
                         <fieldset>

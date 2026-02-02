@@ -49,7 +49,7 @@ $farmacie = $db->getFarmacieConFarmaco($idFarmaco);
 $nomeFarmaco = htmlspecialchars($farmaco['nome_commerciale']);
 $immagineFarmaco = !empty($farmaco['immagine']) ? 
     "assets/medImages/" . htmlspecialchars($farmaco['immagine']) : 
-    "assets/immagine_farmaco.jpg";
+    "assets/immagine_farmaco.webp";
 $altImmagine = "Confezione di " . $nomeFarmaco;
 
 $descrizione = htmlspecialchars($farmaco['descrizione']);

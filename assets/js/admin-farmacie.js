@@ -74,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // === TOGGLE FORM INSERIMENTO FARMACIA ===
     const addBtn = document.getElementById('addFarmaciaBtn');
     const formContainer = document.getElementById('add-farmacia-form-container');
     const form = document.getElementById('add-farmacia-form');
@@ -92,93 +91,119 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // === VALIDAZIONE FORM INSERIMENTO FARMACIA ===
     if (form) {
-        // NOTA: I messaggi di errore/successo sono già gestiti da PHP nel placeholder [feedback_messages]
-        // JavaScript si occupa solo della validazione client-side prima del submit
+        const inputs = {
+            nameFarmacia: document.getElementById('nome'),
+            indirizzoFarmacia: document.getElementById('indirizzo'),
+            cittàFarmacia: document.getElementById('citta'),
+            telefonoFarmacia: document.getElementById('telefono'),
+            orarioFarmacia: document.querySelectorAll('input[name="tipo_orario"]')
+        };
 
-        // Validazione client-side al submit
-        form.addEventListener('submit', (e) => {
-            clearAllFieldErrors(form);
-            clearGeneralError(form);
+        const validateSingleField = (input) => {
+            const isOrario = input instanceof NodeList || (input.length && input[0].name === "tipo_orario");
 
-            let isValid = true;
-            let firstInvalidInput = null;
-
-            const nomeInput = document.getElementById('nome');
-            const indirizzoInput = document.getElementById('indirizzo');
-            const cittaInput = document.getElementById('citta');
-            const telefonoInput = document.getElementById('telefono');
-            const orarioInputs = document.querySelectorAll('input[name="tipo_orario"]');
-
-            // Validazione nome farmacia
-            if (nomeInput) {
-                const nome = nomeInput.value.trim();
-                if (nome === '') {
-                    showFieldError(nomeInput, 'Inserisci il nome della farmacia.');
-                    isValid = false;
-                    if (!firstInvalidInput) firstInvalidInput = nomeInput;
-                } else if (nome.length < 3 || nome.length > 100) {
-                    showFieldError(nomeInput, 'Il nome deve essere tra 3 e 100 caratteri.');
-                    isValid = false;
-                    if (!firstInvalidInput) firstInvalidInput = nomeInput;
+            if (isOrario) {
+                const orarioChecked = Array.from(inputs.orarioFarmacia).some(i => i.checked);
+                clearFieldError(inputs.orarioFarmacia[0]);
+                if (!orarioChecked) {
+                    showGeneralError(form, 'Seleziona un tipo di orario.');
+                    return false;
                 }
+                return true;
             }
+            if (!input) return true;
+            clearFieldError(input);
+            const valoreInput = input.value.trim();
+            let isFieldValid = true;
 
-            if (indirizzoInput) {
-                const indirizzo = indirizzoInput.value.trim();
-                if (indirizzo === '') {
-                    showFieldError(indirizzoInput, 'Inserisci l\'indirizzo.');
-                    isValid = false;
-                    if (!firstInvalidInput) firstInvalidInput = indirizzoInput;
-                }
+            switch (input.id) {
+                case 'nome':
+                    if (valoreInput === '') {
+                        showFieldError(input, 'Errore: inserire il nome della farmacia.');
+                        isFieldValid = false;
+                    } else if (valoreInput.length < 3 || valoreInput.length > 100) {
+                        showFieldError(input, 'Errore: il nome deve essere tra 3 e 100 caratteri.');
+                        isFieldValid = false;
+                    }
+                    break;
+                case 'indirizzo':
+                    const regexIndirizzo = /^(Via|Viale|Piazza|Piazzale)\s+.+$/i;
+                    if (valoreInput === '') {
+                        showFieldError(input, 'Errore: inserire l\'indirizzo.');
+                        isFieldValid = false;
+                    } else if (!regexIndirizzo.test(valoreInput)) {
+                        showFieldError(input, 'Errore: formato indirizzo invalido');
+                        isFieldValid = false;
+                    }
+                    break;
+                case 'citta':
+                    if (valoreInput === '') {
+                        showFieldError(input, 'Errore: selezionare una città.');
+                        isFieldValid = false;
+                    }
+                    break;
+                case 'telefono':
+                    const telefonoPulito = valoreInput.replace(/\D/g, '');
+                    const phoneRegex = /^[0-9]{9,10}$/;
+                    if (telefonoPulito === '') {
+                        showFieldError(input, 'Errore: Inserire il numero di telefono.');
+                        isFieldValid = false;
+                    } else if (!phoneRegex.test(telefonoPulito)) {
+                        showFieldError(input, 'Errore: il numero deve avere 9 o 10 cifre.');
+                        isFieldValid = false;
+                    }
+                    break;
             }
+            return isFieldValid;
+        };
 
-            if (cittaInput) {
-                const citta = cittaInput.value.trim();
-                if (citta === '') {
-                    showFieldError(cittaInput, 'Seleziona una città.');
-                    isValid = false;
-                    if (!firstInvalidInput) firstInvalidInput = cittaInput;
-                }
-            }
+        Object.values(inputs).forEach(input => {
+            if (input instanceof NodeList) {
+                input.forEach(radio => {
+                    radio.addEventListener('change', () => clearGeneralError(form));
+                    radio.addEventListener('blur', (e) => {
+                        const relatedTarget = e.relatedTarget;
+                        const focusMovedOutsideGroup = !Array.from(input).includes(relatedTarget);
+                        const isMovingUp = relatedTarget &&
+                            (radio.compareDocumentPosition(relatedTarget) & Node.DOCUMENT_POSITION_PRECEDING);
 
-            if (telefonoInput) {
-                let telefonoPulito = telefonoInput.value.replace(/\s+/g, '');
+                        if (focusMovedOutsideGroup && !isMovingUp) {
+                            validateSingleField(input);
+                        } else if (isMovingUp) {
+                            clearGeneralError(form);
+                        }
+                    });
+                });
+            } else if (input) {
+                input.addEventListener('blur', (e) => {
+                    const relatedTarget = e.relatedTarget;
+                    const isMovingUp = relatedTarget &&
+                        (input.compareDocumentPosition(relatedTarget) & Node.DOCUMENT_POSITION_PRECEDING);
 
-                const phoneRegex = /^[0-9 \-\+\(\)]+$/;
-
-                if (telefonoPulito === '') {
-                    showFieldError(telefonoInput, 'Inserisci il numero di telefono.');
-                    isValid = false;
-                    if (!firstInvalidInput) firstInvalidInput = telefonoInput;
-                }
-                else if (!phoneRegex.test(telefonoPulito)) {
-                    showFieldError(telefonoInput, 'Formato non valido.');
-                    isValid = false;
-                    if (!firstInvalidInput) firstInvalidInput = telefonoInput;
-                }
-                else if (telefonoPulito.length < 9 || telefonoPulito.length > 10) {
-                    showFieldError(telefonoInput, 'Il numero deve avere tra 9 e 10 cifre.');
-                    isValid = false;
-                    if (!firstInvalidInput) firstInvalidInput = telefonoInput;
-                }
-            }
-
-            const orarioChecked = Array.from(orarioInputs).some(input => input.checked);
-            if (!orarioChecked) {
-                showGeneralError(form, 'Seleziona un tipo di orario.');
-                isValid = false;
-                if (!firstInvalidInput) firstInvalidInput = orarioInputs[0];
-            }
-            if (!isValid) {
-                e.preventDefault();
+                    if (isMovingUp) {
+                        clearFieldError(input);
+                    } else {
+                        validateSingleField(input);
+                    }
+                });
+                input.addEventListener('input', () => clearFieldError(input));
             }
         });
-        const inputs = form.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('input', () => clearFieldError(input));
-            input.addEventListener('change', () => clearFieldError(input));
+        form.addEventListener('submit', (e) => {
+            let formIsValid = true;
+            let firstError = null;
+
+            Object.values(inputs).forEach(input => {
+                if (!validateSingleField(input)) {
+                    formIsValid = false;
+                    if (!firstError) firstError = (input instanceof NodeList) ? input[0] : input;
+                }
+            });
+            if (!formIsValid) {
+                e.preventDefault();
+                if (firstError) firstError.focus();
+            }
         });
     }
 });

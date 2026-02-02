@@ -1,24 +1,20 @@
 // login-validation.js - Gestione validazione e errori per login
 
-document.addEventListener('DOMContentLoaded', function() {
-        // Legge i parametri dall'URL del browser
-        const params = new URLSearchParams(window.location.search);
-        // Cerca se esiste un parametro chiamato 'redirect'
-        const redirectUrl = params.get('redirect');
-        
-        // Se esiste, lo mette dentro il campo nascosto del form
-        if (redirectUrl) {
-            document.getElementById('redirect-target').value = redirectUrl;
-        }
-    });
+document.addEventListener('DOMContentLoaded', function () {
+    const params = new URLSearchParams(window.location.search);
+    const redirectUrl = params.get('redirect');
+    if (redirectUrl) {
+        document.getElementById('redirect-target').value = redirectUrl;
+    }
+});
 
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector('form[action="process-login.php"]');
-    
+
     if (!form) return;
-    
-    // Mappatura errori URL → campo + messaggio
+
+    // MAPPATURA ERRORI URL -> CAMPO + MESSAGGIO
     const errorMappings = {
         'empty_fields': {
             message: 'Compila tutti i campi per effettuare l\'accesso.'
@@ -42,25 +38,19 @@ document.addEventListener("DOMContentLoaded", () => {
             message: 'Errore di connessione al database. Riprova più tardi.'
         }
     };
-    
-    // Gestisci errori da URL
     handleURLErrors(errorMappings);
-    
-    // Validazione client-side al submit
+
+    // VALIDAZIONE CLIENT-SIDE AL SUBMIT
     form.addEventListener('submit', (e) => {
         clearAllFieldErrors(form);
         clearGeneralError(form);
-        
         let isValid = true;
         let firstInvalidInput = null;
-        
         const usernameInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
-        
-        // Validazione username
         if (usernameInput) {
             const username = usernameInput.value.trim();
-            
+
             if (username === '') {
                 showFieldError(usernameInput, 'Inserisci il tuo username.');
                 isValid = false;
@@ -75,16 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!firstInvalidInput) firstInvalidInput = usernameInput;
             }
         }
-        
-        // Validazione password
         if (passwordInput) {
             const password = passwordInput.value;
             const username = usernameInput ? usernameInput.value.trim() : '';
-            
-            // Utenti con eccezione per password più corta
             const exemptUsers = ['user', 'admin'];
             const minPasswordLength = exemptUsers.includes(username) ? 4 : 6;
-            
+
             if (password === '') {
                 showFieldError(passwordInput, 'Inserisci la tua password.');
                 isValid = false;
@@ -95,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!firstInvalidInput) firstInvalidInput = passwordInput;
             }
         }
-        
+
         if (!isValid) {
             e.preventDefault();
             if (firstInvalidInput) {
@@ -103,8 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
-    
-    // Rimuovi errore quando utente inizia a digitare
     const inputs = form.querySelectorAll('input[type="text"], input[type="password"]');
     inputs.forEach(input => {
         input.addEventListener('input', () => {

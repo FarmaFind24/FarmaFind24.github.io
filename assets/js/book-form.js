@@ -1,8 +1,3 @@
-/* 
-    DOCUMENTO: JS per la gestione del form di prenotazione visita
-    DESCRIZIONE: Gestisce validazione e spostamento tra tab
-*/
-
 document.body.classList.add('js-active');
 var regForm = document.getElementById("regForm");
 

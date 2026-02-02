@@ -8,7 +8,7 @@ require_once "dbConnection.php";
 require_once "session-helper.php";
 use DB\DBAccess;
 
-// 1. CONTROLLO SICUREZZA: Se non � loggato, via al login
+// 1. CONTROLLO SICUREZZA: Se non loggato, via al login
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: area-login.html");
     exit;
@@ -62,7 +62,7 @@ if ($connessioneOk) {
                 <div class="appuntamento-card-details">
                     <div>
                         <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
-                        <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
+                        <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . ', ore: ' . $ora . '</p>
                     </div>
                     <div class="row">
                     
@@ -108,7 +108,7 @@ if ($connessioneOk) {
                 <div class="appuntamento-card-details">
                     <div>
                         <h3>' . htmlspecialchars($p['nome_servizio']) . '</h3>
-                        <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . '</p>
+                        <p>Presso: ' . htmlspecialchars($p['nome_farmacia']) . ', ore: ' . $ora . '</p>
                     </div>
                     <div class="row">
                     
@@ -145,7 +145,7 @@ $paginaHTML = str_replace('[username]', htmlspecialchars($_SESSION['username']),
 $paginaHTML = str_replace('[email]', htmlspecialchars($_SESSION['email']), $paginaHTML);
 
 // Formattazione data registrazione
-$dataReg = isset($_SESSION['data_registrazione']) ? date("d/m/Y", strtotime($_SESSION['data_registrazione'])) : "N/D";
+$dataReg = isset($_SESSION['created_at']) ? date("d/m/Y", strtotime($_SESSION['created_at'])) : "N/D";
 $paginaHTML = str_replace('[data_registrazione]', $dataReg, $paginaHTML);
 
 // 5. SOSTITUZIONE PLACEHOLDER (Liste generate)

@@ -4,7 +4,6 @@
   --primary-color: #006723;
   --primary-color-hover: #014016;
   --header-border-color: #dee1e6;
-  --border-color: #e5e7eb;
   --z-index-sidenav: 500;
   --z-index-header: 1000;
   --z-index-footer: 1000;
@@ -263,7 +262,7 @@ a.delete-account::before {
   font-family: 'Material Symbols Outlined';
   font-variation-settings: 'FILL' 1;
 }
-
+/*ICONA AGGIUNGI*/
 #addFarmaciaBtn::before {
   content: "\e145";
   font-family: 'Material Symbols Outlined'; 
@@ -273,12 +272,25 @@ a.delete-account::before {
   color: var(--primary-color);
   margin-right: 0.2em;
 }
+.container-warning h2::before {
+  content: "\e002";
+  font-family: 'Material Symbols Outlined'; 
+  display: block;
+  text-align: center;
+  font-size: 1.4em;
+  color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
 
 
 /************/
 /*   GRID   */
 /************/
-
 .grid {
   gap: 1rem;
   display: grid;
@@ -303,110 +315,6 @@ a.delete-account::before {
   gap: 0.8em;
   margin-top: 1em;
 }
-
-.sr-only {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-.help-nav{
-  position: absolute;
-  text-indent: -999em;
-}
-.help-nav:focus{
-  text-indent: 0em;
-  position: static;
-}
-.row-btn {
-  margin-top: auto;
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-input[type="text"]#fnote{
-  height: 5rem;
-}
-
-.hide {
-  display: block; 
-  background-image: url("../logo_h1.png");
-  margin-left: 1rem;
-  margin-top: 2rem;
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-.title-main {
-  font-size: 1em;
-  text-align: center;
-  width: 100%;
-  display: block;
-}
-.small {
-  font-size: 1.1rem;
-}
-.medium {
-  font-size: 1.5rem;
-}
-.title-card {
-  font-size: 1.5em;
-  text-align: left;
-}
-.form-search-container {
-  display: flex;
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  box-sizing: border-box;
-  align-items: center;
-}
-.form-search-container input[type="search"] {
-  flex-grow: 1;
-  height: 3rem;
-  font-size: 1rem;
-  border-radius: 1rem;
-  border: 1px solid black;
-  padding-left: 1rem;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.form-search-container button {
-  width: 10rem;
-  height: 3rem;
-  background-color: var(--primary-color);
-  color: var(--main-bg-color);
-  font-weight: bold;
-  font-size: 1rem;
-  border-radius: 1rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  margin: 0;
-}
-.form-search-container button:hover {
-  background-color: var(--primary-color-hover);
-}
-
-.col-img {
-  width: 30%;
-  aspect-ratio: 16/9;
-  background-size: cover;
-  background-position: center;
-  display: block;
-  border-radius: 8px;
-  background-repeat: no-repeat;
-}
-
 /******************/
 /*   NAVIGAZIONE  */
 /******************/
@@ -606,6 +514,111 @@ a.btn-like:visited{
 .btn-details:hover { 
   text-decoration: underline;
 }
+
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.help-nav{
+  position: absolute;
+  text-indent: -999em;
+}
+.help-nav:focus{
+  text-indent: 0em;
+  position: static;
+}
+.row-btn {
+  margin-top: auto;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+input[type="text"]#fnote{
+  height: 5rem;
+}
+
+.hide {
+  display: block; 
+  background-image: url("../logo_h1.png");
+  margin-left: 1rem;
+  margin-top: 2rem;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.title-main {
+  font-size: 1em;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+.small {
+  font-size: 1.1rem;
+}
+.medium {
+  font-size: 1.5rem;
+}
+.title-card {
+  font-size: 1.5em;
+  text-align: left;
+}
+.form-search-container {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  align-items: center;
+}
+.form-search-container input[type="search"] {
+  flex-grow: 1;
+  height: 3rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: 1px solid black;
+  padding-left: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.form-search-container button {
+  width: 10rem;
+  height: 3rem;
+  background-color: var(--primary-color);
+  color: var(--main-bg-color);
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 0;
+}
+.form-search-container button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.col-img {
+  width: 30%;
+  aspect-ratio: 16/9;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  border-radius: 8px;
+  background-repeat: no-repeat;
+}
+
 
 
 
@@ -1036,9 +1049,9 @@ a.btn-like:visited{
   height: 70%;
 }
 
-/**********************/
-/*     LOGIN-PAGE     */
-/**********************/
+/********************************/
+/*     LOGIN E REGISTRAZIONE    */
+/********************************/
 .login-container {
   display: flex;
   flex-direction: column;
@@ -1108,7 +1121,15 @@ a.btn-like:visited{
   flex-direction: row;
   justify-content: space-between;
 }
-
+.requirements{
+  margin-bottom: 1rem;
+  display: none;
+  padding-left: 1rem;
+}
+.form-group input:focus + .requirements,
+.form-field input:focus + .requirements {
+    display: block;
+}
 /**********************/
 /*   AREA-PERSONALE   */
 /**********************/
@@ -1214,6 +1235,7 @@ a.btn-like:visited{
 }
 .appuntamento-card-details .row{
   display: flex;
+  align-items: center;
   flex-direction: row;
   justify-content: center;
 }
@@ -1365,16 +1387,9 @@ a.delete-account {
   color: red;
   font-size: 2rem;
 }
-.icon-container-warning {
-  background-color: rgba(255, 0, 0, 0.1);
-  width: 3.5rem;
-  height: 3.5em;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
-}
+
+
+
 .btn-primary.no-margin {
   margin: 0;
 }
@@ -1868,12 +1883,11 @@ a.delete-account {
   margin-bottom: 2em;
 }
 /*VALIDAZIONE INPUT FORM*/
-/* Campo con errore */
 input.invalid,
 select.invalid,
 textarea.invalid {
   border: 2px solid #c62828;
-  background-color: #ff7474;
+  background-color: #FFCCCC;
   outline-color: #c62828;
 }
 
@@ -1883,8 +1897,24 @@ textarea.invalid:focus {
   border-color: #c62828;
   box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.15);
 }
+.message {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  font-weight: 500;
+}
 
-/* Messaggio errore sotto il campo */
+.message.success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
 .error-message {
   display: none;
   color: #b71c1c;
@@ -1900,8 +1930,6 @@ textarea.invalid:focus {
 .error-message:not(:empty) {
   display: block;
 }
-
-/* Errore generale in cima al form */
 .general-error {
   display: none;
   color: #b71c1c;
@@ -1932,8 +1960,6 @@ textarea.invalid:focus {
 .success-message:not(:empty) {
   display: block;
 }
-
-/* Vecchio stile per compatibilità */
 #general-error-msg {
   display: none;
   color: #d93025;
@@ -1990,14 +2016,6 @@ textarea.invalid:focus {
   padding: 1em;
 }
 
-
-
-
-
-
-
-
-/* Sezione per dividere Farmacia e Utente */
 .split-section {
   display: flex;
   flex-wrap: wrap;
@@ -2013,7 +2031,7 @@ textarea.invalid:focus {
 }
 
 .section-title {
-  background-color: #eafaea; /* Colore tenue basato sul primary */
+  background-color: #eafaea;
   color: var(--primary-color);
   padding: 0.8em 1em;
   font-weight: 700;
@@ -2024,7 +2042,6 @@ textarea.invalid:focus {
   gap: 0.5rem;
 }
 
-/* Footer della ricevuta */
 .booking-footer {
   padding: 1.5em;
   background-color: var(--second-bg-color);
@@ -2032,8 +2049,6 @@ textarea.invalid:focus {
   font-size: 0.9em;
   color: #666;
 }
-
-/* Azioni (bottoni) fuori dal foglio stampabile */
 .booking-actions {
   display: flex;
   justify-content: center;
@@ -2083,12 +2098,15 @@ textarea.invalid:focus {
 .center-error {
   display: flex;
   flex-direction: column;
-  align-items: center; /* centra orizzontalmente */
-  justify-content: center; /* centra verticalmente */
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  min-height: 60vh; /* mantiene il contenuto centrato nella pagina */
+  min-height: 60vh;
 }
-
+.center-error .material-symbols-outlined {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
 /* --- PAGINA CONSIGLI --- */
 .banner-tips {
   margin-top: 1.5em; 
@@ -2252,7 +2270,6 @@ details[open] summary::after {
   opacity: 1;
 }
 
-/* Authentication required message */
 .auth-required-message {
   margin: 4em auto;
   max-width: 700px;
@@ -2294,21 +2311,15 @@ details[open] summary::after {
   border-color: var(--primary-color-hover);
 }
 
-
-
 .auth-required-message a:visited {
   color: #870058;
   border-bottom: 2px solid #870058;
 
 
 }
-
-/* Utility classes for visibility */
 .content-hidden {
   display: none !important;
 }
-
-/* Error message styling for booking page */
 .booking-error-message {
   margin: 1em 0;
 }
@@ -2415,11 +2426,11 @@ div.drug-row dt {
 .badge-ricetta { 
   background: #fff3cd; 
   color: #856404; 
-} /* Ricetta */
+} 
 .badge-banco { 
   background: #d4edda; 
   color: #155724; 
-} /* Banco */
+} 
 .drug-action { 
   min-width: 140px; 
   text-align: right; 
@@ -2432,31 +2443,10 @@ div.drug-row dt {
 
 
 
-/**********************/
+/*****************************/
 /* GESTIONE FARMACIE (ADMIN) */
-/**********************/
+/*****************************/
 
-/* Messaggi di feedback */
-.message {
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 4px;
-  font-weight: 500;
-}
-
-.message.success {
-  background-color: #d4edda;
-  border: 1px solid #c3e6cb;
-  color: #155724;
-}
-
-.message.error {
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
-}
-
-/* Contenitore bottoni */
 .button-container {
   margin: 1.5rem 0;
   display: flex;
@@ -2470,13 +2460,10 @@ div.drug-row dt {
   gap: 0.5rem;
 }
 
-/* Tabella farmacie */
 .farmacie-table-container {
   margin: 2rem 0;
   overflow-x: auto;
 }
-
-
 
 .data-table {
   width: 100%;
@@ -2503,25 +2490,24 @@ div.drug-row dt {
   padding: 1rem;
   border-bottom: 1px solid #eee;
 }
-.data-table tbody th:last-child th,
-.data-table tbody tr:last-child td {
-  border-bottom: none;
+
+.data-table tbody tr td:last-child {
+  padding: 0;
+  margin: 0;
 }
 
 .data-table tbody tr:hover {
   background-color: #f8f9fa;
 }
 
-
-/* Form inline per pulsante elimina */
 .inline-form {
   display: inline;
   margin: 0;
 }
 
 .data-table tr td a::before{
-  content: "\e88e"; /* Icona 'info' da Material Symbols */
-  font-family: 'Material Symbols Outlined'; /* Specifica il font */
+  content: "\e88e";
+  font-family: 'Material Symbols Outlined';
   display: inline-block;
   vertical-align: middle;
   font-size: 1.4em;
@@ -2550,7 +2536,6 @@ div.drug-row dt {
   outline-offset: 2px;
 }
 
-/* Contenitore form */
 .form-container {
   margin: 2rem 0;
   padding: 2rem;
@@ -2559,7 +2544,6 @@ div.drug-row dt {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Nasconde il form solo se JavaScript aggiunge questa classe */
 .form-container.js-hidden {
   display: none;
 }
@@ -2570,7 +2554,6 @@ div.drug-row dt {
   color: var(--primary-color);
 }
 
-/* Fieldset e legend */
 .form-container fieldset {
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -2584,7 +2567,6 @@ div.drug-row dt {
   padding: 0 0.5rem;
 }
 
-/* Form groups */
 .form-group {
   margin-bottom: 1rem;
 }
@@ -2621,7 +2603,6 @@ div.drug-row dt {
   color: #666;
 }
 
-/* Radio groups */
 .radio-group {
   margin-bottom: 0.75rem;
   display: flex;
@@ -2640,22 +2621,22 @@ div.drug-row dt {
   margin-bottom: 0;
 }
 
-/* Azioni form */
 .form-actions {
   display: flex;
+  flex-direction: row-reverse;
   gap: 1rem;
-  justify-content: flex-end;
   margin-top: 2rem;
   padding-top: 1rem;
   border-top: 1px solid #eee;
 }
 
-
-
 .form-container abbr[title] {
   color: #dc3545;
   text-decoration: none;
   margin-left: 0.25rem;
+}
+.form-container abbr[title].form-orario{
+  color: black;
 }
 
 .no-data {

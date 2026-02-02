@@ -81,3 +81,55 @@ h1.hide {
     display: none;
 }
 
+/*Tabella Area Admin */
+.data-table thead,tfoot{
+  display: none;
+}
+.data-table tr,th,td{
+  display: block;
+  padding: 0;
+  white-space: normal;
+}
+.data-table  td[data-title]:before {
+  content: attr(data-title) ":\00A0";
+  font-weight: bold;
+}
+.data-table tbody th[data-title]:before{
+  font-weight: bold;
+}
+.data-table th,td{
+  border-top: none;
+}
+.data-table tbody th{
+  background-color: var(--primary-color);
+  color: white;
+}
+.data-table tr{
+  border: 0.5px solid #000;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+  margin-bottom: 0em;
+}
+.data-table button{
+  border-radius: 0.5rem;
+  width: 6.5rem;
+  font-size: 0.9rem;
+  height: 2.5rem;
+  margin-top: 0rem;
+  transition:
+    background-color 0.2s,
+    color 0.5s,
+    border 0.2s;
+  cursor: pointer;
+  font-family: inherit;
+
+}

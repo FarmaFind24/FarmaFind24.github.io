@@ -71,21 +71,31 @@
                 <p>Registrati al portale di FarmaFind24</p>
             </div>
             <div class="user-login">
-                <form action="process-register.php" method="POST">
+                <form action="process-register.php" id="register-form" method="POST" novalidate>
                     <fieldset>
                         <legend class="sr-only">Registrati</legend>
                         <div class="form-field">
                             <label for="name">Nome</label>
-                            <input type="text" id="name" placeholder="Nome" name="name" required>
+                            <input type="text" id="name" placeholder="Nome" name="name" required
+                                aria-describedby="name-requirements">
+                            <ul class="requirements" id="name-requirements">
+                                <li>Il nome deve essere lungo almeno 2 caratteri e meno di 50</li>
+                            </ul>
                         </div>
                         <div class="form-field">
                             <label for="surname">Cognome</label>
                             <input type="text" id="surname" placeholder="Cognome" name="surname" required>
+                            <ul class="requirements" id="surname-requirements">
+                                <li>Il cognome deve essere lungo almeno 2 caratteri e meno di 50.</li>
+                            </ul>
                         </div>
                         <div class="form-field">
                             <label for="username">Username</label>
                             <input type="text" id="username" placeholder="Username" name="username"
                                 autocomplete="username" required>
+                            <ul class="requirements" id="username-requirements">
+                                <li>Lo username deve essere lungo almeno 3 caratteri e meno di 50.</li>
+                            </ul>
                         </div>
                         <div class="form-field">
                             <label for="email">Email</label>
@@ -95,8 +105,8 @@
                         <div class="form-field">
                             <label for="password">Password</label>
                             <input type="password" id="password" placeholder="Password" name="password"
-                                autocomplete="new-password" required>
-                            <ul class="password-requirements">
+                                autocomplete="new-password" required aria-describedby="password-requirements">
+                            <ul class="requirements" id="password-requirements">
                                 <li>La password deve essere lunga almeno 8 caratteri.</li>
                                 <li>La password deve contenere almeno una lettera.</li>
                                 <li>La password deve contenere almeno un numero.</li>
